@@ -19,6 +19,7 @@
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.7);
             --success: #00ff88;
+            --error: #ff4444;
         }
         
         body {
@@ -189,7 +190,238 @@
             gap: 1.5rem;
         }
         
-        /* Topic Cards */
+        /* Flashcard Styles */
+        .flashcard-container {
+            perspective: 1000px;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            border-radius: 20px;
+            background: rgba(26, 31, 58, 0.8);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .flashcard-front {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+        }
+        
+        .flashcard-back {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.1), rgba(255, 190, 11, 0.1));
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-text {
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .flashcard-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .flashcard-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .flashcard-item {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .flashcard-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+        }
+        
+        /* Mock Test Styles */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .question-card {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-1);
+        }
+        
+        .question-timer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-4);
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .option {
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .option:hover {
+            border-color: var(--accent-1);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: var(--accent-1);
+            background: rgba(0, 212, 255, 0.2);
+        }
+        
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.2);
+        }
+        
+        .option.wrong {
+            border-color: var(--error);
+            background: rgba(255, 68, 68, 0.2);
+        }
+        
+        .test-result {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .test-score {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 2rem 0;
+        }
+        
+        /* Problem Styles */
+        .problem-card {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-1);
+        }
+        
+        .problem-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .problem-solution {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--accent-1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        .problem-solution.show {
+            display: block;
+        }
+        
+        .problem-difficulty {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .difficulty-easy {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+        }
+        
+        .difficulty-medium {
+            background: rgba(255, 190, 11, 0.2);
+            color: var(--accent-4);
+        }
+        
+        .difficulty-hard {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--error);
+        }
+        
         .topic-card {
             background: rgba(26, 31, 58, 0.6);
             backdrop-filter: blur(30px);
@@ -218,7 +450,6 @@
             color: var(--accent-4);
         }
         
-        /* Pomodoro Timer */
         .timer-container {
             text-align: center;
             padding: 3rem;
@@ -241,7 +472,7 @@
             margin-top: 2rem;
         }
         
-        .timer-btn {
+        .timer-btn, .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
@@ -253,7 +484,7 @@
             font-size: 1rem;
         }
         
-        .timer-btn:hover {
+        .timer-btn:hover, .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
@@ -281,7 +512,6 @@
             color: var(--text-primary);
         }
         
-        /* Notes System */
         .notes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -360,7 +590,6 @@
             resize: vertical;
         }
         
-        /* Music Player */
         .music-player {
             position: fixed;
             bottom: 0;
@@ -480,23 +709,6 @@
         }
         
         .volume-slider { width: 100px; }
-        
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            color: white;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
-        }
         
         .technique-card {
             background: rgba(26, 31, 58, 0.6);
@@ -640,6 +852,8 @@
             .music-player { left: 0; }
             .page-title { font-size: 2rem; }
             .timer-display { font-size: 4rem; }
+            .flashcard { height: 300px; }
+            .flashcard-text { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -683,6 +897,19 @@
             </div>
             
             <div class="nav-section">
+                <h3>Practice</h3>
+                <button class="nav-btn" data-page="flashcards">
+                    <i class="fas fa-layer-group"></i> Flashcards
+                </button>
+                <button class="nav-btn" data-page="mock-tests">
+                    <i class="fas fa-clipboard-check"></i> Mock Tests
+                </button>
+                <button class="nav-btn" data-page="problems">
+                    <i class="fas fa-puzzle-piece"></i> Problems
+                </button>
+            </div>
+            
+            <div class="nav-section">
                 <h3>Tools</h3>
                 <button class="nav-btn" data-page="pomodoro">
                     <i class="fas fa-clock"></i> Pomodoro
@@ -700,58 +927,56 @@
             <!-- Dashboard -->
             <div id="dashboard" class="page active">
                 <h1 class="page-title">Ultimate Perfectionist</h1>
-                <p class="page-subtitle">PCM × Tech Blended + Deep Learning + Music</p>
+                <p class="page-subtitle">Complete Learning Platform - Everything You Need</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 Complete Platform</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 All Features</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                         <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧠</div>
                             <h3>Deep Learning</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">6 proven techniques</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">6 techniques</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
                             <h3>40 Topics</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">PCM × Tech blended</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">PCM × Tech</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎵</div>
-                            <h3>Music Player</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Pure audio, no ads</p>
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎴</div>
+                            <h3>Flashcards</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Create & practice</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+                            <h3>Mock Tests</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Timed tests</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧩</div>
+                            <h3>Problems</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Practice</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</div>
                             <h3>Pomodoro</h3>
                             <p style="color: var(--text-secondary); font-size: 0.9rem;">Focus timer</p>
                         </div>
-                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px;">
+                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
                             <h3>Notes</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Smart note-taking</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Smart notes</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                            <h3>Themes</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">5 backgrounds</p>
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎵</div>
+                            <h3>Music</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">No ads</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✨ What Makes This Special</h2>
-                    <ul style="font-size: 1.05rem; line-height: 2; color: var(--text-secondary);">
-                        <li>✅ <strong>PCM × Tech Blended</strong> - See connections between subjects</li>
-                        <li>✅ <strong>Deep Learning Techniques</strong> - Learn how to learn</li>
-                        <li>✅ <strong>Pure Audio Music</strong> - Your songs, no ads</li>
-                        <li>✅ <strong>Pomodoro Timer</strong> - Stay focused</li>
-                        <li>✅ <strong>Smart Notes</strong> - Organize your learning</li>
-                        <li>✅ <strong>Beautiful UI</strong> - Aesthetic themes</li>
-                    </ul>
-                </div>
             </div>
             
-            <!-- Deep Learning (same as before) -->
+            <!-- Deep Learning (keeping previous code) -->
             <div id="deep-learning" class="page">
                 <h1 class="page-title">Deep Learning System</h1>
                 <p class="page-subtitle">6 Proven Learning Techniques</p>
@@ -761,7 +986,7 @@
                         <div class="technique-icon">🎓</div>
                         <div class="technique-title">Feynman Technique</div>
                     </div>
-                    <p class="technique-desc">Explain concepts in simple terms as if teaching someone else. This reveals knowledge gaps and ensures true understanding.</p>
+                    <p class="technique-desc">Explain concepts in simple terms as if teaching someone else.</p>
                     <ul class="technique-steps">
                         <li>Choose a concept and write it down</li>
                         <li>Explain it in simple language</li>
@@ -790,7 +1015,7 @@
                         <div class="technique-icon">🧠</div>
                         <div class="technique-title">Active Recall</div>
                     </div>
-                    <p class="technique-desc">Test yourself without looking at notes. Actively retrieve information from memory.</p>
+                    <p class="technique-desc">Test yourself without looking at notes.</p>
                     <ul class="technique-steps">
                         <li>Close your book/notes</li>
                         <li>Write down everything you remember</li>
@@ -804,7 +1029,7 @@
                         <div class="technique-icon">🗺️</div>
                         <div class="technique-title">Mind Mapping</div>
                     </div>
-                    <p class="technique-desc">Visualize connections between concepts to see the big picture.</p>
+                    <p class="technique-desc">Visualize connections between concepts.</p>
                     <ul class="technique-steps">
                         <li>Start with main concept in center</li>
                         <li>Branch out to related topics</li>
@@ -818,7 +1043,7 @@
                         <div class="technique-icon">🔀</div>
                         <div class="technique-title">Interleaving</div>
                     </div>
-                    <p class="technique-desc">Mix different topics instead of blocking. Strengthens learning and connections.</p>
+                    <p class="technique-desc">Mix different topics instead of blocking.</p>
                     <ul class="technique-steps">
                         <li>Don't study one topic for hours</li>
                         <li>Switch between related topics</li>
@@ -832,7 +1057,7 @@
                         <div class="technique-icon">💭</div>
                         <div class="technique-title">Elaboration</div>
                     </div>
-                    <p class="technique-desc">Connect new knowledge to existing knowledge. Ask "why" and "how".</p>
+                    <p class="technique-desc">Connect new knowledge to existing knowledge.</p>
                     <ul class="technique-steps">
                         <li>Ask "Why does this work?"</li>
                         <li>Ask "How does this relate to X?"</li>
@@ -842,35 +1067,142 @@
                 </div>
             </div>
             
-            <!-- Physics -->
+            <!-- Flashcards -->
+            <div id="flashcards" class="page">
+                <h1 class="page-title">Flashcards</h1>
+                <p class="page-subtitle">Create and practice with flashcards</p>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Create New Flashcard</h3>
+                    <input type="text" class="note-input" id="flashcard-front-input" placeholder="Front (Question)...">
+                    <textarea class="note-input" id="flashcard-back-input" placeholder="Back (Answer)..."></textarea>
+                    <button class="btn" onclick="createFlashcard()">
+                        <i class="fas fa-plus"></i> Create Flashcard
+                    </button>
+                </div>
+                
+                <div id="flashcard-practice" style="display: none;">
+                    <button class="btn" onclick="backToFlashcardList()" style="margin-bottom: 2rem;">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </button>
+                    
+                    <div class="flashcard-container">
+                        <div class="flashcard" id="flashcard" onclick="flipCard()">
+                            <div class="flashcard-face flashcard-front">
+                                <div class="flashcard-text" id="flashcard-front-text">Click to start</div>
+                            </div>
+                            <div class="flashcard-face flashcard-back">
+                                <div class="flashcard-text" id="flashcard-back-text">Answer</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flashcard-controls">
+                        <button class="btn" onclick="previousCard()">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn" onclick="flipCard()">
+                            <i class="fas fa-sync"></i> Flip
+                        </button>
+                        <button class="btn" onclick="nextCard()">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
+                        Card <span id="current-card-num">1</span> of <span id="total-cards">0</span>
+                    </p>
+                </div>
+                
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem;">Your Flashcards</h2>
+                <div class="flashcard-list" id="flashcard-list"></div>
+            </div>
+            
+            <!-- Mock Tests -->
+            <div id="mock-tests" class="page">
+                <h1 class="page-title">Mock Tests</h1>
+                <p class="page-subtitle">Test your knowledge with timed tests</p>
+                
+                <div id="test-selection">
+                    <div class="grid">
+                        <div class="topic-card" onclick="startTest('physics')">
+                            <div class="topic-icon">⚛️</div>
+                            <div class="topic-title">Physics Test</div>
+                            <div class="topic-desc">10 questions • 15 minutes</div>
+                        </div>
+                        <div class="topic-card" onclick="startTest('chemistry')">
+                            <div class="topic-icon">🧪</div>
+                            <div class="topic-title">Chemistry Test</div>
+                            <div class="topic-desc">10 questions • 15 minutes</div>
+                        </div>
+                        <div class="topic-card" onclick="startTest('maths')">
+                            <div class="topic-icon">📐</div>
+                            <div class="topic-title">Maths Test</div>
+                            <div class="topic-desc">10 questions • 15 minutes</div>
+                        </div>
+                        <div class="topic-card" onclick="startTest('tech')">
+                            <div class="topic-icon">💻</div>
+                            <div class="topic-title">Tech Test</div>
+                            <div class="topic-desc">10 questions • 15 minutes</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="test-container" style="display: none;">
+                    <button class="btn" onclick="endTest()" style="margin-bottom: 2rem;">
+                        <i class="fas fa-times"></i> End Test
+                    </button>
+                    <div class="test-container" id="test-questions"></div>
+                </div>
+                
+                <div id="test-result-container" style="display: none;">
+                    <div class="test-result">
+                        <h2>Test Complete!</h2>
+                        <div class="test-score" id="test-score">0%</div>
+                        <p style="font-size: 1.2rem; color: var(--text-secondary);">
+                            You scored <span id="score-text">0/0</span>
+                        </p>
+                        <button class="btn" onclick="backToTestSelection()" style="margin-top: 2rem;">
+                            <i class="fas fa-redo"></i> Take Another Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Problems -->
+            <div id="problems" class="page">
+                <h1 class="page-title">Practice Problems</h1>
+                <p class="page-subtitle">Solve problems with detailed solutions</p>
+                
+                <div id="problems-container"></div>
+            </div>
+            
+            <!-- Physics, Chemistry, Maths, Tech (keeping previous code) -->
             <div id="physics" class="page">
                 <h1 class="page-title">Physics</h1>
                 <p class="page-subtitle">10 Topics with Tech Connections</p>
                 <div class="grid" id="physics-grid"></div>
             </div>
             
-            <!-- Chemistry -->
             <div id="chemistry" class="page">
                 <h1 class="page-title">Chemistry</h1>
                 <p class="page-subtitle">10 Topics with Tech Connections</p>
                 <div class="grid" id="chemistry-grid"></div>
             </div>
             
-            <!-- Maths -->
             <div id="maths" class="page">
                 <h1 class="page-title">Maths</h1>
                 <p class="page-subtitle">10 Topics with Tech Connections</p>
                 <div class="grid" id="maths-grid"></div>
             </div>
             
-            <!-- Tech -->
             <div id="tech" class="page">
                 <h1 class="page-title">Tech</h1>
                 <p class="page-subtitle">10 Topics with PCM Connections</p>
                 <div class="grid" id="tech-grid"></div>
             </div>
             
-            <!-- Pomodoro -->
+            <!-- Pomodoro, Notes, Music, Themes (keeping previous code) -->
             <div id="pomodoro" class="page">
                 <h1 class="page-title">Pomodoro Timer</h1>
                 <p class="page-subtitle">Stay focused with timed sessions</p>
@@ -904,7 +1236,6 @@
                 </div>
             </div>
             
-            <!-- Notes -->
             <div id="notes" class="page">
                 <h1 class="page-title">Notes</h1>
                 <p class="page-subtitle">Organize your learning</p>
@@ -922,24 +1253,22 @@
                 <div class="notes-grid" id="notes-grid"></div>
             </div>
             
-            <!-- Music (same as before) -->
             <div id="music" class="page">
                 <h1 class="page-title">Music Player</h1>
-                <p class="page-subtitle">Pure Audio - No Ads - Your Songs</p>
+                <p class="page-subtitle">Pure Audio - No Ads</p>
                 
                 <div class="info-box">
-                    <h3 style="margin-bottom: 1rem;">📌 How to Add Your Songs:</h3>
+                    <h3 style="margin-bottom: 1rem;">📌 How to Add Songs:</h3>
                     <ol style="line-height: 2; color: var(--text-secondary);">
-                        <li><strong>Download</strong> your favorite songs (MP3 format)</li>
-                        <li><strong>Upload</strong> to Google Drive/Dropbox/OneDrive</li>
-                        <li><strong>Get shareable link</strong> (make sure it's direct download link)</li>
-                        <li><strong>Click "Add Song"</strong> below and paste the link</li>
+                        <li>Download your favorite songs (MP3)</li>
+                        <li>Upload to Google Drive/Dropbox</li>
+                        <li>Get shareable link</li>
+                        <li>Click "Add Song" below</li>
                     </ol>
                 </div>
                 
                 <div class="upload-section">
                     <h3 style="margin-bottom: 1rem;">🎵 Add Your Songs</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Upload MP3 files or paste direct links</p>
                     <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
                     <button class="btn" onclick="document.getElementById('file-input').click()">
                         <i class="fas fa-upload"></i> Upload MP3 Files
@@ -953,7 +1282,7 @@
                 
                 <div id="playlist-detail" style="display: none;">
                     <button class="btn" onclick="backToPlaylists()" style="margin-bottom: 2rem;">
-                        <i class="fas fa-arrow-left"></i> Back to Playlists
+                        <i class="fas fa-arrow-left"></i> Back
                     </button>
                     <div class="card">
                         <h2 id="playlist-detail-title"></h2>
@@ -962,7 +1291,6 @@
                 </div>
             </div>
             
-            <!-- Themes -->
             <div id="themes" class="page">
                 <h1 class="page-title">Themes</h1>
                 <p class="page-subtitle">Choose your aesthetic</p>
@@ -970,23 +1298,18 @@
                 <div class="theme-grid">
                     <div class="theme-option bg-ocean" onclick="changeTheme('ocean')">
                         <h3>🌊 Ocean Blue</h3>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Deep ocean waves</p>
                     </div>
                     <div class="theme-option bg-sunset" onclick="changeTheme('sunset')">
                         <h3>🌅 Sunset</h3>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Warm sunset sky</p>
                     </div>
                     <div class="theme-option bg-forest" onclick="changeTheme('forest')">
                         <h3>🌲 Forest</h3>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Peaceful forest</p>
                     </div>
                     <div class="theme-option bg-galaxy" onclick="changeTheme('galaxy')">
                         <h3>🌌 Galaxy</h3>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Space and stars</p>
                     </div>
                     <div class="theme-option bg-cyberpunk" onclick="changeTheme('cyberpunk')">
                         <h3>🎮 Cyberpunk</h3>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Neon city</p>
                     </div>
                 </div>
             </div>
@@ -999,7 +1322,7 @@
             <div class="album-art">🎵</div>
             <div class="song-info">
                 <div class="song-title" id="current-song-title">No song playing</div>
-                <div class="song-artist" id="current-song-artist">Add your songs to start</div>
+                <div class="song-artist" id="current-song-artist">Add songs to start</div>
             </div>
             <div class="player-controls">
                 <button class="control-btn" onclick="previousSong()">
@@ -1034,9 +1357,8 @@
     
     <audio id="audio-player"></audio>
     
-    <script src="https://aurenya-19.github.io/pcm-tech-content-db/content.js"></script>
     <script>
-        // Topics Database with PCM × Tech Blends
+        // Topics Database
         const topicsDatabase = {
             physics: [
                 {icon:'🚀',title:'Kinematics',desc:'Motion, velocity, acceleration',blend:'🤖 Used in robotics path planning & autonomous vehicles'},
@@ -1088,7 +1410,6 @@
             ]
         };
         
-        // Load topics for each subject
         function loadTopics(subject) {
             const grid = document.getElementById(subject + '-grid');
             grid.innerHTML = '';
@@ -1106,7 +1427,284 @@
             });
         }
         
-        // Pomodoro Timer
+        // Flashcards System
+        let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        let currentCardIndex = 0;
+        
+        function createFlashcard() {
+            const front = document.getElementById('flashcard-front-input').value;
+            const back = document.getElementById('flashcard-back-input').value;
+            
+            if (!front || !back) {
+                alert('Please fill both sides!');
+                return;
+            }
+            
+            flashcards.push({ id: Date.now(), front, back });
+            localStorage.setItem('flashcards', JSON.stringify(flashcards));
+            
+            document.getElementById('flashcard-front-input').value = '';
+            document.getElementById('flashcard-back-input').value = '';
+            
+            loadFlashcardList();
+        }
+        
+        function loadFlashcardList() {
+            const list = document.getElementById('flashcard-list');
+            list.innerHTML = '';
+            
+            if (flashcards.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No flashcards yet. Create your first one!</p>';
+                return;
+            }
+            
+            flashcards.forEach((card, index) => {
+                const item = document.createElement('div');
+                item.className = 'flashcard-item';
+                item.innerHTML = `
+                    <h4>${card.front}</h4>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                        <button class="note-btn edit" onclick="practiceFlashcards(${index})">
+                            <i class="fas fa-play"></i> Practice
+                        </button>
+                        <button class="note-btn delete" onclick="deleteFlashcard(${card.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+        
+        function practiceFlashcards(startIndex = 0) {
+            if (flashcards.length === 0) return;
+            
+            currentCardIndex = startIndex;
+            document.querySelector('.card').style.display = 'none';
+            document.getElementById('flashcard-list').style.display = 'none';
+            document.getElementById('flashcard-practice').style.display = 'block';
+            
+            showCard();
+        }
+        
+        function showCard() {
+            const card = flashcards[currentCardIndex];
+            document.getElementById('flashcard-front-text').textContent = card.front;
+            document.getElementById('flashcard-back-text').textContent = card.back;
+            document.getElementById('current-card-num').textContent = currentCardIndex + 1;
+            document.getElementById('total-cards').textContent = flashcards.length;
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+        
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+        
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+            showCard();
+        }
+        
+        function previousCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+            showCard();
+        }
+        
+        function backToFlashcardList() {
+            document.querySelector('.card').style.display = 'block';
+            document.getElementById('flashcard-list').style.display = 'grid';
+            document.getElementById('flashcard-practice').style.display = 'none';
+        }
+        
+        function deleteFlashcard(id) {
+            if (confirm('Delete this flashcard?')) {
+                flashcards = flashcards.filter(c => c.id !== id);
+                localStorage.setItem('flashcards', JSON.stringify(flashcards));
+                loadFlashcardList();
+            }
+        }
+        
+        // Mock Tests System
+        const testQuestions = {
+            physics: [
+                {q: 'What is the SI unit of force?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], correct: 0},
+                {q: 'Acceleration due to gravity on Earth?', options: ['9.8 m/s²', '10 m/s²', '8.9 m/s²', '11 m/s²'], correct: 0},
+                {q: 'First law of thermodynamics is?', options: ['Energy conservation', 'Entropy increase', 'Heat flow', 'Work done'], correct: 0},
+                {q: 'Speed of light in vacuum?', options: ['3×10⁸ m/s', '2×10⁸ m/s', '4×10⁸ m/s', '5×10⁸ m/s'], correct: 0},
+                {q: 'Unit of electric current?', options: ['Ampere', 'Volt', 'Ohm', 'Coulomb'], correct: 0}
+            ],
+            chemistry: [
+                {q: 'Atomic number of Carbon?', options: ['6', '12', '8', '14'], correct: 0},
+                {q: 'pH of pure water?', options: ['7', '0', '14', '1'], correct: 0},
+                {q: 'Avogadro number is?', options: ['6.022×10²³', '6.022×10²²', '6.022×10²⁴', '6.022×10²¹'], correct: 0},
+                {q: 'Noble gas configuration?', options: ['Stable', 'Reactive', 'Unstable', 'Neutral'], correct: 0},
+                {q: 'Oxidation state of O in H₂O?', options: ['-2', '+2', '0', '-1'], correct: 0}
+            ],
+            maths: [
+                {q: 'Derivative of x²?', options: ['2x', 'x', '2', 'x²'], correct: 0},
+                {q: 'Value of π?', options: ['3.14159...', '3.14', '22/7', '3'], correct: 0},
+                {q: 'sin²θ + cos²θ = ?', options: ['1', '0', '2', 'θ'], correct: 0},
+                {q: 'Integral of 1/x?', options: ['ln|x|', 'x', '1', 'e^x'], correct: 0},
+                {q: 'Slope of y = mx + c?', options: ['m', 'c', 'x', 'y'], correct: 0}
+            ],
+            tech: [
+                {q: 'Full form of AI?', options: ['Artificial Intelligence', 'Automated Intelligence', 'Advanced Intelligence', 'Applied Intelligence'], correct: 0},
+                {q: 'What is GPU used for?', options: ['Parallel processing', 'Storage', 'Networking', 'Input'], correct: 0},
+                {q: 'Python is?', options: ['Programming language', 'Snake', 'Framework', 'Database'], correct: 0},
+                {q: 'HTTP stands for?', options: ['HyperText Transfer Protocol', 'High Transfer Protocol', 'Hyper Transfer Text Protocol', 'None'], correct: 0},
+                {q: 'Binary of 5?', options: ['101', '110', '111', '100'], correct: 0}
+            ]
+        };
+        
+        let currentTest = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let testTimer = null;
+        let testTimeLeft = 900; // 15 minutes
+        
+        function startTest(subject) {
+            currentTest = subject;
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            testTimeLeft = 900;
+            
+            document.getElementById('test-selection').style.display = 'none';
+            document.getElementById('test-container').style.display = 'block';
+            
+            loadTestQuestion();
+            startTestTimer();
+        }
+        
+        function loadTestQuestion() {
+            const questions = testQuestions[currentTest];
+            const container = document.getElementById('test-questions');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-number">Question ${index + 1}/${questions.length}</div>
+                        <div class="question-timer" id="test-timer">15:00</div>
+                    </div>
+                    <div class="question-text">${q.q}</div>
+                    <div class="options-container">
+                        ${q.options.map((opt, i) => `
+                            <div class="option" onclick="selectAnswer(${index}, ${i})" data-q="${index}" data-opt="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            
+            document.querySelectorAll(`[data-q="${questionIndex}"]`).forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.querySelector(`[data-q="${questionIndex}"][data-opt="${optionIndex}"]`).classList.add('selected');
+        }
+        
+        function startTestTimer() {
+            testTimer = setInterval(() => {
+                testTimeLeft--;
+                const mins = Math.floor(testTimeLeft / 60);
+                const secs = testTimeLeft % 60;
+                document.getElementById('test-timer').textContent = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                
+                if (testTimeLeft <= 0) {
+                    endTest();
+                }
+            }, 1000);
+        }
+        
+        function endTest() {
+            clearInterval(testTimer);
+            
+            const questions = testQuestions[currentTest];
+            let score = 0;
+            
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    score++;
+                }
+            });
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            
+            document.getElementById('test-container').style.display = 'none';
+            document.getElementById('test-result-container').style.display = 'block';
+            document.getElementById('test-score').textContent = percentage + '%';
+            document.getElementById('score-text').textContent = `${score}/${questions.length}`;
+        }
+        
+        function backToTestSelection() {
+            document.getElementById('test-selection').style.display = 'block';
+            document.getElementById('test-result-container').style.display = 'none';
+        }
+        
+        // Problems System
+        const problems = [
+            {
+                title: 'Kinematics Problem',
+                difficulty: 'easy',
+                text: 'A car accelerates from rest at 2 m/s² for 10 seconds. What is its final velocity?',
+                solution: 'Using v = u + at, where u = 0, a = 2 m/s², t = 10s\nv = 0 + 2(10) = 20 m/s'
+            },
+            {
+                title: 'Chemistry Stoichiometry',
+                difficulty: 'medium',
+                text: 'How many moles of H₂O are produced when 2 moles of H₂ react with excess O₂?',
+                solution: '2H₂ + O₂ → 2H₂O\nFrom equation: 2 moles H₂ produces 2 moles H₂O\nAnswer: 2 moles'
+            },
+            {
+                title: 'Calculus Integration',
+                difficulty: 'hard',
+                text: 'Find the integral of ∫(3x² + 2x + 1)dx',
+                solution: '∫(3x² + 2x + 1)dx = x³ + x² + x + C'
+            },
+            {
+                title: 'Binary Conversion',
+                difficulty: 'easy',
+                text: 'Convert decimal 15 to binary',
+                solution: '15 ÷ 2 = 7 remainder 1\n7 ÷ 2 = 3 remainder 1\n3 ÷ 2 = 1 remainder 1\n1 ÷ 2 = 0 remainder 1\nAnswer: 1111'
+            }
+        ];
+        
+        function loadProblems() {
+            const container = document.getElementById('problems-container');
+            container.innerHTML = '';
+            
+            problems.forEach((problem, index) => {
+                const card = document.createElement('div');
+                card.className = 'problem-card';
+                card.innerHTML = `
+                    <div class="problem-difficulty difficulty-${problem.difficulty}">${problem.difficulty.toUpperCase()}</div>
+                    <div class="problem-title">${problem.title}</div>
+                    <div class="problem-text">${problem.text}</div>
+                    <button class="btn" onclick="toggleSolution(${index})">
+                        <i class="fas fa-lightbulb"></i> Show Solution
+                    </button>
+                    <div class="problem-solution" id="solution-${index}">
+                        <strong>Solution:</strong><br>
+                        ${problem.solution.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        
+        function toggleSolution(index) {
+            document.getElementById(`solution-${index}`).classList.toggle('show');
+        }
+        
+        // Pomodoro Timer (keeping previous code)
         let timerInterval = null;
         let timeLeft = 25 * 60;
         let currentMode = 'focus';
@@ -1159,7 +1757,7 @@
                         localStorage.setItem('pomodoroSessions', sessionsCompleted);
                     }
                     
-                    alert('Time\'s up! ' + (currentMode === 'focus' ? 'Take a break!' : 'Back to work!'));
+                    alert('Time\'s up!');
                     document.getElementById('start-btn').style.display = 'inline-block';
                     document.getElementById('pause-btn').style.display = 'none';
                     
@@ -1185,14 +1783,13 @@
             document.getElementById('pause-btn').style.display = 'none';
         }
         
-        // Load saved sessions
         const savedSessions = localStorage.getItem('pomodoroSessions');
         if (savedSessions) {
             sessionsCompleted = parseInt(savedSessions);
             document.getElementById('sessions-count').textContent = sessionsCompleted;
         }
         
-        // Notes System
+        // Notes System (keeping previous code)
         let notes = JSON.parse(localStorage.getItem('notes')) || [];
         
         function createNote() {
@@ -1200,18 +1797,11 @@
             const content = document.getElementById('note-content-input').value;
             
             if (!title || !content) {
-                alert('Please fill both title and content!');
+                alert('Please fill both fields!');
                 return;
             }
             
-            const note = {
-                id: Date.now(),
-                title: title,
-                content: content,
-                created: new Date().toLocaleDateString()
-            };
-            
-            notes.push(note);
+            notes.push({ id: Date.now(), title, content, created: new Date().toLocaleDateString() });
             localStorage.setItem('notes', JSON.stringify(notes));
             
             document.getElementById('note-title-input').value = '';
@@ -1225,7 +1815,7 @@
             grid.innerHTML = '';
             
             if (notes.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No notes yet. Create your first note!</p>';
+                grid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No notes yet.</p>';
                 return;
             }
             
@@ -1247,14 +1837,14 @@
         }
         
         function deleteNote(id) {
-            if (confirm('Delete this note?')) {
-                notes = notes.filter(note => note.id !== id);
+            if (confirm('Delete?')) {
+                notes = notes.filter(n => n.id !== id);
                 localStorage.setItem('notes', JSON.stringify(notes));
                 loadNotes();
             }
         }
         
-        // Music Player (same as before)
+        // Music Player (keeping previous code - same as before)
         let musicDatabase = JSON.parse(localStorage.getItem('musicDatabase')) || {
             myMusic: { name: '🎵 My Music', icon: '🎵', songs: [] }
         };
@@ -1271,13 +1861,12 @@
             for (let file of files) {
                 if (file.type.startsWith('audio/')) {
                     const url = URL.createObjectURL(file);
-                    const song = {
+                    musicDatabase.myMusic.songs.push({
                         title: file.name.replace(/\.[^/.]+$/, ""),
                         artist: 'Local File',
                         duration: '0:00',
                         url: url
-                    };
-                    musicDatabase.myMusic.songs.push(song);
+                    });
                 }
             }
             saveMusicDatabase();
@@ -1288,15 +1877,12 @@
         function addSongByLink() {
             const title = prompt('Song Title:');
             if (!title) return;
-            
-            const artist = prompt('Artist Name:');
+            const artist = prompt('Artist:');
             if (!artist) return;
-            
             const url = prompt('Direct MP3 Link:');
             if (!url) return;
             
-            const song = { title, artist, duration: '0:00', url };
-            musicDatabase.myMusic.songs.push(song);
+            musicDatabase.myMusic.songs.push({ title, artist, duration: '0:00', url });
             saveMusicDatabase();
             loadPlaylists();
             alert('Song added!');
@@ -1336,7 +1922,7 @@
             songList.innerHTML = '';
             
             if (playlist.songs.length === 0) {
-                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add some!</p>';
+                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet.</p>';
                 return;
             }
             
@@ -1361,7 +1947,7 @@
         
         function deleteSong(event, playlistKey, index) {
             event.stopPropagation();
-            if (confirm('Delete this song?')) {
+            if (confirm('Delete?')) {
                 musicDatabase[playlistKey].songs.splice(index, 1);
                 saveMusicDatabase();
                 openPlaylist(playlistKey);
@@ -1393,7 +1979,7 @@
         
         function togglePlay() {
             if (!currentPlaylist || musicDatabase[currentPlaylist].songs.length === 0) {
-                alert('Please add songs first!');
+                alert('Add songs first!');
                 return;
             }
             
@@ -1504,6 +2090,8 @@
                 
                 if (page === 'music') loadPlaylists();
                 if (page === 'notes') loadNotes();
+                if (page === 'flashcards') loadFlashcardList();
+                if (page === 'problems') loadProblems();
                 if (['physics', 'chemistry', 'maths', 'tech'].includes(page)) loadTopics(page);
                 
                 window.scrollTo(0, 0);
@@ -1513,6 +2101,8 @@
         // Initialize
         loadPlaylists();
         loadNotes();
+        loadFlashcardList();
+        loadProblems();
         loadTopics('physics');
         loadTopics('chemistry');
         loadTopics('maths');
