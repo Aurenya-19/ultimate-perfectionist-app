@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Perfectionist - PCM × Tech + Music</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Ultimate Perfectionist - Complete Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +28,6 @@
             overflow-x: hidden;
         }
         
-        /* Animated Background */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -57,7 +56,6 @@
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
         
-        /* Background Themes */
         .bg-ocean { background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%); }
         .bg-sunset { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #fdc830 100%); }
         .bg-forest { background: linear-gradient(135deg, #1a4d2e 0%, #4f6f52 50%, #739072 100%); }
@@ -191,7 +189,178 @@
             gap: 1.5rem;
         }
         
-        /* Music Player - Fixed Bottom */
+        /* Topic Cards */
+        .topic-card {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .topic-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .topic-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .topic-desc { color: var(--text-secondary); font-size: 0.9rem; }
+        .topic-blend { 
+            margin-top: 1rem; 
+            padding: 0.5rem; 
+            background: rgba(255, 190, 11, 0.1); 
+            border-radius: 8px; 
+            font-size: 0.85rem;
+            color: var(--accent-4);
+        }
+        
+        /* Pomodoro Timer */
+        .timer-container {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .timer-display {
+            font-size: 6rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 2rem 0;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .timer-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            color: white;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .timer-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+        
+        .timer-mode {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .mode-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .mode-btn.active {
+            border-color: var(--accent-1);
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--text-primary);
+        }
+        
+        /* Notes System */
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .note-card {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .note-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        .note-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        
+        .note-content {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .note-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .note-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        
+        .note-btn.edit {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .note-btn.delete {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--text-primary);
+        }
+        
+        .note-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .note-input:focus {
+            outline: none;
+            border-color: var(--accent-1);
+        }
+        
+        textarea.note-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Music Player */
         .music-player {
             position: fixed;
             bottom: 0;
@@ -225,10 +394,7 @@
             flex-shrink: 0;
         }
         
-        .song-info {
-            flex: 1;
-            min-width: 0;
-        }
+        .song-info { flex: 1; min-width: 0; }
         
         .song-title {
             font-weight: 700;
@@ -313,97 +479,9 @@
             flex-shrink: 0;
         }
         
-        .volume-slider {
-            width: 100px;
-        }
+        .volume-slider { width: 100px; }
         
-        /* Playlist Card */
-        .playlist-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .playlist-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-        }
-        
-        .playlist-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .playlist-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .playlist-count {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Song List */
-        .song-list {
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        
-        .song-item {
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .song-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .song-item.playing {
-            background: rgba(0, 212, 255, 0.2);
-            border-left: 3px solid var(--accent-1);
-        }
-        
-        .song-number {
-            width: 30px;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-        
-        .song-details {
-            flex: 1;
-        }
-        
-        .song-duration {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Upload Section */
-        .upload-section {
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px dashed var(--accent-1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .upload-btn {
+        .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
@@ -415,12 +493,11 @@
             font-size: 1rem;
         }
         
-        .upload-btn:hover {
+        .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
         
-        /* Deep Learning Cards */
         .technique-card {
             background: rgba(26, 31, 58, 0.6);
             backdrop-filter: blur(30px);
@@ -468,24 +545,6 @@
             font-weight: bold;
         }
         
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            color: white;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
-        }
-        
-        /* Theme Selector */
         .theme-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -510,6 +569,63 @@
             border-color: var(--success);
         }
         
+        .playlist-card {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .playlist-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-1);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .playlist-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .playlist-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .playlist-count { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .song-list { max-height: 500px; overflow-y: auto; }
+        
+        .song-item {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .song-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .song-item.playing {
+            background: rgba(0, 212, 255, 0.2);
+            border-left: 3px solid var(--accent-1);
+        }
+        
+        .song-number { width: 30px; text-align: center; color: var(--text-secondary); }
+        .song-details { flex: 1; }
+        .song-duration { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .upload-section {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px dashed var(--accent-1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
         .info-box {
             background: rgba(255, 190, 11, 0.1);
             border-left: 4px solid var(--accent-4);
@@ -523,7 +639,7 @@
             .main-content { margin-left: 0; width: 100%; padding: 1.5rem; }
             .music-player { left: 0; }
             .page-title { font-size: 2rem; }
-            .player-content { flex-wrap: wrap; }
+            .timer-display { font-size: 4rem; }
         }
     </style>
 </head>
@@ -534,7 +650,7 @@
         <nav class="sidebar">
             <div class="logo">
                 <h1>🎯 PERFECTIONIST</h1>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">PCM × Tech + Music</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Complete Learning Platform</p>
             </div>
             
             <div class="nav-section">
@@ -551,18 +667,18 @@
             </div>
             
             <div class="nav-section">
-                <h3>Learn</h3>
+                <h3>PCM × Tech</h3>
                 <button class="nav-btn" data-page="physics">
-                    <i class="fas fa-atom"></i> Physics
+                    <i class="fas fa-atom"></i> Physics (10)
                 </button>
                 <button class="nav-btn" data-page="chemistry">
-                    <i class="fas fa-flask"></i> Chemistry
+                    <i class="fas fa-flask"></i> Chemistry (10)
                 </button>
                 <button class="nav-btn" data-page="maths">
-                    <i class="fas fa-square-root-alt"></i> Maths
+                    <i class="fas fa-square-root-alt"></i> Maths (10)
                 </button>
                 <button class="nav-btn" data-page="tech">
-                    <i class="fas fa-laptop-code"></i> Tech
+                    <i class="fas fa-laptop-code"></i> Tech (10)
                 </button>
             </div>
             
@@ -584,10 +700,10 @@
             <!-- Dashboard -->
             <div id="dashboard" class="page active">
                 <h1 class="page-title">Ultimate Perfectionist</h1>
-                <p class="page-subtitle">PCM × Tech Blended Learning + Pure Audio Music</p>
+                <p class="page-subtitle">PCM × Tech Blended + Deep Learning + Music</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 Everything You Need</h2>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 Complete Platform</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                         <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧠</div>
@@ -596,8 +712,8 @@
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
-                            <h3>PCM × Tech</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Blended subjects</p>
+                            <h3>40 Topics</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">PCM × Tech blended</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎵</div>
@@ -605,23 +721,32 @@
                             <p style="color: var(--text-secondary); font-size: 0.9rem;">Pure audio, no ads</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</div>
+                            <h3>Pomodoro</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Focus timer</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+                            <h3>Notes</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Smart note-taking</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
                             <h3>Themes</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Beautiful backgrounds</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">5 backgrounds</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✨ Features</h2>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✨ What Makes This Special</h2>
                     <ul style="font-size: 1.05rem; line-height: 2; color: var(--text-secondary);">
-                        <li>✅ <strong>Deep Learning System</strong> - Feynman, Spaced Repetition, Active Recall</li>
-                        <li>✅ <strong>PCM × Tech Blended</strong> - Interdisciplinary connections</li>
-                        <li>✅ <strong>Pure Audio Player</strong> - No ads, audio only</li>
-                        <li>✅ <strong>Your Own Music</strong> - Upload your MP3 files</li>
-                        <li>✅ <strong>Beautiful Backgrounds</strong> - 5 aesthetic themes</li>
-                        <li>✅ <strong>Pomodoro Timer</strong> - Focus sessions</li>
-                        <li>✅ <strong>Smart Notes</strong> - Organized learning</li>
+                        <li>✅ <strong>PCM × Tech Blended</strong> - See connections between subjects</li>
+                        <li>✅ <strong>Deep Learning Techniques</strong> - Learn how to learn</li>
+                        <li>✅ <strong>Pure Audio Music</strong> - Your songs, no ads</li>
+                        <li>✅ <strong>Pomodoro Timer</strong> - Stay focused</li>
+                        <li>✅ <strong>Smart Notes</strong> - Organize your learning</li>
+                        <li>✅ <strong>Beautiful UI</strong> - Aesthetic themes</li>
                     </ul>
                 </div>
             </div>
@@ -717,7 +842,87 @@
                 </div>
             </div>
             
-            <!-- Music Page -->
+            <!-- Physics -->
+            <div id="physics" class="page">
+                <h1 class="page-title">Physics</h1>
+                <p class="page-subtitle">10 Topics with Tech Connections</p>
+                <div class="grid" id="physics-grid"></div>
+            </div>
+            
+            <!-- Chemistry -->
+            <div id="chemistry" class="page">
+                <h1 class="page-title">Chemistry</h1>
+                <p class="page-subtitle">10 Topics with Tech Connections</p>
+                <div class="grid" id="chemistry-grid"></div>
+            </div>
+            
+            <!-- Maths -->
+            <div id="maths" class="page">
+                <h1 class="page-title">Maths</h1>
+                <p class="page-subtitle">10 Topics with Tech Connections</p>
+                <div class="grid" id="maths-grid"></div>
+            </div>
+            
+            <!-- Tech -->
+            <div id="tech" class="page">
+                <h1 class="page-title">Tech</h1>
+                <p class="page-subtitle">10 Topics with PCM Connections</p>
+                <div class="grid" id="tech-grid"></div>
+            </div>
+            
+            <!-- Pomodoro -->
+            <div id="pomodoro" class="page">
+                <h1 class="page-title">Pomodoro Timer</h1>
+                <p class="page-subtitle">Stay focused with timed sessions</p>
+                
+                <div class="card">
+                    <div class="timer-container">
+                        <div class="timer-mode">
+                            <button class="mode-btn active" onclick="setMode('focus')">Focus (25min)</button>
+                            <button class="mode-btn" onclick="setMode('short')">Short Break (5min)</button>
+                            <button class="mode-btn" onclick="setMode('long')">Long Break (15min)</button>
+                        </div>
+                        
+                        <div class="timer-display" id="timer-display">25:00</div>
+                        
+                        <div class="timer-controls">
+                            <button class="timer-btn" onclick="startTimer()" id="start-btn">
+                                <i class="fas fa-play"></i> Start
+                            </button>
+                            <button class="timer-btn" onclick="pauseTimer()" id="pause-btn" style="display: none;">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="timer-btn" onclick="resetTimer()" style="background: rgba(255, 255, 255, 0.1);">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; color: var(--text-secondary);">
+                            <p>Sessions completed: <strong id="sessions-count">0</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notes -->
+            <div id="notes" class="page">
+                <h1 class="page-title">Notes</h1>
+                <p class="page-subtitle">Organize your learning</p>
+                
+                <div class="card">
+                    <h3 style="margin-bottom: 1rem;">Create New Note</h3>
+                    <input type="text" class="note-input" id="note-title-input" placeholder="Note title...">
+                    <textarea class="note-input" id="note-content-input" placeholder="Write your note here..."></textarea>
+                    <button class="btn" onclick="createNote()">
+                        <i class="fas fa-plus"></i> Create Note
+                    </button>
+                </div>
+                
+                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem;">Your Notes</h2>
+                <div class="notes-grid" id="notes-grid"></div>
+            </div>
+            
+            <!-- Music (same as before) -->
             <div id="music" class="page">
                 <h1 class="page-title">Music Player</h1>
                 <p class="page-subtitle">Pure Audio - No Ads - Your Songs</p>
@@ -730,17 +935,16 @@
                         <li><strong>Get shareable link</strong> (make sure it's direct download link)</li>
                         <li><strong>Click "Add Song"</strong> below and paste the link</li>
                     </ol>
-                    <p style="margin-top: 1rem; color: var(--accent-4);"><strong>Note:</strong> This is your personal app - add any songs you want!</p>
                 </div>
                 
                 <div class="upload-section">
                     <h3 style="margin-bottom: 1rem;">🎵 Add Your Songs</h3>
                     <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Upload MP3 files or paste direct links</p>
                     <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
-                    <button class="upload-btn" onclick="document.getElementById('file-input').click()">
+                    <button class="btn" onclick="document.getElementById('file-input').click()">
                         <i class="fas fa-upload"></i> Upload MP3 Files
                     </button>
-                    <button class="upload-btn" onclick="addSongByLink()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
+                    <button class="btn" onclick="addSongByLink()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
                         <i class="fas fa-link"></i> Add by Link
                     </button>
                 </div>
@@ -758,7 +962,7 @@
                 </div>
             </div>
             
-            <!-- Themes Page -->
+            <!-- Themes -->
             <div id="themes" class="page">
                 <h1 class="page-title">Themes</h1>
                 <p class="page-subtitle">Choose your aesthetic</p>
@@ -786,41 +990,10 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Other Pages (Placeholder) -->
-            <div id="physics" class="page">
-                <h1 class="page-title">Physics</h1>
-                <p class="page-subtitle">Coming soon with PCM × Tech blend</p>
-            </div>
-            
-            <div id="chemistry" class="page">
-                <h1 class="page-title">Chemistry</h1>
-                <p class="page-subtitle">Coming soon with PCM × Tech blend</p>
-            </div>
-            
-            <div id="maths" class="page">
-                <h1 class="page-title">Maths</h1>
-                <p class="page-subtitle">Coming soon with PCM × Tech blend</p>
-            </div>
-            
-            <div id="tech" class="page">
-                <h1 class="page-title">Tech</h1>
-                <p class="page-subtitle">Coming soon with PCM × Tech blend</p>
-            </div>
-            
-            <div id="pomodoro" class="page">
-                <h1 class="page-title">Pomodoro Timer</h1>
-                <p class="page-subtitle">Coming soon</p>
-            </div>
-            
-            <div id="notes" class="page">
-                <h1 class="page-title">Notes</h1>
-                <p class="page-subtitle">Coming soon</p>
-            </div>
         </main>
     </div>
     
-    <!-- Music Player - Fixed Bottom -->
+    <!-- Music Player -->
     <div class="music-player" id="music-player">
         <div class="player-content">
             <div class="album-art">🎵</div>
@@ -861,14 +1034,229 @@
     
     <audio id="audio-player"></audio>
     
+    <script src="https://aurenya-19.github.io/pcm-tech-content-db/content.js"></script>
     <script>
-        // Music Database - User's songs stored in localStorage
-        let musicDatabase = JSON.parse(localStorage.getItem('musicDatabase')) || {
-            myMusic: {
-                name: '🎵 My Music',
-                icon: '🎵',
-                songs: []
+        // Topics Database with PCM × Tech Blends
+        const topicsDatabase = {
+            physics: [
+                {icon:'🚀',title:'Kinematics',desc:'Motion, velocity, acceleration',blend:'🤖 Used in robotics path planning & autonomous vehicles'},
+                {icon:'⚖️',title:"Newton's Laws",desc:'Forces, friction, dynamics',blend:'🎮 Physics engines in games & simulations'},
+                {icon:'💥',title:'Work & Energy',desc:'KE, PE, conservation',blend:'⚡ Energy optimization in ML models'},
+                {icon:'🎯',title:'Momentum',desc:'Collisions, impulse',blend:'🚗 Crash simulations & safety systems'},
+                {icon:'🔄',title:'Rotational Motion',desc:'Torque, angular momentum',blend:'🛸 Drone stabilization & gyroscopes'},
+                {icon:'🌍',title:'Gravitation',desc:'Universal law, orbits',blend:'🛰️ Satellite positioning & GPS'},
+                {icon:'📳',title:'SHM',desc:'Oscillations, waves',blend:'📡 Signal processing & communications'},
+                {icon:'🌊',title:'Waves',desc:'Sound, light, interference',blend:'🎵 Audio compression & noise cancellation'},
+                {icon:'🌡️',title:'Thermodynamics',desc:'Heat, entropy, engines',blend:'💻 CPU cooling & thermal management'},
+                {icon:'⚡',title:'Electrostatics',desc:'Charges, fields, potential',blend:'📱 Touchscreens & capacitive sensors'}
+            ],
+            chemistry: [
+                {icon:'🧪',title:'GOC',desc:'Hybridization, resonance',blend:'💊 Drug design & molecular modeling'},
+                {icon:'⛽',title:'Hydrocarbons',desc:'Alkanes, alkenes, alkynes',blend:'🔋 Fuel cells & battery chemistry'},
+                {icon:'🔬',title:'Mechanisms',desc:'SN1, SN2, E1, E2',blend:'🧬 Biochemical pathways & enzymes'},
+                {icon:'🍷',title:'Alcohols',desc:'Preparation, reactions',blend:'🏭 Industrial solvents & biofuels'},
+                {icon:'🧬',title:'Carbonyls',desc:'Aldehydes, ketones',blend:'🍬 Food chemistry & flavors'},
+                {icon:'💊',title:'Amines',desc:'Basicity, reactions',blend:'💉 Pharmaceutical synthesis'},
+                {icon:'🔄',title:'Stereochemistry',desc:'Chirality, isomerism',blend:'🧪 Chiral drugs & optical materials'},
+                {icon:'🎨',title:'P-Block',desc:'Group 13-18 elements',blend:'💡 LEDs & semiconductor materials'},
+                {icon:'🎭',title:'Coordination',desc:'Complexes, CFT',blend:'🌈 Pigments & catalysts'},
+                {icon:'🧮',title:'Mole Concept',desc:'Stoichiometry',blend:'⚗️ Chemical process optimization'}
+            ],
+            maths: [
+                {icon:'∞',title:'Limits',desc:'Continuity, derivatives',blend:'📈 Optimization algorithms'},
+                {icon:'📈',title:'Differentiation',desc:'Derivatives, chain rule',blend:'🤖 Gradient descent in ML'},
+                {icon:'📊',title:'AOD',desc:'Maxima/minima',blend:'💹 Cost minimization & profit max'},
+                {icon:'∫',title:'Integration',desc:'Area, volume',blend:'📊 Data analysis & statistics'},
+                {icon:'dy/dx',title:'Diff Equations',desc:'First order, linear',blend:'🌊 Modeling dynamic systems'},
+                {icon:'ℂ',title:'Complex Numbers',desc:'Operations, roots',blend:'📡 Signal processing & AC circuits'},
+                {icon:'[A]',title:'Matrices',desc:'Operations, inverse',blend:'🖼️ Image processing & transformations'},
+                {icon:'🎯',title:'Probability',desc:'Conditional, Bayes',blend:'🎲 ML predictions & decision making'},
+                {icon:'🌙',title:'Parabola',desc:'Focus, directrix',blend:'📡 Satellite dishes & reflectors'},
+                {icon:'⭕',title:'Circles',desc:'Tangent, chord',blend:'🎯 Computer graphics & CAD'}
+            ],
+            tech: [
+                {icon:'🧠',title:'Neural Networks',desc:'Perceptron, backprop',blend:'🧮 Uses calculus & linear algebra'},
+                {icon:'🤖',title:'Deep Learning',desc:'CNNs, RNNs',blend:'📊 Matrix operations & optimization'},
+                {icon:'💬',title:'NLP',desc:'BERT, GPT, transformers',blend:'📈 Probability & statistics'},
+                {icon:'👁️',title:'Computer Vision',desc:'Object detection',blend:'🌊 Fourier transforms & convolution'},
+                {icon:'🎮',title:'RL',desc:'Q-learning, policy',blend:'🎯 Optimization & game theory'},
+                {icon:'✨',title:'Generative AI',desc:'LLMs, diffusion',blend:'🎨 Chemistry of materials & physics'},
+                {icon:'⛓️',title:'Blockchain',desc:'Distributed ledger',blend:'🔐 Cryptography & hash functions'},
+                {icon:'📜',title:'Smart Contracts',desc:'Solidity, Ethereum',blend:'💰 Economics & game theory'},
+                {icon:'⚛️',title:'Quantum Computing',desc:'Qubits, gates',blend:'⚡ Quantum mechanics & physics'},
+                {icon:'🔐',title:'Cryptography',desc:'RSA, AES, hashing',blend:'🔢 Number theory & modular arithmetic'}
+            ]
+        };
+        
+        // Load topics for each subject
+        function loadTopics(subject) {
+            const grid = document.getElementById(subject + '-grid');
+            grid.innerHTML = '';
+            
+            topicsDatabase[subject].forEach(topic => {
+                const card = document.createElement('div');
+                card.className = 'topic-card';
+                card.innerHTML = `
+                    <div class="topic-icon">${topic.icon}</div>
+                    <div class="topic-title">${topic.title}</div>
+                    <div class="topic-desc">${topic.desc}</div>
+                    <div class="topic-blend">${topic.blend}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        // Pomodoro Timer
+        let timerInterval = null;
+        let timeLeft = 25 * 60;
+        let currentMode = 'focus';
+        let sessionsCompleted = 0;
+        
+        const modes = {
+            focus: 25 * 60,
+            short: 5 * 60,
+            long: 15 * 60
+        };
+        
+        function setMode(mode) {
+            currentMode = mode;
+            timeLeft = modes[mode];
+            updateTimerDisplay();
+            
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                document.getElementById('start-btn').style.display = 'inline-block';
+                document.getElementById('pause-btn').style.display = 'none';
             }
+        }
+        
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer-display').textContent = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function startTimer() {
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('pause-btn').style.display = 'inline-block';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    
+                    if (currentMode === 'focus') {
+                        sessionsCompleted++;
+                        document.getElementById('sessions-count').textContent = sessionsCompleted;
+                        localStorage.setItem('pomodoroSessions', sessionsCompleted);
+                    }
+                    
+                    alert('Time\'s up! ' + (currentMode === 'focus' ? 'Take a break!' : 'Back to work!'));
+                    document.getElementById('start-btn').style.display = 'inline-block';
+                    document.getElementById('pause-btn').style.display = 'none';
+                    
+                    timeLeft = modes[currentMode];
+                    updateTimerDisplay();
+                }
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            document.getElementById('start-btn').style.display = 'inline-block';
+            document.getElementById('pause-btn').style.display = 'none';
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timeLeft = modes[currentMode];
+            updateTimerDisplay();
+            document.getElementById('start-btn').style.display = 'inline-block';
+            document.getElementById('pause-btn').style.display = 'none';
+        }
+        
+        // Load saved sessions
+        const savedSessions = localStorage.getItem('pomodoroSessions');
+        if (savedSessions) {
+            sessionsCompleted = parseInt(savedSessions);
+            document.getElementById('sessions-count').textContent = sessionsCompleted;
+        }
+        
+        // Notes System
+        let notes = JSON.parse(localStorage.getItem('notes')) || [];
+        
+        function createNote() {
+            const title = document.getElementById('note-title-input').value;
+            const content = document.getElementById('note-content-input').value;
+            
+            if (!title || !content) {
+                alert('Please fill both title and content!');
+                return;
+            }
+            
+            const note = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                created: new Date().toLocaleDateString()
+            };
+            
+            notes.push(note);
+            localStorage.setItem('notes', JSON.stringify(notes));
+            
+            document.getElementById('note-title-input').value = '';
+            document.getElementById('note-content-input').value = '';
+            
+            loadNotes();
+        }
+        
+        function loadNotes() {
+            const grid = document.getElementById('notes-grid');
+            grid.innerHTML = '';
+            
+            if (notes.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No notes yet. Create your first note!</p>';
+                return;
+            }
+            
+            notes.forEach(note => {
+                const card = document.createElement('div');
+                card.className = 'note-card';
+                card.innerHTML = `
+                    <div class="note-title">${note.title}</div>
+                    <div class="note-content">${note.content.substring(0, 150)}${note.content.length > 150 ? '...' : ''}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">${note.created}</div>
+                    <div class="note-actions">
+                        <button class="note-btn delete" onclick="deleteNote(${note.id})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function deleteNote(id) {
+            if (confirm('Delete this note?')) {
+                notes = notes.filter(note => note.id !== id);
+                localStorage.setItem('notes', JSON.stringify(notes));
+                loadNotes();
+            }
+        }
+        
+        // Music Player (same as before)
+        let musicDatabase = JSON.parse(localStorage.getItem('musicDatabase')) || {
+            myMusic: { name: '🎵 My Music', icon: '🎵', songs: [] }
         };
         
         let currentPlaylist = null;
@@ -878,7 +1266,6 @@
         let isRepeat = false;
         const audioPlayer = document.getElementById('audio-player');
         
-        // File upload handler
         document.getElementById('file-input').addEventListener('change', function(e) {
             const files = e.target.files;
             for (let file of files) {
@@ -898,7 +1285,6 @@
             alert(`Added ${files.length} song(s)!`);
         });
         
-        // Add song by link
         function addSongByLink() {
             const title = prompt('Song Title:');
             if (!title) return;
@@ -906,27 +1292,20 @@
             const artist = prompt('Artist Name:');
             if (!artist) return;
             
-            const url = prompt('Direct MP3 Link (from Google Drive/Dropbox):');
+            const url = prompt('Direct MP3 Link:');
             if (!url) return;
             
-            const song = {
-                title: title,
-                artist: artist,
-                duration: '0:00',
-                url: url
-            };
-            
+            const song = { title, artist, duration: '0:00', url };
             musicDatabase.myMusic.songs.push(song);
             saveMusicDatabase();
             loadPlaylists();
-            alert('Song added successfully!');
+            alert('Song added!');
         }
         
         function saveMusicDatabase() {
             localStorage.setItem('musicDatabase', JSON.stringify(musicDatabase));
         }
         
-        // Load playlists
         function loadPlaylists() {
             const grid = document.getElementById('playlists-grid');
             grid.innerHTML = '';
@@ -957,7 +1336,7 @@
             songList.innerHTML = '';
             
             if (playlist.songs.length === 0) {
-                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add some songs to get started!</p>';
+                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add some!</p>';
                 return;
             }
             
@@ -1007,7 +1386,6 @@
             isPlaying = true;
             document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
             
-            // Update song list UI
             document.querySelectorAll('.song-item').forEach((item, i) => {
                 item.classList.toggle('playing', i === index);
             });
@@ -1077,7 +1455,6 @@
             audioPlayer.currentTime = (clickX / width) * duration;
         }
         
-        // Update progress
         audioPlayer.addEventListener('timeupdate', () => {
             const current = audioPlayer.currentTime;
             const duration = audioPlayer.duration;
@@ -1088,7 +1465,6 @@
             document.getElementById('duration').textContent = formatTime(duration);
         });
         
-        // Auto next song or repeat
         audioPlayer.addEventListener('ended', () => {
             if (isRepeat) {
                 audioPlayer.currentTime = 0;
@@ -1105,7 +1481,6 @@
             return `${mins}:${secs.toString().padStart(2, '0')}`;
         }
         
-        // Theme changer
         function changeTheme(theme) {
             const bg = document.getElementById('animated-bg');
             bg.className = 'animated-bg bg-' + theme;
@@ -1127,9 +1502,9 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(page).classList.add('active');
                 
-                if (page === 'music') {
-                    loadPlaylists();
-                }
+                if (page === 'music') loadPlaylists();
+                if (page === 'notes') loadNotes();
+                if (['physics', 'chemistry', 'maths', 'tech'].includes(page)) loadTopics(page);
                 
                 window.scrollTo(0, 0);
             });
@@ -1137,6 +1512,11 @@
         
         // Initialize
         loadPlaylists();
+        loadNotes();
+        loadTopics('physics');
+        loadTopics('chemistry');
+        loadTopics('maths');
+        loadTopics('tech');
     </script>
 </body>
 </html>
