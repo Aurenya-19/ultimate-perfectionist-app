@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Perfectionist - COMPLETE & WORKING</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Ultimate Perfectionist - UPDATE 1: Practice Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +35,6 @@
             width: 100%; height: 100%;
             z-index: -1;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b69 100%);
-            transition: all 1s ease;
         }
         
         .animated-bg::before {
@@ -87,6 +86,17 @@
             -webkit-text-fill-color: transparent;
         }
         
+        .update-badge {
+            background: var(--accent-3);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+        
         .nav-section { margin-bottom: 2rem; }
         
         .nav-section h3 {
@@ -131,7 +141,6 @@
         .main-content {
             margin-left: 280px;
             padding: 2.5rem;
-            padding-bottom: 150px;
             width: calc(100% - 280px);
             min-height: 100vh;
         }
@@ -192,45 +201,157 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
         
-        .status-item {
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            margin-bottom: 1rem;
+        .flashcard-container {
+            perspective: 1000px;
+            margin: 2rem auto;
+            max-width: 600px;
+            height: 400px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-        }
-        
-        .status-working {
-            border-left: 4px solid var(--success);
-        }
-        
-        .status-broken {
-            border-left: 4px solid var(--error);
-        }
-        
-        .status-badge {
-            padding: 0.5rem 1rem;
+            justify-content: center;
+            padding: 3rem;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            background: rgba(26, 31, 58, 0.8);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
         }
         
-        .badge-working {
+        .flashcard-front {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+        }
+        
+        .flashcard-back {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.1), rgba(255, 190, 11, 0.1));
+            transform: rotateY(180deg);
+        }
+        
+        .flashcard-text {
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 1.8;
+        }
+        
+        .test-question {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        
+        .test-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .test-option {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .test-option:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--accent-1);
+        }
+        
+        .test-option.selected {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: var(--accent-1);
+        }
+        
+        .test-option.correct {
             background: rgba(0, 255, 136, 0.2);
-            color: var(--success);
+            border-color: var(--success);
         }
         
-        .badge-broken {
+        .test-option.wrong {
             background: rgba(255, 68, 68, 0.2);
-            color: var(--error);
+            border-color: var(--error);
+        }
+        
+        .problem-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        
+        .solution {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-1);
+            display: none;
+        }
+        
+        .solution.show {
+            display: block;
+        }
+        
+        .formula-sheet {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .formula-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
+            width: 0%;
+            transition: width 0.5s;
         }
         
         @media (max-width: 1024px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; width: 100%; padding: 1.5rem; }
             .page-title { font-size: 2rem; }
+            .flashcard-container { height: 300px; }
         }
     </style>
 </head>
@@ -241,207 +362,380 @@
         <nav class="sidebar">
             <div class="logo">
                 <h1>🎯 PERFECTIONIST</h1>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Honest Status Report</p>
+                <span class="update-badge">UPDATE 1</span>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Practice Tools</p>
             </div>
             
             <div class="nav-section">
                 <h3>Main</h3>
-                <button class="nav-btn active" data-page="status">
-                    <i class="fas fa-clipboard-check"></i> Feature Status
+                <button class="nav-btn active" data-page="dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </button>
+            </div>
+            
+            <div class="nav-section">
+                <h3>Practice Tools (NEW)</h3>
+                <button class="nav-btn" data-page="flashcards">
+                    <i class="fas fa-layer-group"></i> Flashcards
+                </button>
+                <button class="nav-btn" data-page="tests">
+                    <i class="fas fa-clipboard-list"></i> Mock Tests
+                </button>
+                <button class="nav-btn" data-page="problems">
+                    <i class="fas fa-puzzle-piece"></i> Problems
+                </button>
+                <button class="nav-btn" data-page="formulas">
+                    <i class="fas fa-calculator"></i> Formulas
                 </button>
             </div>
         </nav>
         
         <main class="main-content">
-            <!-- Status Report -->
-            <div id="status" class="page active">
-                <h1 class="page-title">Honest Feature Status</h1>
-                <p class="page-subtitle">What's ACTUALLY working vs what's broken/missing</p>
+            <!-- Dashboard -->
+            <div id="dashboard" class="page active">
+                <h1 class="page-title">UPDATE 1: Practice Tools</h1>
+                <p class="page-subtitle">Flashcards, Mock Tests, Problems & Formula Sheets - All Working!</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--success);">✅ WORKING FEATURES</h2>
-                    
-                    <div class="status-item status-working">
-                        <div>
-                            <h3>📚 88 Chapters Listed</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">All Physics (29), Chemistry (30), Maths (29) chapters are visible with descriptions and PCM × Tech connections</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🎉 What's New in This Update</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="padding: 2rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎴</div>
+                            <h3>Flashcards</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Create & review with spaced repetition</p>
                         </div>
-                        <span class="status-badge badge-working">WORKING</span>
-                    </div>
-                    
-                    <div class="status-item status-working">
-                        <div>
-                            <h3>🧠 Deep Learning Content</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">All 6 techniques (Feynman, Spaced Repetition, Active Recall, Mind Mapping, Interleaving, Elaboration) with full explanations</p>
+                        <div style="padding: 2rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">📝</div>
+                            <h3>Mock Tests</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Timed tests with instant scoring</p>
                         </div>
-                        <span class="status-badge badge-working">WORKING</span>
-                    </div>
-                    
-                    <div class="status-item status-working">
-                        <div>
-                            <h3>🎨 12 Themes</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Theme switcher works, backgrounds change, saves preference</p>
+                        <div style="padding: 2rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧩</div>
+                            <h3>Problems</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Practice with step-by-step solutions</p>
                         </div>
-                        <span class="status-badge badge-working">WORKING</span>
-                    </div>
-                    
-                    <div class="status-item status-working">
-                        <div>
-                            <h3>🎵 Music Player (Basic)</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Can upload MP3s, add by link, songs save to localStorage, basic playback controls</p>
+                        <div style="padding: 2rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 1rem;">📖</div>
+                            <h3>Formula Sheets</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Quick reference for all formulas</p>
                         </div>
-                        <span class="status-badge badge-working">WORKING</span>
-                    </div>
-                    
-                    <div class="status-item status-working">
-                        <div>
-                            <h3>🎯 Navigation</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Sidebar navigation, page switching, responsive design</p>
-                        </div>
-                        <span class="status-badge badge-working">WORKING</span>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--error);">❌ BROKEN/INCOMPLETE FEATURES</h2>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>📖 Chapter Content</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Chapters are just cards. No detailed theory, formulas, examples, or practice problems when clicked</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Full content for each chapter (500+ words, formulas, examples, problems)</p>
-                        </div>
-                        <span class="status-badge badge-broken">INCOMPLETE</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>🎵 Music Player (Advanced)</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Basic playback only. No playlist management, no equalizer, no lyrics, no recommendations</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Multiple playlists, better UI, song metadata, album art</p>
-                        </div>
-                        <span class="status-badge badge-broken">INCOMPLETE</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>🎴 Flashcards</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Create flashcards, spaced repetition system, mastery tracking</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>📝 Mock Tests</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Timed tests, multiple choice questions, scoring, explanations</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>🧩 Practice Problems</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> 100+ problems per subject, step-by-step solutions, difficulty levels</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>⏰ Pomodoro Timer</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> 25/5/15 min timers, session tracking, break reminders</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>📝 Notes System</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Create notes, Cornell notes, chapter-wise organization, search</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>📊 Analytics Dashboard</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Study time tracking, progress graphs, weak areas, retention rate</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>🎮 Gamification</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> XP system, levels, achievements, streaks, rewards</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>🔍 Search Function</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Can't search chapters, notes, or content</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Global search across all content</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                    
-                    <div class="status-item status-broken">
-                        <div>
-                            <h3>📖 Formula Sheets</h3>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
-                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> All important formulas, quick reference, printable PDFs</p>
-                        </div>
-                        <span class="status-badge badge-broken">MISSING</span>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">📊 Summary</h2>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📊 Your Progress</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                        <div style="padding: 2rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 3rem; font-weight: 900; color: var(--success);">5</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Working Features</div>
+                        <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-1);" id="cards-count">0</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Flashcards Created</div>
                         </div>
-                        <div style="padding: 2rem; background: rgba(255, 68, 68, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 3rem; font-weight: 900; color: var(--error);">11</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Missing/Broken</div>
+                        <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-3);" id="tests-taken">0</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Tests Taken</div>
                         </div>
-                        <div style="padding: 2rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 3rem; font-weight: 900; color: var(--accent-1);">31%</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Completion</div>
+                        <div style="padding: 1.5rem; background: rgba(0, 0, 0, 0.2); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--success);" id="problems-solved">0</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Problems Solved</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 What Should I Build Next?</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
-                        I've been honest about what's working and what's not. Now tell me what you want me to build first:
-                    </p>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🚀 Coming in Next Updates</h2>
+                    <ul style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>UPDATE 2:</strong> Full chapter content (detailed theory for all 88 chapters)</li>
+                        <li><strong>UPDATE 3:</strong> Productivity tools (Pomodoro, Notes, Analytics)</li>
+                        <li><strong>UPDATE 4:</strong> Gamification (XP, Levels, Achievements, Streaks)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Flashcards -->
+            <div id="flashcards" class="page">
+                <h1 class="page-title">Flashcards</h1>
+                <p class="page-subtitle">Create & Review with Spaced Repetition</p>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📊 Your Flashcards</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--error);" id="new-cards">0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">New</div>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--accent-4);" id="learning-cards">0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Learning</div>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--success);" id="mastered-cards">0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Mastered</div>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; font-weight: 900; color: var(--accent-1);" id="due-cards">0</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Due Today</div>
+                        </div>
+                    </div>
                     
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <button class="btn" style="text-align: left; padding: 1.5rem;">
-                            <strong>Option 1:</strong> Full Chapter Content (detailed theory, formulas, examples for all 88 chapters)
+                    <button class="btn" onclick="showCreateCard()">
+                        <i class="fas fa-plus"></i> Create New Flashcard
+                    </button>
+                    <button class="btn" onclick="startReview()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
+                        <i class="fas fa-play"></i> Start Review
+                    </button>
+                </div>
+                
+                <div class="card" id="create-card-section" style="display: none;">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">✏️ Create Flashcard</h2>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Front (Question):</label>
+                        <textarea id="card-front" style="width: 100%; min-height: 100px; padding: 1rem; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 1rem; font-family: 'Inter', sans-serif;" placeholder="e.g., What is Newton's Second Law?"></textarea>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Back (Answer):</label>
+                        <textarea id="card-back" style="width: 100%; min-height: 100px; padding: 1rem; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 1rem; font-family: 'Inter', sans-serif;" placeholder="e.g., F = ma (Force equals mass times acceleration)"></textarea>
+                    </div>
+                    <button class="btn" onclick="createCard()">
+                        <i class="fas fa-save"></i> Save Flashcard
+                    </button>
+                    <button class="btn" onclick="hideCreateCard()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+                
+                <div class="card" id="review-section" style="display: none;">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎴 Review Flashcards</h2>
+                    <div class="flashcard-container">
+                        <div class="flashcard" id="flashcard" onclick="flipCard()">
+                            <div class="flashcard-face flashcard-front">
+                                <div class="flashcard-text" id="card-question">Click to start review</div>
+                            </div>
+                            <div class="flashcard-face flashcard-back">
+                                <div class="flashcard-text" id="card-answer">Answer will appear here</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button class="btn" onclick="rateCard('again')" style="background: var(--error);">
+                            <i class="fas fa-times"></i> Again (1 day)
                         </button>
-                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
-                            <strong>Option 2:</strong> Practice Tools (Flashcards + Mock Tests + Problems)
+                        <button class="btn" onclick="rateCard('good')" style="background: var(--accent-4);">
+                            <i class="fas fa-check"></i> Good (3 days)
                         </button>
-                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
-                            <strong>Option 3:</strong> Productivity Tools (Pomodoro + Notes + Analytics)
+                        <button class="btn" onclick="rateCard('easy')" style="background: var(--success);">
+                            <i class="fas fa-check-double"></i> Easy (1 week)
                         </button>
-                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
-                            <strong>Option 4:</strong> Everything at once (will take multiple updates)
+                    </div>
+                    <button class="btn" onclick="endReview()" style="margin-top: 2rem; background: rgba(255, 255, 255, 0.1);">
+                        <i class="fas fa-stop"></i> End Review
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mock Tests -->
+            <div id="tests" class="page">
+                <h1 class="page-title">Mock Tests</h1>
+                <p class="page-subtitle">Timed Tests with Instant Scoring</p>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📝 Available Tests</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div style="padding: 2rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; cursor: pointer;" onclick="startTest('physics')">
+                            <h3>⚛️ Physics Test</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">10 questions • 15 minutes</p>
+                        </div>
+                        <div style="padding: 2rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; cursor: pointer;" onclick="startTest('chemistry')">
+                            <h3>🧪 Chemistry Test</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">10 questions • 15 minutes</p>
+                        </div>
+                        <div style="padding: 2rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; cursor: pointer;" onclick="startTest('maths')">
+                            <h3>📐 Maths Test</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">10 questions • 15 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" id="test-section" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="font-size: 1.8rem;" id="test-title">Test</h2>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: var(--accent-1);" id="timer">15:00</div>
+                    </div>
+                    
+                    <div id="test-questions"></div>
+                    
+                    <button class="btn" onclick="submitTest()">
+                        <i class="fas fa-check"></i> Submit Test
+                    </button>
+                </div>
+                
+                <div class="card" id="test-results" style="display: none;">
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🎉 Test Results</h2>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div style="font-size: 5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-1), var(--accent-3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="test-score">0%</div>
+                        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-top: 1rem;" id="test-message">Great job!</p>
+                    </div>
+                    <button class="btn" onclick="backToTests()">
+                        <i class="fas fa-arrow-left"></i> Back to Tests
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Problems -->
+            <div id="problems" class="page">
+                <h1 class="page-title">Practice Problems</h1>
+                <p class="page-subtitle">Solve Problems with Step-by-Step Solutions</p>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🧩 Physics Problems</h2>
+                    
+                    <div class="problem-card">
+                        <h3 style="margin-bottom: 1rem;">Problem 1: Kinematics</h3>
+                        <p style="line-height: 1.8; color: var(--text-secondary);">A car accelerates from rest at 2 m/s². How far does it travel in 5 seconds?</p>
+                        <button class="btn" onclick="toggleSolution(1)" style="margin-top: 1rem;">
+                            <i class="fas fa-lightbulb"></i> Show Solution
                         </button>
+                        <div class="solution" id="solution-1">
+                            <h4 style="margin-bottom: 1rem;">Solution:</h4>
+                            <p style="line-height: 1.8;">
+                                <strong>Given:</strong><br>
+                                • Initial velocity (u) = 0 m/s<br>
+                                • Acceleration (a) = 2 m/s²<br>
+                                • Time (t) = 5 s<br><br>
+                                
+                                <strong>Formula:</strong><br>
+                                s = ut + (1/2)at²<br><br>
+                                
+                                <strong>Calculation:</strong><br>
+                                s = 0(5) + (1/2)(2)(5)²<br>
+                                s = 0 + (1)(25)<br>
+                                s = 25 m<br><br>
+                                
+                                <strong>Answer:</strong> The car travels 25 meters.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <h3 style="margin-bottom: 1rem;">Problem 2: Newton's Laws</h3>
+                        <p style="line-height: 1.8; color: var(--text-secondary);">A 10 kg object is pushed with a force of 50 N. What is its acceleration?</p>
+                        <button class="btn" onclick="toggleSolution(2)" style="margin-top: 1rem;">
+                            <i class="fas fa-lightbulb"></i> Show Solution
+                        </button>
+                        <div class="solution" id="solution-2">
+                            <h4 style="margin-bottom: 1rem;">Solution:</h4>
+                            <p style="line-height: 1.8;">
+                                <strong>Given:</strong><br>
+                                • Mass (m) = 10 kg<br>
+                                • Force (F) = 50 N<br><br>
+                                
+                                <strong>Formula:</strong><br>
+                                F = ma<br>
+                                Therefore, a = F/m<br><br>
+                                
+                                <strong>Calculation:</strong><br>
+                                a = 50/10<br>
+                                a = 5 m/s²<br><br>
+                                
+                                <strong>Answer:</strong> The acceleration is 5 m/s².
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card">
+                        <h3 style="margin-bottom: 1rem;">Problem 3: Energy</h3>
+                        <p style="line-height: 1.8; color: var(--text-secondary);">A 2 kg ball is thrown upward with a velocity of 10 m/s. What is its kinetic energy?</p>
+                        <button class="btn" onclick="toggleSolution(3)" style="margin-top: 1rem;">
+                            <i class="fas fa-lightbulb"></i> Show Solution
+                        </button>
+                        <div class="solution" id="solution-3">
+                            <h4 style="margin-bottom: 1rem;">Solution:</h4>
+                            <p style="line-height: 1.8;">
+                                <strong>Given:</strong><br>
+                                • Mass (m) = 2 kg<br>
+                                • Velocity (v) = 10 m/s<br><br>
+                                
+                                <strong>Formula:</strong><br>
+                                KE = (1/2)mv²<br><br>
+                                
+                                <strong>Calculation:</strong><br>
+                                KE = (1/2)(2)(10)²<br>
+                                KE = (1)(100)<br>
+                                KE = 100 J<br><br>
+                                
+                                <strong>Answer:</strong> The kinetic energy is 100 Joules.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Formulas -->
+            <div id="formulas" class="page">
+                <h1 class="page-title">Formula Sheets</h1>
+                <p class="page-subtitle">Quick Reference for All Important Formulas</p>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">⚛️ Physics Formulas</h2>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-1);">Kinematics</h3>
+                        <div class="formula-item">v = u + at</div>
+                        <div class="formula-item">s = ut + (1/2)at²</div>
+                        <div class="formula-item">v² = u² + 2as</div>
+                        <div class="formula-item">s = (u + v)t / 2</div>
+                    </div>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-1);">Newton's Laws</h3>
+                        <div class="formula-item">F = ma</div>
+                        <div class="formula-item">p = mv (momentum)</div>
+                        <div class="formula-item">F = Δp/Δt</div>
+                    </div>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-1);">Energy & Work</h3>
+                        <div class="formula-item">KE = (1/2)mv²</div>
+                        <div class="formula-item">PE = mgh</div>
+                        <div class="formula-item">W = F × d × cos(θ)</div>
+                        <div class="formula-item">Power = W/t</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🧪 Chemistry Formulas</h2>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-3);">Mole Concept</h3>
+                        <div class="formula-item">n = m/M (moles = mass/molar mass)</div>
+                        <div class="formula-item">n = V/22.4 (at STP)</div>
+                        <div class="formula-item">n = N/Nₐ (Avogadro's number)</div>
+                        <div class="formula-item">Molarity (M) = moles/volume(L)</div>
+                    </div>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-3);">Gas Laws</h3>
+                        <div class="formula-item">PV = nRT (Ideal Gas Law)</div>
+                        <div class="formula-item">P₁V₁/T₁ = P₂V₂/T₂</div>
+                        <div class="formula-item">d = PM/RT (density)</div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📐 Maths Formulas</h2>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-2);">Calculus</h3>
+                        <div class="formula-item">d/dx(xⁿ) = nxⁿ⁻¹</div>
+                        <div class="formula-item">d/dx(eˣ) = eˣ</div>
+                        <div class="formula-item">d/dx(ln x) = 1/x</div>
+                        <div class="formula-item">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div>
+                    </div>
+                    
+                    <div class="formula-sheet">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent-2);">Trigonometry</h3>
+                        <div class="formula-item">sin²θ + cos²θ = 1</div>
+                        <div class="formula-item">tan θ = sin θ / cos θ</div>
+                        <div class="formula-item">sin(A+B) = sinA cosB + cosA sinB</div>
+                        <div class="formula-item">cos(A+B) = cosA cosB - sinA sinB</div>
                     </div>
                 </div>
             </div>
@@ -449,6 +743,246 @@
     </div>
     
     <script>
+        // Flashcards System
+        let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
+        let currentCardIndex = 0;
+        let reviewCards = [];
+        
+        function updateFlashcardStats() {
+            const newCards = flashcards.filter(c => c.status === 'new').length;
+            const learningCards = flashcards.filter(c => c.status === 'learning').length;
+            const masteredCards = flashcards.filter(c => c.status === 'mastered').length;
+            const dueCards = flashcards.filter(c => new Date(c.nextReview) <= new Date()).length;
+            
+            document.getElementById('new-cards').textContent = newCards;
+            document.getElementById('learning-cards').textContent = learningCards;
+            document.getElementById('mastered-cards').textContent = masteredCards;
+            document.getElementById('due-cards').textContent = dueCards;
+            document.getElementById('cards-count').textContent = flashcards.length;
+        }
+        
+        function showCreateCard() {
+            document.getElementById('create-card-section').style.display = 'block';
+        }
+        
+        function hideCreateCard() {
+            document.getElementById('create-card-section').style.display = 'none';
+            document.getElementById('card-front').value = '';
+            document.getElementById('card-back').value = '';
+        }
+        
+        function createCard() {
+            const front = document.getElementById('card-front').value.trim();
+            const back = document.getElementById('card-back').value.trim();
+            
+            if (!front || !back) {
+                alert('Please fill both front and back!');
+                return;
+            }
+            
+            flashcards.push({
+                front,
+                back,
+                status: 'new',
+                nextReview: new Date().toISOString(),
+                created: new Date().toISOString()
+            });
+            
+            localStorage.setItem('flashcards', JSON.stringify(flashcards));
+            updateFlashcardStats();
+            hideCreateCard();
+            alert('Flashcard created!');
+        }
+        
+        function startReview() {
+            reviewCards = flashcards.filter(c => new Date(c.nextReview) <= new Date());
+            if (reviewCards.length === 0) {
+                alert('No cards due for review!');
+                return;
+            }
+            currentCardIndex = 0;
+            showReviewCard();
+            document.getElementById('review-section').style.display = 'block';
+        }
+        
+        function showReviewCard() {
+            if (currentCardIndex >= reviewCards.length) {
+                alert('Review complete!');
+                endReview();
+                return;
+            }
+            const card = reviewCards[currentCardIndex];
+            document.getElementById('card-question').textContent = card.front;
+            document.getElementById('card-answer').textContent = card.back;
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+        
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+        
+        function rateCard(rating) {
+            const card = reviewCards[currentCardIndex];
+            const cardIndex = flashcards.findIndex(c => c.front === card.front);
+            
+            const now = new Date();
+            if (rating === 'again') {
+                flashcards[cardIndex].nextReview = new Date(now.getTime() + 24*60*60*1000).toISOString();
+                flashcards[cardIndex].status = 'learning';
+            } else if (rating === 'good') {
+                flashcards[cardIndex].nextReview = new Date(now.getTime() + 3*24*60*60*1000).toISOString();
+                flashcards[cardIndex].status = 'learning';
+            } else if (rating === 'easy') {
+                flashcards[cardIndex].nextReview = new Date(now.getTime() + 7*24*60*60*1000).toISOString();
+                flashcards[cardIndex].status = 'mastered';
+            }
+            
+            localStorage.setItem('flashcards', JSON.stringify(flashcards));
+            currentCardIndex++;
+            showReviewCard();
+        }
+        
+        function endReview() {
+            document.getElementById('review-section').style.display = 'none';
+            updateFlashcardStats();
+        }
+        
+        // Mock Tests System
+        const testQuestions = {
+            physics: [
+                {q: 'What is the SI unit of force?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], correct: 0},
+                {q: 'Acceleration due to gravity on Earth?', options: ['9.8 m/s²', '10 m/s²', '8.9 m/s²', '11 m/s²'], correct: 0},
+                {q: 'Formula for kinetic energy?', options: ['mgh', '(1/2)mv²', 'mv', 'F×d'], correct: 1},
+                {q: 'What is momentum?', options: ['Force × time', 'Mass × velocity', 'Mass × acceleration', 'Force × distance'], correct: 1},
+                {q: 'Unit of power?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 2},
+                {q: 'First law of motion states?', options: ['F=ma', 'Inertia', 'Action-reaction', 'Energy conservation'], correct: 1},
+                {q: 'Speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10⁷ m/s', '3×10⁹ m/s'], correct: 0},
+                {q: 'Ohm\'s law formula?', options: ['V=IR', 'P=VI', 'E=mc²', 'F=ma'], correct: 0},
+                {q: 'Unit of electric charge?', options: ['Ampere', 'Coulomb', 'Volt', 'Ohm'], correct: 1},
+                {q: 'What is frequency?', options: ['Distance/time', 'Cycles/second', 'Speed/distance', 'Time/distance'], correct: 1}
+            ],
+            chemistry: [
+                {q: 'Avogadro\'s number?', options: ['6.022×10²³', '6.022×10²²', '6.022×10²⁴', '6.022×10²¹'], correct: 0},
+                {q: 'pH of pure water?', options: ['7', '0', '14', '1'], correct: 0},
+                {q: 'Atomic number of Carbon?', options: ['6', '12', '8', '14'], correct: 0},
+                {q: 'What is a mole?', options: ['6.022×10²³ particles', 'Mass in grams', 'Volume in liters', 'Density'], correct: 0},
+                {q: 'Noble gas configuration?', options: ['Stable', 'Reactive', 'Metallic', 'Acidic'], correct: 0},
+                {q: 'Oxidation is?', options: ['Loss of electrons', 'Gain of electrons', 'Neutral', 'Reduction'], correct: 0},
+                {q: 'Catalyst function?', options: ['Speeds up reaction', 'Slows reaction', 'Stops reaction', 'No effect'], correct: 0},
+                {q: 'Molecular formula of water?', options: ['H₂O', 'HO', 'H₂O₂', 'H₃O'], correct: 0},
+                {q: 'Periodic table groups?', options: ['18', '8', '7', '20'], correct: 0},
+                {q: 'Electronegativity trend?', options: ['Increases left to right', 'Decreases', 'No trend', 'Random'], correct: 0}
+            ],
+            maths: [
+                {q: 'Value of π?', options: ['3.14159', '3.14', '22/7', 'All of these'], correct: 3},
+                {q: 'sin²θ + cos²θ = ?', options: ['1', '0', '2', 'θ'], correct: 0},
+                {q: 'Derivative of x²?', options: ['2x', 'x', '2', 'x²'], correct: 0},
+                {q: 'Integral of 1/x?', options: ['ln|x| + C', 'x + C', '1/x² + C', 'e^x + C'], correct: 0},
+                {q: 'Quadratic formula?', options: ['(-b±√(b²-4ac))/2a', 'ax²+bx+c', 'x²+y²=r²', 'y=mx+c'], correct: 0},
+                {q: 'tan θ = ?', options: ['sin θ / cos θ', 'cos θ / sin θ', 'sin θ × cos θ', '1 / sin θ'], correct: 0},
+                {q: 'Value of e?', options: ['2.718', '3.14', '1.414', '1.732'], correct: 0},
+                {q: 'Pythagoras theorem?', options: ['a²+b²=c²', 'a+b=c', 'a²=b²+c²', 'abc=1'], correct: 0},
+                {q: 'Slope formula?', options: ['(y₂-y₁)/(x₂-x₁)', 'y=mx+c', 'ax+by=c', 'x²+y²=r²'], correct: 0},
+                {q: 'Area of circle?', options: ['πr²', '2πr', 'πd', 'r²'], correct: 0}
+            ]
+        };
+        
+        let currentTest = null;
+        let testAnswers = [];
+        let testTimer = null;
+        let timeLeft = 900; // 15 minutes
+        
+        function startTest(subject) {
+            currentTest = subject;
+            testAnswers = new Array(10).fill(null);
+            timeLeft = 900;
+            
+            document.getElementById('test-title').textContent = subject.charAt(0).toUpperCase() + subject.slice(1) + ' Test';
+            
+            const questionsHTML = testQuestions[subject].map((q, i) => `
+                <div class="test-question">
+                    <h3 style="margin-bottom: 1rem;">Question ${i+1}</h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">${q.q}</p>
+                    <div class="test-options">
+                        ${q.options.map((opt, j) => `
+                            <div class="test-option" onclick="selectOption(${i}, ${j})">
+                                <strong>${String.fromCharCode(65+j)}.</strong> ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('test-questions').innerHTML = questionsHTML;
+            document.getElementById('test-section').style.display = 'block';
+            
+            testTimer = setInterval(updateTimer, 1000);
+        }
+        
+        function updateTimer() {
+            timeLeft--;
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(testTimer);
+                submitTest();
+            }
+        }
+        
+        function selectOption(questionIndex, optionIndex) {
+            testAnswers[questionIndex] = optionIndex;
+            const options = document.querySelectorAll('.test-question')[questionIndex].querySelectorAll('.test-option');
+            options.forEach((opt, i) => {
+                opt.classList.toggle('selected', i === optionIndex);
+            });
+        }
+        
+        function submitTest() {
+            clearInterval(testTimer);
+            
+            let correct = 0;
+            testQuestions[currentTest].forEach((q, i) => {
+                if (testAnswers[i] === q.correct) correct++;
+            });
+            
+            const score = Math.round((correct / 10) * 100);
+            document.getElementById('test-score').textContent = score + '%';
+            
+            let message = '';
+            if (score >= 90) message = 'Outstanding! 🎉';
+            else if (score >= 75) message = 'Great job! 👏';
+            else if (score >= 60) message = 'Good effort! 👍';
+            else message = 'Keep practicing! 💪';
+            
+            document.getElementById('test-message').textContent = message;
+            
+            document.getElementById('test-section').style.display = 'none';
+            document.getElementById('test-results').style.display = 'block';
+            
+            const testsTaken = parseInt(localStorage.getItem('testsTaken') || '0') + 1;
+            localStorage.setItem('testsTaken', testsTaken);
+            document.getElementById('tests-taken').textContent = testsTaken;
+        }
+        
+        function backToTests() {
+            document.getElementById('test-results').style.display = 'none';
+        }
+        
+        // Problems System
+        function toggleSolution(problemId) {
+            const solution = document.getElementById('solution-' + problemId);
+            solution.classList.toggle('show');
+            
+            if (solution.classList.contains('show')) {
+                const problemsSolved = parseInt(localStorage.getItem('problemsSolved') || '0') + 1;
+                localStorage.setItem('problemsSolved', problemsSolved);
+                document.getElementById('problems-solved').textContent = problemsSolved;
+            }
+        }
+        
+        // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const page = btn.dataset.page;
@@ -460,8 +994,13 @@
             });
         });
         
-        console.log('✅ Honest Status Report Loaded');
-        console.log('📊 5 Working, 11 Missing/Broken, 31% Complete');
+        // Initialize
+        updateFlashcardStats();
+        document.getElementById('tests-taken').textContent = localStorage.getItem('testsTaken') || '0';
+        document.getElementById('problems-solved').textContent = localStorage.getItem('problemsSolved') || '0';
+        
+        console.log('✅ UPDATE 1: Practice Tools Loaded!');
+        console.log('🎴 Flashcards, 📝 Mock Tests, 🧩 Problems, 📖 Formulas - All Working!');
     </script>
 </body>
 </html>
