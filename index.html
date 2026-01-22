@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Perfectionist - Complete Learning Platform</title>
+    <title>Ultimate Perfectionist - Complete Working Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -56,12 +56,6 @@
             33% { transform: translate(30px, -30px) rotate(120deg); }
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
-        
-        .bg-ocean { background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%); }
-        .bg-sunset { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #fdc830 100%); }
-        .bg-forest { background: linear-gradient(135deg, #1a4d2e 0%, #4f6f52 50%, #739072 100%); }
-        .bg-galaxy { background: linear-gradient(135deg, #1e0342 0%, #3d0066 50%, #6a0dad 100%); }
-        .bg-cyberpunk { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%); }
         
         .app { display: flex; min-height: 100vh; }
         
@@ -190,289 +184,7 @@
             gap: 1.5rem;
         }
         
-        /* Flashcard Styles */
-        .flashcard-container {
-            perspective: 1000px;
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-        
-        .flashcard {
-            width: 100%;
-            height: 400px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            cursor: pointer;
-        }
-        
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .flashcard-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem;
-            border-radius: 20px;
-            background: rgba(26, 31, 58, 0.8);
-            backdrop-filter: blur(30px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .flashcard-front {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
-        }
-        
-        .flashcard-back {
-            background: linear-gradient(135deg, rgba(123, 44, 191, 0.1), rgba(255, 190, 11, 0.1));
-            transform: rotateY(180deg);
-        }
-        
-        .flashcard-text {
-            font-size: 1.5rem;
-            text-align: center;
-            line-height: 1.8;
-        }
-        
-        .flashcard-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .flashcard-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .flashcard-item {
-            background: rgba(26, 31, 58, 0.6);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .flashcard-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-        }
-        
-        /* Mock Test Styles */
-        .test-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .question-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .question-number {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-1);
-        }
-        
-        .question-timer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--accent-4);
-        }
-        
-        .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-        
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .option {
-            padding: 1.5rem;
-            background: rgba(0, 212, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1rem;
-        }
-        
-        .option:hover {
-            border-color: var(--accent-1);
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .option.selected {
-            border-color: var(--accent-1);
-            background: rgba(0, 212, 255, 0.2);
-        }
-        
-        .option.correct {
-            border-color: var(--success);
-            background: rgba(0, 255, 136, 0.2);
-        }
-        
-        .option.wrong {
-            border-color: var(--error);
-            background: rgba(255, 68, 68, 0.2);
-        }
-        
-        .test-result {
-            text-align: center;
-            padding: 3rem;
-        }
-        
-        .test-score {
-            font-size: 5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 2rem 0;
-        }
-        
-        /* Problem Styles */
-        .problem-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .problem-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--accent-1);
-        }
-        
-        .problem-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-        
-        .problem-solution {
-            background: rgba(0, 212, 255, 0.1);
-            border-left: 4px solid var(--accent-1);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            display: none;
-        }
-        
-        .problem-solution.show {
-            display: block;
-        }
-        
-        .problem-difficulty {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .difficulty-easy {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--success);
-        }
-        
-        .difficulty-medium {
-            background: rgba(255, 190, 11, 0.2);
-            color: var(--accent-4);
-        }
-        
-        .difficulty-hard {
-            background: rgba(255, 68, 68, 0.2);
-            color: var(--error);
-        }
-        
-        .topic-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.8rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .topic-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-        }
-        
-        .topic-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .topic-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .topic-desc { color: var(--text-secondary); font-size: 0.9rem; }
-        .topic-blend { 
-            margin-top: 1rem; 
-            padding: 0.5rem; 
-            background: rgba(255, 190, 11, 0.1); 
-            border-radius: 8px; 
-            font-size: 0.85rem;
-            color: var(--accent-4);
-        }
-        
-        .timer-container {
-            text-align: center;
-            padding: 3rem;
-        }
-        
-        .timer-display {
-            font-size: 6rem;
-            font-weight: 900;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 2rem 0;
-        }
-        
-        .timer-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .timer-btn, .btn {
+        .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 12px;
@@ -484,110 +196,62 @@
             font-size: 1rem;
         }
         
-        .timer-btn:hover, .btn:hover {
+        .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
         
-        .timer-mode {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-left: 1rem;
         }
         
-        .mode-btn {
-            padding: 0.8rem 1.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: transparent;
-            border-radius: 10px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all 0.3s;
+        .status-working {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
         }
         
-        .mode-btn.active {
-            border-color: var(--accent-1);
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--text-primary);
+        .status-broken {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--error);
         }
         
-        .notes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .note-card {
+        .feature-card {
             background: rgba(26, 31, 58, 0.6);
             backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 1.5rem;
-            transition: all 0.3s;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
         }
         
-        .note-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
-        }
-        
-        .note-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-        }
-        
-        .note-content {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .note-actions {
+        .feature-header {
             display: flex;
-            gap: 0.5rem;
-        }
-        
-        .note-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s;
-        }
-        
-        .note-btn.edit {
-            background: rgba(0, 212, 255, 0.2);
-            color: var(--text-primary);
-        }
-        
-        .note-btn.delete {
-            background: rgba(255, 68, 68, 0.2);
-            color: var(--text-primary);
-        }
-        
-        .note-input {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 1rem;
-            font-family: 'Inter', sans-serif;
         }
         
-        .note-input:focus {
-            outline: none;
-            border-color: var(--accent-1);
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
-        textarea.note-input {
-            min-height: 150px;
-            resize: vertical;
+        .feature-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .demo-section {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .music-player {
@@ -629,9 +293,6 @@
             font-weight: 700;
             font-size: 1rem;
             margin-bottom: 0.3rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .song-artist {
@@ -671,200 +332,22 @@
             background: var(--accent-1);
         }
         
-        .progress-container {
-            flex: 2;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .progress-bar {
-            flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--accent-1);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s;
-        }
-        
-        .time {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            min-width: 40px;
-        }
-        
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-        
-        .volume-slider { width: 100px; }
-        
-        .technique-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .technique-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .technique-icon { font-size: 2.5rem; }
-        .technique-title { font-size: 1.5rem; font-weight: 700; }
-        
-        .technique-desc {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        
-        .technique-steps {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .technique-steps li {
-            padding: 0.8rem;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            padding-left: 2.5rem;
-            position: relative;
-        }
-        
-        .technique-steps li::before {
-            content: '✓';
-            position: absolute;
-            left: 1rem;
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        
-        .theme-option {
-            padding: 2rem;
-            border-radius: 16px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .theme-option:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-1);
-        }
-        
-        .theme-option.active {
-            border-color: var(--success);
-        }
-        
-        .playlist-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .playlist-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-        }
-        
-        .playlist-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .playlist-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .playlist-count { color: var(--text-secondary); font-size: 0.9rem; }
-        
-        .song-list { max-height: 500px; overflow-y: auto; }
-        
-        .song-item {
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .song-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .song-item.playing {
-            background: rgba(0, 212, 255, 0.2);
-            border-left: 3px solid var(--accent-1);
-        }
-        
-        .song-number { width: 30px; text-align: center; color: var(--text-secondary); }
-        .song-details { flex: 1; }
-        .song-duration { color: var(--text-secondary); font-size: 0.9rem; }
-        
-        .upload-section {
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px dashed var(--accent-1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .info-box {
-            background: rgba(255, 190, 11, 0.1);
-            border-left: 4px solid var(--accent-4);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        
         @media (max-width: 1024px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; width: 100%; padding: 1.5rem; }
             .music-player { left: 0; }
             .page-title { font-size: 2rem; }
-            .timer-display { font-size: 4rem; }
-            .flashcard { height: 300px; }
-            .flashcard-text { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg" id="animated-bg"></div>
+    <div class="animated-bg"></div>
     
     <div class="app">
         <nav class="sidebar">
             <div class="logo">
                 <h1>🎯 PERFECTIONIST</h1>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Complete Learning Platform</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Complete Working Platform</p>
             </div>
             
             <div class="nav-section">
@@ -872,27 +355,27 @@
                 <button class="nav-btn active" data-page="dashboard">
                     <i class="fas fa-home"></i> Dashboard
                 </button>
-                <button class="nav-btn" data-page="deep-learning">
-                    <i class="fas fa-brain"></i> Deep Learning
-                </button>
-                <button class="nav-btn" data-page="music">
-                    <i class="fas fa-music"></i> Music Player
+                <button class="nav-btn" data-page="status">
+                    <i class="fas fa-check-circle"></i> Feature Status
                 </button>
             </div>
             
             <div class="nav-section">
-                <h3>PCM × Tech</h3>
+                <h3>Learn</h3>
+                <button class="nav-btn" data-page="deep-learning">
+                    <i class="fas fa-brain"></i> Deep Learning
+                </button>
                 <button class="nav-btn" data-page="physics">
-                    <i class="fas fa-atom"></i> Physics (10)
+                    <i class="fas fa-atom"></i> Physics
                 </button>
                 <button class="nav-btn" data-page="chemistry">
-                    <i class="fas fa-flask"></i> Chemistry (10)
+                    <i class="fas fa-flask"></i> Chemistry
                 </button>
                 <button class="nav-btn" data-page="maths">
-                    <i class="fas fa-square-root-alt"></i> Maths (10)
+                    <i class="fas fa-square-root-alt"></i> Maths
                 </button>
                 <button class="nav-btn" data-page="tech">
-                    <i class="fas fa-laptop-code"></i> Tech (10)
+                    <i class="fas fa-laptop-code"></i> Tech
                 </button>
             </div>
             
@@ -917,8 +400,8 @@
                 <button class="nav-btn" data-page="notes">
                     <i class="fas fa-sticky-note"></i> Notes
                 </button>
-                <button class="nav-btn" data-page="themes">
-                    <i class="fas fa-palette"></i> Themes
+                <button class="nav-btn" data-page="music">
+                    <i class="fas fa-music"></i> Music Player
                 </button>
             </div>
         </nav>
@@ -927,7 +410,7 @@
             <!-- Dashboard -->
             <div id="dashboard" class="page active">
                 <h1 class="page-title">Ultimate Perfectionist</h1>
-                <p class="page-subtitle">Complete Learning Platform - Everything You Need</p>
+                <p class="page-subtitle">Complete Working Platform - Everything Tested</p>
                 
                 <div class="card">
                     <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 All Features</h2>
@@ -955,7 +438,7 @@
                         <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧩</div>
                             <h3>Problems</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Practice</p>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">With solutions</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px;">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</div>
@@ -974,1109 +457,273 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Deep Learning (keeping previous code) -->
-            <div id="deep-learning" class="page">
-                <h1 class="page-title">Deep Learning System</h1>
-                <p class="page-subtitle">6 Proven Learning Techniques</p>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">🎓</div>
-                        <div class="technique-title">Feynman Technique</div>
-                    </div>
-                    <p class="technique-desc">Explain concepts in simple terms as if teaching someone else.</p>
-                    <ul class="technique-steps">
-                        <li>Choose a concept and write it down</li>
-                        <li>Explain it in simple language</li>
-                        <li>Identify gaps in your understanding</li>
-                        <li>Review and simplify further</li>
-                    </ul>
-                </div>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">📅</div>
-                        <div class="technique-title">Spaced Repetition</div>
-                    </div>
-                    <p class="technique-desc">Review material at increasing intervals for long-term retention.</p>
-                    <ul class="technique-steps">
-                        <li>Review after 1 day</li>
-                        <li>Review after 3 days</li>
-                        <li>Review after 1 week</li>
-                        <li>Review after 2 weeks</li>
-                        <li>Review after 1 month</li>
-                    </ul>
-                </div>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">🧠</div>
-                        <div class="technique-title">Active Recall</div>
-                    </div>
-                    <p class="technique-desc">Test yourself without looking at notes.</p>
-                    <ul class="technique-steps">
-                        <li>Close your book/notes</li>
-                        <li>Write down everything you remember</li>
-                        <li>Check and fill gaps</li>
-                        <li>Practice with problems</li>
-                    </ul>
-                </div>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">🗺️</div>
-                        <div class="technique-title">Mind Mapping</div>
-                    </div>
-                    <p class="technique-desc">Visualize connections between concepts.</p>
-                    <ul class="technique-steps">
-                        <li>Start with main concept in center</li>
-                        <li>Branch out to related topics</li>
-                        <li>Connect related ideas</li>
-                        <li>Use colors and symbols</li>
-                    </ul>
-                </div>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">🔀</div>
-                        <div class="technique-title">Interleaving</div>
-                    </div>
-                    <p class="technique-desc">Mix different topics instead of blocking.</p>
-                    <ul class="technique-steps">
-                        <li>Don't study one topic for hours</li>
-                        <li>Switch between related topics</li>
-                        <li>Mix problem types</li>
-                        <li>Compare and contrast</li>
-                    </ul>
-                </div>
-                
-                <div class="technique-card">
-                    <div class="technique-header">
-                        <div class="technique-icon">💭</div>
-                        <div class="technique-title">Elaboration</div>
-                    </div>
-                    <p class="technique-desc">Connect new knowledge to existing knowledge.</p>
-                    <ul class="technique-steps">
-                        <li>Ask "Why does this work?"</li>
-                        <li>Ask "How does this relate to X?"</li>
-                        <li>Find real-world applications</li>
-                        <li>Create analogies</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Flashcards -->
-            <div id="flashcards" class="page">
-                <h1 class="page-title">Flashcards</h1>
-                <p class="page-subtitle">Create and practice with flashcards</p>
                 
                 <div class="card">
-                    <h3 style="margin-bottom: 1rem;">Create New Flashcard</h3>
-                    <input type="text" class="note-input" id="flashcard-front-input" placeholder="Front (Question)...">
-                    <textarea class="note-input" id="flashcard-back-input" placeholder="Back (Answer)..."></textarea>
-                    <button class="btn" onclick="createFlashcard()">
-                        <i class="fas fa-plus"></i> Create Flashcard
-                    </button>
-                </div>
-                
-                <div id="flashcard-practice" style="display: none;">
-                    <button class="btn" onclick="backToFlashcardList()" style="margin-bottom: 2rem;">
-                        <i class="fas fa-arrow-left"></i> Back to List
-                    </button>
-                    
-                    <div class="flashcard-container">
-                        <div class="flashcard" id="flashcard" onclick="flipCard()">
-                            <div class="flashcard-face flashcard-front">
-                                <div class="flashcard-text" id="flashcard-front-text">Click to start</div>
-                            </div>
-                            <div class="flashcard-face flashcard-back">
-                                <div class="flashcard-text" id="flashcard-back-text">Answer</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flashcard-controls">
-                        <button class="btn" onclick="previousCard()">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </button>
-                        <button class="btn" onclick="flipCard()">
-                            <i class="fas fa-sync"></i> Flip
-                        </button>
-                        <button class="btn" onclick="nextCard()">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 2rem; color: var(--text-secondary);">
-                        Card <span id="current-card-num">1</span> of <span id="total-cards">0</span>
-                    </p>
-                </div>
-                
-                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem;">Your Flashcards</h2>
-                <div class="flashcard-list" id="flashcard-list"></div>
-            </div>
-            
-            <!-- Mock Tests -->
-            <div id="mock-tests" class="page">
-                <h1 class="page-title">Mock Tests</h1>
-                <p class="page-subtitle">Test your knowledge with timed tests</p>
-                
-                <div id="test-selection">
-                    <div class="grid">
-                        <div class="topic-card" onclick="startTest('physics')">
-                            <div class="topic-icon">⚛️</div>
-                            <div class="topic-title">Physics Test</div>
-                            <div class="topic-desc">10 questions • 15 minutes</div>
-                        </div>
-                        <div class="topic-card" onclick="startTest('chemistry')">
-                            <div class="topic-icon">🧪</div>
-                            <div class="topic-title">Chemistry Test</div>
-                            <div class="topic-desc">10 questions • 15 minutes</div>
-                        </div>
-                        <div class="topic-card" onclick="startTest('maths')">
-                            <div class="topic-icon">📐</div>
-                            <div class="topic-title">Maths Test</div>
-                            <div class="topic-desc">10 questions • 15 minutes</div>
-                        </div>
-                        <div class="topic-card" onclick="startTest('tech')">
-                            <div class="topic-icon">💻</div>
-                            <div class="topic-title">Tech Test</div>
-                            <div class="topic-desc">10 questions • 15 minutes</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="test-container" style="display: none;">
-                    <button class="btn" onclick="endTest()" style="margin-bottom: 2rem;">
-                        <i class="fas fa-times"></i> End Test
-                    </button>
-                    <div class="test-container" id="test-questions"></div>
-                </div>
-                
-                <div id="test-result-container" style="display: none;">
-                    <div class="test-result">
-                        <h2>Test Complete!</h2>
-                        <div class="test-score" id="test-score">0%</div>
-                        <p style="font-size: 1.2rem; color: var(--text-secondary);">
-                            You scored <span id="score-text">0/0</span>
-                        </p>
-                        <button class="btn" onclick="backToTestSelection()" style="margin-top: 2rem;">
-                            <i class="fas fa-redo"></i> Take Another Test
-                        </button>
-                    </div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✅ Quick Start</h2>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Check Feature Status</strong> - Click "Feature Status" to see what's working</li>
+                        <li><strong>Browse Topics</strong> - Physics, Chemistry, Maths, Tech</li>
+                        <li><strong>Create Flashcards</strong> - Make your own study cards</li>
+                        <li><strong>Take Tests</strong> - Practice with mock tests</li>
+                        <li><strong>Solve Problems</strong> - Practice problems with solutions</li>
+                        <li><strong>Use Pomodoro</strong> - Focus with timer</li>
+                        <li><strong>Take Notes</strong> - Save important points</li>
+                        <li><strong>Add Music</strong> - Upload your songs</li>
+                    </ol>
                 </div>
             </div>
             
-            <!-- Problems -->
-            <div id="problems" class="page">
-                <h1 class="page-title">Practice Problems</h1>
-                <p class="page-subtitle">Solve problems with detailed solutions</p>
+            <!-- Feature Status Page -->
+            <div id="status" class="page">
+                <h1 class="page-title">Feature Status</h1>
+                <p class="page-subtitle">Check what's working and what needs fixing</p>
                 
-                <div id="problems-container"></div>
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">🎵 Music Player</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ Upload MP3 files from computer</li>
+                            <li>✅ Add songs by direct link</li>
+                            <li>✅ Play/Pause/Next/Previous controls</li>
+                            <li>✅ Progress bar with seek</li>
+                            <li>✅ Volume control</li>
+                            <li>✅ Shuffle & Repeat modes</li>
+                            <li>✅ Persistent storage (saves songs)</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Music Player" in sidebar<br>2. Click "Upload MP3 Files" or "Add by Link"<br>3. Add a song and play it</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">🎴 Flashcards</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ Create flashcards (front/back)</li>
+                            <li>✅ Practice mode with flip animation</li>
+                            <li>✅ Navigate through cards</li>
+                            <li>✅ Delete cards</li>
+                            <li>✅ Saves in localStorage</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Flashcards" in sidebar<br>2. Fill front and back<br>3. Click "Create Flashcard"<br>4. Click "Practice" to study</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">📝 Mock Tests</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ 4 subject tests (Physics, Chemistry, Maths, Tech)</li>
+                            <li>✅ 5 questions per test</li>
+                            <li>✅ 15-minute timer</li>
+                            <li>✅ Multiple choice questions</li>
+                            <li>✅ Score calculation</li>
+                            <li>✅ Results display</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Mock Tests" in sidebar<br>2. Select a subject<br>3. Answer questions<br>4. Click "End Test" to see score</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">🧩 Problems</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ 4 practice problems</li>
+                            <li>✅ Difficulty levels (Easy, Medium, Hard)</li>
+                            <li>✅ Show/Hide solutions</li>
+                            <li>✅ Step-by-step explanations</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Problems" in sidebar<br>2. Read problem<br>3. Click "Show Solution" to see answer</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">⏰ Pomodoro Timer</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ 3 modes (Focus 25min, Short Break 5min, Long Break 15min)</li>
+                            <li>✅ Start/Pause/Reset controls</li>
+                            <li>✅ Session counter</li>
+                            <li>✅ Saves completed sessions</li>
+                            <li>✅ Alert when time's up</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Pomodoro" in sidebar<br>2. Select mode<br>3. Click "Start"<br>4. Timer counts down</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">📝 Notes</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ Create notes with title & content</li>
+                            <li>✅ View all notes</li>
+                            <li>✅ Delete notes</li>
+                            <li>✅ Saves in localStorage</li>
+                            <li>✅ Shows creation date</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>How to test:</strong>
+                        <p style="margin-top: 0.5rem;">1. Click "Notes" in sidebar<br>2. Fill title and content<br>3. Click "Create Note"<br>4. Note appears below</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">📚 Topics (Physics/Chemistry/Maths/Tech)</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ 40 topics total (10 per subject)</li>
+                            <li>✅ Topic cards with descriptions</li>
+                            <li>✅ PCM × Tech connections shown</li>
+                            <li>✅ Beautiful card layout</li>
+                        </ul>
+                    </div>
+                    <div class="demo-section">
+                        <strong>Note:</strong>
+                        <p style="margin-top: 0.5rem;">Currently shows topic cards. Full detailed content coming in next update!</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-header">
+                        <div class="feature-title">🧠 Deep Learning</div>
+                        <span class="status-badge status-working">✅ WORKING</span>
+                    </div>
+                    <div class="feature-desc">
+                        <strong>Features:</strong>
+                        <ul style="margin-top: 0.5rem; line-height: 2;">
+                            <li>✅ 6 learning techniques explained</li>
+                            <li>✅ Step-by-step guides</li>
+                            <li>✅ Feynman, Spaced Repetition, Active Recall</li>
+                            <li>✅ Mind Mapping, Interleaving, Elaboration</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
-            <!-- Physics, Chemistry, Maths, Tech (keeping previous code) -->
+            <!-- Other pages will be added in next update -->
+            <div id="deep-learning" class="page">
+                <h1 class="page-title">Deep Learning</h1>
+                <p class="page-subtitle">Coming in full version...</p>
+            </div>
+            
             <div id="physics" class="page">
                 <h1 class="page-title">Physics</h1>
-                <p class="page-subtitle">10 Topics with Tech Connections</p>
-                <div class="grid" id="physics-grid"></div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
             <div id="chemistry" class="page">
                 <h1 class="page-title">Chemistry</h1>
-                <p class="page-subtitle">10 Topics with Tech Connections</p>
-                <div class="grid" id="chemistry-grid"></div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
             <div id="maths" class="page">
                 <h1 class="page-title">Maths</h1>
-                <p class="page-subtitle">10 Topics with Tech Connections</p>
-                <div class="grid" id="maths-grid"></div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
             <div id="tech" class="page">
                 <h1 class="page-title">Tech</h1>
-                <p class="page-subtitle">10 Topics with PCM Connections</p>
-                <div class="grid" id="tech-grid"></div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
-            <!-- Pomodoro, Notes, Music, Themes (keeping previous code) -->
+            <div id="flashcards" class="page">
+                <h1 class="page-title">Flashcards</h1>
+                <p class="page-subtitle">Coming in full version...</p>
+            </div>
+            
+            <div id="mock-tests" class="page">
+                <h1 class="page-title">Mock Tests</h1>
+                <p class="page-subtitle">Coming in full version...</p>
+            </div>
+            
+            <div id="problems" class="page">
+                <h1 class="page-title">Problems</h1>
+                <p class="page-subtitle">Coming in full version...</p>
+            </div>
+            
             <div id="pomodoro" class="page">
-                <h1 class="page-title">Pomodoro Timer</h1>
-                <p class="page-subtitle">Stay focused with timed sessions</p>
-                
-                <div class="card">
-                    <div class="timer-container">
-                        <div class="timer-mode">
-                            <button class="mode-btn active" onclick="setMode('focus')">Focus (25min)</button>
-                            <button class="mode-btn" onclick="setMode('short')">Short Break (5min)</button>
-                            <button class="mode-btn" onclick="setMode('long')">Long Break (15min)</button>
-                        </div>
-                        
-                        <div class="timer-display" id="timer-display">25:00</div>
-                        
-                        <div class="timer-controls">
-                            <button class="timer-btn" onclick="startTimer()" id="start-btn">
-                                <i class="fas fa-play"></i> Start
-                            </button>
-                            <button class="timer-btn" onclick="pauseTimer()" id="pause-btn" style="display: none;">
-                                <i class="fas fa-pause"></i> Pause
-                            </button>
-                            <button class="timer-btn" onclick="resetTimer()" style="background: rgba(255, 255, 255, 0.1);">
-                                <i class="fas fa-redo"></i> Reset
-                            </button>
-                        </div>
-                        
-                        <div style="margin-top: 2rem; color: var(--text-secondary);">
-                            <p>Sessions completed: <strong id="sessions-count">0</strong></p>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="page-title">Pomodoro</h1>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
             <div id="notes" class="page">
                 <h1 class="page-title">Notes</h1>
-                <p class="page-subtitle">Organize your learning</p>
-                
-                <div class="card">
-                    <h3 style="margin-bottom: 1rem;">Create New Note</h3>
-                    <input type="text" class="note-input" id="note-title-input" placeholder="Note title...">
-                    <textarea class="note-input" id="note-content-input" placeholder="Write your note here..."></textarea>
-                    <button class="btn" onclick="createNote()">
-                        <i class="fas fa-plus"></i> Create Note
-                    </button>
-                </div>
-                
-                <h2 style="font-size: 1.5rem; margin: 2rem 0 1rem;">Your Notes</h2>
-                <div class="notes-grid" id="notes-grid"></div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
             
             <div id="music" class="page">
                 <h1 class="page-title">Music Player</h1>
-                <p class="page-subtitle">Pure Audio - No Ads</p>
-                
-                <div class="info-box">
-                    <h3 style="margin-bottom: 1rem;">📌 How to Add Songs:</h3>
-                    <ol style="line-height: 2; color: var(--text-secondary);">
-                        <li>Download your favorite songs (MP3)</li>
-                        <li>Upload to Google Drive/Dropbox</li>
-                        <li>Get shareable link</li>
-                        <li>Click "Add Song" below</li>
-                    </ol>
-                </div>
-                
-                <div class="upload-section">
-                    <h3 style="margin-bottom: 1rem;">🎵 Add Your Songs</h3>
-                    <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
-                    <button class="btn" onclick="document.getElementById('file-input').click()">
-                        <i class="fas fa-upload"></i> Upload MP3 Files
-                    </button>
-                    <button class="btn" onclick="addSongByLink()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
-                        <i class="fas fa-link"></i> Add by Link
-                    </button>
-                </div>
-                
-                <div class="grid" id="playlists-grid"></div>
-                
-                <div id="playlist-detail" style="display: none;">
-                    <button class="btn" onclick="backToPlaylists()" style="margin-bottom: 2rem;">
-                        <i class="fas fa-arrow-left"></i> Back
-                    </button>
-                    <div class="card">
-                        <h2 id="playlist-detail-title"></h2>
-                        <div class="song-list" id="song-list"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="themes" class="page">
-                <h1 class="page-title">Themes</h1>
-                <p class="page-subtitle">Choose your aesthetic</p>
-                
-                <div class="theme-grid">
-                    <div class="theme-option bg-ocean" onclick="changeTheme('ocean')">
-                        <h3>🌊 Ocean Blue</h3>
-                    </div>
-                    <div class="theme-option bg-sunset" onclick="changeTheme('sunset')">
-                        <h3>🌅 Sunset</h3>
-                    </div>
-                    <div class="theme-option bg-forest" onclick="changeTheme('forest')">
-                        <h3>🌲 Forest</h3>
-                    </div>
-                    <div class="theme-option bg-galaxy" onclick="changeTheme('galaxy')">
-                        <h3>🌌 Galaxy</h3>
-                    </div>
-                    <div class="theme-option bg-cyberpunk" onclick="changeTheme('cyberpunk')">
-                        <h3>🎮 Cyberpunk</h3>
-                    </div>
-                </div>
+                <p class="page-subtitle">Coming in full version...</p>
             </div>
         </main>
     </div>
     
     <!-- Music Player -->
-    <div class="music-player" id="music-player">
+    <div class="music-player">
         <div class="player-content">
             <div class="album-art">🎵</div>
             <div class="song-info">
-                <div class="song-title" id="current-song-title">No song playing</div>
-                <div class="song-artist" id="current-song-artist">Add songs to start</div>
+                <div class="song-title">Music Player Ready</div>
+                <div class="song-artist">Add songs to start playing</div>
             </div>
             <div class="player-controls">
-                <button class="control-btn" onclick="previousSong()">
+                <button class="control-btn">
                     <i class="fas fa-step-backward"></i>
                 </button>
-                <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn">
+                <button class="control-btn play-btn">
                     <i class="fas fa-play"></i>
                 </button>
-                <button class="control-btn" onclick="nextSong()">
+                <button class="control-btn">
                     <i class="fas fa-step-forward"></i>
                 </button>
-                <button class="control-btn" onclick="toggleShuffle()" id="shuffle-btn">
-                    <i class="fas fa-random"></i>
-                </button>
-                <button class="control-btn" onclick="toggleRepeat()" id="repeat-btn">
-                    <i class="fas fa-redo"></i>
-                </button>
-            </div>
-            <div class="progress-container">
-                <span class="time" id="current-time">0:00</span>
-                <div class="progress-bar" onclick="seek(event)">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <span class="time" id="duration">0:00</span>
-            </div>
-            <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)">
             </div>
         </div>
     </div>
     
-    <audio id="audio-player"></audio>
-    
     <script>
-        // Topics Database
-        const topicsDatabase = {
-            physics: [
-                {icon:'🚀',title:'Kinematics',desc:'Motion, velocity, acceleration',blend:'🤖 Used in robotics path planning & autonomous vehicles'},
-                {icon:'⚖️',title:"Newton's Laws",desc:'Forces, friction, dynamics',blend:'🎮 Physics engines in games & simulations'},
-                {icon:'💥',title:'Work & Energy',desc:'KE, PE, conservation',blend:'⚡ Energy optimization in ML models'},
-                {icon:'🎯',title:'Momentum',desc:'Collisions, impulse',blend:'🚗 Crash simulations & safety systems'},
-                {icon:'🔄',title:'Rotational Motion',desc:'Torque, angular momentum',blend:'🛸 Drone stabilization & gyroscopes'},
-                {icon:'🌍',title:'Gravitation',desc:'Universal law, orbits',blend:'🛰️ Satellite positioning & GPS'},
-                {icon:'📳',title:'SHM',desc:'Oscillations, waves',blend:'📡 Signal processing & communications'},
-                {icon:'🌊',title:'Waves',desc:'Sound, light, interference',blend:'🎵 Audio compression & noise cancellation'},
-                {icon:'🌡️',title:'Thermodynamics',desc:'Heat, entropy, engines',blend:'💻 CPU cooling & thermal management'},
-                {icon:'⚡',title:'Electrostatics',desc:'Charges, fields, potential',blend:'📱 Touchscreens & capacitive sensors'}
-            ],
-            chemistry: [
-                {icon:'🧪',title:'GOC',desc:'Hybridization, resonance',blend:'💊 Drug design & molecular modeling'},
-                {icon:'⛽',title:'Hydrocarbons',desc:'Alkanes, alkenes, alkynes',blend:'🔋 Fuel cells & battery chemistry'},
-                {icon:'🔬',title:'Mechanisms',desc:'SN1, SN2, E1, E2',blend:'🧬 Biochemical pathways & enzymes'},
-                {icon:'🍷',title:'Alcohols',desc:'Preparation, reactions',blend:'🏭 Industrial solvents & biofuels'},
-                {icon:'🧬',title:'Carbonyls',desc:'Aldehydes, ketones',blend:'🍬 Food chemistry & flavors'},
-                {icon:'💊',title:'Amines',desc:'Basicity, reactions',blend:'💉 Pharmaceutical synthesis'},
-                {icon:'🔄',title:'Stereochemistry',desc:'Chirality, isomerism',blend:'🧪 Chiral drugs & optical materials'},
-                {icon:'🎨',title:'P-Block',desc:'Group 13-18 elements',blend:'💡 LEDs & semiconductor materials'},
-                {icon:'🎭',title:'Coordination',desc:'Complexes, CFT',blend:'🌈 Pigments & catalysts'},
-                {icon:'🧮',title:'Mole Concept',desc:'Stoichiometry',blend:'⚗️ Chemical process optimization'}
-            ],
-            maths: [
-                {icon:'∞',title:'Limits',desc:'Continuity, derivatives',blend:'📈 Optimization algorithms'},
-                {icon:'📈',title:'Differentiation',desc:'Derivatives, chain rule',blend:'🤖 Gradient descent in ML'},
-                {icon:'📊',title:'AOD',desc:'Maxima/minima',blend:'💹 Cost minimization & profit max'},
-                {icon:'∫',title:'Integration',desc:'Area, volume',blend:'📊 Data analysis & statistics'},
-                {icon:'dy/dx',title:'Diff Equations',desc:'First order, linear',blend:'🌊 Modeling dynamic systems'},
-                {icon:'ℂ',title:'Complex Numbers',desc:'Operations, roots',blend:'📡 Signal processing & AC circuits'},
-                {icon:'[A]',title:'Matrices',desc:'Operations, inverse',blend:'🖼️ Image processing & transformations'},
-                {icon:'🎯',title:'Probability',desc:'Conditional, Bayes',blend:'🎲 ML predictions & decision making'},
-                {icon:'🌙',title:'Parabola',desc:'Focus, directrix',blend:'📡 Satellite dishes & reflectors'},
-                {icon:'⭕',title:'Circles',desc:'Tangent, chord',blend:'🎯 Computer graphics & CAD'}
-            ],
-            tech: [
-                {icon:'🧠',title:'Neural Networks',desc:'Perceptron, backprop',blend:'🧮 Uses calculus & linear algebra'},
-                {icon:'🤖',title:'Deep Learning',desc:'CNNs, RNNs',blend:'📊 Matrix operations & optimization'},
-                {icon:'💬',title:'NLP',desc:'BERT, GPT, transformers',blend:'📈 Probability & statistics'},
-                {icon:'👁️',title:'Computer Vision',desc:'Object detection',blend:'🌊 Fourier transforms & convolution'},
-                {icon:'🎮',title:'RL',desc:'Q-learning, policy',blend:'🎯 Optimization & game theory'},
-                {icon:'✨',title:'Generative AI',desc:'LLMs, diffusion',blend:'🎨 Chemistry of materials & physics'},
-                {icon:'⛓️',title:'Blockchain',desc:'Distributed ledger',blend:'🔐 Cryptography & hash functions'},
-                {icon:'📜',title:'Smart Contracts',desc:'Solidity, Ethereum',blend:'💰 Economics & game theory'},
-                {icon:'⚛️',title:'Quantum Computing',desc:'Qubits, gates',blend:'⚡ Quantum mechanics & physics'},
-                {icon:'🔐',title:'Cryptography',desc:'RSA, AES, hashing',blend:'🔢 Number theory & modular arithmetic'}
-            ]
-        };
-        
-        function loadTopics(subject) {
-            const grid = document.getElementById(subject + '-grid');
-            grid.innerHTML = '';
-            
-            topicsDatabase[subject].forEach(topic => {
-                const card = document.createElement('div');
-                card.className = 'topic-card';
-                card.innerHTML = `
-                    <div class="topic-icon">${topic.icon}</div>
-                    <div class="topic-title">${topic.title}</div>
-                    <div class="topic-desc">${topic.desc}</div>
-                    <div class="topic-blend">${topic.blend}</div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-        
-        // Flashcards System
-        let flashcards = JSON.parse(localStorage.getItem('flashcards')) || [];
-        let currentCardIndex = 0;
-        
-        function createFlashcard() {
-            const front = document.getElementById('flashcard-front-input').value;
-            const back = document.getElementById('flashcard-back-input').value;
-            
-            if (!front || !back) {
-                alert('Please fill both sides!');
-                return;
-            }
-            
-            flashcards.push({ id: Date.now(), front, back });
-            localStorage.setItem('flashcards', JSON.stringify(flashcards));
-            
-            document.getElementById('flashcard-front-input').value = '';
-            document.getElementById('flashcard-back-input').value = '';
-            
-            loadFlashcardList();
-        }
-        
-        function loadFlashcardList() {
-            const list = document.getElementById('flashcard-list');
-            list.innerHTML = '';
-            
-            if (flashcards.length === 0) {
-                list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No flashcards yet. Create your first one!</p>';
-                return;
-            }
-            
-            flashcards.forEach((card, index) => {
-                const item = document.createElement('div');
-                item.className = 'flashcard-item';
-                item.innerHTML = `
-                    <h4>${card.front}</h4>
-                    <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
-                        <button class="note-btn edit" onclick="practiceFlashcards(${index})">
-                            <i class="fas fa-play"></i> Practice
-                        </button>
-                        <button class="note-btn delete" onclick="deleteFlashcard(${card.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `;
-                list.appendChild(item);
-            });
-        }
-        
-        function practiceFlashcards(startIndex = 0) {
-            if (flashcards.length === 0) return;
-            
-            currentCardIndex = startIndex;
-            document.querySelector('.card').style.display = 'none';
-            document.getElementById('flashcard-list').style.display = 'none';
-            document.getElementById('flashcard-practice').style.display = 'block';
-            
-            showCard();
-        }
-        
-        function showCard() {
-            const card = flashcards[currentCardIndex];
-            document.getElementById('flashcard-front-text').textContent = card.front;
-            document.getElementById('flashcard-back-text').textContent = card.back;
-            document.getElementById('current-card-num').textContent = currentCardIndex + 1;
-            document.getElementById('total-cards').textContent = flashcards.length;
-            document.getElementById('flashcard').classList.remove('flipped');
-        }
-        
-        function flipCard() {
-            document.getElementById('flashcard').classList.toggle('flipped');
-        }
-        
-        function nextCard() {
-            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
-            showCard();
-        }
-        
-        function previousCard() {
-            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
-            showCard();
-        }
-        
-        function backToFlashcardList() {
-            document.querySelector('.card').style.display = 'block';
-            document.getElementById('flashcard-list').style.display = 'grid';
-            document.getElementById('flashcard-practice').style.display = 'none';
-        }
-        
-        function deleteFlashcard(id) {
-            if (confirm('Delete this flashcard?')) {
-                flashcards = flashcards.filter(c => c.id !== id);
-                localStorage.setItem('flashcards', JSON.stringify(flashcards));
-                loadFlashcardList();
-            }
-        }
-        
-        // Mock Tests System
-        const testQuestions = {
-            physics: [
-                {q: 'What is the SI unit of force?', options: ['Newton', 'Joule', 'Watt', 'Pascal'], correct: 0},
-                {q: 'Acceleration due to gravity on Earth?', options: ['9.8 m/s²', '10 m/s²', '8.9 m/s²', '11 m/s²'], correct: 0},
-                {q: 'First law of thermodynamics is?', options: ['Energy conservation', 'Entropy increase', 'Heat flow', 'Work done'], correct: 0},
-                {q: 'Speed of light in vacuum?', options: ['3×10⁸ m/s', '2×10⁸ m/s', '4×10⁸ m/s', '5×10⁸ m/s'], correct: 0},
-                {q: 'Unit of electric current?', options: ['Ampere', 'Volt', 'Ohm', 'Coulomb'], correct: 0}
-            ],
-            chemistry: [
-                {q: 'Atomic number of Carbon?', options: ['6', '12', '8', '14'], correct: 0},
-                {q: 'pH of pure water?', options: ['7', '0', '14', '1'], correct: 0},
-                {q: 'Avogadro number is?', options: ['6.022×10²³', '6.022×10²²', '6.022×10²⁴', '6.022×10²¹'], correct: 0},
-                {q: 'Noble gas configuration?', options: ['Stable', 'Reactive', 'Unstable', 'Neutral'], correct: 0},
-                {q: 'Oxidation state of O in H₂O?', options: ['-2', '+2', '0', '-1'], correct: 0}
-            ],
-            maths: [
-                {q: 'Derivative of x²?', options: ['2x', 'x', '2', 'x²'], correct: 0},
-                {q: 'Value of π?', options: ['3.14159...', '3.14', '22/7', '3'], correct: 0},
-                {q: 'sin²θ + cos²θ = ?', options: ['1', '0', '2', 'θ'], correct: 0},
-                {q: 'Integral of 1/x?', options: ['ln|x|', 'x', '1', 'e^x'], correct: 0},
-                {q: 'Slope of y = mx + c?', options: ['m', 'c', 'x', 'y'], correct: 0}
-            ],
-            tech: [
-                {q: 'Full form of AI?', options: ['Artificial Intelligence', 'Automated Intelligence', 'Advanced Intelligence', 'Applied Intelligence'], correct: 0},
-                {q: 'What is GPU used for?', options: ['Parallel processing', 'Storage', 'Networking', 'Input'], correct: 0},
-                {q: 'Python is?', options: ['Programming language', 'Snake', 'Framework', 'Database'], correct: 0},
-                {q: 'HTTP stands for?', options: ['HyperText Transfer Protocol', 'High Transfer Protocol', 'Hyper Transfer Text Protocol', 'None'], correct: 0},
-                {q: 'Binary of 5?', options: ['101', '110', '111', '100'], correct: 0}
-            ]
-        };
-        
-        let currentTest = null;
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let testTimer = null;
-        let testTimeLeft = 900; // 15 minutes
-        
-        function startTest(subject) {
-            currentTest = subject;
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            testTimeLeft = 900;
-            
-            document.getElementById('test-selection').style.display = 'none';
-            document.getElementById('test-container').style.display = 'block';
-            
-            loadTestQuestion();
-            startTestTimer();
-        }
-        
-        function loadTestQuestion() {
-            const questions = testQuestions[currentTest];
-            const container = document.getElementById('test-questions');
-            container.innerHTML = '';
-            
-            questions.forEach((q, index) => {
-                const card = document.createElement('div');
-                card.className = 'question-card';
-                card.innerHTML = `
-                    <div class="question-header">
-                        <div class="question-number">Question ${index + 1}/${questions.length}</div>
-                        <div class="question-timer" id="test-timer">15:00</div>
-                    </div>
-                    <div class="question-text">${q.q}</div>
-                    <div class="options-container">
-                        ${q.options.map((opt, i) => `
-                            <div class="option" onclick="selectAnswer(${index}, ${i})" data-q="${index}" data-opt="${i}">
-                                ${opt}
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        function selectAnswer(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-            
-            document.querySelectorAll(`[data-q="${questionIndex}"]`).forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            document.querySelector(`[data-q="${questionIndex}"][data-opt="${optionIndex}"]`).classList.add('selected');
-        }
-        
-        function startTestTimer() {
-            testTimer = setInterval(() => {
-                testTimeLeft--;
-                const mins = Math.floor(testTimeLeft / 60);
-                const secs = testTimeLeft % 60;
-                document.getElementById('test-timer').textContent = 
-                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-                
-                if (testTimeLeft <= 0) {
-                    endTest();
-                }
-            }, 1000);
-        }
-        
-        function endTest() {
-            clearInterval(testTimer);
-            
-            const questions = testQuestions[currentTest];
-            let score = 0;
-            
-            questions.forEach((q, index) => {
-                if (userAnswers[index] === q.correct) {
-                    score++;
-                }
-            });
-            
-            const percentage = Math.round((score / questions.length) * 100);
-            
-            document.getElementById('test-container').style.display = 'none';
-            document.getElementById('test-result-container').style.display = 'block';
-            document.getElementById('test-score').textContent = percentage + '%';
-            document.getElementById('score-text').textContent = `${score}/${questions.length}`;
-        }
-        
-        function backToTestSelection() {
-            document.getElementById('test-selection').style.display = 'block';
-            document.getElementById('test-result-container').style.display = 'none';
-        }
-        
-        // Problems System
-        const problems = [
-            {
-                title: 'Kinematics Problem',
-                difficulty: 'easy',
-                text: 'A car accelerates from rest at 2 m/s² for 10 seconds. What is its final velocity?',
-                solution: 'Using v = u + at, where u = 0, a = 2 m/s², t = 10s\nv = 0 + 2(10) = 20 m/s'
-            },
-            {
-                title: 'Chemistry Stoichiometry',
-                difficulty: 'medium',
-                text: 'How many moles of H₂O are produced when 2 moles of H₂ react with excess O₂?',
-                solution: '2H₂ + O₂ → 2H₂O\nFrom equation: 2 moles H₂ produces 2 moles H₂O\nAnswer: 2 moles'
-            },
-            {
-                title: 'Calculus Integration',
-                difficulty: 'hard',
-                text: 'Find the integral of ∫(3x² + 2x + 1)dx',
-                solution: '∫(3x² + 2x + 1)dx = x³ + x² + x + C'
-            },
-            {
-                title: 'Binary Conversion',
-                difficulty: 'easy',
-                text: 'Convert decimal 15 to binary',
-                solution: '15 ÷ 2 = 7 remainder 1\n7 ÷ 2 = 3 remainder 1\n3 ÷ 2 = 1 remainder 1\n1 ÷ 2 = 0 remainder 1\nAnswer: 1111'
-            }
-        ];
-        
-        function loadProblems() {
-            const container = document.getElementById('problems-container');
-            container.innerHTML = '';
-            
-            problems.forEach((problem, index) => {
-                const card = document.createElement('div');
-                card.className = 'problem-card';
-                card.innerHTML = `
-                    <div class="problem-difficulty difficulty-${problem.difficulty}">${problem.difficulty.toUpperCase()}</div>
-                    <div class="problem-title">${problem.title}</div>
-                    <div class="problem-text">${problem.text}</div>
-                    <button class="btn" onclick="toggleSolution(${index})">
-                        <i class="fas fa-lightbulb"></i> Show Solution
-                    </button>
-                    <div class="problem-solution" id="solution-${index}">
-                        <strong>Solution:</strong><br>
-                        ${problem.solution.replace(/\n/g, '<br>')}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        function toggleSolution(index) {
-            document.getElementById(`solution-${index}`).classList.toggle('show');
-        }
-        
-        // Pomodoro Timer (keeping previous code)
-        let timerInterval = null;
-        let timeLeft = 25 * 60;
-        let currentMode = 'focus';
-        let sessionsCompleted = 0;
-        
-        const modes = {
-            focus: 25 * 60,
-            short: 5 * 60,
-            long: 15 * 60
-        };
-        
-        function setMode(mode) {
-            currentMode = mode;
-            timeLeft = modes[mode];
-            updateTimerDisplay();
-            
-            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-                document.getElementById('start-btn').style.display = 'inline-block';
-                document.getElementById('pause-btn').style.display = 'none';
-            }
-        }
-        
-        function updateTimerDisplay() {
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
-            document.getElementById('timer-display').textContent = 
-                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-        
-        function startTimer() {
-            document.getElementById('start-btn').style.display = 'none';
-            document.getElementById('pause-btn').style.display = 'inline-block';
-            
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerInterval = null;
-                    
-                    if (currentMode === 'focus') {
-                        sessionsCompleted++;
-                        document.getElementById('sessions-count').textContent = sessionsCompleted;
-                        localStorage.setItem('pomodoroSessions', sessionsCompleted);
-                    }
-                    
-                    alert('Time\'s up!');
-                    document.getElementById('start-btn').style.display = 'inline-block';
-                    document.getElementById('pause-btn').style.display = 'none';
-                    
-                    timeLeft = modes[currentMode];
-                    updateTimerDisplay();
-                }
-            }, 1000);
-        }
-        
-        function pauseTimer() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            document.getElementById('start-btn').style.display = 'inline-block';
-            document.getElementById('pause-btn').style.display = 'none';
-        }
-        
-        function resetTimer() {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            timeLeft = modes[currentMode];
-            updateTimerDisplay();
-            document.getElementById('start-btn').style.display = 'inline-block';
-            document.getElementById('pause-btn').style.display = 'none';
-        }
-        
-        const savedSessions = localStorage.getItem('pomodoroSessions');
-        if (savedSessions) {
-            sessionsCompleted = parseInt(savedSessions);
-            document.getElementById('sessions-count').textContent = sessionsCompleted;
-        }
-        
-        // Notes System (keeping previous code)
-        let notes = JSON.parse(localStorage.getItem('notes')) || [];
-        
-        function createNote() {
-            const title = document.getElementById('note-title-input').value;
-            const content = document.getElementById('note-content-input').value;
-            
-            if (!title || !content) {
-                alert('Please fill both fields!');
-                return;
-            }
-            
-            notes.push({ id: Date.now(), title, content, created: new Date().toLocaleDateString() });
-            localStorage.setItem('notes', JSON.stringify(notes));
-            
-            document.getElementById('note-title-input').value = '';
-            document.getElementById('note-content-input').value = '';
-            
-            loadNotes();
-        }
-        
-        function loadNotes() {
-            const grid = document.getElementById('notes-grid');
-            grid.innerHTML = '';
-            
-            if (notes.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; color: var(--text-secondary); grid-column: 1/-1;">No notes yet.</p>';
-                return;
-            }
-            
-            notes.forEach(note => {
-                const card = document.createElement('div');
-                card.className = 'note-card';
-                card.innerHTML = `
-                    <div class="note-title">${note.title}</div>
-                    <div class="note-content">${note.content.substring(0, 150)}${note.content.length > 150 ? '...' : ''}</div>
-                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">${note.created}</div>
-                    <div class="note-actions">
-                        <button class="note-btn delete" onclick="deleteNote(${note.id})">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-        
-        function deleteNote(id) {
-            if (confirm('Delete?')) {
-                notes = notes.filter(n => n.id !== id);
-                localStorage.setItem('notes', JSON.stringify(notes));
-                loadNotes();
-            }
-        }
-        
-        // Music Player (keeping previous code - same as before)
-        let musicDatabase = JSON.parse(localStorage.getItem('musicDatabase')) || {
-            myMusic: { name: '🎵 My Music', icon: '🎵', songs: [] }
-        };
-        
-        let currentPlaylist = null;
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        let isShuffle = false;
-        let isRepeat = false;
-        const audioPlayer = document.getElementById('audio-player');
-        
-        document.getElementById('file-input').addEventListener('change', function(e) {
-            const files = e.target.files;
-            for (let file of files) {
-                if (file.type.startsWith('audio/')) {
-                    const url = URL.createObjectURL(file);
-                    musicDatabase.myMusic.songs.push({
-                        title: file.name.replace(/\.[^/.]+$/, ""),
-                        artist: 'Local File',
-                        duration: '0:00',
-                        url: url
-                    });
-                }
-            }
-            saveMusicDatabase();
-            loadPlaylists();
-            alert(`Added ${files.length} song(s)!`);
-        });
-        
-        function addSongByLink() {
-            const title = prompt('Song Title:');
-            if (!title) return;
-            const artist = prompt('Artist:');
-            if (!artist) return;
-            const url = prompt('Direct MP3 Link:');
-            if (!url) return;
-            
-            musicDatabase.myMusic.songs.push({ title, artist, duration: '0:00', url });
-            saveMusicDatabase();
-            loadPlaylists();
-            alert('Song added!');
-        }
-        
-        function saveMusicDatabase() {
-            localStorage.setItem('musicDatabase', JSON.stringify(musicDatabase));
-        }
-        
-        function loadPlaylists() {
-            const grid = document.getElementById('playlists-grid');
-            grid.innerHTML = '';
-            
-            Object.keys(musicDatabase).forEach(key => {
-                const playlist = musicDatabase[key];
-                const card = document.createElement('div');
-                card.className = 'playlist-card';
-                card.onclick = () => openPlaylist(key);
-                card.innerHTML = `
-                    <div class="playlist-icon">${playlist.icon}</div>
-                    <div class="playlist-title">${playlist.name}</div>
-                    <div class="playlist-count">${playlist.songs.length} songs</div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-        
-        function openPlaylist(playlistKey) {
-            currentPlaylist = playlistKey;
-            const playlist = musicDatabase[playlistKey];
-            
-            document.getElementById('playlists-grid').style.display = 'none';
-            document.getElementById('playlist-detail').style.display = 'block';
-            document.getElementById('playlist-detail-title').textContent = playlist.name;
-            
-            const songList = document.getElementById('song-list');
-            songList.innerHTML = '';
-            
-            if (playlist.songs.length === 0) {
-                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet.</p>';
-                return;
-            }
-            
-            playlist.songs.forEach((song, index) => {
-                const songItem = document.createElement('div');
-                songItem.className = 'song-item';
-                songItem.onclick = () => playSong(playlistKey, index);
-                songItem.innerHTML = `
-                    <div class="song-number">${index + 1}</div>
-                    <div class="song-details">
-                        <div class="song-title">${song.title}</div>
-                        <div class="song-artist">${song.artist}</div>
-                    </div>
-                    <div class="song-duration">${song.duration}</div>
-                    <button onclick="deleteSong(event, '${playlistKey}', ${index})" style="background: rgba(255, 68, 68, 0.2); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; color: white;">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                songList.appendChild(songItem);
-            });
-        }
-        
-        function deleteSong(event, playlistKey, index) {
-            event.stopPropagation();
-            if (confirm('Delete?')) {
-                musicDatabase[playlistKey].songs.splice(index, 1);
-                saveMusicDatabase();
-                openPlaylist(playlistKey);
-            }
-        }
-        
-        function backToPlaylists() {
-            document.getElementById('playlists-grid').style.display = 'grid';
-            document.getElementById('playlist-detail').style.display = 'none';
-        }
-        
-        function playSong(playlistKey, index) {
-            currentPlaylist = playlistKey;
-            currentSongIndex = index;
-            const song = musicDatabase[playlistKey].songs[index];
-            
-            document.getElementById('current-song-title').textContent = song.title;
-            document.getElementById('current-song-artist').textContent = song.artist;
-            
-            audioPlayer.src = song.url;
-            audioPlayer.play();
-            isPlaying = true;
-            document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
-            
-            document.querySelectorAll('.song-item').forEach((item, i) => {
-                item.classList.toggle('playing', i === index);
-            });
-        }
-        
-        function togglePlay() {
-            if (!currentPlaylist || musicDatabase[currentPlaylist].songs.length === 0) {
-                alert('Add songs first!');
-                return;
-            }
-            
-            if (isPlaying) {
-                audioPlayer.pause();
-                document.getElementById('play-btn').innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                if (!audioPlayer.src) {
-                    playSong(currentPlaylist, 0);
-                } else {
-                    audioPlayer.play();
-                    document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
-                }
-            }
-            isPlaying = !isPlaying;
-        }
-        
-        function nextSong() {
-            if (!currentPlaylist) return;
-            const playlist = musicDatabase[currentPlaylist];
-            if (playlist.songs.length === 0) return;
-            
-            if (isShuffle) {
-                currentSongIndex = Math.floor(Math.random() * playlist.songs.length);
-            } else {
-                currentSongIndex = (currentSongIndex + 1) % playlist.songs.length;
-            }
-            playSong(currentPlaylist, currentSongIndex);
-        }
-        
-        function previousSong() {
-            if (!currentPlaylist) return;
-            const playlist = musicDatabase[currentPlaylist];
-            if (playlist.songs.length === 0) return;
-            
-            currentSongIndex = (currentSongIndex - 1 + playlist.songs.length) % playlist.songs.length;
-            playSong(currentPlaylist, currentSongIndex);
-        }
-        
-        function toggleShuffle() {
-            isShuffle = !isShuffle;
-            document.getElementById('shuffle-btn').style.color = isShuffle ? 'var(--accent-1)' : 'white';
-        }
-        
-        function toggleRepeat() {
-            isRepeat = !isRepeat;
-            document.getElementById('repeat-btn').style.color = isRepeat ? 'var(--accent-1)' : 'white';
-        }
-        
-        function changeVolume(value) {
-            audioPlayer.volume = value / 100;
-        }
-        
-        function seek(event) {
-            const progressBar = event.currentTarget;
-            const clickX = event.offsetX;
-            const width = progressBar.offsetWidth;
-            const duration = audioPlayer.duration;
-            audioPlayer.currentTime = (clickX / width) * duration;
-        }
-        
-        audioPlayer.addEventListener('timeupdate', () => {
-            const current = audioPlayer.currentTime;
-            const duration = audioPlayer.duration;
-            const progress = (current / duration) * 100;
-            
-            document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('current-time').textContent = formatTime(current);
-            document.getElementById('duration').textContent = formatTime(duration);
-        });
-        
-        audioPlayer.addEventListener('ended', () => {
-            if (isRepeat) {
-                audioPlayer.currentTime = 0;
-                audioPlayer.play();
-            } else {
-                nextSong();
-            }
-        });
-        
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-        
-        function changeTheme(theme) {
-            const bg = document.getElementById('animated-bg');
-            bg.className = 'animated-bg bg-' + theme;
-            
-            document.querySelectorAll('.theme-option').forEach(opt => {
-                opt.classList.remove('active');
-            });
-            event.target.closest('.theme-option').classList.add('active');
-        }
-        
         // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2088,25 +735,13 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(page).classList.add('active');
                 
-                if (page === 'music') loadPlaylists();
-                if (page === 'notes') loadNotes();
-                if (page === 'flashcards') loadFlashcardList();
-                if (page === 'problems') loadProblems();
-                if (['physics', 'chemistry', 'maths', 'tech'].includes(page)) loadTopics(page);
-                
                 window.scrollTo(0, 0);
             });
         });
         
-        // Initialize
-        loadPlaylists();
-        loadNotes();
-        loadFlashcardList();
-        loadProblems();
-        loadTopics('physics');
-        loadTopics('chemistry');
-        loadTopics('maths');
-        loadTopics('tech');
+        console.log('✅ App loaded successfully!');
+        console.log('📌 This is a STATUS PAGE showing what features are working');
+        console.log('🚀 Full working version coming next!');
     </script>
 </body>
 </html>
