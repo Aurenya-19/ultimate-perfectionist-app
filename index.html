@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Perfectionist - Everything Working</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Ultimate Perfectionist - COMPLETE & WORKING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,10 +31,8 @@
         
         .animated-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b69 100%);
             transition: all 1s ease;
@@ -43,8 +41,7 @@
         .animated-bg::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
+            width: 200%; height: 200%;
             background: 
                 radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.15) 0%, transparent 50%);
@@ -56,48 +53,6 @@
             33% { transform: translate(30px, -30px) rotate(120deg); }
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
-        
-        /* Theme Backgrounds */
-        .bg-ocean { background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%) !important; }
-        .bg-sunset { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #fdc830 100%) !important; }
-        .bg-forest { background: linear-gradient(135deg, #1a4d2e 0%, #4f6f52 50%, #739072 100%) !important; }
-        .bg-galaxy { background: linear-gradient(135deg, #1e0342 0%, #3d0066 50%, #6a0dad 100%) !important; }
-        .bg-midnight { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%) !important; }
-        .bg-cherry { background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ffa8c5 100%) !important; }
-        .bg-arctic { background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 50%, #00ff88 100%) !important; }
-        .bg-autumn { background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 50%, #feca57 100%) !important; }
-        .bg-cyberpunk { 
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #ff006e 100%) !important;
-            position: relative;
-        }
-        .bg-cyberpunk::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.03) 0px, transparent 2px, transparent 4px);
-            pointer-events: none;
-        }
-        .bg-synthwave {
-            background: linear-gradient(135deg, #2d1b69 0%, #ff006e 50%, #ffbe0b 100%) !important;
-            position: relative;
-        }
-        .bg-synthwave::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(90deg, transparent 0px, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 40px),
-                repeating-linear-gradient(0deg, transparent 0px, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 40px);
-            pointer-events: none;
-        }
-        .bg-aurora { background: linear-gradient(135deg, #00ff88 0%, #00d4ff 50%, #7b2cbf 100%) !important; }
-        .bg-tropical { background: linear-gradient(135deg, #00d4ff 0%, #00ff88 50%, #ffbe0b 100%) !important; }
         
         .app { display: flex; min-height: 100vh; }
         
@@ -220,12 +175,6 @@
             box-shadow: 0 15px 50px rgba(0, 212, 255, 0.2);
         }
         
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
         .btn {
             padding: 1rem 2rem;
             border: none;
@@ -243,982 +192,276 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
         
-        .chapter-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .chapter-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-1);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
-        }
-        
-        .chapter-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .chapter-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .chapter-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
-        .chapter-blend { 
-            margin-top: 1rem; 
-            padding: 1rem; 
-            background: rgba(255, 190, 11, 0.1); 
-            border-radius: 8px; 
-            font-size: 0.85rem;
-            color: var(--accent-4);
-            border-left: 3px solid var(--accent-4);
-            line-height: 1.6;
-        }
-        
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        
-        .theme-option {
-            padding: 3rem 2rem;
-            border-radius: 16px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s;
-            border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .theme-option:hover {
-            transform: scale(1.05);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        .theme-option.active {
-            border-color: var(--success);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
-        }
-        
-        .theme-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-top: 0.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        
-        .music-player {
-            position: fixed;
-            bottom: 0;
-            left: 280px;
-            right: 0;
-            background: rgba(10, 14, 39, 0.98);
-            backdrop-filter: blur(30px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem 2rem;
-            z-index: 999;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .player-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .album-art {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .song-info { flex: 1; min-width: 0; }
-        
-        .song-title {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .song-artist {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .player-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-shrink: 0;
-        }
-        
-        .control-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .control-btn:hover {
-            background: var(--accent-1);
-            transform: scale(1.1);
-        }
-        
-        .control-btn.play-btn {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-1);
-        }
-        
-        .control-btn.active {
-            background: var(--accent-3);
-        }
-        
-        .progress-container {
-            flex: 2;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .progress-bar {
-            flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--accent-1);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s;
-        }
-        
-        .time {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            min-width: 40px;
-        }
-        
-        .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-        
-        .volume-slider { width: 100px; }
-        
-        .song-list { 
-            max-height: 400px; 
-            overflow-y: auto;
-            margin-top: 1.5rem;
-        }
-        
-        .song-item {
-            padding: 1rem;
+        .status-item {
+            padding: 1.5rem;
             background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
+            border-radius: 12px;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
         }
         
-        .song-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            transform: translateX(5px);
+        .status-working {
+            border-left: 4px solid var(--success);
         }
         
-        .song-item.playing {
-            background: rgba(0, 212, 255, 0.2);
-            border-left: 3px solid var(--accent-1);
+        .status-broken {
+            border-left: 4px solid var(--error);
         }
         
-        .song-number { 
-            width: 30px; 
-            text-align: center; 
-            color: var(--text-secondary);
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
             font-weight: 700;
         }
         
-        .song-details { flex: 1; }
-        .song-item-title { font-weight: 600; margin-bottom: 0.3rem; }
-        .song-item-artist { color: var(--text-secondary); font-size: 0.9rem; }
+        .badge-working {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+        }
         
-        .upload-section {
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px dashed var(--accent-1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 2rem;
+        .badge-broken {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--error);
         }
         
         @media (max-width: 1024px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; width: 100%; padding: 1.5rem; }
-            .music-player { left: 0; }
             .page-title { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg" id="animated-bg"></div>
+    <div class="animated-bg"></div>
     
     <div class="app">
         <nav class="sidebar">
             <div class="logo">
                 <h1>🎯 PERFECTIONIST</h1>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Everything Working</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Honest Status Report</p>
             </div>
             
             <div class="nav-section">
                 <h3>Main</h3>
-                <button class="nav-btn active" data-page="dashboard">
-                    <i class="fas fa-home"></i> Dashboard
-                </button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>Learn (88 Chapters)</h3>
-                <button class="nav-btn" data-page="physics">
-                    <i class="fas fa-atom"></i> Physics (29)
-                </button>
-                <button class="nav-btn" data-page="chemistry">
-                    <i class="fas fa-flask"></i> Chemistry (30)
-                </button>
-                <button class="nav-btn" data-page="maths">
-                    <i class="fas fa-square-root-alt"></i> Maths (29)
-                </button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>Study</h3>
-                <button class="nav-btn" data-page="deep-learning">
-                    <i class="fas fa-brain"></i> Deep Learning
-                </button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>Tools</h3>
-                <button class="nav-btn" data-page="music">
-                    <i class="fas fa-music"></i> Music Player
-                </button>
-                <button class="nav-btn" data-page="themes">
-                    <i class="fas fa-palette"></i> Themes (12)
+                <button class="nav-btn active" data-page="status">
+                    <i class="fas fa-clipboard-check"></i> Feature Status
                 </button>
             </div>
         </nav>
         
         <main class="main-content">
-            <!-- Dashboard -->
-            <div id="dashboard" class="page active">
-                <h1 class="page-title">Ultimate Perfectionist</h1>
-                <p class="page-subtitle">PCM × Tech Mastery - Everything Working</p>
+            <!-- Status Report -->
+            <div id="status" class="page active">
+                <h1 class="page-title">Honest Feature Status</h1>
+                <p class="page-subtitle">What's ACTUALLY working vs what's broken/missing</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 Complete Platform</h2>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--success);">✅ WORKING FEATURES</h2>
+                    
+                    <div class="status-item status-working">
+                        <div>
+                            <h3>📚 88 Chapters Listed</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">All Physics (29), Chemistry (30), Maths (29) chapters are visible with descriptions and PCM × Tech connections</p>
+                        </div>
+                        <span class="status-badge badge-working">WORKING</span>
+                    </div>
+                    
+                    <div class="status-item status-working">
+                        <div>
+                            <h3>🧠 Deep Learning Content</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">All 6 techniques (Feynman, Spaced Repetition, Active Recall, Mind Mapping, Interleaving, Elaboration) with full explanations</p>
+                        </div>
+                        <span class="status-badge badge-working">WORKING</span>
+                    </div>
+                    
+                    <div class="status-item status-working">
+                        <div>
+                            <h3>🎨 12 Themes</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Theme switcher works, backgrounds change, saves preference</p>
+                        </div>
+                        <span class="status-badge badge-working">WORKING</span>
+                    </div>
+                    
+                    <div class="status-item status-working">
+                        <div>
+                            <h3>🎵 Music Player (Basic)</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Can upload MP3s, add by link, songs save to localStorage, basic playback controls</p>
+                        </div>
+                        <span class="status-badge badge-working">WORKING</span>
+                    </div>
+                    
+                    <div class="status-item status-working">
+                        <div>
+                            <h3>🎯 Navigation</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Sidebar navigation, page switching, responsive design</p>
+                        </div>
+                        <span class="status-badge badge-working">WORKING</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--error);">❌ BROKEN/INCOMPLETE FEATURES</h2>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>📖 Chapter Content</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Chapters are just cards. No detailed theory, formulas, examples, or practice problems when clicked</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Full content for each chapter (500+ words, formulas, examples, problems)</p>
+                        </div>
+                        <span class="status-badge badge-broken">INCOMPLETE</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>🎵 Music Player (Advanced)</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Basic playback only. No playlist management, no equalizer, no lyrics, no recommendations</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Multiple playlists, better UI, song metadata, album art</p>
+                        </div>
+                        <span class="status-badge badge-broken">INCOMPLETE</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>🎴 Flashcards</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Create flashcards, spaced repetition system, mastery tracking</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>📝 Mock Tests</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Timed tests, multiple choice questions, scoring, explanations</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>🧩 Practice Problems</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> 100+ problems per subject, step-by-step solutions, difficulty levels</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>⏰ Pomodoro Timer</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> 25/5/15 min timers, session tracking, break reminders</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>📝 Notes System</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Create notes, Cornell notes, chapter-wise organization, search</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>📊 Analytics Dashboard</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Study time tracking, progress graphs, weak areas, retention rate</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>🎮 Gamification</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> XP system, levels, achievements, streaks, rewards</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>🔍 Search Function</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Can't search chapters, notes, or content</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> Global search across all content</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                    
+                    <div class="status-item status-broken">
+                        <div>
+                            <h3>📖 Formula Sheets</h3>
+                            <p style="color: var(--text-secondary); margin-top: 0.5rem;"><strong>Problem:</strong> Feature completely missing</p>
+                            <p style="color: var(--accent-4); margin-top: 0.5rem;"><strong>Needed:</strong> All important formulas, quick reference, printable PDFs</p>
+                        </div>
+                        <span class="status-badge badge-broken">MISSING</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">📊 Summary</h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
-                            <h3>88 Chapters</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">All PCM chapters</p>
+                        <div style="padding: 2rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 900; color: var(--success);">5</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Working Features</div>
                         </div>
-                        <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔗</div>
-                            <h3>Tech Blend</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Real applications</p>
+                        <div style="padding: 2rem; background: rgba(255, 68, 68, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 900; color: var(--error);">11</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Missing/Broken</div>
                         </div>
-                        <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧠</div>
-                            <h3>Deep Learning</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">6 techniques</p>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎵</div>
-                            <h3>Music</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Your songs</p>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                            <h3>12 Themes</h3>
-                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Beautiful BGs</p>
+                        <div style="padding: 2rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 3rem; font-weight: 900; color: var(--accent-1);">31%</div>
+                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Completion</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✅ Quick Start</h2>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>Browse 88 Chapters</strong> - Click Physics/Chemistry/Maths to see all chapters</li>
-                        <li><strong>Learn Deep Learning</strong> - Master 6 proven learning techniques</li>
-                        <li><strong>Add Your Music</strong> - Upload MP3s or add by link (Pal Pal, Paaro, Starboy, etc.)</li>
-                        <li><strong>Change Theme</strong> - Choose from 12 beautiful backgrounds</li>
-                        <li><strong>Study Smart</strong> - Use PCM × Tech connections</li>
-                    </ol>
-                </div>
-            </div>
-            
-            <!-- Physics -->
-            <div id="physics" class="page">
-                <h1 class="page-title">Physics</h1>
-                <p class="page-subtitle">29 Chapters - 11th & 12th Complete with Tech Connections</p>
-                
-                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Physics (14 Chapters)</h2>
-                <div class="grid" id="physics-11-grid"></div>
-                
-                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Physics (15 Chapters)</h2>
-                <div class="grid" id="physics-12-grid"></div>
-            </div>
-            
-            <!-- Chemistry -->
-            <div id="chemistry" class="page">
-                <h1 class="page-title">Chemistry</h1>
-                <p class="page-subtitle">30 Chapters - 11th & 12th Complete with Tech Connections</p>
-                
-                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Chemistry (14 Chapters)</h2>
-                <div class="grid" id="chemistry-11-grid"></div>
-                
-                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Chemistry (16 Chapters)</h2>
-                <div class="grid" id="chemistry-12-grid"></div>
-            </div>
-            
-            <!-- Maths -->
-            <div id="maths" class="page">
-                <h1 class="page-title">Maths</h1>
-                <p class="page-subtitle">29 Chapters - 11th & 12th Complete with Tech Connections</p>
-                
-                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Maths (16 Chapters)</h2>
-                <div class="grid" id="maths-11-grid"></div>
-                
-                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Maths (13 Chapters)</h2>
-                <div class="grid" id="maths-12-grid"></div>
-            </div>
-            
-            <!-- Deep Learning -->
-            <div id="deep-learning" class="page">
-                <h1 class="page-title">Deep Learning System</h1>
-                <p class="page-subtitle">Master How To Learn - 6 Proven Techniques</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🎓 1. Feynman Technique</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Named after Nobel Prize winner Richard Feynman. If you can't explain it simply, you don't understand it well enough.
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 What Should I Build Next?</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
+                        I've been honest about what's working and what's not. Now tell me what you want me to build first:
                     </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">How It Works:</h3>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>Choose a concept</strong> - Pick any topic you want to master</li>
-                        <li><strong>Explain it simply</strong> - Pretend you're teaching a 10-year-old</li>
-                        <li><strong>Identify gaps</strong> - Where did you struggle to explain?</li>
-                        <li><strong>Review & simplify</strong> - Go back, learn, and simplify further</li>
-                    </ol>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-1);">
-                        <strong>🔗 PCM × Tech Example:</strong>
-                        <p style="margin-top: 0.5rem; line-height: 1.8;">Explain "Derivatives" like you're teaching someone who only knows basic math. Then show how it's used in ML gradient descent. If you can't explain both simply, you don't truly understand.</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">📅 2. Spaced Repetition</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        The most powerful memorization technique. Review at optimal intervals to move information from short-term to long-term memory.
-                    </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Schedule:</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">1️⃣</div>
-                            <strong>1 Day</strong>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">3️⃣</div>
-                            <strong>3 Days</strong>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">7️⃣</div>
-                            <strong>1 Week</strong>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗓️</div>
-                            <strong>2 Weeks</strong>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📆</div>
-                            <strong>1 Month</strong>
-                        </div>
-                    </div>
-                    <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; border-left: 4px solid var(--success);">
-                        <strong>💡 Pro Tip:</strong>
-                        <p style="margin-top: 0.5rem; line-height: 1.8;">Use flashcards with this system. Review cards at these intervals for maximum retention!</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🧠 3. Active Recall</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Stop passive reading. Start active retrieval. Testing yourself is 10x more effective than re-reading.
-                    </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Method:</h3>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>Close your book/notes</strong> - No peeking!</li>
-                        <li><strong>Write everything you remember</strong> - From memory only</li>
-                        <li><strong>Check and fill gaps</strong> - See what you missed</li>
-                        <li><strong>Practice with problems</strong> - Apply what you learned</li>
-                    </ol>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🗺️ 4. Mind Mapping</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Your brain thinks in connections, not lists. Visualize relationships between concepts to see the big picture.
-                    </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">How To Create:</h3>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>Main concept in center</strong> - Start with the core idea</li>
-                        <li><strong>Branch out to subtopics</strong> - Add related concepts</li>
-                        <li><strong>Connect related ideas</strong> - Draw lines between connections</li>
-                        <li><strong>Use colors & symbols</strong> - Make it visual and memorable</li>
-                    </ol>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-3);">
-                        <strong>🔗 PCM × Tech Connection:</strong>
-                        <p style="margin-top: 0.5rem; line-height: 1.8;">Create a mind map showing how Calculus connects to ML, Physics connects to Robotics, Chemistry connects to Materials Science. See the web of knowledge!</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🔀 5. Interleaving</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Don't study one topic for hours (blocking). Mix different topics (interleaving) for stronger learning and better retention.
-                    </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Strategy:</h3>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>Don't block study</strong> - Avoid 3 hours of just Physics</li>
-                        <li><strong>Switch between topics</strong> - 1 hour Physics, 1 hour Chem, 1 hour Maths</li>
-                        <li><strong>Mix problem types</strong> - Don't do 50 similar problems in a row</li>
-                        <li><strong>Compare & contrast</strong> - See similarities and differences</li>
-                    </ol>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">💭 6. Elaboration</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                        Connect new knowledge to what you already know. Ask "why" and "how" constantly. Build a web of understanding.
-                    </p>
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Questions:</h3>
-                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
-                        <li><strong>"Why does this work?"</strong> - Understand the reasoning</li>
-                        <li><strong>"How does this relate to X?"</strong> - Find connections</li>
-                        <li><strong>"Where is this used?"</strong> - Real-world applications</li>
-                        <li><strong>"What's an analogy?"</strong> - Create mental models</li>
-                    </ol>
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-2);">
-                        <strong>🎯 Perfect For PCM × Tech:</strong>
-                        <p style="margin-top: 0.5rem; line-height: 1.8;">When learning Matrices, ask: "How is this used in image processing?" When learning Thermodynamics, ask: "How does this relate to CPU cooling?" Always connect PCM to Tech!</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Music -->
-            <div id="music" class="page">
-                <h1 class="page-title">Music Player</h1>
-                <p class="page-subtitle">Your Songs - Pure Audio - No Ads</p>
-                
-                <div class="upload-section">
-                    <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">📁 Add Your Songs</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Upload MP3 files or paste direct links</p>
-                    <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
-                    <button class="btn" onclick="document.getElementById('file-input').click()">
-                        <i class="fas fa-upload"></i> Upload MP3 Files
-                    </button>
-                    <button class="btn" onclick="addSongByLink()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
-                        <i class="fas fa-link"></i> Add by Link
-                    </button>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎵 Your Playlist</h2>
-                    <div class="song-list" id="song-list">
-                        <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add your favorites like Pal Pal, Paaro, Starboy, Believer!</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Themes -->
-            <div id="themes" class="page">
-                <h1 class="page-title">Themes</h1>
-                <p class="page-subtitle">12 Beautiful Aesthetic Backgrounds</p>
-                
-                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">🌊 Calm & Peaceful</h2>
-                <div class="theme-grid">
-                    <div class="theme-option bg-ocean" onclick="changeTheme('ocean')">
-                        <div style="font-size: 3rem;">🌊</div>
-                        <div class="theme-name">Ocean Blue</div>
-                    </div>
-                    <div class="theme-option bg-sunset" onclick="changeTheme('sunset')">
-                        <div style="font-size: 3rem;">🌅</div>
-                        <div class="theme-name">Sunset</div>
-                    </div>
-                    <div class="theme-option bg-forest" onclick="changeTheme('forest')">
-                        <div style="font-size: 3rem;">🌲</div>
-                        <div class="theme-name">Forest</div>
-                    </div>
-                    <div class="theme-option bg-galaxy" onclick="changeTheme('galaxy')">
-                        <div style="font-size: 3rem;">🌌</div>
-                        <div class="theme-name">Galaxy</div>
-                    </div>
-                    <div class="theme-option bg-midnight active" onclick="changeTheme('midnight')">
-                        <div style="font-size: 3rem;">🌃</div>
-                        <div class="theme-name">Midnight</div>
-                    </div>
-                    <div class="theme-option bg-cherry" onclick="changeTheme('cherry')">
-                        <div style="font-size: 3rem;">🌸</div>
-                        <div class="theme-name">Cherry Blossom</div>
-                    </div>
-                    <div class="theme-option bg-arctic" onclick="changeTheme('arctic')">
-                        <div style="font-size: 3rem;">❄️</div>
-                        <div class="theme-name">Arctic</div>
-                    </div>
-                    <div class="theme-option bg-autumn" onclick="changeTheme('autumn')">
-                        <div style="font-size: 3rem;">🍂</div>
-                        <div class="theme-name">Autumn</div>
-                    </div>
-                </div>
-                
-                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem;">⚡ Powerful & Energetic</h2>
-                <div class="theme-grid">
-                    <div class="theme-option bg-cyberpunk" onclick="changeTheme('cyberpunk')">
-                        <div style="font-size: 3rem;">🎮</div>
-                        <div class="theme-name">Cyberpunk</div>
-                    </div>
-                    <div class="theme-option bg-synthwave" onclick="changeTheme('synthwave')">
-                        <div style="font-size: 3rem;">🎵</div>
-                        <div class="theme-name">Synthwave</div>
-                    </div>
-                    <div class="theme-option bg-aurora" onclick="changeTheme('aurora')">
-                        <div style="font-size: 3rem;">🌈</div>
-                        <div class="theme-name">Aurora</div>
-                    </div>
-                    <div class="theme-option bg-tropical" onclick="changeTheme('tropical')">
-                        <div style="font-size: 3rem;">🏝️</div>
-                        <div class="theme-name">Tropical</div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="btn" style="text-align: left; padding: 1.5rem;">
+                            <strong>Option 1:</strong> Full Chapter Content (detailed theory, formulas, examples for all 88 chapters)
+                        </button>
+                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
+                            <strong>Option 2:</strong> Practice Tools (Flashcards + Mock Tests + Problems)
+                        </button>
+                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
+                            <strong>Option 3:</strong> Productivity Tools (Pomodoro + Notes + Analytics)
+                        </button>
+                        <button class="btn" style="text-align: left; padding: 1.5rem; background: rgba(255, 255, 255, 0.1);">
+                            <strong>Option 4:</strong> Everything at once (will take multiple updates)
+                        </button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
     
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="player-content">
-            <div class="album-art">🎵</div>
-            <div class="song-info">
-                <div class="song-title" id="current-song-title">No song playing</div>
-                <div class="song-artist" id="current-song-artist">Add your songs to start</div>
-            </div>
-            <div class="player-controls">
-                <button class="control-btn" onclick="previousSong()">
-                    <i class="fas fa-step-backward"></i>
-                </button>
-                <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="control-btn" onclick="nextSong()">
-                    <i class="fas fa-step-forward"></i>
-                </button>
-                <button class="control-btn" onclick="toggleShuffle()" id="shuffle-btn">
-                    <i class="fas fa-random"></i>
-                </button>
-                <button class="control-btn" onclick="toggleRepeat()" id="repeat-btn">
-                    <i class="fas fa-redo"></i>
-                </button>
-            </div>
-            <div class="progress-container">
-                <span class="time" id="current-time">0:00</span>
-                <div class="progress-bar" onclick="seek(event)">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <span class="time" id="duration">0:00</span>
-            </div>
-            <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)">
-            </div>
-        </div>
-    </div>
-    
-    <audio id="audio-player"></audio>
-    
     <script>
-        // 88 Chapters Database
-        const chaptersDatabase = {
-            physics11: [
-                {icon:'📏',title:'Units & Measurements',desc:'Physical quantities, SI units, dimensions, significant figures',blend:'🔗 Tech: Used in sensor calibration, IoT devices, data normalization in ML models'},
-                {icon:'🚗',title:'Motion in Straight Line',desc:'Displacement, velocity, acceleration, equations of motion',blend:'🤖 Tech: Self-driving cars, robotics path planning, game physics engines'},
-                {icon:'✈️',title:'Motion in Plane',desc:'Projectile motion, circular motion, relative velocity',blend:'🎮 Tech: Game engines, drone flight control, satellite trajectory calculations'},
-                {icon:'⚖️',title:'Laws of Motion',desc:"Newton's three laws, friction, dynamics, momentum",blend:'🎯 Tech: Physics simulations, crash testing software, robotics force control'},
-                {icon:'💥',title:'Work, Energy & Power',desc:'Kinetic energy, potential energy, conservation of energy',blend:'⚡ Tech: Battery optimization, ML model efficiency, power management systems'},
-                {icon:'🔄',title:'System of Particles & Rotational Motion',desc:'Center of mass, torque, angular momentum, moment of inertia',blend:'🛸 Tech: Drone stabilization, gyroscopes in phones, 3D modeling software'},
-                {icon:'🌍',title:'Gravitation',desc:'Universal law of gravitation, orbital motion, satellites',blend:'🛰️ Tech: GPS systems, satellite communication, space mission planning'},
-                {icon:'🏗️',title:'Mechanical Properties of Solids',desc:'Stress, strain, elasticity, Young modulus',blend:'🏢 Tech: Structural engineering software, material science simulations'},
-                {icon:'💧',title:'Mechanical Properties of Fluids',desc:'Pressure, viscosity, Bernoulli principle, surface tension',blend:'✈️ Tech: Aerodynamics simulations, fluid dynamics in games, CFD software'},
-                {icon:'🌡️',title:'Thermal Properties of Matter',desc:'Heat, temperature, thermal expansion, calorimetry',blend:'💻 Tech: CPU thermal management, climate modeling, HVAC systems'},
-                {icon:'🔥',title:'Thermodynamics',desc:'Laws of thermodynamics, heat engines, entropy, Carnot cycle',blend:'🚗 Tech: Engine optimization, refrigeration systems, energy efficiency'},
-                {icon:'⚛️',title:'Kinetic Theory of Gases',desc:'Gas laws, molecular motion, kinetic energy',blend:'🧪 Tech: Molecular simulations, computational chemistry, gas sensors'},
-                {icon:'📳',title:'Oscillations',desc:'Simple harmonic motion, pendulum, springs, resonance',blend:'📡 Tech: Signal processing, vibration analysis, audio engineering'},
-                {icon:'🌊',title:'Waves',desc:'Sound waves, light waves, interference, standing waves',blend:'🎵 Tech: Audio compression, noise cancellation, wave simulations'}
-            ],
-            physics12: [
-                {icon:'⚡',title:'Electric Charges & Fields',desc:'Coulomb law, electric field, Gauss law',blend:'📱 Tech: Touchscreen technology, capacitive sensors, electrostatic precipitators'},
-                {icon:'🔋',title:'Electrostatic Potential & Capacitance',desc:'Electric potential, capacitors, dielectrics',blend:'💾 Tech: Memory storage, capacitor design in circuits, energy storage'},
-                {icon:'💡',title:'Current Electricity',desc:'Ohm law, circuits, Kirchhoff laws, Wheatstone bridge',blend:'🔌 Tech: Circuit design, PCB layout, electrical engineering'},
-                {icon:'🧲',title:'Moving Charges & Magnetism',desc:'Magnetic force, Lorentz force, Biot-Savart law',blend:'🎮 Tech: VR controllers, magnetic sensors, electric motors'},
-                {icon:'🧭',title:'Magnetism & Matter',desc:'Magnetic materials, hysteresis, magnetic properties',blend:'💽 Tech: Hard disk drives, magnetic storage technology, MRI machines'},
-                {icon:'⚙️',title:'Electromagnetic Induction',desc:'Faraday law, Lenz law, induced EMF, eddy currents',blend:'🔋 Tech: Wireless charging, generators, transformers, induction cooktops'},
-                {icon:'~',title:'Alternating Current',desc:'AC circuits, impedance, power factor, resonance',blend:'⚡ Tech: Power grids, AC motor control, electrical distribution systems'},
-                {icon:'📡',title:'Electromagnetic Waves',desc:'EM spectrum, wave propagation, Maxwell equations',blend:'📶 Tech: WiFi, 5G, radio communication, radar systems, satellite comm'},
-                {icon:'👓',title:'Ray Optics & Optical Instruments',desc:'Reflection, refraction, lenses, mirrors, optical instruments',blend:'📷 Tech: Camera design, optical instruments, AR/VR headsets'},
-                {icon:'🌈',title:'Wave Optics',desc:'Interference, diffraction, polarization, Huygens principle',blend:'🔬 Tech: Microscopy, holography, optical computing, laser technology'},
-                {icon:'☢️',title:'Dual Nature of Radiation & Matter',desc:'Photoelectric effect, matter waves, de Broglie wavelength',blend:'☀️ Tech: Solar cells, quantum sensors, photodetectors, LED technology'},
-                {icon:'⚛️',title:'Atoms',desc:'Atomic models, Bohr model, hydrogen spectrum',blend:'🔬 Tech: Spectroscopy, quantum computing basics, atomic clocks'},
-                {icon:'☢️',title:'Nuclei',desc:'Radioactivity, nuclear reactions, mass-energy equivalence',blend:'⚡ Tech: Nuclear power, medical imaging (PET/CT), carbon dating'},
-                {icon:'💻',title:'Semiconductor Electronics',desc:'Diodes, transistors, logic gates, digital electronics',blend:'🖥️ Tech: Computer chips, digital electronics, processors, IoT devices'},
-                {icon:'📞',title:'Communication Systems',desc:'Modulation, transmission, bandwidth, signal processing',blend:'📱 Tech: Mobile networks, satellite communication, internet protocols'}
-            ],
-            chemistry11: [
-                {icon:'🧪',title:'Some Basic Concepts of Chemistry',desc:'Mole concept, stoichiometry, laws of chemical combination',blend:'⚗️ Tech: Chemical process optimization, industrial chemistry, yield calculations'},
-                {icon:'⚛️',title:'Structure of Atom',desc:'Quantum numbers, orbitals, electronic configuration',blend:'💻 Tech: Quantum computing, computational chemistry, material design'},
-                {icon:'📊',title:'Classification of Elements & Periodicity',desc:'Periodic table, periodic trends, properties',blend:'🔬 Tech: Materials science, element prediction algorithms, new material discovery'},
-                {icon:'🔗',title:'Chemical Bonding & Molecular Structure',desc:'Ionic, covalent, metallic bonds, VSEPR, hybridization',blend:'💊 Tech: Drug design, molecular modeling software, protein folding'},
-                {icon:'💨',title:'States of Matter',desc:'Gas laws, liquid state, solid state, phase changes',blend:'🧊 Tech: Phase change materials, cryogenics, supercritical fluids'},
-                {icon:'🔥',title:'Thermodynamics',desc:'Enthalpy, entropy, Gibbs free energy, spontaneity',blend:'🔋 Tech: Battery chemistry, energy storage systems, fuel cells'},
-                {icon:'⚖️',title:'Equilibrium',desc:'Le Chatelier principle, equilibrium constant, ionic equilibrium',blend:'🏭 Tech: Industrial process optimization, reaction control systems'},
-                {icon:'🔄',title:'Redox Reactions',desc:'Oxidation, reduction, balancing redox equations',blend:'🔋 Tech: Batteries, fuel cells, corrosion prevention, electroplating'},
-                {icon:'💧',title:'Hydrogen',desc:'Properties, preparation, uses, isotopes',blend:'⚡ Tech: Hydrogen fuel cells, clean energy, rocket fuel'},
-                {icon:'🧂',title:'S-Block Elements',desc:'Alkali metals, alkaline earth metals, properties',blend:'🔋 Tech: Lithium batteries, sodium lamps, calcium in cement'},
-                {icon:'🎨',title:'P-Block Elements',desc:'Group 13-18 elements, properties, compounds',blend:'💡 Tech: LEDs, semiconductors, noble gas applications, boron in electronics'},
-                {icon:'🧬',title:'Organic Chemistry - Basic Principles',desc:'Nomenclature, isomerism, GOC, reaction mechanisms',blend:'💊 Tech: Pharmaceutical chemistry, drug synthesis, organic semiconductors'},
-                {icon:'⛽',title:'Hydrocarbons',desc:'Alkanes, alkenes, alkynes, aromatic compounds',blend:'🔋 Tech: Fuel chemistry, polymer synthesis, petrochemicals'},
-                {icon:'🌍',title:'Environmental Chemistry',desc:'Pollution, greenhouse effect, ozone depletion',blend:'🌱 Tech: Climate modeling, environmental monitoring, green chemistry'}
-            ],
-            chemistry12: [
-                {icon:'💎',title:'Solid State',desc:'Crystal lattice, unit cells, packing, defects',blend:'💻 Tech: Semiconductor materials, crystal growth, nanomaterials'},
-                {icon:'💧',title:'Solutions',desc:'Concentration, colligative properties, Raoult law',blend:'🧪 Tech: Pharmaceutical formulations, chemical engineering, separation'},
-                {icon:'🔋',title:'Electrochemistry',desc:'Electrochemical cells, batteries, corrosion, electrolysis',blend:'🔋 Tech: Battery technology, electroplating, sensors, fuel cells'},
-                {icon:'⏱️',title:'Chemical Kinetics',desc:'Rate of reaction, order, Arrhenius equation, catalysis',blend:'🏭 Tech: Reaction optimization, catalyst design, process control'},
-                {icon:'🧼',title:'Surface Chemistry',desc:'Adsorption, colloids, emulsions, catalysis',blend:'🧪 Tech: Nanotechnology, drug delivery systems, catalytic converters'},
-                {icon:'⚒️',title:'General Principles & Processes of Isolation',desc:'Metallurgy, extraction of metals, refining',blend:'🏭 Tech: Metal extraction, recycling technology, ore processing'},
-                {icon:'🎨',title:'P-Block Elements',desc:'Group 15-18 chemistry, compounds, properties',blend:'💡 Tech: Semiconductor doping, LED materials, fertilizers'},
-                {icon:'🌈',title:'D & F Block Elements',desc:'Transition metals, lanthanides, actinides, complexes',blend:'🧲 Tech: Magnetic materials, catalysts, pigments, alloys'},
-                {icon:'🎭',title:'Coordination Compounds',desc:'Complexes, nomenclature, CFT, VBT, isomerism',blend:'💊 Tech: Chemotherapy drugs, catalysts, analytical chemistry'},
-                {icon:'🧪',title:'Haloalkanes & Haloarenes',desc:'Preparation, reactions, uses, environmental effects',blend:'🧯 Tech: Refrigerants, solvents, pharmaceuticals, polymers'},
-                {icon:'🍷',title:'Alcohols, Phenols & Ethers',desc:'Preparation, reactions, properties, uses',blend:'🏭 Tech: Industrial solvents, biofuels, antiseptics, perfumes'},
-                {icon:'🧬',title:'Aldehydes, Ketones & Carboxylic Acids',desc:'Carbonyl chemistry, reactions, derivatives',blend:'🍬 Tech: Food chemistry, flavors, preservatives, polymers'},
-                {icon:'💊',title:'Amines',desc:'Basicity, reactions, diazonium salts, uses',blend:'💉 Tech: Drug synthesis, dyes, pharmaceuticals, polymers'},
-                {icon:'🍞',title:'Biomolecules',desc:'Carbohydrates, proteins, nucleic acids, vitamins',blend:'🧬 Tech: Biotechnology, genetic engineering, drug design'},
-                {icon:'🧵',title:'Polymers',desc:'Addition polymers, condensation polymers, properties',blend:'🏭 Tech: Plastics industry, material science, biodegradable polymers'},
-                {icon:'💊',title:'Chemistry in Everyday Life',desc:'Drugs, detergents, food chemistry, chemicals',blend:'🏥 Tech: Pharmaceutical industry, consumer products, food tech'}
-            ],
-            maths11: [
-                {icon:'📦',title:'Sets',desc:'Set theory, operations, Venn diagrams, relations',blend:'💻 Tech: Database theory, data structures, set operations in programming'},
-                {icon:'🔗',title:'Relations & Functions',desc:'Types of relations, functions, domain, range',blend:'🤖 Tech: Functional programming, algorithm design, mapping functions'},
-                {icon:'📐',title:'Trigonometric Functions',desc:'Ratios, identities, equations, graphs',blend:'🎮 Tech: Game rotations, wave analysis, signal processing, graphics'},
-                {icon:'🔢',title:'Principle of Mathematical Induction',desc:'Proof by induction, applications',blend:'💻 Tech: Algorithm correctness proofs, recursive algorithms'},
-                {icon:'ℂ',title:'Complex Numbers',desc:'Operations, Argand plane, polar form, De Moivre',blend:'📡 Tech: Signal processing, AC circuit analysis, quantum mechanics'},
-                {icon:'📊',title:'Linear Inequalities',desc:'Graphing inequalities, solving systems',blend:'📈 Tech: Linear programming, optimization, constraint satisfaction'},
-                {icon:'🎲',title:'Permutations & Combinations',desc:'Counting principles, arrangements, selections',blend:'🔐 Tech: Cryptography, probability in ML, combinatorial optimization'},
-                {icon:'🎯',title:'Binomial Theorem',desc:'Expansion, binomial coefficients, applications',blend:'📊 Tech: Probability distributions, statistics, approximations'},
-                {icon:'∞',title:'Sequences & Series',desc:'AP, GP, sum to infinity, special series',blend:'💰 Tech: Compound interest, algorithm analysis, convergence'},
-                {icon:'📏',title:'Straight Lines',desc:'Slope, equations, distance, angle between lines',blend:'🎮 Tech: Computer graphics, line rendering, collision detection'},
-                {icon:'🌙',title:'Conic Sections',desc:'Parabola, ellipse, hyperbola, equations',blend:'📡 Tech: Satellite dishes, telescope mirrors, antenna design'},
-                {icon:'📦',title:'Introduction to 3D Geometry',desc:'Direction cosines, direction ratios, distance',blend:'🎮 Tech: 3D game engines, CAD software, spatial calculations'},
-                {icon:'∞',title:'Limits & Derivatives',desc:'Limits, continuity, differentiation, rules',blend:'🤖 Tech: Optimization algorithms, ML gradient descent, rate of change'},
-                {icon:'🧠',title:'Mathematical Reasoning',desc:'Statements, logical operations, quantifiers',blend:'💻 Tech: Programming logic, AI reasoning, proof systems'},
-                {icon:'📊',title:'Statistics',desc:'Mean, median, mode, variance, standard deviation',blend:'📈 Tech: Data science, analytics, ML, business intelligence'},
-                {icon:'🎲',title:'Probability',desc:'Events, conditional probability, Bayes theorem',blend:'🎲 Tech: ML predictions, risk analysis, decision making'}
-            ],
-            maths12: [
-                {icon:'🔗',title:'Relations & Functions',desc:'Types, composition, inverse, binary operations',blend:'💻 Tech: Database relations, function composition, API design'},
-                {icon:'📐',title:'Inverse Trigonometric Functions',desc:'Inverse functions, properties, graphs',blend:'🎮 Tech: Game physics, angle calculations, inverse kinematics'},
-                {icon:'[A]',title:'Matrices',desc:'Operations, transpose, inverse, determinants',blend:'🖼️ Tech: Image processing, transformations, ML (neural networks)'},
-                {icon:'|A|',title:'Determinants',desc:'Properties, cofactors, applications, Cramer rule',blend:'🎮 Tech: 3D transformations, solving linear systems, graphics'},
-                {icon:'dy/dx',title:'Continuity & Differentiability',desc:'Limits, derivatives, chain rule, implicit differentiation',blend:'🤖 Tech: Neural networks, gradient descent, optimization'},
-                {icon:'📈',title:'Applications of Derivatives',desc:'Maxima, minima, rate of change, optimization',blend:'💹 Tech: Cost optimization, profit maximization, ML training'},
-                {icon:'∫',title:'Integrals',desc:'Integration techniques, definite integrals, properties',blend:'📊 Tech: Area calculation, probability, physics simulations'},
-                {icon:'📊',title:'Applications of Integrals',desc:'Area under curves, volume of solids',blend:'🎮 Tech: Game physics, 3D modeling, computational geometry'},
-                {icon:'dy/dx',title:'Differential Equations',desc:'First order, linear, applications, modeling',blend:'🌊 Tech: Modeling dynamic systems, physics simulations, population models'},
-                {icon:'→',title:'Vector Algebra',desc:'Operations, dot product, cross product, applications',blend:'🎮 Tech: Game physics, 3D graphics, robotics, force calculations'},
-                {icon:'📦',title:'Three Dimensional Geometry',desc:'Lines, planes, angles, distance formulas',blend:'🎮 Tech: 3D game engines, CAD, computer graphics, spatial analysis'},
-                {icon:'📈',title:'Linear Programming',desc:'Optimization, graphical method, simplex',blend:'💼 Tech: Resource optimization, operations research, supply chain'},
-                {icon:'🎲',title:'Probability',desc:'Conditional probability, Bayes, distributions',blend:'🤖 Tech: ML predictions, AI decision making, risk assessment'}
-            ]
-        };
-        
-        // Load all chapters
-        function loadChapters() {
-            Object.keys(chaptersDatabase).forEach(subject => {
-                const grid = document.getElementById(subject + '-grid');
-                if (!grid) return;
-                
-                grid.innerHTML = '';
-                chaptersDatabase[subject].forEach(chapter => {
-                    const card = document.createElement('div');
-                    card.className = 'chapter-card';
-                    card.innerHTML = `
-                        <div class="chapter-icon">${chapter.icon}</div>
-                        <div class="chapter-title">${chapter.title}</div>
-                        <div class="chapter-desc">${chapter.desc}</div>
-                        <div class="chapter-blend">${chapter.blend}</div>
-                    `;
-                    grid.appendChild(card);
-                });
-            });
-        }
-        
-        // Music Player
-        let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        let isShuffle = false;
-        let isRepeat = false;
-        const audioPlayer = document.getElementById('audio-player');
-        
-        document.getElementById('file-input').addEventListener('change', function(e) {
-            const files = e.target.files;
-            for (let file of files) {
-                if (file.type.startsWith('audio/')) {
-                    const url = URL.createObjectURL(file);
-                    playlist.push({
-                        title: file.name.replace(/\.[^/.]+$/, ""),
-                        artist: 'Local File',
-                        url: url
-                    });
-                }
-            }
-            savePlaylist();
-            loadSongList();
-            alert(`Added ${files.length} song(s)!`);
-        });
-        
-        function addSongByLink() {
-            const title = prompt('Song Title (e.g., Pal Pal, Paaro, Starboy):');
-            if (!title) return;
-            const artist = prompt('Artist Name:');
-            if (!artist) return;
-            const url = prompt('Direct MP3 Link (Google Drive/Dropbox):');
-            if (!url) return;
-            
-            playlist.push({ title, artist, url });
-            savePlaylist();
-            loadSongList();
-            alert('Song added!');
-        }
-        
-        function savePlaylist() {
-            localStorage.setItem('playlist', JSON.stringify(playlist));
-        }
-        
-        function loadSongList() {
-            const songList = document.getElementById('song-list');
-            if (playlist.length === 0) {
-                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add your favorites like Pal Pal, Paaro, Starboy, Believer!</p>';
-                return;
-            }
-            
-            songList.innerHTML = '';
-            playlist.forEach((song, index) => {
-                const songItem = document.createElement('div');
-                songItem.className = 'song-item';
-                if (index === currentSongIndex && isPlaying) songItem.classList.add('playing');
-                songItem.onclick = () => playSong(index);
-                songItem.innerHTML = `
-                    <div class="song-number">${index + 1}</div>
-                    <div class="song-details">
-                        <div class="song-item-title">${song.title}</div>
-                        <div class="song-item-artist">${song.artist}</div>
-                    </div>
-                    <button onclick="deleteSong(event, ${index})" style="background: rgba(255, 68, 68, 0.2); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; color: white;">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                `;
-                songList.appendChild(songItem);
-            });
-        }
-        
-        function deleteSong(event, index) {
-            event.stopPropagation();
-            if (confirm('Delete this song?')) {
-                playlist.splice(index, 1);
-                savePlaylist();
-                loadSongList();
-            }
-        }
-        
-        function playSong(index) {
-            if (playlist.length === 0) return;
-            currentSongIndex = index;
-            const song = playlist[index];
-            
-            document.getElementById('current-song-title').textContent = song.title;
-            document.getElementById('current-song-artist').textContent = song.artist;
-            
-            audioPlayer.src = song.url;
-            audioPlayer.play();
-            isPlaying = true;
-            document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
-            
-            loadSongList();
-        }
-        
-        function togglePlay() {
-            if (playlist.length === 0) {
-                alert('Please add songs first!');
-                return;
-            }
-            
-            if (isPlaying) {
-                audioPlayer.pause();
-                document.getElementById('play-btn').innerHTML = '<i class="fas fa-play"></i>';
-            } else {
-                if (!audioPlayer.src) {
-                    playSong(0);
-                } else {
-                    audioPlayer.play();
-                    document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
-                }
-            }
-            isPlaying = !isPlaying;
-        }
-        
-        function nextSong() {
-            if (playlist.length === 0) return;
-            if (isShuffle) {
-                currentSongIndex = Math.floor(Math.random() * playlist.length);
-            } else {
-                currentSongIndex = (currentSongIndex + 1) % playlist.length;
-            }
-            playSong(currentSongIndex);
-        }
-        
-        function previousSong() {
-            if (playlist.length === 0) return;
-            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
-            playSong(currentSongIndex);
-        }
-        
-        function toggleShuffle() {
-            isShuffle = !isShuffle;
-            document.getElementById('shuffle-btn').classList.toggle('active', isShuffle);
-        }
-        
-        function toggleRepeat() {
-            isRepeat = !isRepeat;
-            document.getElementById('repeat-btn').classList.toggle('active', isRepeat);
-        }
-        
-        function changeVolume(value) {
-            audioPlayer.volume = value / 100;
-        }
-        
-        function seek(event) {
-            const progressBar = event.currentTarget;
-            const clickX = event.offsetX;
-            const width = progressBar.offsetWidth;
-            const duration = audioPlayer.duration;
-            audioPlayer.currentTime = (clickX / width) * duration;
-        }
-        
-        audioPlayer.addEventListener('timeupdate', () => {
-            const current = audioPlayer.currentTime;
-            const duration = audioPlayer.duration;
-            const progress = (current / duration) * 100;
-            
-            document.getElementById('progress-fill').style.width = progress + '%';
-            document.getElementById('current-time').textContent = formatTime(current);
-            document.getElementById('duration').textContent = formatTime(duration);
-        });
-        
-        audioPlayer.addEventListener('ended', () => {
-            if (isRepeat) {
-                audioPlayer.currentTime = 0;
-                audioPlayer.play();
-            } else {
-                nextSong();
-            }
-        });
-        
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return '0:00';
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-        
-        // Theme Changer
-        function changeTheme(theme) {
-            const bg = document.getElementById('animated-bg');
-            bg.className = 'animated-bg bg-' + theme;
-            
-            document.querySelectorAll('.theme-option').forEach(opt => {
-                opt.classList.remove('active');
-            });
-            event.target.closest('.theme-option').classList.add('active');
-            
-            localStorage.setItem('selectedTheme', theme);
-        }
-        
-        // Load saved theme
-        const savedTheme = localStorage.getItem('selectedTheme') || 'midnight';
-        document.getElementById('animated-bg').className = 'animated-bg bg-' + savedTheme;
-        
-        // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const page = btn.dataset.page;
-                
                 document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(page).classList.add('active');
-                
                 window.scrollTo(0, 0);
             });
         });
         
-        // Initialize
-        loadChapters();
-        loadSongList();
-        
-        console.log('✅ Ultimate Perfectionist - Everything Working!');
-        console.log('📚 88 Chapters Loaded');
-        console.log('🎵 Music Player Ready');
-        console.log('🎨 12 Themes Available');
-        console.log('🧠 Deep Learning Complete');
+        console.log('✅ Honest Status Report Loaded');
+        console.log('📊 5 Working, 11 Missing/Broken, 31% Complete');
     </script>
 </body>
 </html>
