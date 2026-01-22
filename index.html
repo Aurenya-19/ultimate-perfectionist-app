@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Perfectionist - Complete Learning System</title>
+    <title>Ultimate Perfectionist - Everything Working</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -57,6 +57,48 @@
             66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
         
+        /* Theme Backgrounds */
+        .bg-ocean { background: linear-gradient(135deg, #0a4d68 0%, #088395 50%, #05bfdb 100%) !important; }
+        .bg-sunset { background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #fdc830 100%) !important; }
+        .bg-forest { background: linear-gradient(135deg, #1a4d2e 0%, #4f6f52 50%, #739072 100%) !important; }
+        .bg-galaxy { background: linear-gradient(135deg, #1e0342 0%, #3d0066 50%, #6a0dad 100%) !important; }
+        .bg-midnight { background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #2d1b69 100%) !important; }
+        .bg-cherry { background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #ffa8c5 100%) !important; }
+        .bg-arctic { background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 50%, #00ff88 100%) !important; }
+        .bg-autumn { background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 50%, #feca57 100%) !important; }
+        .bg-cyberpunk { 
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #ff006e 100%) !important;
+            position: relative;
+        }
+        .bg-cyberpunk::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg, rgba(0, 212, 255, 0.03) 0px, transparent 2px, transparent 4px);
+            pointer-events: none;
+        }
+        .bg-synthwave {
+            background: linear-gradient(135deg, #2d1b69 0%, #ff006e 50%, #ffbe0b 100%) !important;
+            position: relative;
+        }
+        .bg-synthwave::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(90deg, transparent 0px, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 40px),
+                repeating-linear-gradient(0deg, transparent 0px, rgba(255, 255, 255, 0.03) 1px, transparent 2px, transparent 40px);
+            pointer-events: none;
+        }
+        .bg-aurora { background: linear-gradient(135deg, #00ff88 0%, #00d4ff 50%, #7b2cbf 100%) !important; }
+        .bg-tropical { background: linear-gradient(135deg, #00d4ff 0%, #00ff88 50%, #ffbe0b 100%) !important; }
+        
         .app { display: flex; min-height: 100vh; }
         
         .sidebar {
@@ -90,34 +132,6 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .xp-bar {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-        }
-        
-        .xp-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-        }
-        
-        .xp-progress {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        .xp-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-1), var(--accent-3));
-            width: 0%;
-            transition: width 0.5s;
-        }
-        
         .nav-section { margin-bottom: 2rem; }
         
         .nav-section h3 {
@@ -146,7 +160,6 @@
             align-items: center;
             gap: 0.8rem;
             font-weight: 600;
-            position: relative;
         }
         
         .nav-btn:hover {
@@ -158,17 +171,6 @@
         .nav-btn.active {
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 0, 110, 0.2));
             color: var(--text-primary);
-        }
-        
-        .badge {
-            position: absolute;
-            right: 1rem;
-            background: var(--accent-3);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            font-weight: 700;
         }
         
         .main-content {
@@ -220,7 +222,7 @@
         
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
         
@@ -241,344 +243,259 @@
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
         }
         
-        .stat-card {
+        .chapter-card {
             background: rgba(26, 31, 58, 0.6);
             backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 2rem;
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 1rem 0;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        .achievement-card {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
+            cursor: pointer;
             transition: all 0.3s;
         }
         
-        .achievement-card:hover {
+        .chapter-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-4);
+            border-color: var(--accent-1);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
         }
         
-        .achievement-icon {
-            font-size: 3rem;
-            filter: grayscale(100%);
-            opacity: 0.3;
+        .chapter-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .chapter-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .chapter-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+        .chapter-blend { 
+            margin-top: 1rem; 
+            padding: 1rem; 
+            background: rgba(255, 190, 11, 0.1); 
+            border-radius: 8px; 
+            font-size: 0.85rem;
+            color: var(--accent-4);
+            border-left: 3px solid var(--accent-4);
+            line-height: 1.6;
         }
         
-        .achievement-card.unlocked .achievement-icon {
-            filter: grayscale(0%);
-            opacity: 1;
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
         }
         
-        .achievement-info {
-            flex: 1;
+        .theme-option {
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
         
-        .achievement-title {
+        .theme-option:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .theme-option.active {
+            border-color: var(--success);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+        
+        .theme-name {
             font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         
-        .achievement-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 280px;
+            right: 0;
+            background: rgba(10, 14, 39, 0.98);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
+            z-index: 999;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
         }
         
-        .flashcard-container {
-            perspective: 1000px;
-            margin: 2rem auto;
-            max-width: 600px;
-        }
-        
-        .flashcard {
-            width: 100%;
-            height: 400px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            cursor: pointer;
-        }
-        
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .flashcard-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
+        .player-content {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .album-art {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 3rem;
-            border-radius: 20px;
-            background: rgba(26, 31, 58, 0.8);
-            backdrop-filter: blur(30px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .flashcard-front {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
-        }
-        
-        .flashcard-back {
-            background: linear-gradient(135deg, rgba(123, 44, 191, 0.1), rgba(255, 190, 11, 0.1));
-            transform: rotateY(180deg);
-        }
-        
-        .flashcard-text {
             font-size: 1.5rem;
-            text-align: center;
-            line-height: 1.8;
+            flex-shrink: 0;
         }
         
-        .mastery-badge {
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .song-info { flex: 1; min-width: 0; }
+        
+        .song-title {
             font-weight: 700;
-        }
-        
-        .mastery-new {
-            background: rgba(255, 68, 68, 0.2);
-            color: var(--error);
-        }
-        
-        .mastery-learning {
-            background: rgba(255, 190, 11, 0.2);
-            color: var(--accent-4);
-        }
-        
-        .mastery-mastered {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--success);
-        }
-        
-        .due-badge {
-            background: var(--accent-3);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-        
-        .planner-day {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .planner-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .planner-date {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-        
-        .planner-tasks {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        
-        .planner-task {
-            padding: 1rem;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .planner-task input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        
-        .planner-task.completed {
-            opacity: 0.5;
-            text-decoration: line-through;
-        }
-        
-        .cornell-note {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            grid-template-rows: auto 1fr auto;
-            gap: 1rem;
-            min-height: 500px;
-        }
-        
-        .cornell-cues {
-            grid-column: 1;
-            grid-row: 1 / 3;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        
-        .cornell-notes {
-            grid-column: 2;
-            grid-row: 1 / 3;
-            background: rgba(255, 0, 110, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        
-        .cornell-summary {
-            grid-column: 1 / 3;
-            grid-row: 3;
-            background: rgba(255, 190, 11, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-        
-        .cornell-note textarea {
-            width: 100%;
-            min-height: 200px;
-            background: transparent;
-            border: none;
-            color: white;
-            font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            resize: vertical;
+            margin-bottom: 0.3rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .cornell-note textarea:focus {
-            outline: none;
+        .song-artist {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
         }
         
-        .formula-sheet {
-            background: rgba(26, 31, 58, 0.6);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .formula-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--accent-1);
-        }
-        
-        .formula-list {
+        .player-controls {
             display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
         }
         
-        .formula-item {
+        .control-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: var(--accent-1);
+            transform: scale(1.1);
+        }
+        
+        .control-btn.play-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-1);
+        }
+        
+        .control-btn.active {
+            background: var(--accent-3);
+        }
+        
+        .progress-container {
+            flex: 2;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-1);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        
+        .time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            min-width: 40px;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+        
+        .volume-slider { width: 100px; }
+        
+        .song-list { 
+            max-height: 400px; 
+            overflow-y: auto;
+            margin-top: 1.5rem;
+        }
+        
+        .song-item {
             padding: 1rem;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        
-        .focus-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .focus-overlay.active {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
-        .focus-content {
-            text-align: center;
-            max-width: 600px;
+        .song-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
         }
         
-        .focus-timer {
-            font-size: 8rem;
-            font-weight: 900;
-            font-family: 'JetBrains Mono', monospace;
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 2rem 0;
+        .song-item.playing {
+            background: rgba(0, 212, 255, 0.2);
+            border-left: 3px solid var(--accent-1);
         }
         
-        .focus-message {
-            font-size: 1.5rem;
+        .song-number { 
+            width: 30px; 
+            text-align: center; 
             color: var(--text-secondary);
+            font-weight: 700;
+        }
+        
+        .song-details { flex: 1; }
+        .song-item-title { font-weight: 600; margin-bottom: 0.3rem; }
+        .song-item-artist { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        .upload-section {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px dashed var(--accent-1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
             margin-bottom: 2rem;
         }
         
         @media (max-width: 1024px) {
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; width: 100%; padding: 1.5rem; }
+            .music-player { left: 0; }
             .page-title { font-size: 2rem; }
-            .flashcard { height: 300px; }
-            .flashcard-text { font-size: 1.2rem; }
-            .focus-timer { font-size: 5rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="animated-bg"></div>
+    <div class="animated-bg" id="animated-bg"></div>
     
     <div class="app">
         <nav class="sidebar">
             <div class="logo">
                 <h1>🎯 PERFECTIONIST</h1>
-                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Complete Learning System</p>
-                <div class="xp-bar">
-                    <div class="xp-info">
-                        <span>Level <strong id="user-level">1</strong></span>
-                        <span><strong id="user-xp">0</strong> / <strong id="user-xp-max">100</strong> XP</span>
-                    </div>
-                    <div class="xp-progress">
-                        <div class="xp-fill" id="xp-fill"></div>
-                    </div>
-                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">Everything Working</p>
             </div>
             
             <div class="nav-section">
@@ -586,51 +503,35 @@
                 <button class="nav-btn active" data-page="dashboard">
                     <i class="fas fa-home"></i> Dashboard
                 </button>
-                <button class="nav-btn" data-page="analytics">
-                    <i class="fas fa-chart-line"></i> Analytics
+            </div>
+            
+            <div class="nav-section">
+                <h3>Learn (88 Chapters)</h3>
+                <button class="nav-btn" data-page="physics">
+                    <i class="fas fa-atom"></i> Physics (29)
                 </button>
-                <button class="nav-btn" data-page="achievements">
-                    <i class="fas fa-trophy"></i> Achievements
+                <button class="nav-btn" data-page="chemistry">
+                    <i class="fas fa-flask"></i> Chemistry (30)
+                </button>
+                <button class="nav-btn" data-page="maths">
+                    <i class="fas fa-square-root-alt"></i> Maths (29)
                 </button>
             </div>
             
             <div class="nav-section">
-                <h3>Study Tools</h3>
-                <button class="nav-btn" data-page="flashcards">
-                    <i class="fas fa-layer-group"></i> Flashcards
-                    <span class="badge" id="due-cards-badge">0</span>
-                </button>
-                <button class="nav-btn" data-page="planner">
-                    <i class="fas fa-calendar-check"></i> Study Planner
-                </button>
-                <button class="nav-btn" data-page="cornell">
-                    <i class="fas fa-sticky-note"></i> Cornell Notes
-                </button>
-                <button class="nav-btn" data-page="feynman">
-                    <i class="fas fa-chalkboard-teacher"></i> Feynman Practice
-                </button>
-                <button class="nav-btn" data-page="formulas">
-                    <i class="fas fa-calculator"></i> Formula Sheets
-                </button>
-                <button class="nav-btn" data-page="focus">
-                    <i class="fas fa-bullseye"></i> Focus Mode
-                </button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>Learn</h3>
+                <h3>Study</h3>
                 <button class="nav-btn" data-page="deep-learning">
                     <i class="fas fa-brain"></i> Deep Learning
                 </button>
-                <button class="nav-btn" data-page="chapters">
-                    <i class="fas fa-book"></i> 88 Chapters
-                </button>
             </div>
             
             <div class="nav-section">
-                <h3>Entertainment</h3>
+                <h3>Tools</h3>
                 <button class="nav-btn" data-page="music">
                     <i class="fas fa-music"></i> Music Player
+                </button>
+                <button class="nav-btn" data-page="themes">
+                    <i class="fas fa-palette"></i> Themes (12)
                 </button>
             </div>
         </nav>
@@ -638,667 +539,661 @@
         <main class="main-content">
             <!-- Dashboard -->
             <div id="dashboard" class="page active">
-                <h1 class="page-title">Dashboard</h1>
-                <p class="page-subtitle">Your Learning Journey</p>
-                
-                <div class="grid">
-                    <div class="stat-card">
-                        <i class="fas fa-fire" style="font-size: 2rem; color: var(--accent-3);"></i>
-                        <div class="stat-value" id="streak-days">0</div>
-                        <div class="stat-label">Day Streak 🔥</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent-1);"></i>
-                        <div class="stat-value" id="study-hours">0</div>
-                        <div class="stat-label">Hours Studied</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-check-circle" style="font-size: 2rem; color: var(--success);"></i>
-                        <div class="stat-value" id="chapters-completed">0</div>
-                        <div class="stat-label">Chapters Completed</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-layer-group" style="font-size: 2rem; color: var(--accent-4);"></i>
-                        <div class="stat-value" id="cards-mastered">0</div>
-                        <div class="stat-label">Cards Mastered</div>
-                    </div>
-                </div>
+                <h1 class="page-title">Ultimate Perfectionist</h1>
+                <p class="page-subtitle">PCM × Tech Mastery - Everything Working</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📚 Today's Study Plan</h2>
-                    <div id="today-tasks">
-                        <p style="color: var(--text-secondary);">Loading your personalized study plan...</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎯 Quick Actions</h2>
-                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button class="btn" onclick="startFocusMode()">
-                            <i class="fas fa-bullseye"></i> Start Focus Session
-                        </button>
-                        <button class="btn" onclick="reviewFlashcards()" style="background: rgba(255, 255, 255, 0.1);">
-                            <i class="fas fa-layer-group"></i> Review Flashcards
-                        </button>
-                        <button class="btn" onclick="openPlanner()" style="background: rgba(255, 255, 255, 0.1);">
-                            <i class="fas fa-calendar"></i> View Planner
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Analytics -->
-            <div id="analytics" class="page">
-                <h1 class="page-title">Learning Analytics</h1>
-                <p class="page-subtitle">Track Your Progress & Identify Weak Areas</p>
-                
-                <div class="grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Overall Progress</div>
-                        <div class="stat-value">23%</div>
-                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">20 / 88 chapters</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Retention Rate</div>
-                        <div class="stat-value">87%</div>
-                        <p style="color: var(--success); margin-top: 0.5rem;">Excellent! 🎉</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Study Consistency</div>
-                        <div class="stat-value">92%</div>
-                        <p style="color: var(--success); margin-top: 0.5rem;">Very consistent!</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Avg. Study Time</div>
-                        <div class="stat-value">4.2h</div>
-                        <p style="color: var(--text-secondary); margin-top: 0.5rem;">Per day</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📊 Subject-wise Progress</h2>
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                        <div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Physics</span>
-                                <span>8 / 29 chapters (28%)</span>
-                            </div>
-                            <div style="height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; overflow: hidden;">
-                                <div style="height: 100%; width: 28%; background: linear-gradient(90deg, var(--accent-1), var(--accent-3));"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Chemistry</span>
-                                <span>7 / 30 chapters (23%)</span>
-                            </div>
-                            <div style="height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; overflow: hidden;">
-                                <div style="height: 100%; width: 23%; background: linear-gradient(90deg, var(--accent-3), var(--accent-4));"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span>Maths</span>
-                                <span>5 / 29 chapters (17%)</span>
-                            </div>
-                            <div style="height: 12px; background: rgba(255, 255, 255, 0.1); border-radius: 6px; overflow: hidden;">
-                                <div style="height: 100%; width: 17%; background: linear-gradient(90deg, var(--accent-4), var(--success));"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">⚠️ Weak Areas (Need Review)</h2>
-                    <div style="display: flex; flex-direction: column; gap: 1rem;">
-                        <div style="padding: 1rem; background: rgba(255, 68, 68, 0.1); border-left: 3px solid var(--error); border-radius: 8px;">
-                            <strong>Thermodynamics</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Last reviewed: 15 days ago • Retention: 45%</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(255, 68, 68, 0.1); border-left: 3px solid var(--error); border-radius: 8px;">
-                            <strong>Organic Chemistry - GOC</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Last reviewed: 12 days ago • Retention: 52%</p>
-                        </div>
-                        <div style="padding: 1rem; background: rgba(255, 190, 11, 0.1); border-left: 3px solid var(--accent-4); border-radius: 8px;">
-                            <strong>Calculus - Integration</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.5rem;">Last reviewed: 8 days ago • Retention: 68%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Achievements -->
-            <div id="achievements" class="page">
-                <h1 class="page-title">Achievements</h1>
-                <p class="page-subtitle">Unlock badges as you progress</p>
-                
-                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div class="achievement-card unlocked">
-                        <div class="achievement-icon">🎯</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">First Steps</div>
-                            <div class="achievement-desc">Complete your first study session</div>
-                        </div>
-                        <div style="color: var(--success); font-weight: 700;">UNLOCKED</div>
-                    </div>
-                    
-                    <div class="achievement-card unlocked">
-                        <div class="achievement-icon">🔥</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">Week Warrior</div>
-                            <div class="achievement-desc">Maintain a 7-day study streak</div>
-                        </div>
-                        <div style="color: var(--success); font-weight: 700;">UNLOCKED</div>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">⚡</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">Speed Learner</div>
-                            <div class="achievement-desc">Complete 10 chapters in one week</div>
-                        </div>
-                        <div style="color: var(--text-secondary);">LOCKED</div>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🧠</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">Master Mind</div>
-                            <div class="achievement-desc">Master 100 flashcards</div>
-                        </div>
-                        <div style="color: var(--text-secondary);">LOCKED</div>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">💯</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">Perfect Score</div>
-                            <div class="achievement-desc">Score 100% on any test</div>
-                        </div>
-                        <div style="color: var(--text-secondary);">LOCKED</div>
-                    </div>
-                    
-                    <div class="achievement-card">
-                        <div class="achievement-icon">🏆</div>
-                        <div class="achievement-info">
-                            <div class="achievement-title">Ultimate Perfectionist</div>
-                            <div class="achievement-desc">Complete all 88 chapters</div>
-                        </div>
-                        <div style="color: var(--text-secondary);">LOCKED</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Flashcards -->
-            <div id="flashcards" class="page">
-                <h1 class="page-title">Smart Flashcards</h1>
-                <p class="page-subtitle">Spaced Repetition System - Review at optimal intervals</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📊 Your Progress</h2>
-                    <div class="grid">
-                        <div style="padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--error);">12</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">New Cards</div>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-4);">28</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Learning</div>
-                        </div>
-                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--success);">45</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Mastered</div>
-                        </div>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🚀 Complete Platform</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                         <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-1);">8</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Due Today</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎴 Review Flashcards</h2>
-                    <div class="flashcard-container">
-                        <div class="flashcard" id="flashcard" onclick="flipCard()">
-                            <div class="flashcard-face flashcard-front">
-                                <div class="flashcard-text">What is Newton's Second Law?</div>
-                                <div class="mastery-badge mastery-learning">LEARNING</div>
-                            </div>
-                            <div class="flashcard-face flashcard-back">
-                                <div class="flashcard-text">F = ma<br><br>Force equals mass times acceleration</div>
-                                <div class="mastery-badge mastery-learning">Next review: 3 days</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                        <button class="btn" style="background: var(--error);">
-                            <i class="fas fa-times"></i> Again (1 day)
-                        </button>
-                        <button class="btn" style="background: var(--accent-4);">
-                            <i class="fas fa-check"></i> Good (3 days)
-                        </button>
-                        <button class="btn" style="background: var(--success);">
-                            <i class="fas fa-check-double"></i> Easy (1 week)
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Study Planner -->
-            <div id="planner" class="page">
-                <h1 class="page-title">Study Planner</h1>
-                <p class="page-subtitle">Smart scheduling with interleaving built-in</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📅 This Week's Plan</h2>
-                    
-                    <div class="planner-day">
-                        <div class="planner-header">
-                            <div class="planner-date">Monday, Today</div>
-                            <div style="color: var(--accent-1); font-weight: 700;">3 / 5 tasks completed</div>
-                        </div>
-                        <div class="planner-tasks">
-                            <div class="planner-task completed">
-                                <input type="checkbox" checked>
-                                <div>
-                                    <strong>Physics - Kinematics</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Review equations of motion</p>
-                                </div>
-                            </div>
-                            <div class="planner-task completed">
-                                <input type="checkbox" checked>
-                                <div>
-                                    <strong>Chemistry - GOC</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Practice resonance structures</p>
-                                </div>
-                            </div>
-                            <div class="planner-task completed">
-                                <input type="checkbox" checked>
-                                <div>
-                                    <strong>Maths - Calculus</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Solve 10 integration problems</p>
-                                </div>
-                            </div>
-                            <div class="planner-task">
-                                <input type="checkbox">
-                                <div>
-                                    <strong>Physics - Thermodynamics</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Review first law</p>
-                                </div>
-                            </div>
-                            <div class="planner-task">
-                                <input type="checkbox">
-                                <div>
-                                    <strong>Chemistry - Equilibrium</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Le Chatelier's principle</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="planner-day">
-                        <div class="planner-header">
-                            <div class="planner-date">Tuesday</div>
-                            <div style="color: var(--text-secondary);">5 tasks planned</div>
-                        </div>
-                        <div class="planner-tasks">
-                            <div class="planner-task">
-                                <input type="checkbox">
-                                <div>
-                                    <strong>Maths - Matrices</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Operations and determinants</p>
-                                </div>
-                            </div>
-                            <div class="planner-task">
-                                <input type="checkbox">
-                                <div>
-                                    <strong>Physics - Electrostatics</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Coulomb's law problems</p>
-                                </div>
-                            </div>
-                            <div class="planner-task">
-                                <input type="checkbox">
-                                <div>
-                                    <strong>Chemistry - Redox</strong>
-                                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Balancing equations</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cornell Notes -->
-            <div id="cornell" class="page">
-                <h1 class="page-title">Cornell Notes</h1>
-                <p class="page-subtitle">Structured note-taking system</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📝 Create New Note</h2>
-                    <input type="text" placeholder="Note Title (e.g., Physics - Newton's Laws)" style="width: 100%; padding: 1rem; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 1.5rem;">
-                    
-                    <div class="cornell-note">
-                        <div class="cornell-cues">
-                            <h3 style="margin-bottom: 1rem;">Cues & Questions</h3>
-                            <textarea placeholder="Write key questions, terms, and cues here..."></textarea>
-                        </div>
-                        <div class="cornell-notes">
-                            <h3 style="margin-bottom: 1rem;">Notes</h3>
-                            <textarea placeholder="Write your detailed notes here..."></textarea>
-                        </div>
-                        <div class="cornell-summary">
-                            <h3 style="margin-bottom: 1rem;">Summary</h3>
-                            <textarea placeholder="Summarize the main points in your own words..."></textarea>
-                        </div>
-                    </div>
-                    
-                    <button class="btn" style="margin-top: 1.5rem;">
-                        <i class="fas fa-save"></i> Save Note
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Feynman Practice -->
-            <div id="feynman" class="page">
-                <h1 class="page-title">Feynman Technique Practice</h1>
-                <p class="page-subtitle">Explain concepts in simple terms</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎓 Choose a Concept</h2>
-                    <input type="text" placeholder="What concept do you want to explain? (e.g., Derivatives, Thermodynamics)" style="width: 100%; padding: 1rem; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 1rem; margin-bottom: 1.5rem;">
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">✍️ Explain It Simply</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Pretend you're teaching a 10-year-old. Use simple language, no jargon.</p>
-                    <textarea style="width: 100%; min-height: 300px; padding: 1.5rem; background: rgba(0, 0, 0, 0.3); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: white; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical;" placeholder="Start explaining..."></textarea>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🔍 Identify Gaps</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Where did you struggle? What parts were unclear?</p>
-                    <textarea style="width: 100%; min-height: 150px; padding: 1.5rem; background: rgba(255, 68, 68, 0.1); border: 2px solid var(--error); border-radius: 12px; color: white; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical;" placeholder="List the parts you need to review..."></textarea>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🔗 PCM × Tech Connection</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">How is this concept used in real-world tech?</p>
-                    <textarea style="width: 100%; min-height: 150px; padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border: 2px solid var(--accent-1); border-radius: 12px; color: white; font-size: 1rem; font-family: 'Inter', sans-serif; resize: vertical;" placeholder="Explain the tech application..."></textarea>
-                </div>
-            </div>
-            
-            <!-- Formula Sheets -->
-            <div id="formulas" class="page">
-                <h1 class="page-title">Formula Sheets</h1>
-                <p class="page-subtitle">Quick reference for all important formulas</p>
-                
-                <div class="formula-sheet">
-                    <div class="formula-title">⚛️ Physics - Kinematics</div>
-                    <div class="formula-list">
-                        <div class="formula-item">v = u + at</div>
-                        <div class="formula-item">s = ut + (1/2)at²</div>
-                        <div class="formula-item">v² = u² + 2as</div>
-                        <div class="formula-item">s = (u + v)t / 2</div>
-                    </div>
-                </div>
-                
-                <div class="formula-sheet">
-                    <div class="formula-title">⚡ Physics - Electrostatics</div>
-                    <div class="formula-list">
-                        <div class="formula-item">F = kq₁q₂ / r²</div>
-                        <div class="formula-item">E = F / q = kQ / r²</div>
-                        <div class="formula-item">V = kQ / r</div>
-                        <div class="formula-item">C = Q / V</div>
-                    </div>
-                </div>
-                
-                <div class="formula-sheet">
-                    <div class="formula-title">🧪 Chemistry - Mole Concept</div>
-                    <div class="formula-list">
-                        <div class="formula-item">n = m / M (moles = mass / molar mass)</div>
-                        <div class="formula-item">n = V / 22.4 (at STP)</div>
-                        <div class="formula-item">n = N / Nₐ (Avogadro's number)</div>
-                        <div class="formula-item">Molarity (M) = moles / volume(L)</div>
-                    </div>
-                </div>
-                
-                <div class="formula-sheet">
-                    <div class="formula-title">📐 Maths - Calculus</div>
-                    <div class="formula-list">
-                        <div class="formula-item">d/dx(xⁿ) = nxⁿ⁻¹</div>
-                        <div class="formula-item">d/dx(eˣ) = eˣ</div>
-                        <div class="formula-item">d/dx(ln x) = 1/x</div>
-                        <div class="formula-item">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div>
-                    </div>
-                </div>
-                
-                <button class="btn" style="margin-top: 1rem;">
-                    <i class="fas fa-download"></i> Download All Formulas (PDF)
-                </button>
-            </div>
-            
-            <!-- Focus Mode -->
-            <div id="focus" class="page">
-                <h1 class="page-title">Focus Mode</h1>
-                <p class="page-subtitle">Distraction-free deep work sessions</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">⏱️ Pomodoro Timer</h2>
-                    <div style="text-align: center;">
-                        <div style="font-size: 6rem; font-weight: 900; font-family: 'JetBrains Mono', monospace; background: linear-gradient(135deg, var(--accent-1), var(--accent-3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 2rem 0;">25:00</div>
-                        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem;">
-                            <button class="btn" onclick="setFocusTime(25)">Focus (25min)</button>
-                            <button class="btn" onclick="setFocusTime(5)" style="background: rgba(255, 255, 255, 0.1);">Short Break (5min)</button>
-                            <button class="btn" onclick="setFocusTime(15)" style="background: rgba(255, 255, 255, 0.1);">Long Break (15min)</button>
-                        </div>
-                        <button class="btn" onclick="startFocusMode()" style="font-size: 1.2rem; padding: 1.5rem 3rem;">
-                            <i class="fas fa-play"></i> Start Focus Session
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">📊 Today's Focus Stats</h2>
-                    <div class="grid">
-                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-1);">4</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Sessions Completed</div>
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                            <h3>88 Chapters</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">All PCM chapters</p>
                         </div>
                         <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; text-align: center;">
-                            <div style="font-size: 2.5rem; font-weight: 900; color: var(--accent-3);">100</div>
-                            <div style="color: var(--text-secondary); margin-top: 0.5rem;">Minutes Focused</div>
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔗</div>
+                            <h3>Tech Blend</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Real applications</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧠</div>
+                            <h3>Deep Learning</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">6 techniques</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎵</div>
+                            <h3>Music</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Your songs</p>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+                            <h3>12 Themes</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem;">Beautiful BGs</p>
                         </div>
                     </div>
                 </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">✅ Quick Start</h2>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Browse 88 Chapters</strong> - Click Physics/Chemistry/Maths to see all chapters</li>
+                        <li><strong>Learn Deep Learning</strong> - Master 6 proven learning techniques</li>
+                        <li><strong>Add Your Music</strong> - Upload MP3s or add by link (Pal Pal, Paaro, Starboy, etc.)</li>
+                        <li><strong>Change Theme</strong> - Choose from 12 beautiful backgrounds</li>
+                        <li><strong>Study Smart</strong> - Use PCM × Tech connections</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <!-- Physics -->
+            <div id="physics" class="page">
+                <h1 class="page-title">Physics</h1>
+                <p class="page-subtitle">29 Chapters - 11th & 12th Complete with Tech Connections</p>
+                
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Physics (14 Chapters)</h2>
+                <div class="grid" id="physics-11-grid"></div>
+                
+                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Physics (15 Chapters)</h2>
+                <div class="grid" id="physics-12-grid"></div>
+            </div>
+            
+            <!-- Chemistry -->
+            <div id="chemistry" class="page">
+                <h1 class="page-title">Chemistry</h1>
+                <p class="page-subtitle">30 Chapters - 11th & 12th Complete with Tech Connections</p>
+                
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Chemistry (14 Chapters)</h2>
+                <div class="grid" id="chemistry-11-grid"></div>
+                
+                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Chemistry (16 Chapters)</h2>
+                <div class="grid" id="chemistry-12-grid"></div>
+            </div>
+            
+            <!-- Maths -->
+            <div id="maths" class="page">
+                <h1 class="page-title">Maths</h1>
+                <p class="page-subtitle">29 Chapters - 11th & 12th Complete with Tech Connections</p>
+                
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent-1);">📘 Class 11th Maths (16 Chapters)</h2>
+                <div class="grid" id="maths-11-grid"></div>
+                
+                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem; color: var(--accent-3);">📕 Class 12th Maths (13 Chapters)</h2>
+                <div class="grid" id="maths-12-grid"></div>
             </div>
             
             <!-- Deep Learning -->
             <div id="deep-learning" class="page">
                 <h1 class="page-title">Deep Learning System</h1>
-                <p class="page-subtitle">Master how to learn - 6 proven techniques</p>
+                <p class="page-subtitle">Master How To Learn - 6 Proven Techniques</p>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">🎓 Feynman Technique</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Explain concepts in simple terms as if teaching someone else. True understanding through teaching.</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🎓 1. Feynman Technique</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Named after Nobel Prize winner Richard Feynman. If you can't explain it simply, you don't understand it well enough.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">How It Works:</h3>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Choose a concept</strong> - Pick any topic you want to master</li>
+                        <li><strong>Explain it simply</strong> - Pretend you're teaching a 10-year-old</li>
+                        <li><strong>Identify gaps</strong> - Where did you struggle to explain?</li>
+                        <li><strong>Review & simplify</strong> - Go back, learn, and simplify further</li>
+                    </ol>
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-1);">
+                        <strong>🔗 PCM × Tech Example:</strong>
+                        <p style="margin-top: 0.5rem; line-height: 1.8;">Explain "Derivatives" like you're teaching someone who only knows basic math. Then show how it's used in ML gradient descent. If you can't explain both simply, you don't truly understand.</p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">📅 Spaced Repetition</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Review at optimal intervals (1 day, 3 days, 1 week, 2 weeks, 1 month) for long-term retention.</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">📅 2. Spaced Repetition</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        The most powerful memorization technique. Review at optimal intervals to move information from short-term to long-term memory.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Schedule:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="padding: 1.5rem; background: rgba(0, 212, 255, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">1️⃣</div>
+                            <strong>1 Day</strong>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">3️⃣</div>
+                            <strong>3 Days</strong>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">7️⃣</div>
+                            <strong>1 Week</strong>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(255, 190, 11, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🗓️</div>
+                            <strong>2 Weeks</strong>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; text-align: center;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📆</div>
+                            <strong>1 Month</strong>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(0, 255, 136, 0.1); border-radius: 12px; border-left: 4px solid var(--success);">
+                        <strong>💡 Pro Tip:</strong>
+                        <p style="margin-top: 0.5rem; line-height: 1.8;">Use flashcards with this system. Review cards at these intervals for maximum retention!</p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">🧠 Active Recall</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Test yourself without notes. Close book and write. Practice problems actively.</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🧠 3. Active Recall</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Stop passive reading. Start active retrieval. Testing yourself is 10x more effective than re-reading.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Method:</h3>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Close your book/notes</strong> - No peeking!</li>
+                        <li><strong>Write everything you remember</strong> - From memory only</li>
+                        <li><strong>Check and fill gaps</strong> - See what you missed</li>
+                        <li><strong>Practice with problems</strong> - Apply what you learned</li>
+                    </ol>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">🗺️ Mind Mapping</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Visualize concept connections. See the big picture. Identify knowledge gaps.</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🗺️ 4. Mind Mapping</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Your brain thinks in connections, not lists. Visualize relationships between concepts to see the big picture.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">How To Create:</h3>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Main concept in center</strong> - Start with the core idea</li>
+                        <li><strong>Branch out to subtopics</strong> - Add related concepts</li>
+                        <li><strong>Connect related ideas</strong> - Draw lines between connections</li>
+                        <li><strong>Use colors & symbols</strong> - Make it visual and memorable</li>
+                    </ol>
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255, 0, 110, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-3);">
+                        <strong>🔗 PCM × Tech Connection:</strong>
+                        <p style="margin-top: 0.5rem; line-height: 1.8;">Create a mind map showing how Calculus connects to ML, Physics connects to Robotics, Chemistry connects to Materials Science. See the web of knowledge!</p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">🔀 Interleaving</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Mix different topics. Better than blocking. Stronger learning.</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">🔀 5. Interleaving</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Don't study one topic for hours (blocking). Mix different topics (interleaving) for stronger learning and better retention.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Strategy:</h3>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>Don't block study</strong> - Avoid 3 hours of just Physics</li>
+                        <li><strong>Switch between topics</strong> - 1 hour Physics, 1 hour Chem, 1 hour Maths</li>
+                        <li><strong>Mix problem types</strong> - Don't do 50 similar problems in a row</li>
+                        <li><strong>Compare & contrast</strong> - See similarities and differences</li>
+                    </ol>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">💭 Elaboration</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Connect to existing knowledge. Ask "why" and "how". Real-world applications.</p>
-                </div>
-            </div>
-            
-            <!-- Chapters -->
-            <div id="chapters" class="page">
-                <h1 class="page-title">88 Chapters</h1>
-                <p class="page-subtitle">Complete 11th-12th PCM with Tech Connections</p>
-                
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">📚 All Subjects</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary);">Physics (29) • Chemistry (30) • Maths (29) = 88 Total Chapters</p>
-                    <p style="line-height: 1.8; color: var(--accent-1); margin-top: 1rem;">Each chapter shows real-world tech applications and connections!</p>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">💭 6. Elaboration</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Connect new knowledge to what you already know. Ask "why" and "how" constantly. Build a web of understanding.
+                    </p>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-1);">The Questions:</h3>
+                    <ol style="font-size: 1.05rem; line-height: 2.5; color: var(--text-secondary);">
+                        <li><strong>"Why does this work?"</strong> - Understand the reasoning</li>
+                        <li><strong>"How does this relate to X?"</strong> - Find connections</li>
+                        <li><strong>"Where is this used?"</strong> - Real-world applications</li>
+                        <li><strong>"What's an analogy?"</strong> - Create mental models</li>
+                    </ol>
+                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(123, 44, 191, 0.1); border-radius: 12px; border-left: 4px solid var(--accent-2);">
+                        <strong>🎯 Perfect For PCM × Tech:</strong>
+                        <p style="margin-top: 0.5rem; line-height: 1.8;">When learning Matrices, ask: "How is this used in image processing?" When learning Thermodynamics, ask: "How does this relate to CPU cooling?" Always connect PCM to Tech!</p>
+                    </div>
                 </div>
             </div>
             
             <!-- Music -->
             <div id="music" class="page">
                 <h1 class="page-title">Music Player</h1>
-                <p class="page-subtitle">Your songs - Pure audio - No ads</p>
+                <p class="page-subtitle">Your Songs - Pure Audio - No Ads</p>
                 
-                <div class="card">
-                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">🎵 Add Your Favorite Songs</h2>
-                    <p style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">Upload MP3 files or add by direct link. Songs like Pal Pal, Paaro, Starboy, Believer, and more!</p>
-                    <button class="btn">
+                <div class="upload-section">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">📁 Add Your Songs</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Upload MP3 files or paste direct links</p>
+                    <input type="file" id="file-input" accept="audio/*" multiple style="display: none;">
+                    <button class="btn" onclick="document.getElementById('file-input').click()">
                         <i class="fas fa-upload"></i> Upload MP3 Files
                     </button>
-                    <button class="btn" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
+                    <button class="btn" onclick="addSongByLink()" style="margin-left: 1rem; background: rgba(255, 255, 255, 0.1);">
                         <i class="fas fa-link"></i> Add by Link
                     </button>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem;">🎵 Your Playlist</h2>
+                    <div class="song-list" id="song-list">
+                        <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add your favorites like Pal Pal, Paaro, Starboy, Believer!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Themes -->
+            <div id="themes" class="page">
+                <h1 class="page-title">Themes</h1>
+                <p class="page-subtitle">12 Beautiful Aesthetic Backgrounds</p>
+                
+                <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">🌊 Calm & Peaceful</h2>
+                <div class="theme-grid">
+                    <div class="theme-option bg-ocean" onclick="changeTheme('ocean')">
+                        <div style="font-size: 3rem;">🌊</div>
+                        <div class="theme-name">Ocean Blue</div>
+                    </div>
+                    <div class="theme-option bg-sunset" onclick="changeTheme('sunset')">
+                        <div style="font-size: 3rem;">🌅</div>
+                        <div class="theme-name">Sunset</div>
+                    </div>
+                    <div class="theme-option bg-forest" onclick="changeTheme('forest')">
+                        <div style="font-size: 3rem;">🌲</div>
+                        <div class="theme-name">Forest</div>
+                    </div>
+                    <div class="theme-option bg-galaxy" onclick="changeTheme('galaxy')">
+                        <div style="font-size: 3rem;">🌌</div>
+                        <div class="theme-name">Galaxy</div>
+                    </div>
+                    <div class="theme-option bg-midnight active" onclick="changeTheme('midnight')">
+                        <div style="font-size: 3rem;">🌃</div>
+                        <div class="theme-name">Midnight</div>
+                    </div>
+                    <div class="theme-option bg-cherry" onclick="changeTheme('cherry')">
+                        <div style="font-size: 3rem;">🌸</div>
+                        <div class="theme-name">Cherry Blossom</div>
+                    </div>
+                    <div class="theme-option bg-arctic" onclick="changeTheme('arctic')">
+                        <div style="font-size: 3rem;">❄️</div>
+                        <div class="theme-name">Arctic</div>
+                    </div>
+                    <div class="theme-option bg-autumn" onclick="changeTheme('autumn')">
+                        <div style="font-size: 3rem;">🍂</div>
+                        <div class="theme-name">Autumn</div>
+                    </div>
+                </div>
+                
+                <h2 style="font-size: 1.5rem; margin: 3rem 0 1.5rem;">⚡ Powerful & Energetic</h2>
+                <div class="theme-grid">
+                    <div class="theme-option bg-cyberpunk" onclick="changeTheme('cyberpunk')">
+                        <div style="font-size: 3rem;">🎮</div>
+                        <div class="theme-name">Cyberpunk</div>
+                    </div>
+                    <div class="theme-option bg-synthwave" onclick="changeTheme('synthwave')">
+                        <div style="font-size: 3rem;">🎵</div>
+                        <div class="theme-name">Synthwave</div>
+                    </div>
+                    <div class="theme-option bg-aurora" onclick="changeTheme('aurora')">
+                        <div style="font-size: 3rem;">🌈</div>
+                        <div class="theme-name">Aurora</div>
+                    </div>
+                    <div class="theme-option bg-tropical" onclick="changeTheme('tropical')">
+                        <div style="font-size: 3rem;">🏝️</div>
+                        <div class="theme-name">Tropical</div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
     
-    <!-- Focus Mode Overlay -->
-    <div class="focus-overlay" id="focus-overlay">
-        <div class="focus-content">
-            <div class="focus-timer" id="focus-timer-display">25:00</div>
-            <div class="focus-message" id="focus-message">Focus on your studies. You got this! 💪</div>
-            <button class="btn" onclick="exitFocusMode()">
-                <i class="fas fa-times"></i> Exit Focus Mode
-            </button>
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="player-content">
+            <div class="album-art">🎵</div>
+            <div class="song-info">
+                <div class="song-title" id="current-song-title">No song playing</div>
+                <div class="song-artist" id="current-song-artist">Add your songs to start</div>
+            </div>
+            <div class="player-controls">
+                <button class="control-btn" onclick="previousSong()">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="control-btn" onclick="nextSong()">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="control-btn" onclick="toggleShuffle()" id="shuffle-btn">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button class="control-btn" onclick="toggleRepeat()" id="repeat-btn">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            <div class="progress-container">
+                <span class="time" id="current-time">0:00</span>
+                <div class="progress-bar" onclick="seek(event)">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="time" id="duration">0:00</span>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" class="volume-slider" min="0" max="100" value="70" onchange="changeVolume(this.value)">
+            </div>
         </div>
     </div>
     
+    <audio id="audio-player"></audio>
+    
     <script>
-        // User Progress Data
-        let userData = JSON.parse(localStorage.getItem('userData')) || {
-            level: 1,
-            xp: 0,
-            xpMax: 100,
-            streak: 0,
-            studyHours: 0,
-            chaptersCompleted: 0,
-            cardsMastered: 0,
-            lastStudyDate: null
+        // 88 Chapters Database
+        const chaptersDatabase = {
+            physics11: [
+                {icon:'📏',title:'Units & Measurements',desc:'Physical quantities, SI units, dimensions, significant figures',blend:'🔗 Tech: Used in sensor calibration, IoT devices, data normalization in ML models'},
+                {icon:'🚗',title:'Motion in Straight Line',desc:'Displacement, velocity, acceleration, equations of motion',blend:'🤖 Tech: Self-driving cars, robotics path planning, game physics engines'},
+                {icon:'✈️',title:'Motion in Plane',desc:'Projectile motion, circular motion, relative velocity',blend:'🎮 Tech: Game engines, drone flight control, satellite trajectory calculations'},
+                {icon:'⚖️',title:'Laws of Motion',desc:"Newton's three laws, friction, dynamics, momentum",blend:'🎯 Tech: Physics simulations, crash testing software, robotics force control'},
+                {icon:'💥',title:'Work, Energy & Power',desc:'Kinetic energy, potential energy, conservation of energy',blend:'⚡ Tech: Battery optimization, ML model efficiency, power management systems'},
+                {icon:'🔄',title:'System of Particles & Rotational Motion',desc:'Center of mass, torque, angular momentum, moment of inertia',blend:'🛸 Tech: Drone stabilization, gyroscopes in phones, 3D modeling software'},
+                {icon:'🌍',title:'Gravitation',desc:'Universal law of gravitation, orbital motion, satellites',blend:'🛰️ Tech: GPS systems, satellite communication, space mission planning'},
+                {icon:'🏗️',title:'Mechanical Properties of Solids',desc:'Stress, strain, elasticity, Young modulus',blend:'🏢 Tech: Structural engineering software, material science simulations'},
+                {icon:'💧',title:'Mechanical Properties of Fluids',desc:'Pressure, viscosity, Bernoulli principle, surface tension',blend:'✈️ Tech: Aerodynamics simulations, fluid dynamics in games, CFD software'},
+                {icon:'🌡️',title:'Thermal Properties of Matter',desc:'Heat, temperature, thermal expansion, calorimetry',blend:'💻 Tech: CPU thermal management, climate modeling, HVAC systems'},
+                {icon:'🔥',title:'Thermodynamics',desc:'Laws of thermodynamics, heat engines, entropy, Carnot cycle',blend:'🚗 Tech: Engine optimization, refrigeration systems, energy efficiency'},
+                {icon:'⚛️',title:'Kinetic Theory of Gases',desc:'Gas laws, molecular motion, kinetic energy',blend:'🧪 Tech: Molecular simulations, computational chemistry, gas sensors'},
+                {icon:'📳',title:'Oscillations',desc:'Simple harmonic motion, pendulum, springs, resonance',blend:'📡 Tech: Signal processing, vibration analysis, audio engineering'},
+                {icon:'🌊',title:'Waves',desc:'Sound waves, light waves, interference, standing waves',blend:'🎵 Tech: Audio compression, noise cancellation, wave simulations'}
+            ],
+            physics12: [
+                {icon:'⚡',title:'Electric Charges & Fields',desc:'Coulomb law, electric field, Gauss law',blend:'📱 Tech: Touchscreen technology, capacitive sensors, electrostatic precipitators'},
+                {icon:'🔋',title:'Electrostatic Potential & Capacitance',desc:'Electric potential, capacitors, dielectrics',blend:'💾 Tech: Memory storage, capacitor design in circuits, energy storage'},
+                {icon:'💡',title:'Current Electricity',desc:'Ohm law, circuits, Kirchhoff laws, Wheatstone bridge',blend:'🔌 Tech: Circuit design, PCB layout, electrical engineering'},
+                {icon:'🧲',title:'Moving Charges & Magnetism',desc:'Magnetic force, Lorentz force, Biot-Savart law',blend:'🎮 Tech: VR controllers, magnetic sensors, electric motors'},
+                {icon:'🧭',title:'Magnetism & Matter',desc:'Magnetic materials, hysteresis, magnetic properties',blend:'💽 Tech: Hard disk drives, magnetic storage technology, MRI machines'},
+                {icon:'⚙️',title:'Electromagnetic Induction',desc:'Faraday law, Lenz law, induced EMF, eddy currents',blend:'🔋 Tech: Wireless charging, generators, transformers, induction cooktops'},
+                {icon:'~',title:'Alternating Current',desc:'AC circuits, impedance, power factor, resonance',blend:'⚡ Tech: Power grids, AC motor control, electrical distribution systems'},
+                {icon:'📡',title:'Electromagnetic Waves',desc:'EM spectrum, wave propagation, Maxwell equations',blend:'📶 Tech: WiFi, 5G, radio communication, radar systems, satellite comm'},
+                {icon:'👓',title:'Ray Optics & Optical Instruments',desc:'Reflection, refraction, lenses, mirrors, optical instruments',blend:'📷 Tech: Camera design, optical instruments, AR/VR headsets'},
+                {icon:'🌈',title:'Wave Optics',desc:'Interference, diffraction, polarization, Huygens principle',blend:'🔬 Tech: Microscopy, holography, optical computing, laser technology'},
+                {icon:'☢️',title:'Dual Nature of Radiation & Matter',desc:'Photoelectric effect, matter waves, de Broglie wavelength',blend:'☀️ Tech: Solar cells, quantum sensors, photodetectors, LED technology'},
+                {icon:'⚛️',title:'Atoms',desc:'Atomic models, Bohr model, hydrogen spectrum',blend:'🔬 Tech: Spectroscopy, quantum computing basics, atomic clocks'},
+                {icon:'☢️',title:'Nuclei',desc:'Radioactivity, nuclear reactions, mass-energy equivalence',blend:'⚡ Tech: Nuclear power, medical imaging (PET/CT), carbon dating'},
+                {icon:'💻',title:'Semiconductor Electronics',desc:'Diodes, transistors, logic gates, digital electronics',blend:'🖥️ Tech: Computer chips, digital electronics, processors, IoT devices'},
+                {icon:'📞',title:'Communication Systems',desc:'Modulation, transmission, bandwidth, signal processing',blend:'📱 Tech: Mobile networks, satellite communication, internet protocols'}
+            ],
+            chemistry11: [
+                {icon:'🧪',title:'Some Basic Concepts of Chemistry',desc:'Mole concept, stoichiometry, laws of chemical combination',blend:'⚗️ Tech: Chemical process optimization, industrial chemistry, yield calculations'},
+                {icon:'⚛️',title:'Structure of Atom',desc:'Quantum numbers, orbitals, electronic configuration',blend:'💻 Tech: Quantum computing, computational chemistry, material design'},
+                {icon:'📊',title:'Classification of Elements & Periodicity',desc:'Periodic table, periodic trends, properties',blend:'🔬 Tech: Materials science, element prediction algorithms, new material discovery'},
+                {icon:'🔗',title:'Chemical Bonding & Molecular Structure',desc:'Ionic, covalent, metallic bonds, VSEPR, hybridization',blend:'💊 Tech: Drug design, molecular modeling software, protein folding'},
+                {icon:'💨',title:'States of Matter',desc:'Gas laws, liquid state, solid state, phase changes',blend:'🧊 Tech: Phase change materials, cryogenics, supercritical fluids'},
+                {icon:'🔥',title:'Thermodynamics',desc:'Enthalpy, entropy, Gibbs free energy, spontaneity',blend:'🔋 Tech: Battery chemistry, energy storage systems, fuel cells'},
+                {icon:'⚖️',title:'Equilibrium',desc:'Le Chatelier principle, equilibrium constant, ionic equilibrium',blend:'🏭 Tech: Industrial process optimization, reaction control systems'},
+                {icon:'🔄',title:'Redox Reactions',desc:'Oxidation, reduction, balancing redox equations',blend:'🔋 Tech: Batteries, fuel cells, corrosion prevention, electroplating'},
+                {icon:'💧',title:'Hydrogen',desc:'Properties, preparation, uses, isotopes',blend:'⚡ Tech: Hydrogen fuel cells, clean energy, rocket fuel'},
+                {icon:'🧂',title:'S-Block Elements',desc:'Alkali metals, alkaline earth metals, properties',blend:'🔋 Tech: Lithium batteries, sodium lamps, calcium in cement'},
+                {icon:'🎨',title:'P-Block Elements',desc:'Group 13-18 elements, properties, compounds',blend:'💡 Tech: LEDs, semiconductors, noble gas applications, boron in electronics'},
+                {icon:'🧬',title:'Organic Chemistry - Basic Principles',desc:'Nomenclature, isomerism, GOC, reaction mechanisms',blend:'💊 Tech: Pharmaceutical chemistry, drug synthesis, organic semiconductors'},
+                {icon:'⛽',title:'Hydrocarbons',desc:'Alkanes, alkenes, alkynes, aromatic compounds',blend:'🔋 Tech: Fuel chemistry, polymer synthesis, petrochemicals'},
+                {icon:'🌍',title:'Environmental Chemistry',desc:'Pollution, greenhouse effect, ozone depletion',blend:'🌱 Tech: Climate modeling, environmental monitoring, green chemistry'}
+            ],
+            chemistry12: [
+                {icon:'💎',title:'Solid State',desc:'Crystal lattice, unit cells, packing, defects',blend:'💻 Tech: Semiconductor materials, crystal growth, nanomaterials'},
+                {icon:'💧',title:'Solutions',desc:'Concentration, colligative properties, Raoult law',blend:'🧪 Tech: Pharmaceutical formulations, chemical engineering, separation'},
+                {icon:'🔋',title:'Electrochemistry',desc:'Electrochemical cells, batteries, corrosion, electrolysis',blend:'🔋 Tech: Battery technology, electroplating, sensors, fuel cells'},
+                {icon:'⏱️',title:'Chemical Kinetics',desc:'Rate of reaction, order, Arrhenius equation, catalysis',blend:'🏭 Tech: Reaction optimization, catalyst design, process control'},
+                {icon:'🧼',title:'Surface Chemistry',desc:'Adsorption, colloids, emulsions, catalysis',blend:'🧪 Tech: Nanotechnology, drug delivery systems, catalytic converters'},
+                {icon:'⚒️',title:'General Principles & Processes of Isolation',desc:'Metallurgy, extraction of metals, refining',blend:'🏭 Tech: Metal extraction, recycling technology, ore processing'},
+                {icon:'🎨',title:'P-Block Elements',desc:'Group 15-18 chemistry, compounds, properties',blend:'💡 Tech: Semiconductor doping, LED materials, fertilizers'},
+                {icon:'🌈',title:'D & F Block Elements',desc:'Transition metals, lanthanides, actinides, complexes',blend:'🧲 Tech: Magnetic materials, catalysts, pigments, alloys'},
+                {icon:'🎭',title:'Coordination Compounds',desc:'Complexes, nomenclature, CFT, VBT, isomerism',blend:'💊 Tech: Chemotherapy drugs, catalysts, analytical chemistry'},
+                {icon:'🧪',title:'Haloalkanes & Haloarenes',desc:'Preparation, reactions, uses, environmental effects',blend:'🧯 Tech: Refrigerants, solvents, pharmaceuticals, polymers'},
+                {icon:'🍷',title:'Alcohols, Phenols & Ethers',desc:'Preparation, reactions, properties, uses',blend:'🏭 Tech: Industrial solvents, biofuels, antiseptics, perfumes'},
+                {icon:'🧬',title:'Aldehydes, Ketones & Carboxylic Acids',desc:'Carbonyl chemistry, reactions, derivatives',blend:'🍬 Tech: Food chemistry, flavors, preservatives, polymers'},
+                {icon:'💊',title:'Amines',desc:'Basicity, reactions, diazonium salts, uses',blend:'💉 Tech: Drug synthesis, dyes, pharmaceuticals, polymers'},
+                {icon:'🍞',title:'Biomolecules',desc:'Carbohydrates, proteins, nucleic acids, vitamins',blend:'🧬 Tech: Biotechnology, genetic engineering, drug design'},
+                {icon:'🧵',title:'Polymers',desc:'Addition polymers, condensation polymers, properties',blend:'🏭 Tech: Plastics industry, material science, biodegradable polymers'},
+                {icon:'💊',title:'Chemistry in Everyday Life',desc:'Drugs, detergents, food chemistry, chemicals',blend:'🏥 Tech: Pharmaceutical industry, consumer products, food tech'}
+            ],
+            maths11: [
+                {icon:'📦',title:'Sets',desc:'Set theory, operations, Venn diagrams, relations',blend:'💻 Tech: Database theory, data structures, set operations in programming'},
+                {icon:'🔗',title:'Relations & Functions',desc:'Types of relations, functions, domain, range',blend:'🤖 Tech: Functional programming, algorithm design, mapping functions'},
+                {icon:'📐',title:'Trigonometric Functions',desc:'Ratios, identities, equations, graphs',blend:'🎮 Tech: Game rotations, wave analysis, signal processing, graphics'},
+                {icon:'🔢',title:'Principle of Mathematical Induction',desc:'Proof by induction, applications',blend:'💻 Tech: Algorithm correctness proofs, recursive algorithms'},
+                {icon:'ℂ',title:'Complex Numbers',desc:'Operations, Argand plane, polar form, De Moivre',blend:'📡 Tech: Signal processing, AC circuit analysis, quantum mechanics'},
+                {icon:'📊',title:'Linear Inequalities',desc:'Graphing inequalities, solving systems',blend:'📈 Tech: Linear programming, optimization, constraint satisfaction'},
+                {icon:'🎲',title:'Permutations & Combinations',desc:'Counting principles, arrangements, selections',blend:'🔐 Tech: Cryptography, probability in ML, combinatorial optimization'},
+                {icon:'🎯',title:'Binomial Theorem',desc:'Expansion, binomial coefficients, applications',blend:'📊 Tech: Probability distributions, statistics, approximations'},
+                {icon:'∞',title:'Sequences & Series',desc:'AP, GP, sum to infinity, special series',blend:'💰 Tech: Compound interest, algorithm analysis, convergence'},
+                {icon:'📏',title:'Straight Lines',desc:'Slope, equations, distance, angle between lines',blend:'🎮 Tech: Computer graphics, line rendering, collision detection'},
+                {icon:'🌙',title:'Conic Sections',desc:'Parabola, ellipse, hyperbola, equations',blend:'📡 Tech: Satellite dishes, telescope mirrors, antenna design'},
+                {icon:'📦',title:'Introduction to 3D Geometry',desc:'Direction cosines, direction ratios, distance',blend:'🎮 Tech: 3D game engines, CAD software, spatial calculations'},
+                {icon:'∞',title:'Limits & Derivatives',desc:'Limits, continuity, differentiation, rules',blend:'🤖 Tech: Optimization algorithms, ML gradient descent, rate of change'},
+                {icon:'🧠',title:'Mathematical Reasoning',desc:'Statements, logical operations, quantifiers',blend:'💻 Tech: Programming logic, AI reasoning, proof systems'},
+                {icon:'📊',title:'Statistics',desc:'Mean, median, mode, variance, standard deviation',blend:'📈 Tech: Data science, analytics, ML, business intelligence'},
+                {icon:'🎲',title:'Probability',desc:'Events, conditional probability, Bayes theorem',blend:'🎲 Tech: ML predictions, risk analysis, decision making'}
+            ],
+            maths12: [
+                {icon:'🔗',title:'Relations & Functions',desc:'Types, composition, inverse, binary operations',blend:'💻 Tech: Database relations, function composition, API design'},
+                {icon:'📐',title:'Inverse Trigonometric Functions',desc:'Inverse functions, properties, graphs',blend:'🎮 Tech: Game physics, angle calculations, inverse kinematics'},
+                {icon:'[A]',title:'Matrices',desc:'Operations, transpose, inverse, determinants',blend:'🖼️ Tech: Image processing, transformations, ML (neural networks)'},
+                {icon:'|A|',title:'Determinants',desc:'Properties, cofactors, applications, Cramer rule',blend:'🎮 Tech: 3D transformations, solving linear systems, graphics'},
+                {icon:'dy/dx',title:'Continuity & Differentiability',desc:'Limits, derivatives, chain rule, implicit differentiation',blend:'🤖 Tech: Neural networks, gradient descent, optimization'},
+                {icon:'📈',title:'Applications of Derivatives',desc:'Maxima, minima, rate of change, optimization',blend:'💹 Tech: Cost optimization, profit maximization, ML training'},
+                {icon:'∫',title:'Integrals',desc:'Integration techniques, definite integrals, properties',blend:'📊 Tech: Area calculation, probability, physics simulations'},
+                {icon:'📊',title:'Applications of Integrals',desc:'Area under curves, volume of solids',blend:'🎮 Tech: Game physics, 3D modeling, computational geometry'},
+                {icon:'dy/dx',title:'Differential Equations',desc:'First order, linear, applications, modeling',blend:'🌊 Tech: Modeling dynamic systems, physics simulations, population models'},
+                {icon:'→',title:'Vector Algebra',desc:'Operations, dot product, cross product, applications',blend:'🎮 Tech: Game physics, 3D graphics, robotics, force calculations'},
+                {icon:'📦',title:'Three Dimensional Geometry',desc:'Lines, planes, angles, distance formulas',blend:'🎮 Tech: 3D game engines, CAD, computer graphics, spatial analysis'},
+                {icon:'📈',title:'Linear Programming',desc:'Optimization, graphical method, simplex',blend:'💼 Tech: Resource optimization, operations research, supply chain'},
+                {icon:'🎲',title:'Probability',desc:'Conditional probability, Bayes, distributions',blend:'🤖 Tech: ML predictions, AI decision making, risk assessment'}
+            ]
         };
         
-        function updateXPBar() {
-            const percentage = (userData.xp / userData.xpMax) * 100;
-            document.getElementById('xp-fill').style.width = percentage + '%';
-            document.getElementById('user-level').textContent = userData.level;
-            document.getElementById('user-xp').textContent = userData.xp;
-            document.getElementById('user-xp-max').textContent = userData.xpMax;
-        }
-        
-        function addXP(amount) {
-            userData.xp += amount;
-            if (userData.xp >= userData.xpMax) {
-                userData.level++;
-                userData.xp = userData.xp - userData.xpMax;
-                userData.xpMax = Math.floor(userData.xpMax * 1.5);
-                alert(`🎉 Level Up! You're now Level ${userData.level}!`);
-            }
-            saveUserData();
-            updateXPBar();
-        }
-        
-        function saveUserData() {
-            localStorage.setItem('userData', JSON.stringify(userData));
-        }
-        
-        function updateDashboard() {
-            document.getElementById('streak-days').textContent = userData.streak;
-            document.getElementById('study-hours').textContent = userData.studyHours;
-            document.getElementById('chapters-completed').textContent = userData.chaptersCompleted;
-            document.getElementById('cards-mastered').textContent = userData.cardsMastered;
-        }
-        
-        // Flashcard Functions
-        function flipCard() {
-            document.getElementById('flashcard').classList.toggle('flipped');
-        }
-        
-        function reviewFlashcards() {
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-page="flashcards"]').classList.add('active');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('flashcards').classList.add('active');
-        }
-        
-        function openPlanner() {
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('[data-page="planner"]').classList.add('active');
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('planner').classList.add('active');
-        }
-        
-        // Focus Mode
-        let focusTimer = null;
-        let focusTimeLeft = 25 * 60;
-        
-        function startFocusMode() {
-            document.getElementById('focus-overlay').classList.add('active');
-            startFocusTimer();
-        }
-        
-        function exitFocusMode() {
-            document.getElementById('focus-overlay').classList.remove('active');
-            if (focusTimer) {
-                clearInterval(focusTimer);
-                focusTimer = null;
-            }
-        }
-        
-        function startFocusTimer() {
-            focusTimer = setInterval(() => {
-                focusTimeLeft--;
-                const mins = Math.floor(focusTimeLeft / 60);
-                const secs = focusTimeLeft % 60;
-                document.getElementById('focus-timer-display').textContent = 
-                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        // Load all chapters
+        function loadChapters() {
+            Object.keys(chaptersDatabase).forEach(subject => {
+                const grid = document.getElementById(subject + '-grid');
+                if (!grid) return;
                 
-                if (focusTimeLeft <= 0) {
-                    clearInterval(focusTimer);
-                    focusTimer = null;
-                    alert('🎉 Focus session complete! Great work!');
-                    addXP(50);
-                    userData.studyHours += 0.42; // 25 minutes
-                    saveUserData();
-                    updateDashboard();
-                    exitFocusMode();
-                    focusTimeLeft = 25 * 60;
-                }
-            }, 1000);
+                grid.innerHTML = '';
+                chaptersDatabase[subject].forEach(chapter => {
+                    const card = document.createElement('div');
+                    card.className = 'chapter-card';
+                    card.innerHTML = `
+                        <div class="chapter-icon">${chapter.icon}</div>
+                        <div class="chapter-title">${chapter.title}</div>
+                        <div class="chapter-desc">${chapter.desc}</div>
+                        <div class="chapter-blend">${chapter.blend}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+            });
         }
         
-        function setFocusTime(minutes) {
-            focusTimeLeft = minutes * 60;
-            const mins = Math.floor(focusTimeLeft / 60);
-            const secs = focusTimeLeft % 60;
-            document.getElementById('focus-timer-display').textContent = 
-                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        // Music Player
+        let playlist = JSON.parse(localStorage.getItem('playlist')) || [];
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        let isShuffle = false;
+        let isRepeat = false;
+        const audioPlayer = document.getElementById('audio-player');
+        
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const files = e.target.files;
+            for (let file of files) {
+                if (file.type.startsWith('audio/')) {
+                    const url = URL.createObjectURL(file);
+                    playlist.push({
+                        title: file.name.replace(/\.[^/.]+$/, ""),
+                        artist: 'Local File',
+                        url: url
+                    });
+                }
+            }
+            savePlaylist();
+            loadSongList();
+            alert(`Added ${files.length} song(s)!`);
+        });
+        
+        function addSongByLink() {
+            const title = prompt('Song Title (e.g., Pal Pal, Paaro, Starboy):');
+            if (!title) return;
+            const artist = prompt('Artist Name:');
+            if (!artist) return;
+            const url = prompt('Direct MP3 Link (Google Drive/Dropbox):');
+            if (!url) return;
+            
+            playlist.push({ title, artist, url });
+            savePlaylist();
+            loadSongList();
+            alert('Song added!');
         }
+        
+        function savePlaylist() {
+            localStorage.setItem('playlist', JSON.stringify(playlist));
+        }
+        
+        function loadSongList() {
+            const songList = document.getElementById('song-list');
+            if (playlist.length === 0) {
+                songList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem;">No songs yet. Add your favorites like Pal Pal, Paaro, Starboy, Believer!</p>';
+                return;
+            }
+            
+            songList.innerHTML = '';
+            playlist.forEach((song, index) => {
+                const songItem = document.createElement('div');
+                songItem.className = 'song-item';
+                if (index === currentSongIndex && isPlaying) songItem.classList.add('playing');
+                songItem.onclick = () => playSong(index);
+                songItem.innerHTML = `
+                    <div class="song-number">${index + 1}</div>
+                    <div class="song-details">
+                        <div class="song-item-title">${song.title}</div>
+                        <div class="song-item-artist">${song.artist}</div>
+                    </div>
+                    <button onclick="deleteSong(event, ${index})" style="background: rgba(255, 68, 68, 0.2); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; color: white;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                songList.appendChild(songItem);
+            });
+        }
+        
+        function deleteSong(event, index) {
+            event.stopPropagation();
+            if (confirm('Delete this song?')) {
+                playlist.splice(index, 1);
+                savePlaylist();
+                loadSongList();
+            }
+        }
+        
+        function playSong(index) {
+            if (playlist.length === 0) return;
+            currentSongIndex = index;
+            const song = playlist[index];
+            
+            document.getElementById('current-song-title').textContent = song.title;
+            document.getElementById('current-song-artist').textContent = song.artist;
+            
+            audioPlayer.src = song.url;
+            audioPlayer.play();
+            isPlaying = true;
+            document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
+            
+            loadSongList();
+        }
+        
+        function togglePlay() {
+            if (playlist.length === 0) {
+                alert('Please add songs first!');
+                return;
+            }
+            
+            if (isPlaying) {
+                audioPlayer.pause();
+                document.getElementById('play-btn').innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                if (!audioPlayer.src) {
+                    playSong(0);
+                } else {
+                    audioPlayer.play();
+                    document.getElementById('play-btn').innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            }
+            isPlaying = !isPlaying;
+        }
+        
+        function nextSong() {
+            if (playlist.length === 0) return;
+            if (isShuffle) {
+                currentSongIndex = Math.floor(Math.random() * playlist.length);
+            } else {
+                currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            }
+            playSong(currentSongIndex);
+        }
+        
+        function previousSong() {
+            if (playlist.length === 0) return;
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+            playSong(currentSongIndex);
+        }
+        
+        function toggleShuffle() {
+            isShuffle = !isShuffle;
+            document.getElementById('shuffle-btn').classList.toggle('active', isShuffle);
+        }
+        
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            document.getElementById('repeat-btn').classList.toggle('active', isRepeat);
+        }
+        
+        function changeVolume(value) {
+            audioPlayer.volume = value / 100;
+        }
+        
+        function seek(event) {
+            const progressBar = event.currentTarget;
+            const clickX = event.offsetX;
+            const width = progressBar.offsetWidth;
+            const duration = audioPlayer.duration;
+            audioPlayer.currentTime = (clickX / width) * duration;
+        }
+        
+        audioPlayer.addEventListener('timeupdate', () => {
+            const current = audioPlayer.currentTime;
+            const duration = audioPlayer.duration;
+            const progress = (current / duration) * 100;
+            
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('current-time').textContent = formatTime(current);
+            document.getElementById('duration').textContent = formatTime(duration);
+        });
+        
+        audioPlayer.addEventListener('ended', () => {
+            if (isRepeat) {
+                audioPlayer.currentTime = 0;
+                audioPlayer.play();
+            } else {
+                nextSong();
+            }
+        });
+        
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Theme Changer
+        function changeTheme(theme) {
+            const bg = document.getElementById('animated-bg');
+            bg.className = 'animated-bg bg-' + theme;
+            
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            event.target.closest('.theme-option').classList.add('active');
+            
+            localStorage.setItem('selectedTheme', theme);
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('selectedTheme') || 'midnight';
+        document.getElementById('animated-bg').className = 'animated-bg bg-' + savedTheme;
         
         // Navigation
         document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1316,14 +1211,14 @@
         });
         
         // Initialize
-        updateXPBar();
-        updateDashboard();
+        loadChapters();
+        loadSongList();
         
-        // Update due cards badge
-        document.getElementById('due-cards-badge').textContent = '8';
-        
-        console.log('✅ Ultimate Perfectionist - Complete Learning System Loaded!');
-        console.log('🎯 Features: Flashcards, Analytics, Achievements, Planner, Cornell Notes, Feynman, Formulas, Focus Mode');
+        console.log('✅ Ultimate Perfectionist - Everything Working!');
+        console.log('📚 88 Chapters Loaded');
+        console.log('🎵 Music Player Ready');
+        console.log('🎨 12 Themes Available');
+        console.log('🧠 Deep Learning Complete');
     </script>
 </body>
 </html>
