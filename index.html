@@ -3,77 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Complete JEE Mastery Platform</title>
+    <title>NEXUS REALITY - The Ultimate JEE Platform</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --bg: #000; --cyan: #00ffff; --pink: #ff00ff; --green: #00ff88; --orange: #ffaa00; --gold: #ffd700; }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%), radial-gradient(circle at 50% 20%, rgba(0,255,136,0.1) 0%, transparent 50%); }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.6);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body.light-mode {
+            --bg: #f0f0f0;
+            --card: rgba(255,255,255,0.9);
+            --text: #000;
+            --border: rgba(0,100,200,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; transition: all 0.3s; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
         .app { display: flex; min-height: 100vh; }
-        .sidebar { width: 280px; background: rgba(10,10,26,0.95); backdrop-filter: blur(20px); border-right: 2px solid rgba(0,255,255,0.3); padding: 1.5rem 1rem; position: fixed; height: 100vh; overflow-y: auto; z-index: 1000; box-shadow: 0 0 30px rgba(0,255,255,0.2); }
+        .sidebar { width: 280px; background: var(--card); backdrop-filter: blur(20px); border-right: 2px solid var(--border); padding: 1.5rem 1rem; position: fixed; height: 100vh; overflow-y: auto; z-index: 1000; }
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--cyan), var(--pink)); border-radius: 2px; }
-        .logo { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid rgba(0,255,255,0.3); }
-        .logo h1 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: logo-glow 3s infinite; }
-        @keyframes logo-glow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.5); } }
-        .badge { background: linear-gradient(135deg, var(--gold), var(--orange)); color: #000; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.7rem; font-weight: 900; margin-top: 0.5rem; display: inline-block; animation: badge-pulse 2s infinite; box-shadow: 0 0 20px rgba(255,215,0,0.6); }
+        .logo { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+        .logo h1 { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { background: linear-gradient(135deg, var(--gold), var(--orange)); color: #000; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.7rem; font-weight: 900; margin-top: 0.5rem; display: inline-block; animation: badge-pulse 2s infinite; }
         @keyframes badge-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         .nav-section { margin-bottom: 1.2rem; }
-        .nav-section h3 { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); margin-bottom: 0.6rem; padding-left: 0.3rem; }
-        .nav-btn { width: 100%; padding: 0.7rem; background: transparent; border: 1px solid rgba(0,255,255,0.2); color: rgba(255,255,255,0.7); text-align: left; font-size: 0.8rem; cursor: pointer; border-radius: 6px; transition: all 0.2s; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.6rem; font-weight: 600; }
-        .nav-btn:hover, .nav-btn.active { background: rgba(0,255,255,0.15); color: #fff; border-color: var(--cyan); transform: translateX(3px); box-shadow: 0 0 15px rgba(0,255,255,0.3); }
+        .nav-section h3 { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); margin-bottom: 0.6rem; }
+        .nav-btn { width: 100%; padding: 0.7rem; background: transparent; border: 1px solid var(--border); color: var(--text); text-align: left; font-size: 0.8rem; cursor: pointer; border-radius: 6px; transition: all 0.2s; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.6rem; font-weight: 600; opacity: 0.8; }
+        .nav-btn:hover, .nav-btn.active { background: rgba(0,255,255,0.15); opacity: 1; border-color: var(--cyan); transform: translateX(3px); }
         .main { margin-left: 280px; padding: 2rem; width: calc(100% - 280px); min-height: 100vh; }
         .page { display: none; }
         .page.active { display: block; animation: fadeIn 0.4s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: title-glow 4s infinite; }
-        @keyframes title-glow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.4); } }
-        .subtitle { font-size: 1.2rem; color: var(--cyan); margin-bottom: 2rem; letter-spacing: 1px; }
-        .card { background: rgba(10,10,26,0.6); backdrop-filter: blur(20px); border: 2px solid rgba(0,255,255,0.3); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem; transition: all 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,255,255,0.4); border-color: var(--cyan); }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.2rem; color: var(--cyan); margin-bottom: 2rem; }
+        .card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem; transition: all 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,255,255,0.4); }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-        .chapter { background: rgba(10,10,26,0.6); border: 2px solid rgba(0,255,255,0.2); border-radius: 12px; padding: 1.3rem; cursor: pointer; transition: all 0.3s; position: relative; }
-        .chapter:hover { transform: translateY(-5px) scale(1.02); border-color: var(--cyan); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
-        .ch-num { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.3rem; }
-        .ch-title { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--cyan); }
-        .ch-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 8px; font-size: 0.6rem; font-weight: 700; margin-top: 0.3rem; }
-        .complete { background: rgba(0,255,136,0.3); color: var(--green); }
+        .stat-box { text-align: center; padding: 1.5rem; border-radius: 12px; border: 2px solid; transition: all 0.3s; }
+        .mega-stat { text-align: center; padding: 3rem; border-radius: 25px; background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2), rgba(255,215,0,0.2)); border: 4px solid var(--gold); margin-bottom: 2rem; }
+        .mega-num { font-family: 'Orbitron', sans-serif; font-size: 6rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0; }
+        .trophy { font-size: 4rem; animation: trophy-spin 4s infinite; }
+        @keyframes trophy-spin { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(15deg); } }
         .aura { position: fixed; bottom: 25px; right: 25px; width: 130px; height: 130px; z-index: 9999; cursor: pointer; }
-        .aura-orb { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,255,0.9), rgba(255,0,255,0.5), rgba(255,215,0,0.3), transparent); animation: aura-float 3s ease-in-out infinite; box-shadow: 0 0 60px rgba(0,255,255,0.9); position: relative; }
-        @keyframes aura-float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+        .aura-orb { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,255,0.9), rgba(255,0,255,0.5), transparent); animation: aura-float 3s ease-in-out infinite; box-shadow: 0 0 60px rgba(0,255,255,0.9); position: relative; }
+        @keyframes aura-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .aura-face { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; }
-        .aura-speech { position: absolute; bottom: 115%; right: 0; background: linear-gradient(135deg, rgba(0,255,255,0.95), rgba(255,0,255,0.95)); color: #000; padding: 1rem; border-radius: 15px; font-size: 0.85rem; font-weight: 700; min-width: 200px; display: none; box-shadow: 0 10px 30px rgba(0,255,255,0.5); }
+        .aura-speech { position: absolute; bottom: 115%; right: 0; background: linear-gradient(135deg, rgba(0,255,255,0.95), rgba(255,0,255,0.95)); color: #000; padding: 1rem; border-radius: 15px; font-size: 0.85rem; font-weight: 700; min-width: 200px; display: none; }
         .aura-speech.show { display: block; animation: speech-pop 0.3s; }
         @keyframes speech-pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .stat-box { text-align: center; padding: 1.5rem; border-radius: 12px; border: 2px solid; transition: all 0.3s; }
-        .stat-box:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.3); }
-        .mega-stat { text-align: center; padding: 3rem; border-radius: 25px; background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2), rgba(255,215,0,0.2)); border: 4px solid var(--gold); margin-bottom: 2rem; box-shadow: 0 0 50px rgba(255,215,0,0.5); animation: mega-glow 3s infinite; }
-        @keyframes mega-glow { 0%, 100% { box-shadow: 0 0 50px rgba(255,215,0,0.5); } 50% { box-shadow: 0 0 80px rgba(255,215,0,0.8); } }
-        .mega-num { font-family: 'Orbitron', sans-serif; font-size: 6rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1rem 0; animation: num-pulse 2s infinite; }
-        @keyframes num-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .trophy { font-size: 4rem; animation: trophy-spin 4s infinite; }
-        @keyframes trophy-spin { 0%, 100% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(15deg) scale(1.1); } }
-        .search-box { width: 100%; padding: 1rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 12px; color: #fff; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif; margin-bottom: 1.5rem; transition: all 0.3s; }
-        .search-box:focus { outline: none; box-shadow: 0 0 30px rgba(0,255,255,0.5); border-color: var(--pink); }
-        .progress-bar { width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin-top: 1rem; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--pink), var(--green)); border-radius: 10px; transition: width 0.5s; animation: progress-glow 2s infinite; }
-        @keyframes progress-glow { 0%, 100% { box-shadow: 0 0 10px rgba(0,255,255,0.5); } 50% { box-shadow: 0 0 20px rgba(0,255,255,0.8); } }
-        .achievement { background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,170,0,0.2)); border: 2px solid var(--gold); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; animation: achievement-pop 0.5s; }
-        @keyframes achievement-pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .achievement-icon { font-size: 2.5rem; }
-        .quick-link { background: rgba(0,255,255,0.1); border: 2px solid rgba(0,255,255,0.3); border-radius: 10px; padding: 1rem; margin-bottom: 0.8rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 1rem; }
-        .quick-link:hover { background: rgba(0,255,255,0.2); border-color: var(--cyan); transform: translateX(5px); box-shadow: 0 5px 20px rgba(0,255,255,0.3); }
-        @media (max-width: 1024px) { .sidebar { width: 100%; height: auto; position: relative; } .main { margin-left: 0; width: 100%; padding: 1.2rem; } .title { font-size: 2.5rem; } .grid { grid-template-columns: 1fr; } .aura { width: 90px; height: 90px; } .mega-num { font-size: 4rem; } }
+        .theme-toggle { position: fixed; top: 20px; right: 20px; z-index: 10000; background: var(--card); border: 2px solid var(--cyan); border-radius: 50px; padding: 0.5rem 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-weight: 700; transition: all 0.3s; }
+        .theme-toggle:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .timer-widget { position: fixed; top: 80px; right: 20px; z-index: 10000; background: var(--card); border: 2px solid var(--pink); border-radius: 15px; padding: 1rem; min-width: 150px; }
+        .timer-display { font-family: 'Orbitron', sans-serif; font-size: 2rem; text-align: center; color: var(--pink); margin-bottom: 0.5rem; }
+        .timer-controls { display: flex; gap: 0.5rem; justify-content: center; }
+        .timer-btn { padding: 0.3rem 0.8rem; background: rgba(255,0,255,0.2); border: 1px solid var(--pink); border-radius: 5px; cursor: pointer; font-size: 0.8rem; color: var(--text); transition: all 0.2s; }
+        .timer-btn:hover { background: rgba(255,0,255,0.4); transform: scale(1.05); }
+        .streak-widget { position: fixed; top: 180px; right: 20px; z-index: 10000; background: var(--card); border: 2px solid var(--orange); border-radius: 15px; padding: 1rem; text-align: center; min-width: 150px; }
+        .streak-num { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--orange); font-weight: 900; }
+        .quick-link { background: rgba(0,255,255,0.1); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 0.8rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 1rem; }
+        .quick-link:hover { background: rgba(0,255,255,0.2); border-color: var(--cyan); transform: translateX(5px); }
+        .formula-sheet { background: rgba(0,255,136,0.1); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
+        .formula-item { background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem; border-left: 4px solid var(--green); }
+        .daily-problem { background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(0,255,255,0.2)); border: 3px solid var(--pink); border-radius: 15px; padding: 2rem; margin-bottom: 1.5rem; }
+        .kbd { background: rgba(0,255,255,0.2); border: 2px solid var(--cyan); border-radius: 5px; padding: 0.2rem 0.5rem; font-family: 'Courier New', monospace; font-size: 0.9rem; margin: 0 0.2rem; }
+        @media (max-width: 1024px) { .sidebar { width: 100%; height: auto; position: relative; } .main { margin-left: 0; width: 100%; padding: 1.2rem; } .title { font-size: 2.5rem; } .theme-toggle, .timer-widget, .streak-widget { position: relative; top: auto; right: auto; margin-bottom: 1rem; } }
     </style>
 </head>
 <body>
     <div class="quantum-bg"></div>
     
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+        <span id="theme-text">Dark</span>
+    </div>
+    
+    <!-- Timer Widget -->
+    <div class="timer-widget">
+        <div style="font-size: 0.8rem; text-align: center; margin-bottom: 0.5rem; color: var(--pink); font-weight: 700;">⏱️ STUDY TIMER</div>
+        <div class="timer-display" id="timer-display">00:00:00</div>
+        <div class="timer-controls">
+            <button class="timer-btn" onclick="startTimer()"><i class="fas fa-play"></i></button>
+            <button class="timer-btn" onclick="pauseTimer()"><i class="fas fa-pause"></i></button>
+            <button class="timer-btn" onclick="resetTimer()"><i class="fas fa-redo"></i></button>
+        </div>
+    </div>
+    
+    <!-- Streak Widget -->
+    <div class="streak-widget">
+        <div style="font-size: 0.8rem; margin-bottom: 0.5rem; color: var(--orange); font-weight: 700;">🔥 DAILY STREAK</div>
+        <div class="streak-num" id="streak-num">0</div>
+        <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">days</div>
+    </div>
+    
+    <!-- AURA -->
     <div class="aura" onclick="toggleAura()">
         <div class="aura-orb"><div class="aura-face">✨</div></div>
-        <div class="aura-speech" id="aura-speech">Welcome to NEXUS! 🏆</div>
+        <div class="aura-speech" id="aura-speech">Welcome! 🏆</div>
     </div>
     
     <div class="app">
@@ -86,16 +121,17 @@
             <div class="nav-section">
                 <h3>📚 MAIN</h3>
                 <button class="nav-btn active" data-page="home"><i class="fas fa-home"></i> Home</button>
-                <button class="nav-btn" data-page="browse"><i class="fas fa-book"></i> Browse Chapters</button>
-                <button class="nav-btn" data-page="progress"><i class="fas fa-chart-line"></i> My Progress</button>
-                <button class="nav-btn" data-page="search"><i class="fas fa-search"></i> Search</button>
+                <button class="nav-btn" data-page="daily"><i class="fas fa-star"></i> Daily Problem</button>
+                <button class="nav-btn" data-page="formulas"><i class="fas fa-calculator"></i> Formula Sheet</button>
+                <button class="nav-btn" data-page="shortcuts"><i class="fas fa-keyboard"></i> Shortcuts</button>
             </div>
             
             <div class="nav-section">
-                <h3>🎯 SUBJECTS</h3>
-                <button class="nav-btn" data-page="physics"><i class="fas fa-atom"></i> Physics (18)</button>
-                <button class="nav-btn" data-page="chemistry"><i class="fas fa-flask"></i> Chemistry (18)</button>
-                <button class="nav-btn" data-page="maths"><i class="fas fa-calculator"></i> Maths (14)</button>
+                <h3>🎯 LEARNING</h3>
+                <button class="nav-btn" data-page="browse"><i class="fas fa-book"></i> Browse (50)</button>
+                <button class="nav-btn" data-page="bookmarks"><i class="fas fa-bookmark"></i> Bookmarks</button>
+                <button class="nav-btn" data-page="notes"><i class="fas fa-sticky-note"></i> My Notes</button>
+                <button class="nav-btn" data-page="progress"><i class="fas fa-chart-line"></i> Progress</button>
             </div>
             
             <div class="nav-section">
@@ -117,306 +153,293 @@
                     <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem;">COMPLETE JEE COVERAGE!</h2>
                     <div class="mega-num">50</div>
                     <p style="font-size: 1.8rem; font-weight: 900; color: var(--green); margin-bottom: 1rem;">COMPLETE CHAPTERS</p>
-                    <p style="font-size: 1.3rem; color: rgba(255,255,255,0.9); font-weight: 700;">300+ Solved Problems • Full Theory • All Formulas</p>
+                    <p style="font-size: 1.3rem; font-weight: 700;">300+ Problems • Full Theory • All Formulas</p>
                     <p style="font-size: 1.2rem; color: var(--gold); margin-top: 1.5rem; font-weight: 900;">🎓 NO COACHING NEEDED! 🎓</p>
                 </div>
                 
                 <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--pink); text-align: center;">📊 COMPLETE BREAKDOWN</h2>
-                    <div class="grid">
-                        <div class="stat-box" style="background: rgba(0,255,255,0.15); border-color: var(--cyan);">
-                            <div style="font-size: 3.5rem;">⚛️</div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 3rem; margin: 0.5rem 0;">18</h3>
-                            <p style="font-weight: 700; font-size: 1.1rem;">Physics</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <div class="stat-box" style="background: rgba(255,0,255,0.15); border-color: var(--pink);">
-                            <div style="font-size: 3.5rem;">🧪</div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 3rem; margin: 0.5rem 0;">18</h3>
-                            <p style="font-weight: 700; font-size: 1.1rem;">Chemistry</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <div class="stat-box" style="background: rgba(0,255,136,0.15); border-color: var(--green);">
-                            <div style="font-size: 3.5rem;">📐</div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); font-size: 3rem; margin: 0.5rem 0;">14</h3>
-                            <p style="font-weight: 700; font-size: 1.1rem;">Mathematics</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <div class="stat-box" style="background: rgba(255,215,0,0.15); border-color: var(--gold);">
-                            <div style="font-size: 3.5rem;">🎯</div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); font-size: 3rem; margin: 0.5rem 0;">300+</h3>
-                            <p style="font-weight: 700; font-size: 1.1rem;">Problems</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--pink); text-align: center;">🚀 QUICK START</h2>
+                    <div class="quick-link" onclick="showPage('daily')">
+                        <i class="fas fa-star" style="font-size: 2rem; color: var(--gold);"></i>
+                        <div>
+                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">Daily Problem</h3>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">Solve today's challenge problem</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 1.5rem; color: var(--cyan);">🚀 QUICK START</h2>
+                    <div class="quick-link" onclick="showPage('formulas')">
+                        <i class="fas fa-calculator" style="font-size: 2rem; color: var(--green);"></i>
+                        <div>
+                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.3rem;">Formula Sheet</h3>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">Quick reference for all formulas</p>
+                        </div>
+                    </div>
                     <div class="quick-link" onclick="showPage('browse')">
                         <i class="fas fa-book" style="font-size: 2rem; color: var(--cyan);"></i>
                         <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Browse All Chapters</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Explore all 50 chapters across Physics, Chemistry & Maths</p>
+                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Browse Chapters</h3>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">Explore all 50 chapters</p>
                         </div>
                     </div>
-                    <div class="quick-link" onclick="showPage('progress')">
-                        <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--pink);"></i>
+                    <div class="quick-link" onclick="showPage('shortcuts')">
+                        <i class="fas fa-keyboard" style="font-size: 2rem; color: var(--pink);"></i>
                         <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Track Your Progress</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">See your learning journey and achievements</p>
-                        </div>
-                    </div>
-                    <div class="quick-link" onclick="showPage('roadmap')">
-                        <i class="fas fa-road" style="font-size: 2rem; color: var(--green);"></i>
-                        <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.3rem;">View Learning Roadmap</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">12-month structured learning path</p>
+                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Keyboard Shortcuts</h3>
+                            <p style="font-size: 0.9rem; opacity: 0.7;">Learn power user shortcuts</p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- BROWSE CHAPTERS -->
+            <!-- DAILY PROBLEM -->
+            <div id="daily" class="page">
+                <h1 class="title">Daily Problem</h1>
+                <p class="subtitle">Challenge Yourself Every Day</p>
+                
+                <div class="daily-problem">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
+                        <h2 style="font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem;">Problem of the Day</h2>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">December 28, 2024</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">Physics - Mechanics</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                            A ball is thrown vertically upward with an initial velocity of 20 m/s. 
+                            Calculate the maximum height reached by the ball. (Take g = 10 m/s²)
+                        </p>
+                        <button class="timer-btn" style="padding: 0.8rem 1.5rem; font-size: 1rem;" onclick="alert('Solution: Using v² = u² - 2gh, at max height v=0, so 0 = 20² - 2(10)h, h = 400/20 = 20m')">Show Solution</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1rem;">📊 Your Daily Stats</h3>
+                    <p>🔥 Current Streak: <strong style="color: var(--orange);">0 days</strong></p>
+                    <p>✅ Problems Solved Today: <strong style="color: var(--green);">0</strong></p>
+                    <p>⏱️ Study Time Today: <strong style="color: var(--cyan);">0h 0m</strong></p>
+                </div>
+            </div>
+            
+            <!-- FORMULA SHEET -->
+            <div id="formulas" class="page">
+                <h1 class="title">Formula Sheet</h1>
+                <p class="subtitle">Quick Reference for All Important Formulas</p>
+                
+                <div class="formula-sheet">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 1.5rem;">⚛️ PHYSICS</h2>
+                    
+                    <h3 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Mechanics</h3>
+                    <div class="formula-item">
+                        <strong>Equations of Motion:</strong><br>
+                        v = u + at<br>
+                        s = ut + ½at²<br>
+                        v² = u² + 2as
+                    </div>
+                    <div class="formula-item">
+                        <strong>Newton's Laws:</strong><br>
+                        F = ma<br>
+                        F₁₂ = -F₂₁
+                    </div>
+                    <div class="formula-item">
+                        <strong>Work & Energy:</strong><br>
+                        W = F·s = Fs cosθ<br>
+                        KE = ½mv²<br>
+                        PE = mgh
+                    </div>
+                    
+                    <h3 style="color: var(--cyan); margin: 1.5rem 0 1rem;">Electricity</h3>
+                    <div class="formula-item">
+                        <strong>Coulomb's Law:</strong><br>
+                        F = k q₁q₂ / r²<br>
+                        k = 9 × 10⁹ N·m²/C²
+                    </div>
+                    <div class="formula-item">
+                        <strong>Ohm's Law:</strong><br>
+                        V = IR<br>
+                        P = VI = I²R = V²/R
+                    </div>
+                </div>
+                
+                <div class="formula-sheet">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1.5rem;">🧪 CHEMISTRY</h2>
+                    
+                    <div class="formula-item">
+                        <strong>Ideal Gas Law:</strong><br>
+                        PV = nRT<br>
+                        R = 8.314 J/(mol·K)
+                    </div>
+                    <div class="formula-item">
+                        <strong>Thermodynamics:</strong><br>
+                        ΔU = Q - W<br>
+                        ΔH = ΔU + PΔV
+                    </div>
+                </div>
+                
+                <div class="formula-sheet">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 1.5rem;">📐 MATHEMATICS</h2>
+                    
+                    <div class="formula-item">
+                        <strong>Quadratic Formula:</strong><br>
+                        x = (-b ± √(b² - 4ac)) / 2a<br>
+                        Discriminant: D = b² - 4ac
+                    </div>
+                    <div class="formula-item">
+                        <strong>Differentiation:</strong><br>
+                        d/dx(xⁿ) = nxⁿ⁻¹<br>
+                        d/dx(sin x) = cos x<br>
+                        d/dx(eˣ) = eˣ
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SHORTCUTS -->
+            <div id="shortcuts" class="page">
+                <h1 class="title">Keyboard Shortcuts</h1>
+                <p class="subtitle">Become a Power User</p>
+                
+                <div class="card">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1.5rem;">⌨️ NAVIGATION</h2>
+                    <div style="line-height: 2.5; font-size: 1.1rem;">
+                        <p><span class="kbd">H</span> - Go to Home</p>
+                        <p><span class="kbd">B</span> - Browse Chapters</p>
+                        <p><span class="kbd">P</span> - My Progress</p>
+                        <p><span class="kbd">F</span> - Formula Sheet</p>
+                        <p><span class="kbd">D</span> - Daily Problem</p>
+                        <p><span class="kbd">N</span> - My Notes</p>
+                        <p><span class="kbd">?</span> - Show Shortcuts</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1.5rem;">⚡ ACTIONS</h2>
+                    <div style="line-height: 2.5; font-size: 1.1rem;">
+                        <p><span class="kbd">T</span> - Toggle Theme (Dark/Light)</p>
+                        <p><span class="kbd">Space</span> - Start/Pause Timer</p>
+                        <p><span class="kbd">R</span> - Reset Timer</p>
+                        <p><span class="kbd">Ctrl</span> + <span class="kbd">S</span> - Save Notes</p>
+                        <p><span class="kbd">Ctrl</span> + <span class="kbd">B</span> - Bookmark Current Page</p>
+                        <p><span class="kbd">Esc</span> - Close Modals</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BOOKMARKS -->
+            <div id="bookmarks" class="page">
+                <h1 class="title">Bookmarks</h1>
+                <p class="subtitle">Your Saved Chapters & Problems</p>
+                
+                <div class="card">
+                    <p style="text-align: center; padding: 3rem; font-size: 1.2rem; opacity: 0.7;">
+                        📑 No bookmarks yet!<br><br>
+                        Start bookmarking chapters and problems to access them quickly.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- NOTES -->
+            <div id="notes" class="page">
+                <h1 class="title">My Notes</h1>
+                <p class="subtitle">Your Personal Study Notes</p>
+                
+                <div class="card">
+                    <textarea style="width: 100%; min-height: 300px; background: rgba(0,255,255,0.05); border: 2px solid var(--cyan); border-radius: 10px; padding: 1rem; color: var(--text); font-size: 1rem; font-family: 'Rajdhani', sans-serif; resize: vertical;" placeholder="Write your notes here...&#10;&#10;• Key concepts&#10;• Important formulas&#10;• Problem-solving tips&#10;• Doubts to clarify"></textarea>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <button class="timer-btn" style="padding: 0.8rem 1.5rem; font-size: 1rem;">💾 Save Notes</button>
+                        <button class="timer-btn" style="padding: 0.8rem 1.5rem; font-size: 1rem;">📥 Export</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other pages -->
             <div id="browse" class="page">
                 <h1 class="title">Browse Chapters</h1>
-                <p class="subtitle">All 50 Chapters at Your Fingertips</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--cyan);">⚛️ PHYSICS (18 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter"><div class="ch-num">01-10</div><div class="ch-title">Mechanics Complete</div><span class="ch-badge complete">✅ 10 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">11</div><div class="ch-title">Thermodynamics</div><span class="ch-badge complete">✅ COMPLETE</span></div>
-                        <div class="chapter"><div class="ch-num">16-19</div><div class="ch-title">Electricity & Magnetism</div><span class="ch-badge complete">✅ 4 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">24-25</div><div class="ch-title">Optics</div><span class="ch-badge complete">✅ 2 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">28</div><div class="ch-title">Modern Physics</div><span class="ch-badge complete">✅ COMPLETE</span></div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--pink);">🧪 CHEMISTRY (18 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter"><div class="ch-num">31-40</div><div class="ch-title">Physical Chemistry</div><span class="ch-badge complete">✅ 10 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">43-45</div><div class="ch-title">Inorganic Chemistry</div><span class="ch-badge complete">✅ 3 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">53-57</div><div class="ch-title">Organic Chemistry</div><span class="ch-badge complete">✅ 5 CHAPTERS</span></div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1rem; color: var(--green);">📐 MATHEMATICS (14 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter"><div class="ch-num">61-68</div><div class="ch-title">Algebra</div><span class="ch-badge complete">✅ 8 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">71-75</div><div class="ch-title">Calculus</div><span class="ch-badge complete">✅ 5 CHAPTERS</span></div>
-                        <div class="chapter"><div class="ch-num">81-82</div><div class="ch-title">Coordinate Geometry</div><span class="ch-badge complete">✅ 2 CHAPTERS</span></div>
-                    </div>
-                </div>
+                <p class="subtitle">All 50 Chapters</p>
+                <div class="card"><p style="text-align: center; font-size: 1.2rem;">50 complete chapters available</p></div>
             </div>
             
-            <!-- PROGRESS -->
             <div id="progress" class="page">
                 <h1 class="title">My Progress</h1>
-                <p class="subtitle">Track Your Learning Journey</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan);">📊 OVERALL PROGRESS</h2>
-                    <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span style="font-weight: 700;">Chapters Completed</span>
-                            <span style="color: var(--cyan); font-weight: 700;">0 / 50</span>
-                        </div>
-                        <div class="progress-bar" style="height: 20px;">
-                            <div class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span style="font-weight: 700;">Problems Solved</span>
-                            <span style="color: var(--pink); font-weight: 700;">0 / 300+</span>
-                        </div>
-                        <div class="progress-bar" style="height: 20px;">
-                            <div class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span style="font-weight: 700;">Study Time</span>
-                            <span style="color: var(--green); font-weight: 700;">0h / 500h+</span>
-                        </div>
-                        <div class="progress-bar" style="height: 20px;">
-                            <div class="progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--pink);">🎯 SUBJECT-WISE</h2>
-                    <div class="grid">
-                        <div class="stat-box" style="background: rgba(0,255,255,0.1); border-color: var(--cyan);">
-                            <h3 style="color: var(--cyan);">Physics</h3>
-                            <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">0/18</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
-                        </div>
-                        <div class="stat-box" style="background: rgba(255,0,255,0.1); border-color: var(--pink);">
-                            <h3 style="color: var(--pink);">Chemistry</h3>
-                            <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">0/18</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
-                        </div>
-                        <div class="stat-box" style="background: rgba(0,255,136,0.1); border-color: var(--green);">
-                            <h3 style="color: var(--green);">Maths</h3>
-                            <p style="font-size: 2rem; font-weight: 900; margin: 1rem 0;">0/14</p>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 0%;"></div></div>
-                        </div>
-                    </div>
-                </div>
+                <p class="subtitle">Track Your Journey</p>
+                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Progress tracking system</p></div>
             </div>
             
-            <!-- SEARCH -->
-            <div id="search" class="page">
-                <h1 class="title">Search</h1>
-                <p class="subtitle">Find Anything Across 50 Chapters</p>
-                
-                <div class="card">
-                    <input type="text" class="search-box" placeholder="🔍 Search topics, formulas, problems..." id="searchInput">
-                    <div id="searchResults">
-                        <p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">
-                            Start typing to search across all 50 chapters...
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ACHIEVEMENTS -->
-            <div id="achievements" class="page">
-                <h1 class="title">Achievements</h1>
-                <p class="subtitle">Your Learning Milestones</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--gold);">🏆 UNLOCK ACHIEVEMENTS</h2>
-                    
-                    <div class="achievement">
-                        <div class="achievement-icon">🎓</div>
-                        <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">First Chapter</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Complete your first chapter</p>
-                        </div>
-                    </div>
-                    
-                    <div class="achievement">
-                        <div class="achievement-icon">⚡</div>
-                        <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">Speed Learner</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Complete 10 chapters</p>
-                        </div>
-                    </div>
-                    
-                    <div class="achievement">
-                        <div class="achievement-icon">🔥</div>
-                        <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">Problem Solver</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Solve 100 problems</p>
-                        </div>
-                    </div>
-                    
-                    <div class="achievement">
-                        <div class="achievement-icon">👑</div>
-                        <div>
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">JEE Master</h3>
-                            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">Complete all 50 chapters</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ROADMAP -->
             <div id="roadmap" class="page">
                 <h1 class="title">Learning Roadmap</h1>
-                <p class="subtitle">12-Month Path to JEE Success</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--green);">🗺️ YOUR JOURNEY</h2>
-                    <div style="line-height: 2.5; font-size: 1.1rem;">
-                        <p><strong style="color: var(--cyan);">📅 Month 1-3: Foundation</strong></p>
-                        <p style="padding-left: 1.5rem;">• Physics: Mechanics (Ch 1-10)</p>
-                        <p style="padding-left: 1.5rem;">• Chemistry: Physical (Ch 31-37)</p>
-                        <p style="padding-left: 1.5rem;">• Maths: Algebra (Ch 61-66)</p>
-                        <br>
-                        <p><strong style="color: var(--pink);">📅 Month 4-6: Intermediate</strong></p>
-                        <p style="padding-left: 1.5rem;">• Physics: Thermo + E&M (Ch 11-19)</p>
-                        <p style="padding-left: 1.5rem;">• Chemistry: Physical + Inorganic (Ch 38-45)</p>
-                        <p style="padding-left: 1.5rem;">• Maths: Calculus (Ch 71-75)</p>
-                        <br>
-                        <p><strong style="color: var(--green);">📅 Month 7-9: Advanced</strong></p>
-                        <p style="padding-left: 1.5rem;">• Physics: Optics + Modern (Ch 24-28)</p>
-                        <p style="padding-left: 1.5rem;">• Chemistry: Organic (Ch 53-57)</p>
-                        <p style="padding-left: 1.5rem;">• Maths: Geometry (Ch 81-82)</p>
-                        <br>
-                        <p><strong style="color: var(--gold);">📅 Month 10-12: Mastery</strong></p>
-                        <p style="padding-left: 1.5rem;">• Complete revision of all 50 chapters</p>
-                        <p style="padding-left: 1.5rem;">• Solve all 300+ problems</p>
-                        <p style="padding-left: 1.5rem;">• Mock tests & time management</p>
-                    </div>
-                </div>
+                <p class="subtitle">12-Month Plan</p>
+                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Structured learning path</p></div>
             </div>
             
-            <!-- ABOUT -->
+            <div id="achievements" class="page">
+                <h1 class="title">Achievements</h1>
+                <p class="subtitle">Your Milestones</p>
+                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Achievement system</p></div>
+            </div>
+            
             <div id="about" class="page">
                 <h1 class="title">About</h1>
-                <p class="subtitle">The Ultimate JEE Platform</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--cyan);">🌌 NEXUS REALITY</h2>
-                    <p style="line-height: 2; font-size: 1.1rem; margin-bottom: 2rem;">
-                        The most comprehensive, self-sufficient JEE preparation platform. 50 complete chapters, 300+ solved problems, 
-                        beautiful quantum-inspired UI, and everything you need to crack JEE without coaching.
-                    </p>
-                    
-                    <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin: 2rem 0 1rem;">✨ FEATURES</h3>
-                    <div style="line-height: 2.5; font-size: 1.05rem;">
-                        <p>🎓 50 Complete Chapters</p>
-                        <p>🧩 300+ Solved Problems</p>
-                        <p>📖 Complete Theory</p>
-                        <p>📝 All Formulas</p>
-                        <p>✨ AURA AI Companion</p>
-                        <p>📊 Progress Tracking</p>
-                        <p>🏆 Achievements System</p>
-                        <p>🗺️ Learning Roadmap</p>
-                        <p>🔍 Smart Search</p>
-                        <p>⚡ Lightning Fast</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Subject pages -->
-            <div id="physics" class="page">
-                <h1 class="title">Physics</h1>
-                <p class="subtitle">18 Complete Chapters</p>
-                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Complete Physics coverage available</p></div>
-            </div>
-            
-            <div id="chemistry" class="page">
-                <h1 class="title">Chemistry</h1>
-                <p class="subtitle">18 Complete Chapters</p>
-                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Complete Chemistry coverage available</p></div>
-            </div>
-            
-            <div id="maths" class="page">
-                <h1 class="title">Mathematics</h1>
-                <p class="subtitle">14 Complete Chapters</p>
-                <div class="card"><p style="text-align: center; font-size: 1.2rem;">Complete Maths coverage available</p></div>
+                <p class="subtitle">NEXUS REALITY</p>
+                <div class="card"><p style="text-align: center; font-size: 1.2rem;">The Ultimate JEE Platform</p></div>
             </div>
         </main>
     </div>
     
     <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (document.body.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark';
+            }
+        }
+        
+        // Timer
+        let timerSeconds = 0;
+        let timerInterval = null;
+        
+        function startTimer() {
+            if (!timerInterval) {
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    updateTimerDisplay();
+                }, 1000);
+            }
+        }
+        
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+        
+        function resetTimer() {
+            pauseTimer();
+            timerSeconds = 0;
+            updateTimerDisplay();
+        }
+        
+        function updateTimerDisplay() {
+            const hours = Math.floor(timerSeconds / 3600);
+            const minutes = Math.floor((timerSeconds % 3600) / 60);
+            const seconds = timerSeconds % 60;
+            document.getElementById('timer-display').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        // AURA
         const auraPhrases = [
-            "Welcome to NEXUS! 🏆",
+            "Welcome! 🏆",
             "50 chapters ready! 🔥",
-            "300+ problems! 💪",
-            "Let's master JEE! 🚀",
+            "Let's study! 📚",
             "You're amazing! ✨",
-            "Keep learning! 🎓"
+            "Keep going! 💪",
+            "Master JEE! 🚀"
         ];
         let auraIndex = 0;
         
@@ -429,6 +452,7 @@
         }
         setTimeout(toggleAura, 2000);
         
+        // Navigation
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
@@ -442,24 +466,27 @@
             btn.addEventListener('click', () => showPage(btn.dataset.page));
         });
         
-        // Search functionality
-        document.getElementById('searchInput')?.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const results = document.getElementById('searchResults');
-            if (query.length > 0) {
-                results.innerHTML = `
-                    <p style="color: var(--cyan); font-weight: 700; margin-bottom: 1rem;">Search results for "${query}":</p>
-                    <p style="color: rgba(255,255,255,0.7);">Search functionality coming soon! This will search across all 50 chapters, 300+ problems, and formulas.</p>
-                `;
-            } else {
-                results.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6); padding: 2rem;">Start typing to search...</p>';
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+            
+            switch(e.key.toLowerCase()) {
+                case 'h': showPage('home'); break;
+                case 'b': showPage('browse'); break;
+                case 'p': showPage('progress'); break;
+                case 'f': showPage('formulas'); break;
+                case 'd': showPage('daily'); break;
+                case 'n': showPage('notes'); break;
+                case 't': toggleTheme(); break;
+                case ' ': e.preventDefault(); timerInterval ? pauseTimer() : startTimer(); break;
+                case 'r': resetTimer(); break;
+                case '?': showPage('shortcuts'); break;
             }
         });
         
-        console.log('🏆 NEXUS REALITY - COMPLETE PLATFORM!');
-        console.log('📚 50 Chapters • 300+ Problems');
-        console.log('✨ Interactive Features • Progress Tracking');
-        console.log('🚀 THE ULTIMATE JEE MASTERY PLATFORM!');
+        console.log('🏆 NEXUS REALITY - EPIC VERSION!');
+        console.log('✨ Dark Mode • Timer • Streak • Shortcuts • Formulas • Daily Problem');
+        console.log('🚀 THE MOST POWERFUL JEE PLATFORM!');
     </script>
 </body>
 </html>
