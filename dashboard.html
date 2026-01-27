@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.8);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --red: #ff3366;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        .subtitle { color: var(--cyan); font-size: 1.2rem; }
+        
+        .nav-tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { padding: 0.8rem 1.5rem; background: var(--card); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; font-family: 'Rajdhani', sans-serif; color: var(--text); font-size: 0.9rem; }
+        .tab-btn:hover, .tab-btn.active { background: rgba(0,255,255,0.2); border-color: var(--cyan); transform: translateY(-2px); }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.3rem; margin-bottom: 1rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .stat-box { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; transition: all 0.3s; }
+        .stat-box:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,255,255,0.3); }
+        .stat-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: var(--cyan); margin-bottom: 0.3rem; }
+        .stat-label { font-size: 0.9rem; opacity: 0.8; }
+        
+        .leaderboard-item { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1.5rem; transition: all 0.3s; }
+        .leaderboard-item:hover { transform: translateX(5px); border-color: var(--cyan); }
+        .leaderboard-item.top3 { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,170,0,0.1)); border-color: var(--gold); }
+        .rank { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; min-width: 50px; text-align: center; }
+        .rank.gold { color: var(--gold); }
+        .rank.silver { color: #c0c0c0; }
+        .rank.bronze { color: #cd7f32; }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .user-stats { font-size: 0.85rem; opacity: 0.8; }
+        
+        .planner-day { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
+        .planner-day.today { border-color: var(--cyan); background: rgba(0,255,255,0.1); }
+        .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .day-name { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.2rem; }
+        .task-list { display: flex; flex-direction: column; gap: 0.8rem; }
+        .task-item { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; display: flex; align-items: center; gap: 1rem; }
+        .task-item.completed { opacity: 0.6; text-decoration: line-through; }
+        .task-checkbox { width: 20px; height: 20px; cursor: pointer; }
+        .task-text { flex: 1; }
+        
+        .note-item { background: rgba(255,0,255,0.05); border: 2px solid var(--pink); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
+        .note-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .note-title { font-weight: 700; color: var(--pink); }
+        .note-date { font-size: 0.8rem; opacity: 0.7; }
+        .note-content { line-height: 1.6; }
+        
+        .achievement-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; }
+        .achievement-box { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; transition: all 0.3s; }
+        .achievement-box.unlocked { border-color: var(--gold); background: rgba(255,215,0,0.1); }
+        .achievement-box:hover { transform: scale(1.05); }
+        .achievement-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .achievement-name { font-size: 0.85rem; font-weight: 700; }
+        
+        .btn { padding: 0.7rem 1.2rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.85rem; font-family: 'Rajdhani', sans-serif; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
+        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
+        
+        .input { width: 100%; padding: 0.8rem; background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; margin-bottom: 1rem; }
+        .input:focus { outline: none; border-color: var(--cyan); }
+        textarea.input { min-height: 100px; resize: vertical; }
+        
+        .streak-display { text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(255,170,0,0.1), rgba(255,215,0,0.1)); border-radius: 12px; margin-bottom: 2rem; }
+        .streak-number { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; color: var(--orange); }
+        .streak-label { font-size: 1.2rem; color: var(--orange); margin-top: 0.5rem; }
+        
+        .progress-ring { width: 150px; height: 150px; margin: 0 auto; }
+        .progress-ring-circle { transition: stroke-dashoffset 0.5s; transform: rotate(-90deg); transform-origin: 50% 50%; }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">NEXUS DASHBOARD</h1>
+            <p class="subtitle">Track Your Progress • Plan Your Study • Achieve Your Goals</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">📊 Overview</button>
+            <button class="tab-btn" onclick="showTab('leaderboard')">🏆 Leaderboard</button>
+            <button class="tab-btn" onclick="showTab('planner')">📅 Study Planner</button>
+            <button class="tab-btn" onclick="showTab('notes')">📝 Notes</button>
+            <button class="tab-btn" onclick="showTab('achievements')">🏅 Achievements</button>
+            <button class="tab-btn" onclick="showTab('goals')">🎯 Goals</button>
+        </div>
+        
+        <!-- OVERVIEW TAB -->
+        <div id="overview" class="tab-content active">
+            <div class="streak-display">
+                <div class="streak-number" id="streakCount">0</div>
+                <div class="streak-label">🔥 Day Streak</div>
+                <p style="margin-top: 1rem; opacity: 0.8;">Keep studying daily to maintain your streak!</p>
+            </div>
+            
+            <div class="grid">
+                <div class="stat-box">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value" id="totalChapters">0</div>
+                    <div class="stat-label">Chapters Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">🧩</div>
+                    <div class="stat-value" id="totalProblems">0</div>
+                    <div class="stat-label">Problems Solved</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-value" id="totalTests">0</div>
+                    <div class="stat-label">Tests Taken</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-value" id="studyHours">0h</div>
+                    <div class="stat-label">Study Time</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">📈 Weekly Progress</h3>
+                <div id="weeklyProgress"></div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="window.location.href='app.html'">📚 Study Chapters</button>
+                <button class="btn btn-primary" onclick="window.location.href='test.html'">📝 Take Test</button>
+                <button class="btn btn-success" onclick="logStudySession()">⏱️ Log Study Time</button>
+            </div>
+        </div>
+        
+        <!-- LEADERBOARD TAB -->
+        <div id="leaderboard" class="tab-content">
+            <div class="card">
+                <h3 class="card-title">🏆 Top Performers</h3>
+                <div id="leaderboardList"></div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">📊 Your Rank</h3>
+                <div id="yourRank"></div>
+            </div>
+        </div>
+        
+        <!-- STUDY PLANNER TAB -->
+        <div id="planner" class="tab-content">
+            <div class="card">
+                <h3 class="card-title">📅 This Week's Plan</h3>
+                <div id="weeklyPlan"></div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">➕ Add New Task</h3>
+                <input type="text" class="input" id="taskInput" placeholder="Enter task (e.g., Complete Ch 5 Physics)">
+                <select class="input" id="taskDay">
+                    <option value="0">Sunday</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                </select>
+                <button class="btn btn-success" onclick="addTask()">Add Task</button>
+            </div>
+        </div>
+        
+        <!-- NOTES TAB -->
+        <div id="notes" class="tab-content">
+            <div class="card">
+                <h3 class="card-title">📝 Create New Note</h3>
+                <input type="text" class="input" id="noteTitle" placeholder="Note Title">
+                <textarea class="input" id="noteContent" placeholder="Note Content"></textarea>
+                <button class="btn btn-success" onclick="addNote()">Save Note</button>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">📚 Your Notes</h3>
+                <div id="notesList"></div>
+            </div>
+        </div>
+        
+        <!-- ACHIEVEMENTS TAB -->
+        <div id="achievements" class="tab-content">
+            <div class="card">
+                <h3 class="card-title">🏅 Your Achievements</h3>
+                <div class="achievement-grid" id="achievementsList"></div>
+            </div>
+        </div>
+        
+        <!-- GOALS TAB -->
+        <div id="goals" class="tab-content">
+            <div class="card">
+                <h3 class="card-title">🎯 Daily Goals</h3>
+                <div id="dailyGoals"></div>
+            </div>
+            
+            <div class="card">
+                <h3 class="card-title">📊 Monthly Goals</h3>
+                <div id="monthlyGoals"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Data Storage
+        const dashboardData = {
+            streak: 0,
+            lastStudyDate: null,
+            stats: {
+                chapters: 0,
+                problems: 0,
+                tests: 0,
+                studyHours: 0
+            },
+            tasks: {},
+            notes: [],
+            achievements: [
+                {id: 'first-chapter', name: 'First Chapter', icon: '📖', unlocked: false},
+                {id: '10-chapters', name: '10 Chapters', icon: '📚', unlocked: false},
+                {id: '50-problems', name: '50 Problems', icon: '🧩', unlocked: false},
+                {id: 'first-test', name: 'First Test', icon: '📝', unlocked: false},
+                {id: '7-day-streak', name: '7 Day Streak', icon: '🔥', unlocked: false},
+                {id: '30-day-streak', name: '30 Day Streak', icon: '💪', unlocked: false},
+                {id: 'high-scorer', name: '90%+ Score', icon: '🎯', unlocked: false},
+                {id: 'dedicated', name: '50 Hours Study', icon: '⏱️', unlocked: false}
+            ]
+        };
+        
+        // Load Data
+        function loadData() {
+            const saved = localStorage.getItem('dashboardData');
+            if (saved) {
+                Object.assign(dashboardData, JSON.parse(saved));
+            }
+            
+            // Load from app data
+            const appProgress = localStorage.getItem('nexusProgress');
+            if (appProgress) {
+                const progress = JSON.parse(appProgress);
+                dashboardData.stats.chapters = progress.chaptersCompleted?.length || 0;
+                dashboardData.stats.problems = progress.problemsSolved || 0;
+                dashboardData.stats.tests = progress.testsTaken || 0;
+            }
+            
+            updateStreak();
+            updateOverview();
+            renderLeaderboard();
+            renderPlanner();
+            renderNotes();
+            renderAchievements();
+            renderGoals();
+        }
+        
+        // Save Data
+        function saveData() {
+            localStorage.setItem('dashboardData', JSON.stringify(dashboardData));
+        }
+        
+        // Update Streak
+        function updateStreak() {
+            const today = new Date().toDateString();
+            const lastDate = dashboardData.lastStudyDate;
+            
+            if (lastDate === today) {
+                // Already studied today
+            } else if (lastDate) {
+                const last = new Date(lastDate);
+                const now = new Date();
+                const diffDays = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 1) {
+                    dashboardData.streak++;
+                } else if (diffDays > 1) {
+                    dashboardData.streak = 1;
+                }
+            } else {
+                dashboardData.streak = 1;
+            }
+            
+            dashboardData.lastStudyDate = today;
+            saveData();
+        }
+        
+        // Update Overview
+        function updateOverview() {
+            document.getElementById('streakCount').textContent = dashboardData.streak;
+            document.getElementById('totalChapters').textContent = dashboardData.stats.chapters;
+            document.getElementById('totalProblems').textContent = dashboardData.stats.problems;
+            document.getElementById('totalTests').textContent = dashboardData.stats.tests;
+            document.getElementById('studyHours').textContent = dashboardData.stats.studyHours + 'h';
+            
+            // Check achievements
+            checkAchievements();
+        }
+        
+        // Check Achievements
+        function checkAchievements() {
+            const stats = dashboardData.stats;
+            
+            if (stats.chapters >= 1) unlockAchievement('first-chapter');
+            if (stats.chapters >= 10) unlockAchievement('10-chapters');
+            if (stats.problems >= 50) unlockAchievement('50-problems');
+            if (stats.tests >= 1) unlockAchievement('first-test');
+            if (dashboardData.streak >= 7) unlockAchievement('7-day-streak');
+            if (dashboardData.streak >= 30) unlockAchievement('30-day-streak');
+            if (stats.studyHours >= 50) unlockAchievement('dedicated');
+        }
+        
+        function unlockAchievement(id) {
+            const achievement = dashboardData.achievements.find(a => a.id === id);
+            if (achievement && !achievement.unlocked) {
+                achievement.unlocked = true;
+                saveData();
+                // Show notification
+                alert(`🎉 Achievement Unlocked: ${achievement.name} ${achievement.icon}`);
+            }
+        }
+        
+        // Leaderboard
+        function renderLeaderboard() {
+            const leaderboard = [
+                {name: 'Arjun Kumar', score: 2850, tests: 45, accuracy: 95},
+                {name: 'Priya Sharma', score: 2720, tests: 42, accuracy: 92},
+                {name: 'Rahul Verma', score: 2680, tests: 40, accuracy: 90},
+                {name: 'Sneha Patel', score: 2550, tests: 38, accuracy: 88},
+                {name: 'Vikram Singh', score: 2480, tests: 36, accuracy: 86}
+            ];
+            
+            const html = leaderboard.map((user, i) => {
+                const rankClass = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+                return `
+                    <div class="leaderboard-item ${i < 3 ? 'top3' : ''}">
+                        <div class="rank ${rankClass}">${medal || (i + 1)}</div>
+                        <div class="user-info">
+                            <div class="user-name">${user.name}</div>
+                            <div class="user-stats">Score: ${user.score} • Tests: ${user.tests} • Accuracy: ${user.accuracy}%</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('leaderboardList').innerHTML = html;
+            
+            // Your rank
+            const yourScore = dashboardData.stats.tests * 100;
+            document.getElementById('yourRank').innerHTML = `
+                <div class="leaderboard-item" style="border-color: var(--cyan);">
+                    <div class="rank" style="color: var(--cyan);">-</div>
+                    <div class="user-info">
+                        <div class="user-name" style="color: var(--cyan);">You</div>
+                        <div class="user-stats">Score: ${yourScore} • Tests: ${dashboardData.stats.tests} • Keep practicing!</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Study Planner
+        function renderPlanner() {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const today = new Date().getDay();
+            
+            const html = days.map((day, i) => {
+                const tasks = dashboardData.tasks[i] || [];
+                const isToday = i === today;
+                
+                return `
+                    <div class="planner-day ${isToday ? 'today' : ''}">
+                        <div class="day-header">
+                            <div class="day-name">${day} ${isToday ? '(Today)' : ''}</div>
+                            <div>${tasks.filter(t => t.completed).length}/${tasks.length} completed</div>
+                        </div>
+                        <div class="task-list">
+                            ${tasks.length === 0 ? '<p style="opacity: 0.6;">No tasks for this day</p>' : 
+                                tasks.map((task, j) => `
+                                    <div class="task-item ${task.completed ? 'completed' : ''}">
+                                        <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} 
+                                            onchange="toggleTask(${i}, ${j})">
+                                        <div class="task-text">${task.text}</div>
+                                        <button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.7rem;" 
+                                            onclick="deleteTask(${i}, ${j})">🗑️</button>
+                                    </div>
+                                `).join('')
+                            }
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('weeklyPlan').innerHTML = html;
+        }
+        
+        function addTask() {
+            const text = document.getElementById('taskInput').value.trim();
+            const day = parseInt(document.getElementById('taskDay').value);
+            
+            if (!text) {
+                alert('Please enter a task!');
+                return;
+            }
+            
+            if (!dashboardData.tasks[day]) {
+                dashboardData.tasks[day] = [];
+            }
+            
+            dashboardData.tasks[day].push({text, completed: false});
+            saveData();
+            renderPlanner();
+            
+            document.getElementById('taskInput').value = '';
+            alert('Task added successfully!');
+        }
+        
+        function toggleTask(day, index) {
+            dashboardData.tasks[day][index].completed = !dashboardData.tasks[day][index].completed;
+            saveData();
+            renderPlanner();
+        }
+        
+        function deleteTask(day, index) {
+            if (confirm('Delete this task?')) {
+                dashboardData.tasks[day].splice(index, 1);
+                saveData();
+                renderPlanner();
+            }
+        }
+        
+        // Notes
+        function renderNotes() {
+            if (dashboardData.notes.length === 0) {
+                document.getElementById('notesList').innerHTML = '<p style="opacity: 0.6; text-align: center;">No notes yet. Create your first note!</p>';
+                return;
+            }
+            
+            const html = dashboardData.notes.map((note, i) => `
+                <div class="note-item">
+                    <div class="note-header">
+                        <div class="note-title">${note.title}</div>
+                        <div>
+                            <span class="note-date">${note.date}</span>
+                            <button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.7rem; margin-left: 0.5rem;" 
+                                onclick="deleteNote(${i})">🗑️</button>
+                        </div>
+                    </div>
+                    <div class="note-content">${note.content}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('notesList').innerHTML = html;
+        }
+        
+        function addNote() {
+            const title = document.getElementById('noteTitle').value.trim();
+            const content = document.getElementById('noteContent').value.trim();
+            
+            if (!title || !content) {
+                alert('Please fill both title and content!');
+                return;
+            }
+            
+            dashboardData.notes.unshift({
+                title,
+                content,
+                date: new Date().toLocaleDateString()
+            });
+            
+            saveData();
+            renderNotes();
+            
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+            alert('Note saved successfully!');
+        }
+        
+        function deleteNote(index) {
+            if (confirm('Delete this note?')) {
+                dashboardData.notes.splice(index, 1);
+                saveData();
+                renderNotes();
+            }
+        }
+        
+        // Achievements
+        function renderAchievements() {
+            const html = dashboardData.achievements.map(achievement => `
+                <div class="achievement-box ${achievement.unlocked ? 'unlocked' : ''}">
+                    <div class="achievement-icon">${achievement.unlocked ? achievement.icon : '🔒'}</div>
+                    <div class="achievement-name">${achievement.name}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('achievementsList').innerHTML = html;
+        }
+        
+        // Goals
+        function renderGoals() {
+            const dailyGoals = [
+                {name: 'Study 2 hours', progress: Math.min(100, (dashboardData.stats.studyHours % 2) * 50)},
+                {name: 'Complete 1 chapter', progress: 0},
+                {name: 'Solve 10 problems', progress: 0}
+            ];
+            
+            const monthlyGoals = [
+                {name: 'Complete 15 chapters', progress: Math.min(100, (dashboardData.stats.chapters / 15) * 100)},
+                {name: 'Take 10 tests', progress: Math.min(100, (dashboardData.stats.tests / 10) * 100)},
+                {name: 'Maintain 7-day streak', progress: Math.min(100, (dashboardData.streak / 7) * 100)}
+            ];
+            
+            const renderGoalList = (goals) => goals.map(goal => `
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>${goal.name}</span>
+                        <span style="color: var(--cyan); font-weight: 700;">${Math.floor(goal.progress)}%</span>
+                    </div>
+                    <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--cyan), var(--pink)); width: ${goal.progress}%; height: 100%; transition: width 0.5s;"></div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('dailyGoals').innerHTML = renderGoalList(dailyGoals);
+            document.getElementById('monthlyGoals').innerHTML = renderGoalList(monthlyGoals);
+        }
+        
+        // Log Study Session
+        function logStudySession() {
+            const hours = prompt('How many hours did you study?', '1');
+            if (hours && !isNaN(hours)) {
+                dashboardData.stats.studyHours += parseFloat(hours);
+                saveData();
+                updateOverview();
+                alert(`✅ Logged ${hours} hours of study time!`);
+            }
+        }
+        
+        // Tab Navigation
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Initialize
+        loadData();
+        
+        console.log('🏆 NEXUS DASHBOARD - Complete System Ready!');
+    </script>
+</body>
+</html>
