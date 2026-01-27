@@ -8,344 +8,419 @@
 <body>
 # ⚡ NEXUS REALITY - Quick Start Guide
 
-## 🚀 **Get Started in 5 Minutes!**
+> **Get started in 5 minutes and crack JEE like a pro!**
 
 ---
 
-## 📍 **STEP 1: OPEN THE PLATFORM**
+## 🚀 **5-Minute Quick Start**
 
-### **🌐 Visit:**
+### **Step 1: Open Platform (30 seconds)**
 ```
-https://aurenya-19.github.io/ultimate-perfectionist-app/
-```
-
-**You'll see:**
-- 🏆 Big "50" with trophy
-- 📊 Subject breakdown (Physics 18, Chemistry 18, Maths 14)
-- 🚀 Quick start links
-
----
-
-## 🎨 **STEP 2: CUSTOMIZE YOUR EXPERIENCE**
-
-### **🌓 Toggle Dark/Light Mode**
-- **Location:** Top-right corner
-- **Button:** 🌙 Dark / ☀️ Light
-- **Shortcut:** Press `T` key
-- **Tip:** Use dark mode for night study, light mode for day
-
-### **⏱️ Start Study Timer**
-- **Location:** Top-right (below theme toggle)
-- **Controls:** ▶️ Start | ⏸️ Pause | 🔄 Reset
-- **Shortcuts:** 
-  - `Space` - Start/Pause
-  - `R` - Reset
-- **Tip:** Track your daily study time!
-
-### **🔥 Check Your Streak**
-- **Location:** Top-right (below timer)
-- **Shows:** Days of consecutive study
-- **Tip:** Study daily to build streak!
-
----
-
-## 📚 **STEP 3: EXPLORE CONTENT**
-
-### **Option A: Browse All Chapters**
-1. Click **"Browse Chapters"** in sidebar
-2. Or press `B` key
-3. See all 50 chapters organized by subject
-4. Click any chapter to start learning
-
-### **Option B: Follow Quick Links**
-On home page, click:
-- ⭐ **Daily Problem** - Today's challenge
-- 📝 **Formula Sheet** - Quick reference
-- 📚 **Browse Chapters** - All 50 chapters
-- ⌨️ **Keyboard Shortcuts** - Power user guide
-
----
-
-## 🎯 **STEP 4: START LEARNING**
-
-### **📖 Read Theory**
-- Each chapter has complete theory
-- Concepts explained from basics
-- Formulas highlighted
-- Examples included
-
-### **🧩 Solve Problems**
-- 300+ solved problems available
-- Click "Show Solution" to see steps
-- Practice regularly
-- Track problems solved
-
-### **📝 Take Notes**
-1. Click **"My Notes"** in sidebar
-2. Or press `N` key
-3. Write important points
-4. Click "💾 Save Notes"
-
----
-
-## ⌨️ **STEP 5: MASTER KEYBOARD SHORTCUTS**
-
-### **Essential Shortcuts:**
-```
-H - Home
-B - Browse Chapters
-P - My Progress
-F - Formula Sheet
-D - Daily Problem
-N - My Notes
-T - Toggle Theme
-Space - Start/Pause Timer
-? - Show All Shortcuts
+🔗 Visit: https://aurenya-19.github.io/ultimate-perfectionist-app/
 ```
 
-### **Pro Tip:**
-Press `?` anytime to see complete shortcut list!
+### **Step 2: Explore Home (1 minute)**
+- See the mega stats (50 chapters, 300+ problems)
+- Check the quick start cards
+- Understand what's available
+
+### **Step 3: Browse Chapters (1 minute)**
+- Click "All 50 Chapters"
+- See Physics (18), Chemistry (18), Maths (14)
+- Click any chapter to preview
+
+### **Step 4: Try a Test (1 minute)**
+- Click "Practice Tests"
+- Choose any subject
+- Click "Start Test" to see the interface
+
+### **Step 5: Check Analytics (1 minute)**
+- Click "Analytics"
+- See the performance dashboard
+- Understand tracking features
+
+### **Step 6: Watch a Video (30 seconds)**
+- Click "Video Lectures"
+- Browse available videos
+- Click to play
+
+**🎉 Done! You're ready to start learning!**
 
 ---
 
-## 📊 **STEP 6: TRACK YOUR PROGRESS**
+## 📅 **Your First Day Checklist**
 
-### **View Progress:**
-1. Click **"My Progress"** in sidebar
-2. Or press `P` key
-3. See:
-   - Chapters completed (0/50)
-   - Problems solved (0/300+)
-   - Study time (0h/500h+)
-   - Subject-wise breakdown
+### **Morning (2 hours)**
+- [ ] Open NEXUS REALITY
+- [ ] Read Ch 1: Units & Measurements (Theory)
+- [ ] Solve 5 problems from Ch 1
+- [ ] Watch video lecture on Units
 
-### **Unlock Achievements:**
-- 🎓 First Chapter (Complete 1 chapter)
-- ⚡ Speed Learner (Complete 10 chapters)
-- 🔥 Problem Solver (Solve 100 problems)
-- 👑 JEE Master (Complete all 50 chapters)
+### **Afternoon (2 hours)**
+- [ ] Read Ch 2: Motion in Straight Line (Theory)
+- [ ] Solve 5 problems from Ch 2
+- [ ] Take practice test on Ch 1-2
 
----
+### **Evening (1 hour)**
+- [ ] Review mistakes from test
+- [ ] Revise formulas from Ch 1-2
+- [ ] Check analytics dashboard
+- [ ] Plan tomorrow's study
 
-## 🗺️ **STEP 7: FOLLOW THE ROADMAP**
-
-### **12-Month Plan:**
-
-**Month 1-3: Foundation**
-- Physics: Mechanics (Ch 1-10)
-- Chemistry: Physical (Ch 31-37)
-- Maths: Algebra (Ch 61-66)
-
-**Month 4-6: Intermediate**
-- Physics: Thermo + E&M (Ch 11-19)
-- Chemistry: Physical + Inorganic (Ch 38-45)
-- Maths: Calculus (Ch 71-75)
-
-**Month 7-9: Advanced**
-- Physics: Optics + Modern (Ch 24-28)
-- Chemistry: Organic (Ch 53-57)
-- Maths: Geometry (Ch 81-82)
-
-**Month 10-12: Mastery**
-- Revision of all 50 chapters
-- Solve all 300+ problems
-- Mock tests
+**✅ First Day Complete! You've started your JEE journey!**
 
 ---
 
-## 💡 **DAILY ROUTINE (RECOMMENDED)**
+## 🎯 **Your First Week Plan**
 
-### **Morning (2 hours):**
-1. ✅ Check Daily Problem
-2. ✅ Start Timer
-3. ✅ Study 1 chapter (theory)
-4. ✅ Take notes
+### **Day 1: Physics - Mechanics Basics**
+- Ch 1: Units & Measurements
+- Ch 2: Motion in Straight Line
+- 10 problems + 1 test
 
-### **Afternoon (2 hours):**
-1. ✅ Solve problems from chapter
-2. ✅ Use Formula Sheet for reference
-3. ✅ Track progress
+### **Day 2: Physics - Laws of Motion**
+- Ch 3: Laws of Motion
+- Ch 4: Work & Energy
+- 10 problems + 1 test
 
-### **Evening (1 hour):**
-1. ✅ Revise formulas
-2. ✅ Review notes
-3. ✅ Plan next day
+### **Day 3: Chemistry - Atomic Structure**
+- Ch 31: Atomic Structure
+- Ch 32: Chemical Bonding
+- 10 problems + 1 test
 
-### **Result:**
-- 🔥 Daily streak maintained
-- 📚 Consistent learning
-- 🎯 Steady progress
-- 🏆 JEE success!
+### **Day 4: Chemistry - States & Solutions**
+- Ch 33: States of Matter
+- Ch 34: Solutions
+- 10 problems + 1 test
+
+### **Day 5: Maths - Sets & Functions**
+- Ch 61: Sets & Relations
+- Ch 62: Functions
+- 10 problems + 1 test
+
+### **Day 6: Maths - Equations & Series**
+- Ch 63: Quadratic Equations
+- Ch 64: Sequences & Series
+- 10 problems + 1 test
+
+### **Day 7: Revision & Mock Test**
+- Revise all 8 chapters
+- Take first mock test
+- Analyze performance
+- Plan next week
+
+**🏆 First Week Complete! 8 chapters done, 60+ problems solved!**
 
 ---
 
-## 🎯 **POWER USER TIPS**
+## 💡 **Power User Tips**
 
-### **1. Use Keyboard Shortcuts**
-- Navigate faster with keys
-- No need to click
-- Become a power user
+### **Navigation Shortcuts**
+```
+Use sidebar for quick access:
+- Home: Overview
+- All Chapters: Browse content
+- Practice Tests: Chapter tests
+- Mock Tests: Full-length tests
+- Videos: HD lectures
+- Analytics: Performance tracking
+```
 
-### **2. Bookmark Important Chapters**
-- Press `Ctrl+B` to bookmark
-- Quick access later
-- Organize your learning
+### **Study Techniques**
+1. **Active Learning:** Don't just read, solve problems
+2. **Spaced Repetition:** Revise after 1 day, 3 days, 7 days
+3. **Practice Tests:** Take tests before studying (pre-test)
+4. **Error Analysis:** Review every mistake thoroughly
+5. **Formula Mastery:** Write formulas 10 times each
 
-### **3. Use Formula Sheet**
-- Press `F` for quick access
-- Reference while solving
-- Save time
+### **Time Management**
+```
+Daily 5-Hour Schedule:
+- 08:00-10:00: Theory (2h)
+- 10:00-10:15: Break
+- 10:15-12:15: Problems (2h)
+- 12:15-13:00: Lunch
+- 13:00-14:00: Video/Test (1h)
+```
 
-### **4. Take Notes Regularly**
-- Press `N` to open notes
-- Write key points
-- Review before exams
+### **Progress Tracking**
+- Check analytics daily
+- Maintain 80%+ accuracy
+- Complete 4-5 chapters/month
+- Take 2 tests/week
+- 1 mock test/month
 
-### **5. Track Progress Daily**
-- Press `P` to check progress
+---
+
+## 🎓 **Study Strategies**
+
+### **For Theory:**
+1. Read chapter overview
+2. Understand concepts
+3. Note key formulas
+4. Watch video lecture
+5. Make summary notes
+
+### **For Problems:**
+1. Attempt without solution
+2. If stuck, check hints
+3. Reveal solution step-by-step
+4. Understand the approach
+5. Solve similar problems
+
+### **For Tests:**
+1. Time yourself strictly
+2. Attempt all questions
+3. Mark doubts for review
+4. Check solutions immediately
+5. Analyze mistakes
+
+### **For Revision:**
+1. Use formula sheets
+2. Solve previous problems
+3. Take chapter tests
+4. Watch video summaries
+5. Make flashcards
+
+---
+
+## 📊 **Performance Goals**
+
+### **Weekly Goals:**
+- Study 4-5 chapters
+- Solve 50+ problems
+- Take 2-3 practice tests
+- Watch 5+ video lectures
+- Maintain 75%+ accuracy
+
+### **Monthly Goals:**
+- Complete 15-20 chapters
+- Solve 200+ problems
+- Take 8-10 practice tests
+- Take 1-2 mock tests
+- Maintain 80%+ accuracy
+
+### **3-Month Goals:**
+- Complete 50 chapters
+- Solve 300+ problems
+- Take 30+ practice tests
+- Take 5+ mock tests
+- Maintain 85%+ accuracy
+
+---
+
+## 🔥 **Motivation Hacks**
+
+### **Daily Motivation:**
+- [ ] Check leaderboard (compete!)
+- [ ] Track daily streak (don't break it!)
+- [ ] Unlock achievements (collect badges!)
+- [ ] See progress bars (watch them fill!)
+- [ ] Celebrate small wins (every chapter counts!)
+
+### **Stay Consistent:**
+- Study at same time daily
+- Use study timer
+- Join study groups
+- Share progress
+- Reward yourself
+
+### **Overcome Challenges:**
+- Stuck on concept? Watch video
+- Too many mistakes? Revise theory
+- Feeling demotivated? Check leaderboard
+- Losing focus? Take 5-min break
+- Overwhelmed? Follow roadmap
+
+---
+
+## 🎯 **Common Mistakes to Avoid**
+
+### **❌ DON'T:**
+- Skip theory and jump to problems
+- Ignore mistakes in tests
+- Study without tracking progress
+- Cram everything at once
+- Compare with others negatively
+
+### **✅ DO:**
+- Understand concepts deeply
+- Analyze every mistake
+- Track progress daily
+- Study consistently
+- Learn from top performers
+
+---
+
+## 📱 **Mobile Usage Tips**
+
+### **On Mobile:**
+- Use portrait mode for reading
+- Use landscape for tests
+- Bookmark important chapters
+- Download chapters for offline
+- Use dark mode to save battery
+
+### **Best Practices:**
+- Study theory on desktop
+- Practice problems on mobile
+- Take tests on desktop
+- Watch videos on tablet
+- Revise formulas on mobile
+
+---
+
+## 🏆 **Success Checklist**
+
+### **Daily:**
+- [ ] Study 2 hours minimum
+- [ ] Solve 10+ problems
+- [ ] Take 1 practice test
+- [ ] Check analytics
+- [ ] Maintain streak
+
+### **Weekly:**
+- [ ] Complete 4-5 chapters
+- [ ] Solve 50+ problems
+- [ ] Take 2-3 tests
+- [ ] Watch 5+ videos
+- [ ] Revise previous chapters
+
+### **Monthly:**
+- [ ] Complete 15-20 chapters
+- [ ] Solve 200+ problems
+- [ ] Take 1-2 mock tests
+- [ ] Review all mistakes
+- [ ] Update study plan
+
+---
+
+## 🚀 **Advanced Features**
+
+### **Analytics Dashboard:**
+- Overall accuracy percentage
+- Subject-wise breakdown
+- Time spent per topic
+- Weak area identification
+- Progress graphs
+
+### **Leaderboard:**
+- See top performers
+- Compare your rank
+- Get motivated
+- Learn from best
+- Compete healthily
+
+### **Achievement System:**
+- Unlock badges
+- Complete milestones
+- Track achievements
+- Share progress
 - Stay motivated
-- See your growth
-
-### **6. Maintain Daily Streak**
-- Study every day
-- Build consistency
-- Watch streak grow
-
-### **7. Solve Daily Problem**
-- Press `D` for today's challenge
-- Practice daily
-- Improve problem-solving
 
 ---
 
-## 📱 **MOBILE USAGE**
+## 💪 **Consistency Tips**
 
-### **On Phone/Tablet:**
-- ✅ Fully responsive
-- ✅ All features work
-- ✅ Touch-friendly
-- ✅ Study anywhere
+### **Build Habits:**
+1. **Same Time:** Study at fixed hours
+2. **Same Place:** Dedicated study space
+3. **Same Routine:** Follow daily schedule
+4. **Track Streak:** Don't break the chain
+5. **Reward System:** Celebrate milestones
 
-### **Tips:**
-- Use landscape mode for better view
-- Widgets stack vertically on mobile
-- Sidebar becomes top menu
-- All shortcuts work
-
----
-
-## 🆘 **NEED HELP?**
-
-### **Quick Help:**
-- Press `?` - See all shortcuts
-- Click "About" - Platform info
-- Check "Roadmap" - Learning path
-- Visit "Formula Sheet" - Quick reference
-
-### **Common Questions:**
-
-**Q: How to change theme?**
-A: Click top-right button or press `T`
-
-**Q: How to start timer?**
-A: Click ▶️ button or press `Space`
-
-**Q: How to see all chapters?**
-A: Click "Browse Chapters" or press `B`
-
-**Q: How to track progress?**
-A: Click "My Progress" or press `P`
-
-**Q: How to take notes?**
-A: Click "My Notes" or press `N`
+### **Stay Accountable:**
+- Set daily goals
+- Track completion
+- Review weekly
+- Adjust monthly
+- Never give up
 
 ---
 
-## ✅ **CHECKLIST: FIRST DAY**
+## 🎓 **From Zero to Hero**
 
-### **Complete These:**
-- [ ] Open the platform
-- [ ] Toggle dark/light mode
-- [ ] Start study timer
-- [ ] Browse all chapters
-- [ ] Read Chapter 1 theory
-- [ ] Solve 1 problem
-- [ ] Take notes
-- [ ] Check formula sheet
-- [ ] Try keyboard shortcuts
-- [ ] View progress
-- [ ] Check roadmap
-- [ ] Solve daily problem
+### **Month 1: Beginner**
+- Learn platform features
+- Complete 15 chapters
+- Build study habit
+- 70%+ accuracy
 
-### **Congratulations!**
-You're now ready to master JEE with NEXUS REALITY! 🎉
+### **Month 3: Intermediate**
+- Complete 35 chapters
+- Strong foundation
+- 75%+ accuracy
+- Regular testing
+
+### **Month 6: Advanced**
+- Complete all 50 chapters
+- Advanced problem solving
+- 80%+ accuracy
+- Mock test ready
+
+### **Month 12: Expert**
+- Mastered all topics
+- 300+ problems solved
+- 85%+ accuracy
+- **JEE READY!** 🏆
 
 ---
 
-## 🚀 **YOUR JOURNEY STARTS NOW!**
+## 🌟 **Final Quick Tips**
 
 ### **Remember:**
-- 📚 50 chapters to master
-- 🎯 300+ problems to solve
-- ⏱️ 500+ hours of content
-- 🔥 Daily streak to maintain
-- 🏆 Achievements to unlock
-- 🎓 JEE to crack!
+1. **Consistency > Intensity:** Study daily, not in bursts
+2. **Quality > Quantity:** Understand deeply, don't rush
+3. **Practice > Theory:** Solve more, read less
+4. **Analysis > Attempts:** Learn from mistakes
+5. **Progress > Perfection:** Keep moving forward
 
-### **You Have:**
-- ✅ Complete content
-- ✅ Interactive features
-- ✅ Beautiful UI
-- ✅ Fast performance
-- ✅ Everything needed
-
-### **No Excuses:**
-- ❌ No coaching needed
-- ❌ No fees required
-- ❌ No limitations
-- ✅ Just pure learning!
+### **Your Mantra:**
+```
+📚 Study Daily
+🎯 Practice Regularly
+📊 Track Progress
+💪 Stay Consistent
+🏆 Crack JEE!
+```
 
 ---
 
-## 🎊 **FINAL MESSAGE**
+## 🎉 **You're Ready!**
 
-**Welcome to NEXUS REALITY!** 🏆
+**You now know:**
+- ✅ How to navigate the platform
+- ✅ How to study effectively
+- ✅ How to track progress
+- ✅ How to stay motivated
+- ✅ How to crack JEE!
 
-**You now have the ULTIMATE JEE platform at your fingertips.**
-
-**Everything is ready. Everything is free. Everything is here.**
-
-**Now it's your turn to:**
-- 📚 Study consistently
-- 🎯 Solve problems daily
-- 📝 Take notes regularly
+**Now go and:**
+- 🚀 Open the platform
+- 📚 Start Chapter 1
+- 🎯 Solve problems
 - 📊 Track progress
-- 🔥 Maintain streak
-- 🏆 Unlock achievements
-- 🎓 **CRACK JEE!**
+- 🏆 **CRACK JEE!**
 
 ---
 
-```
-╔══════════════════════════════════════════════════════════╗
-║                                                          ║
-║              🚀 YOUR JOURNEY BEGINS NOW! 🚀              ║
-║                                                          ║
-║         NEXUS REALITY - THE ULTIMATE PLATFORM            ║
-║                                                          ║
-║              GO MAKE IT HAPPEN! 💪🎓                     ║
-║                                                          ║
-╚══════════════════════════════════════════════════════════╝
-```
+## 🔗 **Quick Links**
+
+- **Platform:** https://aurenya-19.github.io/ultimate-perfectionist-app/
+- **Full Documentation:** [README.md](README.md)
+- **Features List:** [FEATURES.md](FEATURES.md)
 
 ---
 
-## 🌐 **PLATFORM LINK:**
-### **https://aurenya-19.github.io/ultimate-perfectionist-app/**
+<div align="center">
 
-**Open it now and start your JEE journey! 🚀**
+### **⚡ QUICK START COMPLETE! ⚡**
 
-**All the best! 🌟✨🎯**
+**Now go crack JEE! 🚀🏆🎓**
+
+**Made with 💙 for JEE Aspirants**
+
+</div>
 
 </body>
 </html>
