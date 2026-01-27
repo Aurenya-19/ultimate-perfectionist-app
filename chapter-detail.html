@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Chapter: Laws of Motion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.9);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --red: #ff3366;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .chapter-num { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--orange); font-weight: 900; margin-bottom: 0.5rem; }
+        .chapter-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        .chapter-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; opacity: 0.9; }
+        
+        .sidebar { position: fixed; right: 2rem; top: 6rem; width: 250px; background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; max-height: 80vh; overflow-y: auto; }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+        .sidebar-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.1rem; margin-bottom: 1rem; }
+        .toc-item { padding: 0.5rem; margin-bottom: 0.3rem; cursor: pointer; border-left: 3px solid transparent; transition: all 0.2s; font-size: 0.9rem; }
+        .toc-item:hover { border-left-color: var(--cyan); background: rgba(0,255,255,0.1); }
+        
+        .content { margin-right: 280px; }
+        .section { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--cyan); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        
+        .theory-block { background: rgba(0,255,255,0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; }
+        .theory-block h3 { color: var(--green); margin-bottom: 1rem; font-size: 1.3rem; }
+        .theory-block p { margin-bottom: 1rem; font-size: 1.05rem; }
+        .theory-block ul { margin-left: 2rem; margin-bottom: 1rem; }
+        .theory-block li { margin-bottom: 0.5rem; }
+        
+        .formula-box { background: rgba(0,0,0,0.5); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 1.2rem; text-align: center; }
+        
+        .derivation-box { background: rgba(255,0,255,0.05); border: 2px solid var(--pink); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .derivation-box h4 { color: var(--pink); margin-bottom: 1rem; }
+        .derivation-step { background: rgba(0,0,0,0.3); padding: 1rem; margin-bottom: 0.8rem; border-radius: 5px; border-left: 3px solid var(--pink); }
+        
+        .example-box { background: rgba(255,170,0,0.05); border: 2px solid var(--orange); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; }
+        .example-box h4 { color: var(--orange); margin-bottom: 1rem; font-size: 1.2rem; }
+        
+        .problem-card { background: rgba(255,0,255,0.05); border: 2px solid var(--pink); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .problem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .problem-num { font-family: 'Orbitron', sans-serif; color: var(--pink); font-weight: 900; font-size: 1.2rem; }
+        .difficulty { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; }
+        .difficulty.easy { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
+        .difficulty.medium { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .difficulty.hard { background: rgba(255,51,102,0.2); color: var(--red); border: 1px solid var(--red); }
+        .problem-text { font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.8; }
+        .options { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+        .option { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: rgba(0,255,255,0.15); border-color: var(--cyan); }
+        .option.selected { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
+        
+        .solution-box { background: rgba(0,255,136,0.05); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin-top: 1rem; display: none; }
+        .solution-box.show { display: block; animation: slideDown 0.3s; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { color: var(--green); margin-bottom: 1rem; }
+        
+        .key-point { background: rgba(255,215,0,0.1); border-left: 4px solid var(--gold); padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .key-point strong { color: var(--gold); }
+        
+        .video-embed { width: 100%; aspect-ratio: 16/9; background: rgba(0,0,0,0.5); border: 2px solid var(--cyan); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 1.5rem 0; }
+        
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
+        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
+        
+        @media (max-width: 1024px) { 
+            .sidebar { position: relative; right: 0; width: 100%; margin-bottom: 2rem; }
+            .content { margin-right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="chapter-num">CHAPTER 3 • PHYSICS</div>
+            <h1 class="chapter-title">Laws of Motion</h1>
+            <div class="chapter-meta">
+                <div class="meta-item"><i class="fas fa-book"></i> 25 Topics</div>
+                <div class="meta-item"><i class="fas fa-puzzle-piece"></i> 30 Problems</div>
+                <div class="meta-item"><i class="fas fa-video"></i> 5 Videos</div>
+                <div class="meta-item"><i class="fas fa-clock"></i> 8-10 Hours</div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h3 class="sidebar-title">📑 Contents</h3>
+            <div class="toc-item" onclick="scrollToSection('intro')">Introduction</div>
+            <div class="toc-item" onclick="scrollToSection('first-law')">Newton's First Law</div>
+            <div class="toc-item" onclick="scrollToSection('second-law')">Newton's Second Law</div>
+            <div class="toc-item" onclick="scrollToSection('third-law')">Newton's Third Law</div>
+            <div class="toc-item" onclick="scrollToSection('momentum')">Momentum & Impulse</div>
+            <div class="toc-item" onclick="scrollToSection('friction')">Friction</div>
+            <div class="toc-item" onclick="scrollToSection('circular')">Circular Motion</div>
+            <div class="toc-item" onclick="scrollToSection('problems')">Practice Problems</div>
+            <div class="toc-item" onclick="scrollToSection('videos')">Video Lectures</div>
+        </div>
+        
+        <div class="content">
+            <!-- INTRODUCTION -->
+            <div class="section" id="intro">
+                <h2 class="section-title">📖 Introduction</h2>
+                
+                <div class="theory-block">
+                    <h3>What are Newton's Laws of Motion?</h3>
+                    <p>Newton's Laws of Motion are three fundamental principles that describe the relationship between the motion of an object and the forces acting upon it. These laws form the foundation of classical mechanics and are essential for understanding motion in our everyday world.</p>
+                    
+                    <p><strong>Historical Context:</strong> Sir Isaac Newton published these laws in his work "Philosophiæ Naturalis Principia Mathematica" (Mathematical Principles of Natural Philosophy) in 1687. These laws revolutionized our understanding of physics and remain valid for most everyday situations.</p>
+                    
+                    <div class="key-point">
+                        <strong>Key Concept:</strong> Newton's laws apply to inertial reference frames - frames that are either at rest or moving with constant velocity. They don't apply in accelerating reference frames without modifications.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FIRST LAW -->
+            <div class="section" id="first-law">
+                <h2 class="section-title">⚖️ Newton's First Law (Law of Inertia)</h2>
+                
+                <div class="theory-block">
+                    <h3>Statement</h3>
+                    <p><em>"An object at rest stays at rest, and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force."</em></p>
+                    
+                    <h3>Understanding Inertia</h3>
+                    <p><strong>Inertia</strong> is the tendency of an object to resist changes in its state of motion. It is directly proportional to the mass of the object.</p>
+                    
+                    <ul>
+                        <li><strong>Inertia of Rest:</strong> Tendency to remain at rest (e.g., a book on a table)</li>
+                        <li><strong>Inertia of Motion:</strong> Tendency to keep moving (e.g., a moving car continues forward when brakes are applied)</li>
+                        <li><strong>Inertia of Direction:</strong> Tendency to maintain direction (e.g., passengers lean outward when a car turns)</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <strong>Important:</strong> Mass is the quantitative measure of inertia. Greater mass = Greater inertia = More difficult to change motion.
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>🔍 Real-Life Examples</h4>
+                    <p><strong>1. Seat Belts in Cars:</strong> When a car suddenly stops, passengers continue moving forward due to inertia. Seat belts provide the external force needed to stop them.</p>
+                    <p><strong>2. Shaking a Wet Umbrella:</strong> Water droplets fly off because they tend to continue in their state of motion when the umbrella is suddenly stopped.</p>
+                    <p><strong>3. Pulling a Tablecloth:</strong> If pulled quickly, objects on the table remain in place due to inertia.</p>
+                </div>
+            </div>
+            
+            <!-- SECOND LAW -->
+            <div class="section" id="second-law">
+                <h2 class="section-title">🚀 Newton's Second Law (F = ma)</h2>
+                
+                <div class="theory-block">
+                    <h3>Statement</h3>
+                    <p><em>"The rate of change of momentum of an object is directly proportional to the applied force and takes place in the direction of the force."</em></p>
+                    
+                    <div class="formula-box">
+                        $$\vec{F} = m\vec{a}$$
+                        $$\vec{F} = \frac{d\vec{p}}{dt}$$
+                    </div>
+                    
+                    <p>Where:</p>
+                    <ul>
+                        <li>\(\vec{F}\) = Net force (Newton, N)</li>
+                        <li>\(m\) = Mass (kilogram, kg)</li>
+                        <li>\(\vec{a}\) = Acceleration (m/s²)</li>
+                        <li>\(\vec{p}\) = Momentum = \(m\vec{v}\)</li>
+                    </ul>
+                </div>
+                
+                <div class="derivation-box">
+                    <h4>📐 Derivation</h4>
+                    
+                    <div class="derivation-step">
+                        <strong>Step 1:</strong> Start with momentum
+                        $$\vec{p} = m\vec{v}$$
+                    </div>
+                    
+                    <div class="derivation-step">
+                        <strong>Step 2:</strong> Rate of change of momentum
+                        $$\vec{F} = \frac{d\vec{p}}{dt} = \frac{d(m\vec{v})}{dt}$$
+                    </div>
+                    
+                    <div class="derivation-step">
+                        <strong>Step 3:</strong> For constant mass
+                        $$\vec{F} = m\frac{d\vec{v}}{dt} = m\vec{a}$$
+                    </div>
+                    
+                    <div class="key-point">
+                        <strong>Note:</strong> If mass is variable (like in rocket propulsion), we must use \(\vec{F} = \frac{d(m\vec{v})}{dt}\)
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example 1: Force Calculation</h4>
+                    <p><strong>Problem:</strong> A car of mass 1000 kg accelerates from rest to 20 m/s in 5 seconds. Calculate the force applied.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>Given: \(m = 1000\) kg, \(u = 0\), \(v = 20\) m/s, \(t = 5\) s</p>
+                    
+                    <p>Acceleration: \(a = \frac{v-u}{t} = \frac{20-0}{5} = 4\) m/s²</p>
+                    
+                    <p>Force: \(F = ma = 1000 \times 4 = 4000\) N</p>
+                    
+                    <div class="key-point">
+                        <strong>Answer:</strong> The force applied is 4000 N or 4 kN.
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example 2: Multiple Forces</h4>
+                    <p><strong>Problem:</strong> Two forces 10 N and 15 N act on a 5 kg object at right angles. Find the acceleration.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>Net force: \(F_{net} = \sqrt{10^2 + 15^2} = \sqrt{100 + 225} = \sqrt{325} = 18.03\) N</p>
+                    
+                    <p>Acceleration: \(a = \frac{F_{net}}{m} = \frac{18.03}{5} = 3.61\) m/s²</p>
+                    
+                    <p>Direction: \(\theta = \tan^{-1}\left(\frac{15}{10}\right) = 56.3°\) from the 10 N force</p>
+                    
+                    <div class="key-point">
+                        <strong>Answer:</strong> Acceleration is 3.61 m/s² at 56.3° from the 10 N force.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- THIRD LAW -->
+            <div class="section" id="third-law">
+                <h2 class="section-title">⚡ Newton's Third Law (Action-Reaction)</h2>
+                
+                <div class="theory-block">
+                    <h3>Statement</h3>
+                    <p><em>"For every action, there is an equal and opposite reaction."</em></p>
+                    
+                    <div class="formula-box">
+                        $$\vec{F}_{AB} = -\vec{F}_{BA}$$
+                    </div>
+                    
+                    <h3>Key Points</h3>
+                    <ul>
+                        <li>Action and reaction forces are <strong>equal in magnitude</strong></li>
+                        <li>They are <strong>opposite in direction</strong></li>
+                        <li>They act on <strong>different objects</strong> (this is crucial!)</li>
+                        <li>They act <strong>simultaneously</strong></li>
+                        <li>They are of the <strong>same type</strong> (both gravitational, both electromagnetic, etc.)</li>
+                    </ul>
+                    
+                    <div class="key-point">
+                        <strong>Common Misconception:</strong> Action and reaction forces do NOT cancel each other because they act on different objects. Forces cancel only when they act on the same object.
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>🔍 Real-Life Examples</h4>
+                    <p><strong>1. Walking:</strong> You push the ground backward (action), the ground pushes you forward (reaction).</p>
+                    <p><strong>2. Swimming:</strong> You push water backward (action), water pushes you forward (reaction).</p>
+                    <p><strong>3. Rocket Propulsion:</strong> Rocket expels gases downward (action), gases push rocket upward (reaction).</p>
+                    <p><strong>4. Recoil of Gun:</strong> Bullet moves forward (action), gun recoils backward (reaction).</p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example 3: Recoil Velocity</h4>
+                    <p><strong>Problem:</strong> A 5 kg gun fires a 50 g bullet at 400 m/s. Find the recoil velocity of the gun.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>Using conservation of momentum (from Newton's third law):</p>
+                    <p>Initial momentum = Final momentum</p>
+                    <p>\(0 = m_b v_b + m_g v_g\)</p>
+                    <p>\(0 = (0.05)(400) + (5)(v_g)\)</p>
+                    <p>\(v_g = -\frac{0.05 \times 400}{5} = -4\) m/s</p>
+                    
+                    <div class="key-point">
+                        <strong>Answer:</strong> The gun recoils at 4 m/s in the opposite direction.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MOMENTUM & IMPULSE -->
+            <div class="section" id="momentum">
+                <h2 class="section-title">💥 Momentum & Impulse</h2>
+                
+                <div class="theory-block">
+                    <h3>Linear Momentum</h3>
+                    <p>Momentum is the quantity of motion possessed by a moving object.</p>
+                    
+                    <div class="formula-box">
+                        $$\vec{p} = m\vec{v}$$
+                    </div>
+                    
+                    <ul>
+                        <li>SI Unit: kg·m/s or N·s</li>
+                        <li>It is a <strong>vector quantity</strong></li>
+                        <li>Direction: Same as velocity</li>
+                    </ul>
+                    
+                    <h3>Impulse</h3>
+                    <p>Impulse is the change in momentum or the product of force and time.</p>
+                    
+                    <div class="formula-box">
+                        $$\vec{J} = \vec{F} \cdot \Delta t = \Delta \vec{p} = m(\vec{v} - \vec{u})$$
+                    </div>
+                    
+                    <div class="key-point">
+                        <strong>Impulse-Momentum Theorem:</strong> The impulse applied to an object equals the change in its momentum.
+                    </div>
+                </div>
+                
+                <div class="theory-block">
+                    <h3>Conservation of Momentum</h3>
+                    <p><em>"In the absence of external forces, the total momentum of a system remains constant."</em></p>
+                    
+                    <div class="formula-box">
+                        $$\vec{p}_{initial} = \vec{p}_{final}$$
+                        $$m_1\vec{u}_1 + m_2\vec{u}_2 = m_1\vec{v}_1 + m_2\vec{v}_2$$
+                    </div>
+                    
+                    <p><strong>Applications:</strong></p>
+                    <ul>
+                        <li>Collisions (elastic and inelastic)</li>
+                        <li>Explosions</li>
+                        <li>Rocket propulsion</li>
+                        <li>Recoil of guns</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📝 Example 4: Collision Problem</h4>
+                    <p><strong>Problem:</strong> A 2 kg ball moving at 5 m/s collides with a 3 kg ball at rest. After collision, they move together. Find their common velocity.</p>
+                    
+                    <p><strong>Solution:</strong></p>
+                    <p>This is a perfectly inelastic collision (objects stick together).</p>
+                    
+                    <p>Using conservation of momentum:</p>
+                    <p>\(m_1 u_1 + m_2 u_2 = (m_1 + m_2)v\)</p>
+                    <p>\((2)(5) + (3)(0) = (2 + 3)v\)</p>
+                    <p>\(10 = 5v\)</p>
+                    <p>\(v = 2\) m/s</p>
+                    
+                    <div class="key-point">
+                        <strong>Answer:</strong> The combined mass moves at 2 m/s.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRACTICE PROBLEMS -->
+            <div class="section" id="problems">
+                <h2 class="section-title">🧩 Practice Problems</h2>
+                
+                <!-- Problem 1 -->
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span class="problem-num">Problem 1</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <div class="problem-text">
+                        A force of 20 N acts on a body of mass 5 kg. Calculate the acceleration produced.
+                    </div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, 1, 'A')">A) 2 m/s²</div>
+                        <div class="option" onclick="selectOption(this, 1, 'B')">B) 4 m/s²</div>
+                        <div class="option" onclick="selectOption(this, 1, 'C')">C) 5 m/s²</div>
+                        <div class="option" onclick="selectOption(this, 1, 'D')">D) 10 m/s²</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleSolution(1)">Show Solution</button>
+                    <div class="solution-box" id="solution1">
+                        <h4>✅ Solution</h4>
+                        <p><strong>Given:</strong> F = 20 N, m = 5 kg</p>
+                        <p><strong>Formula:</strong> F = ma</p>
+                        <p><strong>Calculation:</strong></p>
+                        <p>a = F/m = 20/5 = 4 m/s²</p>
+                        <p><strong>Answer: B) 4 m/s²</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Problem 2 -->
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span class="problem-num">Problem 2</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-text">
+                        A body of mass 10 kg is moving with a velocity of 20 m/s. A force is applied to it so that in 4 seconds, it attains a velocity of 30 m/s. Calculate the magnitude of the force.
+                    </div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, 2, 'A')">A) 15 N</div>
+                        <div class="option" onclick="selectOption(this, 2, 'B')">B) 20 N</div>
+                        <div class="option" onclick="selectOption(this, 2, 'C')">C) 25 N</div>
+                        <div class="option" onclick="selectOption(this, 2, 'D')">D) 30 N</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleSolution(2)">Show Solution</button>
+                    <div class="solution-box" id="solution2">
+                        <h4>✅ Solution</h4>
+                        <p><strong>Given:</strong> m = 10 kg, u = 20 m/s, v = 30 m/s, t = 4 s</p>
+                        <p><strong>Step 1:</strong> Find acceleration</p>
+                        <p>a = (v - u)/t = (30 - 20)/4 = 2.5 m/s²</p>
+                        <p><strong>Step 2:</strong> Calculate force</p>
+                        <p>F = ma = 10 × 2.5 = 25 N</p>
+                        <p><strong>Answer: C) 25 N</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Problem 3 -->
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span class="problem-num">Problem 3</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-text">
+                        Two blocks of masses 5 kg and 3 kg are connected by a string passing over a frictionless pulley. Find the acceleration of the system and tension in the string. (g = 10 m/s²)
+                    </div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, 3, 'A')">A) a = 2.5 m/s², T = 37.5 N</div>
+                        <div class="option" onclick="selectOption(this, 3, 'B')">B) a = 2 m/s², T = 40 N</div>
+                        <div class="option" onclick="selectOption(this, 3, 'C')">C) a = 3 m/s², T = 35 N</div>
+                        <div class="option" onclick="selectOption(this, 3, 'D')">D) a = 2.5 m/s², T = 40 N</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleSolution(3)">Show Solution</button>
+                    <div class="solution-box" id="solution3">
+                        <h4>✅ Solution</h4>
+                        <p><strong>Given:</strong> m₁ = 5 kg, m₂ = 3 kg, g = 10 m/s²</p>
+                        <p><strong>For Atwood's Machine:</strong></p>
+                        <p>Acceleration: a = (m₁ - m₂)g/(m₁ + m₂)</p>
+                        <p>a = (5 - 3) × 10/(5 + 3) = 20/8 = 2.5 m/s²</p>
+                        <p><strong>Tension:</strong> T = 2m₁m₂g/(m₁ + m₂)</p>
+                        <p>T = 2 × 5 × 3 × 10/(5 + 3) = 300/8 = 37.5 N</p>
+                        <p><strong>Answer: A) a = 2.5 m/s², T = 37.5 N</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Problem 4 -->
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span class="problem-num">Problem 4</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <div class="problem-text">
+                        A cricket ball of mass 150 g moving at 25 m/s is hit by a bat and returns in the opposite direction at 30 m/s. If the contact time is 0.01 s, find the average force exerted by the bat.
+                    </div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, 4, 'A')">A) 750 N</div>
+                        <div class="option" onclick="selectOption(this, 4, 'B')">B) 825 N</div>
+                        <div class="option" onclick="selectOption(this, 4, 'C')">C) 900 N</div>
+                        <div class="option" onclick="selectOption(this, 4, 'D')">D) 1000 N</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleSolution(4)">Show Solution</button>
+                    <div class="solution-box" id="solution4">
+                        <h4>✅ Solution</h4>
+                        <p><strong>Given:</strong> m = 150 g = 0.15 kg, u = 25 m/s, v = -30 m/s (opposite direction), t = 0.01 s</p>
+                        <p><strong>Using Impulse-Momentum Theorem:</strong></p>
+                        <p>F × t = m(v - u)</p>
+                        <p>F = m(v - u)/t</p>
+                        <p>F = 0.15 × (-30 - 25)/0.01</p>
+                        <p>F = 0.15 × (-55)/0.01</p>
+                        <p>F = -825 N</p>
+                        <p>Magnitude = 825 N (negative sign indicates direction)</p>
+                        <p><strong>Answer: B) 825 N</strong></p>
+                    </div>
+                </div>
+                
+                <!-- Problem 5 -->
+                <div class="problem-card">
+                    <div class="problem-header">
+                        <span class="problem-num">Problem 5</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <div class="problem-text">
+                        A rocket of mass 1000 kg ejects gases at a rate of 10 kg/s with a velocity of 2000 m/s relative to the rocket. Calculate the thrust on the rocket.
+                    </div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption(this, 5, 'A')">A) 15,000 N</div>
+                        <div class="option" onclick="selectOption(this, 5, 'B')">B) 18,000 N</div>
+                        <div class="option" onclick="selectOption(this, 5, 'C')">C) 20,000 N</div>
+                        <div class="option" onclick="selectOption(this, 5, 'D')">D) 22,000 N</div>
+                    </div>
+                    <button class="btn btn-primary" onclick="toggleSolution(5)">Show Solution</button>
+                    <div class="solution-box" id="solution5">
+                        <h4>✅ Solution</h4>
+                        <p><strong>Given:</strong> dm/dt = 10 kg/s, v_rel = 2000 m/s</p>
+                        <p><strong>Thrust Formula:</strong></p>
+                        <p>F = v_rel × (dm/dt)</p>
+                        <p>F = 2000 × 10</p>
+                        <p>F = 20,000 N = 20 kN</p>
+                        <p><strong>Explanation:</strong> Thrust is the force produced by ejecting mass at high velocity (Newton's third law).</p>
+                        <p><strong>Answer: C) 20,000 N</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- VIDEO LECTURES -->
+            <div class="section" id="videos">
+                <h2 class="section-title">🎥 Video Lectures</h2>
+                
+                <div class="video-embed">
+                    <div style="text-align: center;">
+                        <i class="fas fa-play-circle" style="font-size: 4rem; color: var(--cyan); margin-bottom: 1rem;"></i>
+                        <p style="font-size: 1.2rem;">Laws of Motion - Complete Lecture</p>
+                        <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">Duration: 45:30 • By Prof. Sharma</p>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                    <div style="background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">📹 Newton's First Law</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Duration: 12:30</p>
+                    </div>
+                    <div style="background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">📹 F = ma Derivation</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Duration: 15:45</p>
+                    </div>
+                    <div style="background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer;">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">📹 Problem Solving</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Duration: 25:20</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--card); border: 2px solid var(--border); border-radius: 12px;">
+                <h3 style="color: var(--cyan); margin-bottom: 1rem;">✅ Chapter Complete!</h3>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9;">You've covered all topics in Laws of Motion. Ready for the next chapter?</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="app.html" class="btn">← Back to Chapters</a>
+                    <button class="btn btn-success" onclick="markComplete()">Mark as Complete</button>
+                    <a href="test.html" class="btn btn-primary">Take Chapter Test →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        function selectOption(element, problemNum, option) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        function toggleSolution(num) {
+            const solution = document.getElementById('solution' + num);
+            solution.classList.toggle('show');
+        }
+        
+        function markComplete() {
+            alert('🎉 Chapter marked as complete!\n\nGreat job! Your progress has been saved.');
+            // Save to localStorage
+            const progress = JSON.parse(localStorage.getItem('nexusProgress') || '{}');
+            if (!progress.chaptersCompleted) progress.chaptersCompleted = [];
+            if (!progress.chaptersCompleted.includes('p3')) {
+                progress.chaptersCompleted.push('p3');
+                localStorage.setItem('nexusProgress', JSON.stringify(progress));
+            }
+        }
+        
+        console.log('📚 NEXUS REALITY - Detailed Chapter Ready!');
+    </script>
+</body>
+</html>
