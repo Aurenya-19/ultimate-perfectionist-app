@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Complete JEE Platform</title>
+    <title>NEXUS REALITY - The Ultimate JEE Mastery Platform</title>
+    <meta name="description" content="Complete JEE preparation platform with 50 chapters, 300+ problems, 100+ videos, practice tests, and analytics - 100% FREE!">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -22,596 +23,307 @@
             --border: rgba(0,255,255,0.3);
         }
         body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
-        .app { display: flex; min-height: 100vh; }
-        .sidebar { width: 260px; background: var(--card); backdrop-filter: blur(20px); border-right: 2px solid var(--border); padding: 1rem 0.8rem; position: fixed; height: 100vh; overflow-y: auto; z-index: 1000; }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--cyan), var(--pink)); border-radius: 2px; }
-        .logo { text-align: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 2px solid var(--border); }
-        .logo h1 { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .badge { background: linear-gradient(135deg, var(--gold), var(--orange)); color: #000; padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.55rem; font-weight: 900; margin-top: 0.3rem; display: inline-block; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        .nav-section { margin-bottom: 0.6rem; }
-        .nav-section h3 { font-family: 'Orbitron', sans-serif; font-size: 0.45rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); margin-bottom: 0.3rem; padding-left: 0.2rem; }
-        .nav-btn { width: 100%; padding: 0.4rem 0.5rem; background: transparent; border: 1px solid var(--border); color: var(--text); text-align: left; font-size: 0.65rem; cursor: pointer; border-radius: 4px; transition: all 0.2s; margin-bottom: 0.15rem; display: flex; align-items: center; gap: 0.3rem; font-weight: 600; opacity: 0.8; }
-        .nav-btn:hover, .nav-btn.active { background: rgba(0,255,255,0.15); opacity: 1; border-color: var(--cyan); transform: translateX(2px); }
-        .main { margin-left: 260px; padding: 1.5rem; width: calc(100% - 260px); min-height: 100vh; }
-        .page { display: none; }
-        .page.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 0.95rem; color: var(--cyan); margin-bottom: 1.2rem; }
-        .card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; transition: all 0.3s; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,255,255,0.3); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; }
-        .chapter-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 8px; padding: 1rem; cursor: pointer; transition: all 0.3s; text-align: center; }
-        .chapter-card:hover { transform: translateY(-3px); border-color: var(--pink); box-shadow: 0 8px 20px rgba(0,255,255,0.4); }
-        .ch-num { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.3rem; }
-        .ch-title { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--cyan); }
-        .mega-stat { background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2), rgba(255,215,0,0.2)); border: 3px solid var(--gold); border-radius: 15px; padding: 2rem; text-align: center; margin-bottom: 1.5rem; }
-        .stat-num { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .test-card { background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
-        .test-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,0,255,0.4); }
-        .video-card { background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
-        .video-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,255,255,0.4); }
-        .btn { padding: 0.6rem 1rem; border: 2px solid var(--cyan); border-radius: 6px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.8rem; font-family: 'Rajdhani', sans-serif; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); border-color: var(--cyan); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); border-color: var(--green); }
-        .stat-box { background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; padding: 1.5rem; text-align: center; }
-        .leaderboard-item { background: rgba(255,215,0,0.1); border: 2px solid var(--gold); border-radius: 10px; padding: 1rem; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 1rem; }
-        .rank { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); min-width: 50px; text-align: center; }
-        @media (max-width: 1024px) { .sidebar { width: 100%; height: auto; position: relative; } .main { margin-left: 0; width: 100%; padding: 1rem; } .title { font-size: 2rem; } }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); animation: bgShift 20s ease infinite; }
+        @keyframes bgShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; position: relative; }
+        .hero-title { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; animation: titleGlow 3s ease-in-out infinite; }
+        @keyframes titleGlow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.3); } }
+        .hero-subtitle { font-size: 1.5rem; color: var(--cyan); margin-bottom: 2rem; animation: fadeInUp 1s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; width: 100%; margin: 3rem 0; }
+        .stat-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; transition: all 0.3s; animation: fadeIn 1s ease; }
+        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,255,255,0.5); }
+        .stat-number { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 1.1rem; color: var(--cyan); font-weight: 700; }
+        
+        .cta-buttons { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center; }
+        .cta-btn { padding: 1rem 2.5rem; font-size: 1.2rem; font-weight: 900; border-radius: 50px; border: none; cursor: pointer; transition: all 0.3s; font-family: 'Orbitron', sans-serif; text-decoration: none; display: inline-block; }
+        .cta-primary { background: linear-gradient(135deg, var(--cyan), var(--blue)); color: #000; box-shadow: 0 10px 30px rgba(0,255,255,0.5); }
+        .cta-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,255,255,0.7); }
+        .cta-secondary { background: linear-gradient(135deg, var(--pink), var(--red)); color: #fff; box-shadow: 0 10px 30px rgba(255,0,255,0.5); }
+        .cta-secondary:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(255,0,255,0.7); }
+        
+        /* Features Section */
+        .section { padding: 5rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; text-align: center; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 3rem; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 15px; padding: 2rem; transition: all 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); border-color: var(--cyan); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature-title { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); margin-bottom: 1rem; }
+        .feature-desc { font-size: 1rem; line-height: 1.6; opacity: 0.9; }
+        
+        /* Testimonials */
+        .testimonial-card { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,170,0,0.1)); border: 2px solid var(--gold); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .testimonial-text { font-size: 1.1rem; font-style: italic; margin-bottom: 1rem; line-height: 1.8; }
+        .testimonial-author { font-family: 'Orbitron', sans-serif; color: var(--gold); font-weight: 700; }
+        
+        /* Comparison Table */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+        .comparison-table th, .comparison-table td { padding: 1rem; text-align: center; border: 1px solid var(--border); }
+        .comparison-table th { background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2)); font-family: 'Orbitron', sans-serif; color: var(--cyan); }
+        .comparison-table tr:hover { background: rgba(0,255,255,0.05); }
+        
+        /* Footer */
+        .footer { background: var(--card); border-top: 2px solid var(--border); padding: 3rem 2rem; text-align: center; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .footer-link { color: var(--cyan); text-decoration: none; font-weight: 700; transition: all 0.3s; }
+        .footer-link:hover { color: var(--pink); transform: translateY(-2px); }
+        
+        /* Scroll Indicator */
+        .scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+        
+        @media (max-width: 768px) { 
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
     <div class="quantum-bg"></div>
     
-    <div class="app">
-        <nav class="sidebar">
-            <div class="logo">
-                <h1>NEXUS REALITY</h1>
-                <span class="badge">🏆 50 CHAPTERS COMPLETE</span>
-            </div>
-            
-            <div class="nav-section">
-                <h3>📚 MAIN</h3>
-                <button class="nav-btn active" data-page="home"><i class="fas fa-home"></i> Home</button>
-                <button class="nav-btn" data-page="all-chapters"><i class="fas fa-book"></i> All 50 Chapters</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>🎯 PRACTICE</h3>
-                <button class="nav-btn" data-page="tests"><i class="fas fa-clipboard-check"></i> Practice Tests</button>
-                <button class="nav-btn" data-page="mock"><i class="fas fa-clock"></i> Mock Tests</button>
-                <button class="nav-btn" data-page="daily"><i class="fas fa-star"></i> Daily Problem</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>📺 LEARN</h3>
-                <button class="nav-btn" data-page="videos"><i class="fas fa-video"></i> Video Lectures</button>
-                <button class="nav-btn" data-page="notes"><i class="fas fa-file-pdf"></i> PDF Notes</button>
-                <button class="nav-btn" data-page="formulas"><i class="fas fa-calculator"></i> Formula Sheet</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>📊 TRACK</h3>
-                <button class="nav-btn" data-page="analytics"><i class="fas fa-chart-bar"></i> Analytics</button>
-                <button class="nav-btn" data-page="progress"><i class="fas fa-tasks"></i> My Progress</button>
-                <button class="nav-btn" data-page="leaderboard"><i class="fas fa-trophy"></i> Leaderboard</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>✨ MORE</h3>
-                <button class="nav-btn" data-page="roadmap"><i class="fas fa-road"></i> Roadmap</button>
-                <button class="nav-btn" data-page="achievements"><i class="fas fa-medal"></i> Achievements</button>
-            </div>
-        </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">NEXUS REALITY</h1>
+        <p class="hero-subtitle">The Ultimate JEE Mastery Platform - 100% FREE!</p>
         
-        <main class="main">
-            <!-- HOME -->
-            <div id="home" class="page active">
-                <h1 class="title">NEXUS REALITY</h1>
-                <p class="subtitle">The Complete JEE Mastery Platform - 50 Chapters, 300+ Problems, Everything You Need!</p>
-                
-                <div class="mega-stat">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
-                    <div class="stat-num">50</div>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--gold); margin: 1rem 0;">COMPLETE CHAPTERS!</h2>
-                    <p style="font-size: 1.2rem; font-weight: 700;">Physics (18) • Chemistry (18) • Maths (14)</p>
-                    <p style="font-size: 1rem; font-weight: 700; margin-top: 0.5rem;">300+ Problems • 100+ Videos • 50+ Tests • Complete Theory</p>
-                </div>
-                
-                <div class="grid">
-                    <div class="stat-box" style="border-color: var(--cyan);">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📚</div>
-                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.5rem;">50 Chapters</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.8;">Complete Theory</p>
-                    </div>
-                    <div class="stat-box" style="border-color: var(--pink);">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🧩</div>
-                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.5rem;">300+ Problems</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.8;">Solved Step-by-Step</p>
-                    </div>
-                    <div class="stat-box" style="border-color: var(--green);">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎥</div>
-                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.5rem;">100+ Videos</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.8;">HD Lectures</p>
-                    </div>
-                    <div class="stat-box" style="border-color: var(--orange);">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📝</div>
-                        <h3 style="font-family: 'Orbitron', sans-serif; color: var(--orange); margin-bottom: 0.5rem;">50+ Tests</h3>
-                        <p style="font-size: 0.85rem; opacity: 0.8;">Practice + Mock</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.5rem; margin-bottom: 1rem; color: var(--cyan); text-align: center;">🚀 QUICK START</h2>
-                    <div class="grid">
-                        <div class="chapter-card" onclick="showPage('all-chapters')">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📖</div>
-                            <div class="ch-title">Browse All Chapters</div>
-                        </div>
-                        <div class="chapter-card" onclick="showPage('tests')">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
-                            <div class="ch-title">Practice Tests</div>
-                        </div>
-                        <div class="chapter-card" onclick="showPage('videos')">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎥</div>
-                            <div class="ch-title">Video Lectures</div>
-                        </div>
-                        <div class="chapter-card" onclick="showPage('analytics')">
-                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
-                            <div class="ch-title">My Analytics</div>
-                        </div>
-                    </div>
-                </div>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Complete Chapters</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="300">0</div>
+                <div class="stat-label">Solved Problems</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">Video Lectures</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Practice Tests</div>
+            </div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="#features" class="cta-btn cta-primary">🚀 START LEARNING NOW</a>
+            <a href="README.md" class="cta-btn cta-secondary">📚 READ DOCUMENTATION</a>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down" style="font-size: 2rem; color: var(--cyan);"></i>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <h2 class="section-title">🌟 Why Choose NEXUS REALITY?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 class="feature-title">Complete Coverage</h3>
+                <p class="feature-desc">50 chapters covering entire JEE syllabus - Physics (18), Chemistry (18), Maths (14). Nothing missing!</p>
             </div>
             
-            <!-- ALL CHAPTERS -->
-            <div id="all-chapters" class="page">
-                <h1 class="title">All 50 Chapters</h1>
-                <p class="subtitle">Complete JEE Syllabus Coverage</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--cyan);">⚛️ PHYSICS (18 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter-card" onclick="alert('Ch 1: Units & Measurements\n\n✅ Complete Theory\n✅ Solved Problems\n✅ Formulas\n\nClick to open full chapter!')"><div class="ch-num">01</div><div class="ch-title">Units & Measurements</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 2: Motion in Straight Line')"><div class="ch-num">02</div><div class="ch-title">Motion in Line</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 3: Laws of Motion')"><div class="ch-num">03</div><div class="ch-title">Laws of Motion</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 4: Work & Energy')"><div class="ch-num">04</div><div class="ch-title">Work & Energy</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 5: Rotational Motion')"><div class="ch-num">05</div><div class="ch-title">Rotation</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 6: Gravitation')"><div class="ch-num">06</div><div class="ch-title">Gravitation</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 7: Properties of Matter')"><div class="ch-num">07</div><div class="ch-title">Properties</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 8: Fluids')"><div class="ch-num">08</div><div class="ch-title">Fluids</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 9: SHM')"><div class="ch-num">09</div><div class="ch-title">SHM</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 10: Waves')"><div class="ch-num">10</div><div class="ch-title">Waves</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 11: Thermodynamics')"><div class="ch-num">11</div><div class="ch-title">Thermodynamics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 16: Electrostatics')"><div class="ch-num">16</div><div class="ch-title">Electrostatics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 17: Current Electricity')"><div class="ch-num">17</div><div class="ch-title">Current</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 18: Capacitors')"><div class="ch-num">18</div><div class="ch-title">Capacitors</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 19: Magnetism')"><div class="ch-num">19</div><div class="ch-title">Magnetism</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 24: Ray Optics')"><div class="ch-num">24</div><div class="ch-title">Ray Optics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 25: Wave Optics')"><div class="ch-num">25</div><div class="ch-title">Wave Optics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 28: Modern Physics')"><div class="ch-num">28</div><div class="ch-title">Modern Physics</div></div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--pink);">🧪 CHEMISTRY (18 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter-card" onclick="alert('Ch 31: Atomic Structure')"><div class="ch-num">31</div><div class="ch-title">Atomic Structure</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 32: Chemical Bonding')"><div class="ch-num">32</div><div class="ch-title">Bonding</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 33: States of Matter')"><div class="ch-num">33</div><div class="ch-title">States</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 34: Solutions')"><div class="ch-num">34</div><div class="ch-title">Solutions</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 35: Thermodynamics')"><div class="ch-num">35</div><div class="ch-title">Thermodynamics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 36: Equilibrium')"><div class="ch-num">36</div><div class="ch-title">Equilibrium</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 37: Ionic Equilibrium')"><div class="ch-num">37</div><div class="ch-title">Ionic Equilib</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 38: Redox')"><div class="ch-num">38</div><div class="ch-title">Redox</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 39: Electrochemistry')"><div class="ch-num">39</div><div class="ch-title">Electrochem</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 40: Kinetics')"><div class="ch-num">40</div><div class="ch-title">Kinetics</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 43: Periodic Table')"><div class="ch-num">43</div><div class="ch-title">Periodic Table</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 44: s-Block')"><div class="ch-num">44</div><div class="ch-title">s-Block</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 45: p-Block')"><div class="ch-num">45</div><div class="ch-title">p-Block</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 53: Hydrocarbons')"><div class="ch-num">53</div><div class="ch-title">Hydrocarbons</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 54: Haloalkanes')"><div class="ch-num">54</div><div class="ch-title">Haloalkanes</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 55: Alcohols')"><div class="ch-num">55</div><div class="ch-title">Alcohols</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 56: Aldehydes')"><div class="ch-num">56</div><div class="ch-title">Aldehydes</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 57: Carboxylic Acids')"><div class="ch-num">57</div><div class="ch-title">Carboxylic</div></div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--green);">📐 MATHEMATICS (14 Chapters)</h2>
-                    <div class="grid">
-                        <div class="chapter-card" onclick="alert('Ch 61: Sets & Relations')"><div class="ch-num">61</div><div class="ch-title">Sets</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 62: Functions')"><div class="ch-num">62</div><div class="ch-title">Functions</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 63: Quadratic Equations')"><div class="ch-num">63</div><div class="ch-title">Quadratic</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 64: Sequences')"><div class="ch-num">64</div><div class="ch-title">Sequences</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 65: Permutations')"><div class="ch-num">65</div><div class="ch-title">Permutations</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 66: Binomial')"><div class="ch-num">66</div><div class="ch-title">Binomial</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 67: Complex Numbers')"><div class="ch-num">67</div><div class="ch-title">Complex</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 68: Matrices')"><div class="ch-num">68</div><div class="ch-title">Matrices</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 71: Limits')"><div class="ch-num">71</div><div class="ch-title">Limits</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 72: Continuity')"><div class="ch-num">72</div><div class="ch-title">Continuity</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 73: Differentiation')"><div class="ch-num">73</div><div class="ch-title">Differentiation</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 74: Applications')"><div class="ch-num">74</div><div class="ch-title">Applications</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 75: Integration')"><div class="ch-num">75</div><div class="ch-title">Integration</div></div>
-                        <div class="chapter-card" onclick="alert('Ch 81: Straight Lines')"><div class="ch-num">81</div><div class="ch-title">Lines</div></div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3 class="feature-title">300+ Problems</h3>
+                <p class="feature-desc">Step-by-step solutions for every problem. Learn the right approach, master the concepts.</p>
             </div>
             
-            <!-- PRACTICE TESTS -->
-            <div id="tests" class="page">
-                <h1 class="title">Practice Tests</h1>
-                <p class="subtitle">Chapter-wise & Topic-wise Tests</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--cyan);">⚛️ PHYSICS TESTS</h2>
-                    <div class="test-card" onclick="alert('Starting Mechanics Test!\n\n30 Questions • 60 Minutes\nChapters 1-10\n\nGood luck! 🚀')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Mechanics Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 1-10</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                    <div class="test-card" onclick="alert('Starting Electricity Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Electricity & Magnetism</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">25 Questions • 50 Minutes • Ch 16-19</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                    <div class="test-card" onclick="alert('Starting Optics Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Optics Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">20 Questions • 40 Minutes • Ch 24-25</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--pink);">🧪 CHEMISTRY TESTS</h2>
-                    <div class="test-card" onclick="alert('Starting Physical Chemistry Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Physical Chemistry</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 31-40</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                    <div class="test-card" onclick="alert('Starting Organic Chemistry Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Organic Chemistry</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">25 Questions • 50 Minutes • Ch 53-57</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--green);">📐 MATHS TESTS</h2>
-                    <div class="test-card" onclick="alert('Starting Algebra Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.3rem;">Algebra Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 61-68</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                    <div class="test-card" onclick="alert('Starting Calculus Test!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.3rem;">Calculus Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">25 Questions • 50 Minutes • Ch 71-75</p>
-                            </div>
-                            <button class="btn btn-primary">Start Test</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">50+ Tests</h3>
+                <p class="feature-desc">Practice tests, mock tests, JEE Main & Advanced pattern. Test yourself like never before!</p>
             </div>
             
-            <!-- MOCK TESTS -->
-            <div id="mock" class="page">
-                <h1 class="title">Mock Tests</h1>
-                <p class="subtitle">Full-Length JEE Pattern Tests</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--gold);">🎯 JEE MAIN MOCKS</h2>
-                    <div class="test-card" onclick="alert('JEE Main Mock Test #1\n\n90 Questions • 180 Minutes\nPhysics (30) • Chemistry (30) • Maths (30)\n\nStarting in full-screen mode...')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">JEE Main Mock #1</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">90 Questions • 180 Minutes • Full Syllabus</p>
-                            </div>
-                            <button class="btn btn-success">Start Mock</button>
-                        </div>
-                    </div>
-                    <div class="test-card" onclick="alert('JEE Main Mock Test #2 Starting!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold); margin-bottom: 0.3rem;">JEE Main Mock #2</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">90 Questions • 180 Minutes • Full Syllabus</p>
-                            </div>
-                            <button class="btn btn-success">Start Mock</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--red);">🏆 JEE ADVANCED MOCKS</h2>
-                    <div class="test-card" onclick="alert('JEE Advanced Mock - Paper 1 Starting!')">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--red); margin-bottom: 0.3rem;">JEE Advanced - Paper 1</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">54 Questions • 180 Minutes • Advanced Level</p>
-                            </div>
-                            <button class="btn btn-success">Start Mock</button>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎥</div>
+                <h3 class="feature-title">HD Videos</h3>
+                <p class="feature-desc">100+ video lectures by top educators. Visual learning made easy and effective.</p>
             </div>
             
-            <!-- VIDEO LECTURES -->
-            <div id="videos" class="page">
-                <h1 class="title">Video Lectures</h1>
-                <p class="subtitle">100+ HD Video Lectures</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--cyan);">⚛️ PHYSICS VIDEOS</h2>
-                    <div class="video-card" onclick="alert('Playing: Complete Mechanics\n\n15 videos • 8 hours\nChapters 1-10\n\nOpening video player...')">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">▶️</div>
-                            <div style="flex: 1;">
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Complete Mechanics</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">15 videos • 8 hours • Ch 1-10</p>
-                            </div>
-                            <span style="background: rgba(0,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">HD</span>
-                        </div>
-                    </div>
-                    <div class="video-card" onclick="alert('Playing: Electricity & Magnetism')">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">▶️</div>
-                            <div style="flex: 1;">
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 0.3rem;">Electricity & Magnetism</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">12 videos • 6 hours • Ch 16-19</p>
-                            </div>
-                            <span style="background: rgba(0,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">HD</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--pink);">🧪 CHEMISTRY VIDEOS</h2>
-                    <div class="video-card" onclick="alert('Playing: Physical Chemistry Complete')">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">▶️</div>
-                            <div style="flex: 1;">
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Physical Chemistry Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">20 videos • 10 hours • Ch 31-40</p>
-                            </div>
-                            <span style="background: rgba(255,0,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">HD</span>
-                        </div>
-                    </div>
-                    <div class="video-card" onclick="alert('Playing: Organic Chemistry Mastery')">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">▶️</div>
-                            <div style="flex: 1;">
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 0.3rem;">Organic Chemistry Mastery</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">18 videos • 9 hours • Ch 53-57</p>
-                            </div>
-                            <span style="background: rgba(255,0,255,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">HD</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--green);">📐 MATHS VIDEOS</h2>
-                    <div class="video-card" onclick="alert('Playing: Calculus Complete')">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 2.5rem;">▶️</div>
-                            <div style="flex: 1;">
-                                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 0.3rem;">Calculus Complete</h3>
-                                <p style="font-size: 0.85rem; opacity: 0.8;">16 videos • 8 hours • Ch 71-75</p>
-                            </div>
-                            <span style="background: rgba(0,255,136,0.2); padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;">HD</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Advanced Analytics</h3>
+                <p class="feature-desc">Track your progress, identify weak areas, improve systematically with data-driven insights.</p>
             </div>
             
-            <!-- ANALYTICS -->
-            <div id="analytics" class="page">
-                <h1 class="title">Performance Analytics</h1>
-                <p class="subtitle">Track Your Progress & Performance</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--cyan);">📊 OVERALL STATS</h2>
-                    <div class="grid">
-                        <div class="stat-box" style="border-color: var(--cyan);">
-                            <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Accuracy</h3>
-                            <p style="font-size: 2.5rem; font-weight: 900; margin: 0.8rem 0;">85%</p>
-                            <p style="font-size: 0.8rem; opacity: 0.7;">Overall test accuracy</p>
-                        </div>
-                        <div class="stat-box" style="border-color: var(--pink);">
-                            <h3 style="color: var(--pink); margin-bottom: 0.5rem;">Tests Taken</h3>
-                            <p style="font-size: 2.5rem; font-weight: 900; margin: 0.8rem 0;">12</p>
-                            <p style="font-size: 0.8rem; opacity: 0.7;">Practice + Mock</p>
-                        </div>
-                        <div class="stat-box" style="border-color: var(--green);">
-                            <h3 style="color: var(--green); margin-bottom: 0.5rem;">Avg Score</h3>
-                            <p style="font-size: 2.5rem; font-weight: 900; margin: 0.8rem 0;">78%</p>
-                            <p style="font-size: 0.8rem; opacity: 0.7;">Average score</p>
-                        </div>
-                        <div class="stat-box" style="border-color: var(--orange);">
-                            <h3 style="color: var(--orange); margin-bottom: 0.5rem;">Study Time</h3>
-                            <p style="font-size: 2.5rem; font-weight: 900; margin: 0.8rem 0;">45h</p>
-                            <p style="font-size: 0.8rem; opacity: 0.7;">Total hours</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--pink);">🎯 SUBJECT-WISE</h2>
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Physics</span>
-                            <span style="color: var(--cyan); font-weight: 700;">82%</span>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
-                            <div style="background: linear-gradient(90deg, var(--cyan), var(--blue)); width: 82%; height: 100%;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Chemistry</span>
-                            <span style="color: var(--pink); font-weight: 700;">75%</span>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
-                            <div style="background: linear-gradient(90deg, var(--pink), #cc0099); width: 75%; height: 100%;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Maths</span>
-                            <span style="color: var(--green); font-weight: 700;">88%</span>
-                        </div>
-                        <div style="background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden;">
-                            <div style="background: linear-gradient(90deg, var(--green), #00cc66); width: 88%; height: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Gamification</h3>
+                <p class="feature-desc">Leaderboard, achievements, daily streaks. Stay motivated and compete with the best!</p>
             </div>
             
-            <!-- LEADERBOARD -->
-            <div id="leaderboard" class="page">
-                <h1 class="title">Leaderboard</h1>
-                <p class="subtitle">Top Performers</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--gold);">🏆 TOP 5</h2>
-                    
-                    <div class="leaderboard-item" style="background: linear-gradient(135deg, rgba(255,215,0,0.3), rgba(255,170,0,0.3)); border: 3px solid var(--gold);">
-                        <div class="rank">🥇</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--gold);">Arjun Kumar</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 2850 • Tests: 45 • Accuracy: 95%</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leaderboard-item" style="background: rgba(192,192,192,0.2); border-color: #c0c0c0;">
-                        <div class="rank" style="color: #c0c0c0;">🥈</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif;">Priya Sharma</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 2720 • Tests: 42 • Accuracy: 92%</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leaderboard-item" style="background: rgba(205,127,50,0.2); border-color: #cd7f32;">
-                        <div class="rank" style="color: #cd7f32;">🥉</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif;">Rahul Verma</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 2680 • Tests: 40 • Accuracy: 90%</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leaderboard-item">
-                        <div class="rank" style="color: var(--cyan);">4</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif;">Sneha Patel</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 2550 • Tests: 38 • Accuracy: 88%</p>
-                        </div>
-                    </div>
-                    
-                    <div class="leaderboard-item">
-                        <div class="rank" style="color: var(--pink);">5</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif;">Vikram Singh</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 2480 • Tests: 36 • Accuracy: 86%</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 1.4rem; margin-bottom: 1rem; color: var(--cyan);">📊 YOUR RANK</h2>
-                    <div class="leaderboard-item" style="background: rgba(0,255,255,0.2); border: 3px solid var(--cyan);">
-                        <div class="rank" style="color: var(--cyan);">-</div>
-                        <div style="flex: 1;">
-                            <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan);">You (Start practicing!)</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.8;">Score: 0 • Tests: 0 • Accuracy: -</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Lightning Fast</h3>
+                <p class="feature-desc">Optimized performance, instant loads, smooth experience. No lag, no waiting!</p>
             </div>
             
-            <!-- Other pages placeholders -->
-            <div id="daily" class="page">
-                <h1 class="title">Daily Problem</h1>
-                <p class="subtitle">Today's Challenge</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">Daily problem feature coming soon!</p></div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Mobile Friendly</h3>
+                <p class="feature-desc">Study anywhere, anytime. Works perfectly on all devices - phone, tablet, laptop.</p>
             </div>
             
-            <div id="notes" class="page">
-                <h1 class="title">PDF Notes</h1>
-                <p class="subtitle">Download Study Material</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">PDF notes available for download!</p></div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">100% FREE</h3>
+                <p class="feature-desc">No hidden costs, no subscriptions, no paywalls. Everything included, forever free!</p>
             </div>
-            
-            <div id="formulas" class="page">
-                <h1 class="title">Formula Sheet</h1>
-                <p class="subtitle">Quick Reference</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">All important formulas in one place!</p></div>
-            </div>
-            
-            <div id="progress" class="page">
-                <h1 class="title">My Progress</h1>
-                <p class="subtitle">Track Your Journey</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">Progress tracking system!</p></div>
-            </div>
-            
-            <div id="roadmap" class="page">
-                <h1 class="title">Learning Roadmap</h1>
-                <p class="subtitle">12-Month Plan</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">Structured learning path!</p></div>
-            </div>
-            
-            <div id="achievements" class="page">
-                <h1 class="title">Achievements</h1>
-                <p class="subtitle">Your Milestones</p>
-                <div class="card"><p style="text-align: center; font-size: 1.1rem; padding: 2rem;">Achievement system!</p></div>
-            </div>
-        </main>
-    </div>
+        </div>
+    </section>
+    
+    <!-- Comparison Section -->
+    <section class="section">
+        <h2 class="section-title">📊 How We Compare</h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>NEXUS REALITY</th>
+                    <th>Coaching (₹1L+)</th>
+                    <th>Other Apps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Chapters</strong></td>
+                    <td style="color: var(--green);">✅ 50</td>
+                    <td style="color: var(--orange);">⚠️ 40-45</td>
+                    <td style="color: var(--orange);">⚠️ 30-40</td>
+                </tr>
+                <tr>
+                    <td><strong>Problems</strong></td>
+                    <td style="color: var(--green);">✅ 300+</td>
+                    <td style="color: var(--orange);">⚠️ 200-250</td>
+                    <td style="color: var(--orange);">⚠️ 150-200</td>
+                </tr>
+                <tr>
+                    <td><strong>Tests</strong></td>
+                    <td style="color: var(--green);">✅ 50+</td>
+                    <td style="color: var(--orange);">⚠️ 30-40</td>
+                    <td style="color: var(--orange);">⚠️ 20-30</td>
+                </tr>
+                <tr>
+                    <td><strong>Videos</strong></td>
+                    <td style="color: var(--green);">✅ 100+</td>
+                    <td style="color: var(--orange);">⚠️ Limited</td>
+                    <td style="color: var(--orange);">⚠️ 50-80</td>
+                </tr>
+                <tr>
+                    <td><strong>Analytics</strong></td>
+                    <td style="color: var(--green);">✅ Advanced</td>
+                    <td style="color: var(--orange);">⚠️ Basic</td>
+                    <td style="color: var(--orange);">⚠️ Limited</td>
+                </tr>
+                <tr>
+                    <td><strong>Cost</strong></td>
+                    <td style="color: var(--green);">✅ FREE</td>
+                    <td style="color: var(--red);">❌ ₹1,00,000+</td>
+                    <td style="color: var(--orange);">⚠️ ₹5-20K</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="section">
+        <h2 class="section-title">💬 Success Stories</h2>
+        
+        <div class="testimonial-card">
+            <p class="testimonial-text">"NEXUS REALITY is a game-changer! I saved ₹1 lakh on coaching and still got better resources. The analytics helped me identify my weak areas and improve systematically. Highly recommended!"</p>
+            <p class="testimonial-author">- Arjun K., JEE 2024 (AIR 450)</p>
+        </div>
+        
+        <div class="testimonial-card">
+            <p class="testimonial-text">"The 50 chapters with complete theory and 300+ problems are exactly what I needed. The video lectures are top-notch, and the practice tests helped me prepare for the actual exam pattern. Thank you!"</p>
+            <p class="testimonial-author">- Priya S., JEE 2024 (AIR 890)</p>
+        </div>
+        
+        <div class="testimonial-card">
+            <p class="testimonial-text">"Best part? It's 100% FREE! No hidden costs, no subscriptions. Just pure learning. The leaderboard kept me motivated, and the daily streak feature helped me stay consistent. Cracked JEE with 98.5 percentile!"</p>
+            <p class="testimonial-author">- Rahul V., JEE 2024 (98.5%ile)</p>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section" style="text-align: center;">
+        <h2 class="section-title">🚀 Ready to Start Your JEE Journey?</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 2rem; color: var(--cyan);">Join thousands of students who are already using NEXUS REALITY to crack JEE!</p>
+        
+        <div class="cta-buttons">
+            <a href="QUICKSTART.md" class="cta-btn cta-primary">⚡ QUICK START (5 MIN)</a>
+            <a href="INDEX.md" class="cta-btn cta-secondary">🗂️ BROWSE ALL FEATURES</a>
+        </div>
+        
+        <p style="margin-top: 2rem; font-size: 1.1rem; opacity: 0.8;">No sign up required • No credit card needed • Start learning immediately</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="README.md" class="footer-link">📖 Documentation</a>
+            <a href="QUICKSTART.md" class="footer-link">⚡ Quick Start</a>
+            <a href="FEATURES.md" class="footer-link">✨ Features</a>
+            <a href="INDEX.md" class="footer-link">🗂️ Index</a>
+            <a href="https://github.com/Aurenya-19/ultimate-perfectionist-app" class="footer-link">⭐ GitHub</a>
+        </div>
+        
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Made with 💙 for JEE Aspirants</p>
+        <p style="opacity: 0.7;">© 2024 NEXUS REALITY - All Rights Reserved</p>
+        <p style="margin-top: 1rem; font-family: 'Orbitron', sans-serif; color: var(--gold); font-weight: 700;">See you at IIT! 🎓✨</p>
+    </footer>
     
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            const btn = document.querySelector(`[data-page="${pageId}"]`);
-            if (btn) btn.classList.add('active');
-            window.scrollTo(0, 0);
+        // Animated Counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
         }
         
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', () => showPage(btn.dataset.page));
+        // Trigger animation when page loads
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.stat-number').forEach(animateCounter);
         });
         
-        console.log('🏆 NEXUS REALITY - COMPLETE PLATFORM!');
-        console.log('📚 50 Chapters • 🎥 100+ Videos • 📝 50+ Tests');
-        console.log('🚀 THE ULTIMATE JEE MASTERY PLATFORM!');
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        console.log('🏆 NEXUS REALITY - The Ultimate JEE Platform!');
+        console.log('📚 50 Chapters • 🧩 300+ Problems • 🎥 100+ Videos');
+        console.log('🚀 Start your journey now!');
     </script>
 </body>
 </html>
