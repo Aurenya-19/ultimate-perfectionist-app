@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Video Lectures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.8);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        .container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        
+        .search-bar { max-width: 600px; margin: 0 auto 2rem; position: relative; }
+        .search-input { width: 100%; padding: 1rem 3rem 1rem 1rem; background: var(--card); border: 2px solid var(--border); border-radius: 10px; color: var(--text); font-size: 1rem; font-family: 'Rajdhani', sans-serif; }
+        .search-input:focus { outline: none; border-color: var(--cyan); }
+        .search-icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--cyan); font-size: 1.2rem; }
+        
+        .filters { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.7rem 1.5rem; background: var(--card); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; font-family: 'Rajdhani', sans-serif; color: var(--text); }
+        .filter-btn:hover, .filter-btn.active { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
+        
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .video-card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); border-color: var(--cyan); }
+        
+        .video-thumbnail { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2)); display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; }
+        .play-icon { color: var(--cyan); }
+        .video-duration { position: absolute; bottom: 0.5rem; right: 0.5rem; background: rgba(0,0,0,0.8); padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; }
+        
+        .video-info { padding: 1.2rem; }
+        .video-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .video-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.8rem; }
+        .video-desc { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; }
+        .video-tags { display: flex; gap: 0.5rem; margin-top: 0.8rem; flex-wrap: wrap; }
+        .tag { background: rgba(0,255,255,0.1); border: 1px solid var(--cyan); padding: 0.3rem 0.6rem; border-radius: 5px; font-size: 0.75rem; }
+        
+        .video-player-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 2rem; }
+        .video-player-modal.active { display: flex; align-items: center; justify-content: center; }
+        .player-container { max-width: 1200px; width: 100%; background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; }
+        .player-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .close-btn { background: var(--pink); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 700; }
+        .video-frame { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--cyan); }
+        
+        .playlist-section { margin-top: 3rem; }
+        .playlist-card { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .playlist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .playlist-title { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.5rem; }
+        .playlist-count { color: var(--cyan); font-weight: 700; }
+        
+        .btn { padding: 0.7rem 1.2rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.85rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 2rem; }
+            .video-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎥 Video Lectures</h1>
+            <p style="color: var(--cyan); font-size: 1.2rem;">100+ HD Video Lectures by Top Educators</p>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search videos by topic, chapter, or subject...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterVideos('all')">All Videos</button>
+            <button class="filter-btn" onclick="filterVideos('physics')">⚛️ Physics</button>
+            <button class="filter-btn" onclick="filterVideos('chemistry')">🧪 Chemistry</button>
+            <button class="filter-btn" onclick="filterVideos('maths')">📐 Maths</button>
+        </div>
+        
+        <div class="video-grid" id="videoGrid"></div>
+        
+        <div class="playlist-section">
+            <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 2rem; margin-bottom: 2rem; text-align: center;">📚 Curated Playlists</h2>
+            
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <h3 class="playlist-title">⚛️ Complete Mechanics</h3>
+                    <span class="playlist-count">15 Videos • 8 Hours</span>
+                </div>
+                <p style="opacity: 0.9; margin-bottom: 1rem;">Master mechanics from basics to advanced. Covers all chapters 1-10.</p>
+                <button class="btn" onclick="loadPlaylist('mechanics')">▶ Watch Playlist</button>
+            </div>
+            
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <h3 class="playlist-title">🧪 Physical Chemistry</h3>
+                    <span class="playlist-count">20 Videos • 10 Hours</span>
+                </div>
+                <p style="opacity: 0.9; margin-bottom: 1rem;">Complete physical chemistry from atomic structure to kinetics.</p>
+                <button class="btn" onclick="loadPlaylist('physical-chem')">▶ Watch Playlist</button>
+            </div>
+            
+            <div class="playlist-card">
+                <div class="playlist-header">
+                    <h3 class="playlist-title">📐 Calculus Mastery</h3>
+                    <span class="playlist-count">16 Videos • 8 Hours</span>
+                </div>
+                <p style="opacity: 0.9; margin-bottom: 1rem;">From limits to integration, master calculus completely.</p>
+                <button class="btn" onclick="loadPlaylist('calculus')">▶ Watch Playlist</button>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="app.html" class="btn" style="padding: 1rem 2rem; font-size: 1rem;">← Back to App</a>
+        </div>
+    </div>
+    
+    <!-- Video Player Modal -->
+    <div class="video-player-modal" id="videoModal">
+        <div class="player-container">
+            <div class="player-header">
+                <h2 id="playerTitle" style="font-family: 'Orbitron', sans-serif; color: var(--cyan);"></h2>
+                <button class="close-btn" onclick="closePlayer()">✖ Close</button>
+            </div>
+            <div class="video-frame" id="videoFrame">
+                <div style="text-align: center;">
+                    <i class="fas fa-play-circle" style="font-size: 4rem; color: var(--cyan); margin-bottom: 1rem;"></i>
+                    <p style="font-size: 1.2rem;">Video Player</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.5rem;">Actual video would play here</p>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: var(--cyan); margin-bottom: 0.8rem;">About this video:</h3>
+                <p id="playerDesc" style="line-height: 1.8; opacity: 0.9;"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Video Database
+        const videos = [
+            // Physics
+            {id: 1, title: "Units & Measurements - Complete", subject: "physics", chapter: 1, duration: "45:30", desc: "Learn about SI units, dimensional analysis, and measurement techniques.", tags: ["Basics", "Important"]},
+            {id: 2, title: "Motion in Straight Line - Part 1", subject: "physics", chapter: 2, duration: "38:20", desc: "Understand velocity, acceleration, and equations of motion.", tags: ["Kinematics"]},
+            {id: 3, title: "Motion in Straight Line - Part 2", subject: "physics", chapter: 2, duration: "42:15", desc: "Advanced problems and graphical analysis of motion.", tags: ["Kinematics", "Problems"]},
+            {id: 4, title: "Newton's Laws of Motion", subject: "physics", chapter: 3, duration: "50:45", desc: "Complete coverage of all three laws with examples.", tags: ["Important", "Laws"]},
+            {id: 5, title: "Work, Energy & Power", subject: "physics", chapter: 4, duration: "55:30", desc: "Energy conservation, work-energy theorem, and power.", tags: ["Energy", "Important"]},
+            {id: 6, title: "Rotational Motion - Basics", subject: "physics", chapter: 5, duration: "48:20", desc: "Torque, moment of inertia, and angular momentum.", tags: ["Rotation"]},
+            {id: 7, title: "Gravitation Complete", subject: "physics", chapter: 6, duration: "52:10", desc: "Universal law of gravitation and planetary motion.", tags: ["Important"]},
+            {id: 8, title: "Electrostatics - Part 1", subject: "physics", chapter: 16, duration: "46:30", desc: "Electric charge, Coulomb's law, and electric field.", tags: ["Electricity"]},
+            {id: 9, title: "Electrostatics - Part 2", subject: "physics", chapter: 16, duration: "44:25", desc: "Gauss's law and applications.", tags: ["Electricity", "Advanced"]},
+            {id: 10, title: "Current Electricity", subject: "physics", chapter: 17, duration: "50:00", desc: "Ohm's law, circuits, and Kirchhoff's laws.", tags: ["Electricity", "Important"]},
+            
+            // Chemistry
+            {id: 11, title: "Atomic Structure - Complete", subject: "chemistry", chapter: 31, duration: "58:30", desc: "Bohr's model, quantum numbers, and electronic configuration.", tags: ["Basics", "Important"]},
+            {id: 12, title: "Chemical Bonding - Part 1", subject: "chemistry", chapter: 32, duration: "45:20", desc: "Ionic, covalent, and metallic bonding.", tags: ["Bonding"]},
+            {id: 13, title: "Chemical Bonding - Part 2", subject: "chemistry", chapter: 32, duration: "42:15", desc: "VSEPR theory and molecular orbital theory.", tags: ["Bonding", "Advanced"]},
+            {id: 14, title: "States of Matter", subject: "chemistry", chapter: 33, duration: "48:40", desc: "Gas laws, kinetic theory, and liquids.", tags: ["Physical"]},
+            {id: 15, title: "Solutions & Colligative Properties", subject: "chemistry", chapter: 34, duration: "52:30", desc: "Molarity, molality, and colligative properties.", tags: ["Physical", "Important"]},
+            {id: 16, title: "Thermodynamics - Part 1", subject: "chemistry", chapter: 35, duration: "55:20", desc: "First law, enthalpy, and heat capacity.", tags: ["Physical", "Important"]},
+            {id: 17, title: "Thermodynamics - Part 2", subject: "chemistry", chapter: 35, duration: "50:15", desc: "Entropy, Gibbs energy, and spontaneity.", tags: ["Physical", "Advanced"]},
+            {id: 18, title: "Chemical Equilibrium", subject: "chemistry", chapter: 36, duration: "46:30", desc: "Equilibrium constant and Le Chatelier's principle.", tags: ["Physical"]},
+            {id: 19, title: "Ionic Equilibrium", subject: "chemistry", chapter: 37, duration: "48:25", desc: "pH, buffer solutions, and solubility.", tags: ["Physical", "Important"]},
+            {id: 20, title: "Organic Chemistry Basics", subject: "chemistry", chapter: 53, duration: "44:40", desc: "Nomenclature, isomerism, and reactions.", tags: ["Organic", "Basics"]},
+            
+            // Maths
+            {id: 21, title: "Sets & Relations", subject: "maths", chapter: 61, duration: "40:30", desc: "Set operations, relations, and functions basics.", tags: ["Basics"]},
+            {id: 22, title: "Functions - Complete", subject: "maths", chapter: 62, duration: "52:20", desc: "Types of functions, domain, range, and graphs.", tags: ["Important"]},
+            {id: 23, title: "Quadratic Equations", subject: "maths", chapter: 63, duration: "48:15", desc: "Solving quadratics, discriminant, and applications.", tags: ["Algebra", "Important"]},
+            {id: 24, title: "Sequences & Series", subject: "maths", chapter: 64, duration: "55:30", desc: "AP, GP, and special series.", tags: ["Algebra"]},
+            {id: 25, title: "Permutations & Combinations", subject: "maths", chapter: 65, duration: "50:40", desc: "Counting principles and problem solving.", tags: ["Important"]},
+            {id: 26, title: "Binomial Theorem", subject: "maths", chapter: 66, duration: "42:25", desc: "Expansion, general term, and applications.", tags: ["Algebra"]},
+            {id: 27, title: "Complex Numbers", subject: "maths", chapter: 67, duration: "46:30", desc: "Operations, modulus, argument, and De Moivre's theorem.", tags: ["Important"]},
+            {id: 28, title: "Limits - Complete", subject: "maths", chapter: 71, duration: "58:20", desc: "Concept of limits, standard limits, and evaluation.", tags: ["Calculus", "Important"]},
+            {id: 29, title: "Continuity & Differentiability", subject: "maths", chapter: 72, duration: "52:15", desc: "Continuity, differentiability, and theorems.", tags: ["Calculus"]},
+            {id: 30, title: "Differentiation Techniques", subject: "maths", chapter: 73, duration: "55:40", desc: "All differentiation rules and applications.", tags: ["Calculus", "Important"]},
+        ];
+        
+        let currentFilter = 'all';
+        
+        // Render Videos
+        function renderVideos(filter = 'all', searchTerm = '') {
+            const grid = document.getElementById('videoGrid');
+            let filtered = videos;
+            
+            if (filter !== 'all') {
+                filtered = videos.filter(v => v.subject === filter);
+            }
+            
+            if (searchTerm) {
+                filtered = filtered.filter(v => 
+                    v.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    v.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    v.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+                );
+            }
+            
+            const html = filtered.map(video => `
+                <div class="video-card" onclick="playVideo(${video.id})">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play-circle play-icon"></i>
+                        <span class="video-duration">${video.duration}</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.title}</h3>
+                        <div class="video-meta">
+                            <span>${video.subject.charAt(0).toUpperCase() + video.subject.slice(1)}</span>
+                            <span>Ch ${video.chapter}</span>
+                        </div>
+                        <p class="video-desc">${video.desc}</p>
+                        <div class="video-tags">
+                            ${video.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            grid.innerHTML = html || '<p style="text-align: center; opacity: 0.7; grid-column: 1/-1;">No videos found</p>';
+        }
+        
+        // Filter Videos
+        function filterVideos(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderVideos(filter, document.getElementById('searchInput').value);
+        }
+        
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderVideos(currentFilter, e.target.value);
+        });
+        
+        // Play Video
+        function playVideo(id) {
+            const video = videos.find(v => v.id === id);
+            if (!video) return;
+            
+            document.getElementById('playerTitle').textContent = video.title;
+            document.getElementById('playerDesc').textContent = video.desc;
+            document.getElementById('videoModal').classList.add('active');
+            
+            // Save to watch history
+            const history = JSON.parse(localStorage.getItem('videoHistory') || '[]');
+            if (!history.includes(id)) {
+                history.push(id);
+                localStorage.setItem('videoHistory', JSON.stringify(history));
+            }
+        }
+        
+        // Close Player
+        function closePlayer() {
+            document.getElementById('videoModal').classList.remove('active');
+        }
+        
+        // Load Playlist
+        function loadPlaylist(type) {
+            alert(`Loading ${type} playlist!\n\nThis would open a dedicated playlist view with all videos in sequence.`);
+        }
+        
+        // Initialize
+        renderVideos();
+        
+        console.log('🎥 NEXUS REALITY - Video Library Ready!');
+        console.log(`📚 ${videos.length} videos available`);
+    </script>
+</body>
+</html>
