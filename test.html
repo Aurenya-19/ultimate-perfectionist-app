@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Test Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.9);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --red: #ff3366;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        /* Test Selection Screen */
+        .test-selection { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
+        .test-title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2rem; text-align: center; }
+        
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; width: 100%; }
+        .test-option { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 15px; padding: 2rem; cursor: pointer; transition: all 0.3s; }
+        .test-option:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); border-color: var(--cyan); }
+        .test-option h3 { font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem; font-size: 1.5rem; }
+        .test-option p { opacity: 0.8; margin-bottom: 0.5rem; }
+        .test-option .btn { width: 100%; margin-top: 1rem; }
+        
+        /* Test Interface */
+        .test-interface { display: none; min-height: 100vh; }
+        .test-interface.active { display: flex; flex-direction: column; }
+        
+        .test-header { background: var(--card); backdrop-filter: blur(20px); border-bottom: 2px solid var(--border); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .test-info { display: flex; gap: 2rem; align-items: center; }
+        .timer { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--orange); font-weight: 900; }
+        .timer.warning { color: var(--red); animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        
+        .test-body { display: flex; flex: 1; }
+        .question-panel { flex: 1; padding: 2rem; overflow-y: auto; }
+        .palette-panel { width: 300px; background: var(--card); backdrop-filter: blur(20px); border-left: 2px solid var(--border); padding: 1.5rem; overflow-y: auto; }
+        
+        .question-card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; max-width: 900px; margin: 0 auto; }
+        .question-text { font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; }
+        .options-container { display: flex; flex-direction: column; gap: 1rem; }
+        .option { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 1rem; }
+        .option:hover { background: rgba(0,255,255,0.15); border-color: var(--cyan); }
+        .option.selected { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
+        .option-label { font-weight: 900; color: var(--cyan); min-width: 30px; }
+        
+        .question-nav { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
+        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
+        .btn-danger { background: linear-gradient(135deg, var(--red), #cc0033); }
+        
+        .palette-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin-top: 1rem; }
+        .palette-btn { aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: 700; transition: all 0.2s; background: rgba(0,0,0,0.3); }
+        .palette-btn:hover { transform: scale(1.1); }
+        .palette-btn.answered { background: var(--green); border-color: var(--green); color: #000; }
+        .palette-btn.marked { background: var(--orange); border-color: var(--orange); color: #000; }
+        .palette-btn.current { background: var(--cyan); border-color: var(--cyan); color: #000; }
+        .palette-btn.not-visited { background: rgba(255,255,255,0.1); }
+        
+        .legend { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid var(--border); }
+        .legend-item { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; font-size: 0.85rem; }
+        .legend-box { width: 20px; height: 20px; border-radius: 4px; }
+        
+        /* Results Screen */
+        .results-screen { display: none; min-height: 100vh; padding: 2rem; }
+        .results-screen.active { display: block; }
+        .results-card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 15px; padding: 2rem; max-width: 1000px; margin: 0 auto; }
+        .score-display { text-align: center; padding: 3rem; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border-radius: 12px; margin-bottom: 2rem; }
+        .score-number { font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .score-label { font-size: 1.5rem; color: var(--cyan); margin-top: 1rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-box { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem; text-align: center; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; color: var(--cyan); margin-bottom: 0.5rem; }
+        
+        .review-section { margin-top: 2rem; }
+        .review-question { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; }
+        .review-question.correct { border-color: var(--green); }
+        .review-question.wrong { border-color: var(--red); }
+        
+        @media (max-width: 1024px) { 
+            .test-body { flex-direction: column; }
+            .palette-panel { width: 100%; border-left: none; border-top: 2px solid var(--border); }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <!-- Test Selection Screen -->
+    <div class="test-selection" id="testSelection">
+        <h1 class="test-title">Select Your Test</h1>
+        
+        <div class="test-grid">
+            <div class="test-option">
+                <h3>⚛️ Physics - Mechanics</h3>
+                <p><strong>30 Questions</strong></p>
+                <p><strong>60 Minutes</strong></p>
+                <p>Chapters 1-10</p>
+                <p>Difficulty: Medium</p>
+                <button class="btn btn-primary" onclick="startTest('physics', 30, 60)">Start Test</button>
+            </div>
+            
+            <div class="test-option">
+                <h3>🧪 Chemistry - Physical</h3>
+                <p><strong>30 Questions</strong></p>
+                <p><strong>60 Minutes</strong></p>
+                <p>Chapters 31-40</p>
+                <p>Difficulty: Medium</p>
+                <button class="btn btn-primary" onclick="startTest('chemistry', 30, 60)">Start Test</button>
+            </div>
+            
+            <div class="test-option">
+                <h3>📐 Maths - Algebra</h3>
+                <p><strong>30 Questions</strong></p>
+                <p><strong>60 Minutes</strong></p>
+                <p>Chapters 61-68</p>
+                <p>Difficulty: Medium</p>
+                <button class="btn btn-primary" onclick="startTest('maths', 30, 60)">Start Test</button>
+            </div>
+            
+            <div class="test-option">
+                <h3>🏆 JEE Main Mock</h3>
+                <p><strong>90 Questions</strong></p>
+                <p><strong>180 Minutes</strong></p>
+                <p>All Subjects</p>
+                <p>Difficulty: JEE Main</p>
+                <button class="btn btn-success" onclick="startTest('jee-main', 90, 180)">Start Mock</button>
+            </div>
+            
+            <div class="test-option">
+                <h3>🎯 Quick Practice</h3>
+                <p><strong>10 Questions</strong></p>
+                <p><strong>20 Minutes</strong></p>
+                <p>Random Topics</p>
+                <p>Difficulty: Easy</p>
+                <button class="btn btn-primary" onclick="startTest('quick', 10, 20)">Start Practice</button>
+            </div>
+            
+            <div class="test-option">
+                <h3>💪 Challenge Mode</h3>
+                <p><strong>50 Questions</strong></p>
+                <p><strong>90 Minutes</strong></p>
+                <p>Mixed Difficulty</p>
+                <p>Difficulty: Hard</p>
+                <button class="btn btn-danger" onclick="startTest('challenge', 50, 90)">Start Challenge</button>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="window.location.href='app.html'" style="margin-top: 2rem;">← Back to App</button>
+    </div>
+    
+    <!-- Test Interface -->
+    <div class="test-interface" id="testInterface">
+        <div class="test-header">
+            <div class="test-info">
+                <h2 id="testName" style="font-family: 'Orbitron', sans-serif; color: var(--cyan);">Test Name</h2>
+                <div>Question <span id="currentQ">1</span> of <span id="totalQ">30</span></div>
+            </div>
+            <div class="timer" id="timer">60:00</div>
+        </div>
+        
+        <div class="test-body">
+            <div class="question-panel">
+                <div class="question-card">
+                    <div class="question-text" id="questionText">Question will appear here</div>
+                    <div class="options-container" id="optionsContainer"></div>
+                    
+                    <div class="question-nav">
+                        <button class="btn" onclick="previousQuestion()">← Previous</button>
+                        <div style="display: flex; gap: 1rem;">
+                            <button class="btn" onclick="markForReview()">🔖 Mark for Review</button>
+                            <button class="btn" onclick="clearResponse()">✖ Clear</button>
+                        </div>
+                        <button class="btn btn-primary" onclick="nextQuestion()">Next →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="palette-panel">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">Question Palette</h3>
+                <div class="palette-grid" id="paletteGrid"></div>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: var(--green);"></div>
+                        <span>Answered</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: rgba(255,255,255,0.1);"></div>
+                        <span>Not Answered</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: var(--orange);"></div>
+                        <span>Marked for Review</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: var(--cyan);"></div>
+                        <span>Current</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="submitTest()" style="width: 100%; margin-top: 2rem;">✅ Submit Test</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Screen -->
+    <div class="results-screen" id="resultsScreen">
+        <div class="results-card">
+            <h1 style="font-family: 'Orbitron', sans-serif; text-align: center; font-size: 2.5rem; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2rem;">Test Results</h1>
+            
+            <div class="score-display">
+                <div class="score-number" id="finalScore">0</div>
+                <div class="score-label">Your Score</div>
+                <div style="margin-top: 1rem; font-size: 1.2rem;" id="percentage">0%</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div>Correct</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="wrongCount">0</div>
+                    <div>Wrong</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="unattemptedCount">0</div>
+                    <div>Unattempted</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="accuracyPercent">0%</div>
+                    <div>Accuracy</div>
+                </div>
+            </div>
+            
+            <div class="review-section">
+                <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">Review Answers</h2>
+                <div id="reviewContainer"></div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="location.reload()">Take Another Test</button>
+                <button class="btn" onclick="window.location.href='app.html'">Back to App</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Question Bank
+        const questionBank = {
+            physics: [
+                {q: "What is the SI unit of force?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 0},
+                {q: "Acceleration due to gravity on Earth?", options: ["9.8 m/s²", "10 m/s²", "8.9 m/s²", "11 m/s²"], correct: 0},
+                {q: "Formula for kinetic energy?", options: ["½mv²", "mgh", "mv", "½mv"], correct: 0},
+                {q: "Newton's first law is also called?", options: ["Law of Inertia", "Law of Motion", "Law of Action", "Law of Force"], correct: 0},
+                {q: "Speed of light in vacuum?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁷ m/s", "3×10⁹ m/s"], correct: 0},
+                {q: "Unit of electric current?", options: ["Ampere", "Volt", "Ohm", "Watt"], correct: 0},
+                {q: "Formula for work done?", options: ["F×d", "m×a", "F/d", "m×v"], correct: 0},
+                {q: "Ohm's law formula?", options: ["V=IR", "V=I/R", "I=VR", "R=VI"], correct: 0},
+                {q: "Unit of power?", options: ["Watt", "Joule", "Newton", "Pascal"], correct: 0},
+                {q: "Momentum formula?", options: ["mv", "ma", "½mv²", "mgh"], correct: 0}
+            ],
+            chemistry: [
+                {q: "Chemical formula of water?", options: ["H₂O", "CO₂", "O₂", "H₂SO₄"], correct: 0},
+                {q: "Avogadro's number?", options: ["6.022×10²³", "6.022×10²²", "6.022×10²⁴", "6.022×10²¹"], correct: 0},
+                {q: "pH of pure water?", options: ["7", "0", "14", "1"], correct: 0},
+                {q: "Atomic number of Carbon?", options: ["6", "12", "8", "14"], correct: 0},
+                {q: "Formula of methane?", options: ["CH₄", "C₂H₆", "C₃H₈", "C₄H₁₀"], correct: 0},
+                {q: "Valency of Oxygen?", options: ["2", "1", "3", "4"], correct: 0},
+                {q: "Most abundant gas in air?", options: ["Nitrogen", "Oxygen", "CO₂", "Argon"], correct: 0},
+                {q: "Formula of sulfuric acid?", options: ["H₂SO₄", "HCl", "HNO₃", "H₃PO₄"], correct: 0},
+                {q: "Atomic mass of Hydrogen?", options: ["1", "2", "4", "8"], correct: 0},
+                {q: "Number of electrons in Sodium?", options: ["11", "12", "10", "23"], correct: 0}
+            ],
+            maths: [
+                {q: "Value of π (pi)?", options: ["3.14159", "2.71828", "1.41421", "1.73205"], correct: 0},
+                {q: "√144 = ?", options: ["12", "14", "10", "16"], correct: 0},
+                {q: "2³ = ?", options: ["8", "6", "9", "4"], correct: 0},
+                {q: "sin(90°) = ?", options: ["1", "0", "√3/2", "1/2"], correct: 0},
+                {q: "Derivative of x²?", options: ["2x", "x", "x²", "2"], correct: 0},
+                {q: "∫x dx = ?", options: ["x²/2 + C", "x + C", "x³/3 + C", "2x + C"], correct: 0},
+                {q: "log₁₀(100) = ?", options: ["2", "10", "100", "1"], correct: 0},
+                {q: "Value of e?", options: ["2.718", "3.141", "1.414", "1.732"], correct: 0},
+                {q: "cos(0°) = ?", options: ["1", "0", "√3/2", "1/2"], correct: 0},
+                {q: "5! = ?", options: ["120", "60", "24", "720"], correct: 0}
+            ]
+        };
+        
+        // Test State
+        let currentTest = {
+            subject: '',
+            questions: [],
+            currentIndex: 0,
+            answers: [],
+            marked: [],
+            timeLeft: 0,
+            timerInterval: null
+        };
+        
+        // Start Test
+        function startTest(subject, numQuestions, minutes) {
+            // Generate questions
+            let pool = [];
+            if (subject === 'jee-main') {
+                pool = [...questionBank.physics, ...questionBank.chemistry, ...questionBank.maths];
+            } else if (subject === 'quick' || subject === 'challenge') {
+                pool = [...questionBank.physics, ...questionBank.chemistry, ...questionBank.maths];
+            } else {
+                pool = questionBank[subject] || questionBank.physics;
+            }
+            
+            // Shuffle and select
+            currentTest.questions = pool.sort(() => Math.random() - 0.5).slice(0, numQuestions);
+            currentTest.subject = subject;
+            currentTest.currentIndex = 0;
+            currentTest.answers = new Array(numQuestions).fill(null);
+            currentTest.marked = new Array(numQuestions).fill(false);
+            currentTest.timeLeft = minutes * 60;
+            
+            // Update UI
+            document.getElementById('testName').textContent = subject.toUpperCase() + ' Test';
+            document.getElementById('totalQ').textContent = numQuestions;
+            
+            // Show interface
+            document.getElementById('testSelection').style.display = 'none';
+            document.getElementById('testInterface').classList.add('active');
+            
+            // Start timer
+            startTimer();
+            
+            // Render
+            renderPalette();
+            showQuestion(0);
+        }
+        
+        // Timer
+        function startTimer() {
+            updateTimerDisplay();
+            currentTest.timerInterval = setInterval(() => {
+                currentTest.timeLeft--;
+                updateTimerDisplay();
+                
+                if (currentTest.timeLeft <= 300) { // 5 minutes warning
+                    document.getElementById('timer').classList.add('warning');
+                }
+                
+                if (currentTest.timeLeft <= 0) {
+                    clearInterval(currentTest.timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(currentTest.timeLeft / 60);
+            const seconds = currentTest.timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        // Show Question
+        function showQuestion(index) {
+            currentTest.currentIndex = index;
+            const q = currentTest.questions[index];
+            
+            document.getElementById('currentQ').textContent = index + 1;
+            document.getElementById('questionText').textContent = `Q${index + 1}. ${q.q}`;
+            
+            const optionsHtml = q.options.map((opt, i) => `
+                <div class="option ${currentTest.answers[index] === i ? 'selected' : ''}" onclick="selectOption(${i})">
+                    <span class="option-label">${String.fromCharCode(65 + i)}</span>
+                    <span>${opt}</span>
+                </div>
+            `).join('');
+            
+            document.getElementById('optionsContainer').innerHTML = optionsHtml;
+            updatePalette();
+        }
+        
+        // Select Option
+        function selectOption(optionIndex) {
+            currentTest.answers[currentTest.currentIndex] = optionIndex;
+            showQuestion(currentTest.currentIndex);
+        }
+        
+        // Navigation
+        function nextQuestion() {
+            if (currentTest.currentIndex < currentTest.questions.length - 1) {
+                showQuestion(currentTest.currentIndex + 1);
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentTest.currentIndex > 0) {
+                showQuestion(currentTest.currentIndex - 1);
+            }
+        }
+        
+        function markForReview() {
+            currentTest.marked[currentTest.currentIndex] = !currentTest.marked[currentTest.currentIndex];
+            updatePalette();
+        }
+        
+        function clearResponse() {
+            currentTest.answers[currentTest.currentIndex] = null;
+            showQuestion(currentTest.currentIndex);
+        }
+        
+        // Palette
+        function renderPalette() {
+            const html = currentTest.questions.map((_, i) => 
+                `<div class="palette-btn" onclick="showQuestion(${i})" id="palette${i}">${i + 1}</div>`
+            ).join('');
+            document.getElementById('paletteGrid').innerHTML = html;
+        }
+        
+        function updatePalette() {
+            currentTest.questions.forEach((_, i) => {
+                const btn = document.getElementById(`palette${i}`);
+                btn.className = 'palette-btn';
+                
+                if (i === currentTest.currentIndex) {
+                    btn.classList.add('current');
+                } else if (currentTest.answers[i] !== null) {
+                    btn.classList.add('answered');
+                } else if (currentTest.marked[i]) {
+                    btn.classList.add('marked');
+                } else {
+                    btn.classList.add('not-visited');
+                }
+            });
+        }
+        
+        // Submit Test
+        function submitTest() {
+            if (!confirm('Are you sure you want to submit the test?')) return;
+            
+            clearInterval(currentTest.timerInterval);
+            
+            // Calculate results
+            let correct = 0;
+            let wrong = 0;
+            let unattempted = 0;
+            
+            currentTest.questions.forEach((q, i) => {
+                if (currentTest.answers[i] === null) {
+                    unattempted++;
+                } else if (currentTest.answers[i] === q.correct) {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+            
+            const total = currentTest.questions.length;
+            const score = correct * 4 - wrong; // JEE marking: +4, -1
+            const percentage = ((correct / total) * 100).toFixed(1);
+            const accuracy = total - unattempted > 0 ? ((correct / (total - unattempted)) * 100).toFixed(1) : 0;
+            
+            // Show results
+            document.getElementById('testInterface').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('correctCount').textContent = correct;
+            document.getElementById('wrongCount').textContent = wrong;
+            document.getElementById('unattemptedCount').textContent = unattempted;
+            document.getElementById('accuracyPercent').textContent = accuracy + '%';
+            
+            // Review
+            const reviewHtml = currentTest.questions.map((q, i) => {
+                const userAns = currentTest.answers[i];
+                const isCorrect = userAns === q.correct;
+                const status = userAns === null ? 'unattempted' : (isCorrect ? 'correct' : 'wrong');
+                
+                return `
+                    <div class="review-question ${status}">
+                        <h4 style="color: var(--cyan); margin-bottom: 0.8rem;">Q${i + 1}. ${q.q}</h4>
+                        <p><strong>Your Answer:</strong> ${userAns !== null ? q.options[userAns] : 'Not Attempted'}</p>
+                        <p><strong>Correct Answer:</strong> ${q.options[q.correct]}</p>
+                        <p style="margin-top: 0.5rem; color: ${isCorrect ? 'var(--green)' : 'var(--red)'};">
+                            ${userAns === null ? '⚪ Not Attempted' : (isCorrect ? '✅ Correct' : '❌ Wrong')}
+                        </p>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('reviewContainer').innerHTML = reviewHtml;
+            
+            // Save to localStorage
+            const testData = {
+                subject: currentTest.subject,
+                score: score,
+                correct: correct,
+                wrong: wrong,
+                total: total,
+                percentage: percentage,
+                date: new Date().toISOString()
+            };
+            
+            const history = JSON.parse(localStorage.getItem('testHistory') || '[]');
+            history.push(testData);
+            localStorage.setItem('testHistory', JSON.stringify(history));
+        }
+        
+        console.log('🎯 NEXUS REALITY - Full Test System Ready!');
+    </script>
+</body>
+</html>
