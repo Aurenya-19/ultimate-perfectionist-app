@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Study Resources</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.8);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --red: #ff3366;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        .container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        
+        .tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { padding: 0.8rem 1.5rem; background: var(--card); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; font-family: 'Rajdhani', sans-serif; color: var(--text); font-size: 0.9rem; }
+        .tab-btn:hover, .tab-btn.active { background: rgba(0,255,255,0.2); border-color: var(--cyan); transform: translateY(-2px); }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.5rem; margin-bottom: 1rem; }
+        
+        /* Formula Sheet */
+        .formula-grid { display: grid; gap: 1rem; }
+        .formula-card { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 10px; padding: 1.2rem; transition: all 0.3s; }
+        .formula-card:hover { border-color: var(--cyan); transform: translateX(5px); }
+        .formula-subject { font-family: 'Orbitron', sans-serif; color: var(--pink); font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .formula-item { background: rgba(0,255,255,0.05); border-left: 3px solid var(--cyan); padding: 0.8rem; margin-bottom: 0.8rem; font-family: 'Courier New', monospace; font-size: 1rem; }
+        .formula-name { color: var(--green); font-weight: 700; margin-bottom: 0.3rem; }
+        .formula-expr { color: var(--text); font-size: 1.1rem; }
+        
+        /* PDF Notes */
+        .pdf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .pdf-card { background: linear-gradient(135deg, rgba(255,0,255,0.1), rgba(0,255,255,0.1)); border: 2px solid var(--pink); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; cursor: pointer; }
+        .pdf-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255,0,255,0.4); }
+        .pdf-icon { font-size: 3rem; text-align: center; margin-bottom: 1rem; color: var(--pink); }
+        .pdf-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.1rem; margin-bottom: 0.5rem; text-align: center; }
+        .pdf-meta { text-align: center; font-size: 0.85rem; opacity: 0.8; margin-bottom: 1rem; }
+        .pdf-actions { display: flex; gap: 0.5rem; justify-content: center; }
+        
+        /* Flashcards */
+        .flashcard-container { max-width: 600px; margin: 0 auto; }
+        .flashcard { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 3px solid var(--cyan); border-radius: 15px; padding: 3rem; min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; transition: all 0.3s; position: relative; }
+        .flashcard:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(0,255,255,0.5); }
+        .flashcard.flipped { background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(255,170,0,0.1)); border-color: var(--green); }
+        .card-front, .card-back { display: none; }
+        .card-front.active, .card-back.active { display: block; }
+        .card-question { font-size: 1.5rem; font-weight: 700; color: var(--cyan); line-height: 1.6; }
+        .card-answer { font-size: 1.3rem; color: var(--green); line-height: 1.8; }
+        .card-hint { position: absolute; top: 1rem; right: 1rem; font-size: 0.8rem; opacity: 0.7; }
+        .card-nav { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .card-counter { text-align: center; margin-top: 1rem; font-size: 1.1rem; color: var(--cyan); }
+        
+        /* Study Timer */
+        .timer-container { max-width: 500px; margin: 0 auto; text-align: center; }
+        .timer-display { font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; color: var(--cyan); margin: 2rem 0; text-shadow: 0 0 20px rgba(0,255,255,0.5); }
+        .timer-controls { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .timer-presets { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .preset-btn { padding: 1rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
+        .preset-btn:hover { background: rgba(0,255,255,0.2); transform: scale(1.05); }
+        .timer-stats { margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .timer-stat { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 10px; padding: 1rem; }
+        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--green); font-weight: 900; }
+        .stat-label { font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem; }
+        
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
+        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
+        .btn-danger { background: linear-gradient(135deg, var(--red), #cc0033); }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 2rem; }
+            .timer-display { font-size: 3rem; }
+            .flashcard { padding: 2rem; min-height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📚 Study Resources</h1>
+            <p style="color: var(--cyan); font-size: 1.2rem;">Formula Sheets • PDF Notes • Flashcards • Study Timer</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('formulas')">📐 Formula Sheet</button>
+            <button class="tab-btn" onclick="showTab('pdfs')">📄 PDF Notes</button>
+            <button class="tab-btn" onclick="showTab('flashcards')">🎴 Flashcards</button>
+            <button class="tab-btn" onclick="showTab('timer')">⏱️ Study Timer</button>
+        </div>
+        
+        <!-- FORMULA SHEET TAB -->
+        <div id="formulas" class="tab-content active">
+            <div class="card">
+                <h2 class="card-title">📐 Complete Formula Sheet</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9;">All important formulas organized by subject and chapter</p>
+                
+                <div class="formula-grid" id="formulaGrid"></div>
+            </div>
+        </div>
+        
+        <!-- PDF NOTES TAB -->
+        <div id="pdfs" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">📄 Downloadable PDF Notes</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9;">High-quality notes for all chapters</p>
+                
+                <div class="pdf-grid" id="pdfGrid"></div>
+            </div>
+        </div>
+        
+        <!-- FLASHCARDS TAB -->
+        <div id="flashcards" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">🎴 Interactive Flashcards</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9; text-align: center;">Click card to flip • Test your knowledge</p>
+                
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="card-hint">Click to flip</div>
+                        <div class="card-front active">
+                            <p class="card-question" id="cardQuestion">Loading...</p>
+                        </div>
+                        <div class="card-back">
+                            <p class="card-answer" id="cardAnswer">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card-nav">
+                        <button class="btn" onclick="previousCard()">← Previous</button>
+                        <button class="btn btn-primary" onclick="shuffleCards()">🔀 Shuffle</button>
+                        <button class="btn" onclick="nextCard()">Next →</button>
+                    </div>
+                    
+                    <div class="card-counter" id="cardCounter">Card 1 of 30</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- STUDY TIMER TAB -->
+        <div id="timer" class="tab-content">
+            <div class="card">
+                <h2 class="card-title">⏱️ Pomodoro Study Timer</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.9; text-align: center;">Stay focused with timed study sessions</p>
+                
+                <div class="timer-container">
+                    <div class="timer-display" id="timerDisplay">25:00</div>
+                    
+                    <div class="timer-controls">
+                        <button class="btn btn-success" id="startBtn" onclick="startTimer()">▶ Start</button>
+                        <button class="btn btn-danger" id="pauseBtn" onclick="pauseTimer()" style="display: none;">⏸ Pause</button>
+                        <button class="btn" onclick="resetTimer()">↻ Reset</button>
+                    </div>
+                    
+                    <div class="timer-presets">
+                        <button class="preset-btn" onclick="setTimer(15)">15 min</button>
+                        <button class="preset-btn" onclick="setTimer(25)">25 min</button>
+                        <button class="preset-btn" onclick="setTimer(45)">45 min</button>
+                        <button class="preset-btn" onclick="setTimer(60)">60 min</button>
+                    </div>
+                    
+                    <div class="timer-stats">
+                        <div class="timer-stat">
+                            <div class="stat-value" id="sessionsToday">0</div>
+                            <div class="stat-label">Sessions Today</div>
+                        </div>
+                        <div class="timer-stat">
+                            <div class="stat-value" id="minutesToday">0</div>
+                            <div class="stat-label">Minutes Today</div>
+                        </div>
+                        <div class="timer-stat">
+                            <div class="stat-value" id="totalSessions">0</div>
+                            <div class="stat-label">Total Sessions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="app.html" class="btn" style="padding: 1rem 2rem; font-size: 1rem;">← Back to App</a>
+        </div>
+    </div>
+    
+    <script>
+        // Formula Database
+        const formulas = {
+            physics: [
+                {name: "Velocity", formula: "v = u + at", chapter: "Motion"},
+                {name: "Displacement", formula: "s = ut + ½at²", chapter: "Motion"},
+                {name: "Velocity-Displacement", formula: "v² = u² + 2as", chapter: "Motion"},
+                {name: "Force", formula: "F = ma", chapter: "Laws of Motion"},
+                {name: "Momentum", formula: "p = mv", chapter: "Laws of Motion"},
+                {name: "Impulse", formula: "J = FΔt = Δp", chapter: "Laws of Motion"},
+                {name: "Work", formula: "W = F·s·cosθ", chapter: "Work & Energy"},
+                {name: "Kinetic Energy", formula: "KE = ½mv²", chapter: "Work & Energy"},
+                {name: "Potential Energy", formula: "PE = mgh", chapter: "Work & Energy"},
+                {name: "Power", formula: "P = W/t = F·v", chapter: "Work & Energy"},
+                {name: "Torque", formula: "τ = r × F", chapter: "Rotation"},
+                {name: "Angular Momentum", formula: "L = Iω", chapter: "Rotation"},
+                {name: "Gravitational Force", formula: "F = Gm₁m₂/r²", chapter: "Gravitation"},
+                {name: "Escape Velocity", formula: "vₑ = √(2GM/R)", chapter: "Gravitation"},
+                {name: "Coulomb's Law", formula: "F = kq₁q₂/r²", chapter: "Electrostatics"},
+                {name: "Electric Field", formula: "E = F/q = kq/r²", chapter: "Electrostatics"},
+                {name: "Ohm's Law", formula: "V = IR", chapter: "Current"},
+                {name: "Power (Electrical)", formula: "P = VI = I²R = V²/R", chapter: "Current"}
+            ],
+            chemistry: [
+                {name: "Bohr's Energy", formula: "E = -13.6/n² eV", chapter: "Atomic Structure"},
+                {name: "Bohr's Radius", formula: "r = 0.529n²/Z Å", chapter: "Atomic Structure"},
+                {name: "Ideal Gas Law", formula: "PV = nRT", chapter: "States of Matter"},
+                {name: "Molarity", formula: "M = n/V (mol/L)", chapter: "Solutions"},
+                {name: "Molality", formula: "m = n/W_kg", chapter: "Solutions"},
+                {name: "First Law", formula: "ΔU = Q - W", chapter: "Thermodynamics"},
+                {name: "Enthalpy", formula: "ΔH = ΔU + PΔV", chapter: "Thermodynamics"},
+                {name: "Gibbs Energy", formula: "ΔG = ΔH - TΔS", chapter: "Thermodynamics"},
+                {name: "Equilibrium Constant", formula: "Kc = [C]^c[D]^d / [A]^a[B]^b", chapter: "Equilibrium"},
+                {name: "pH", formula: "pH = -log[H⁺]", chapter: "Ionic Equilibrium"},
+                {name: "pOH", formula: "pOH = -log[OH⁻]", chapter: "Ionic Equilibrium"},
+                {name: "Henderson-Hasselbalch", formula: "pH = pKa + log([A⁻]/[HA])", chapter: "Ionic Equilibrium"},
+                {name: "Nernst Equation", formula: "E = E° - (RT/nF)lnQ", chapter: "Electrochemistry"},
+                {name: "Rate Law", formula: "Rate = k[A]^m[B]^n", chapter: "Kinetics"},
+                {name: "Half-life (1st order)", formula: "t₁/₂ = 0.693/k", chapter: "Kinetics"}
+            ],
+            maths: [
+                {name: "Quadratic Formula", formula: "x = (-b ± √(b²-4ac))/2a", chapter: "Quadratic"},
+                {name: "Discriminant", formula: "D = b² - 4ac", chapter: "Quadratic"},
+                {name: "AP Sum", formula: "Sₙ = n/2[2a + (n-1)d]", chapter: "Sequences"},
+                {name: "GP Sum", formula: "Sₙ = a(rⁿ-1)/(r-1)", chapter: "Sequences"},
+                {name: "Permutations", formula: "nPr = n!/(n-r)!", chapter: "P&C"},
+                {name: "Combinations", formula: "nCr = n!/[r!(n-r)!]", chapter: "P&C"},
+                {name: "Binomial Expansion", formula: "(a+b)ⁿ = Σ nCr·aⁿ⁻ʳ·bʳ", chapter: "Binomial"},
+                {name: "Complex Modulus", formula: "|z| = √(a²+b²)", chapter: "Complex"},
+                {name: "Argument", formula: "arg(z) = tan⁻¹(b/a)", chapter: "Complex"},
+                {name: "Derivative (Power)", formula: "d/dx(xⁿ) = nxⁿ⁻¹", chapter: "Differentiation"},
+                {name: "Derivative (sin)", formula: "d/dx(sin x) = cos x", chapter: "Differentiation"},
+                {name: "Derivative (cos)", formula: "d/dx(cos x) = -sin x", chapter: "Differentiation"},
+                {name: "Integration (Power)", formula: "∫xⁿdx = xⁿ⁺¹/(n+1) + C", chapter: "Integration"},
+                {name: "Distance Formula", formula: "d = √[(x₂-x₁)²+(y₂-y₁)²]", chapter: "Geometry"}
+            ]
+        };
+        
+        // PDF Database
+        const pdfs = [
+            {id: 1, title: "Physics - Complete Mechanics", subject: "Physics", pages: 85, size: "12 MB"},
+            {id: 2, title: "Physics - Electricity & Magnetism", subject: "Physics", pages: 72, size: "10 MB"},
+            {id: 3, title: "Physics - Optics & Modern", subject: "Physics", pages: 58, size: "8 MB"},
+            {id: 4, title: "Chemistry - Physical Chemistry", subject: "Chemistry", pages: 95, size: "14 MB"},
+            {id: 5, title: "Chemistry - Inorganic Chemistry", subject: "Chemistry", pages: 68, size: "9 MB"},
+            {id: 6, title: "Chemistry - Organic Chemistry", subject: "Chemistry", pages: 78, size: "11 MB"},
+            {id: 7, title: "Maths - Algebra Complete", subject: "Maths", pages: 88, size: "13 MB"},
+            {id: 8, title: "Maths - Calculus Complete", subject: "Maths", pages: 92, size: "13 MB"},
+            {id: 9, title: "Maths - Geometry & Vectors", subject: "Maths", pages: 65, size: "9 MB"},
+            {id: 10, title: "All Formulas - Quick Reference", subject: "All", pages: 45, size: "5 MB"},
+            {id: 11, title: "JEE Main - Previous Years", subject: "All", pages: 120, size: "18 MB"},
+            {id: 12, title: "JEE Advanced - Previous Years", subject: "All", pages: 110, size: "16 MB"}
+        ];
+        
+        // Flashcard Database
+        const flashcards = [
+            {q: "What is Newton's Second Law?", a: "F = ma (Force equals mass times acceleration)"},
+            {q: "Define Kinetic Energy", a: "KE = ½mv² (Energy of motion)"},
+            {q: "What is Ohm's Law?", a: "V = IR (Voltage = Current × Resistance)"},
+            {q: "Bohr's model energy formula?", a: "E = -13.6/n² eV"},
+            {q: "Ideal Gas Law?", a: "PV = nRT"},
+            {q: "What is pH?", a: "pH = -log[H⁺] (Measure of acidity)"},
+            {q: "Quadratic formula?", a: "x = (-b ± √(b²-4ac))/2a"},
+            {q: "Derivative of sin(x)?", a: "d/dx(sin x) = cos x"},
+            {q: "Integration of x²?", a: "∫x²dx = x³/3 + C"},
+            {q: "Distance formula?", a: "d = √[(x₂-x₁)²+(y₂-y₁)²]"},
+            {q: "What is momentum?", a: "p = mv (mass × velocity)"},
+            {q: "Work formula?", a: "W = F·s·cosθ"},
+            {q: "Escape velocity?", a: "vₑ = √(2GM/R)"},
+            {q: "Coulomb's Law?", a: "F = kq₁q₂/r²"},
+            {q: "Molarity definition?", a: "M = n/V (moles per liter)"},
+            {q: "First Law of Thermodynamics?", a: "ΔU = Q - W"},
+            {q: "Gibbs Free Energy?", a: "ΔG = ΔH - TΔS"},
+            {q: "Rate law?", a: "Rate = k[A]^m[B]^n"},
+            {q: "Permutation formula?", a: "nPr = n!/(n-r)!"},
+            {q: "Combination formula?", a: "nCr = n!/[r!(n-r)!]"},
+            {q: "AP sum formula?", a: "Sₙ = n/2[2a + (n-1)d]"},
+            {q: "GP sum formula?", a: "Sₙ = a(rⁿ-1)/(r-1)"},
+            {q: "Complex modulus?", a: "|z| = √(a²+b²)"},
+            {q: "Power rule derivative?", a: "d/dx(xⁿ) = nxⁿ⁻¹"},
+            {q: "Nernst equation?", a: "E = E° - (RT/nF)lnQ"},
+            {q: "Henderson-Hasselbalch?", a: "pH = pKa + log([A⁻]/[HA])"},
+            {q: "Torque formula?", a: "τ = r × F"},
+            {q: "Angular momentum?", a: "L = Iω"},
+            {q: "Electric field?", a: "E = F/q = kq/r²"},
+            {q: "Power (electrical)?", a: "P = VI = I²R = V²/R"}
+        ];
+        
+        let currentCardIndex = 0;
+        let isFlipped = false;
+        
+        // Timer State
+        let timerInterval = null;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let isRunning = false;
+        let timerStats = {
+            sessionsToday: 0,
+            minutesToday: 0,
+            totalSessions: 0
+        };
+        
+        // Load Timer Stats
+        function loadTimerStats() {
+            const saved = localStorage.getItem('timerStats');
+            if (saved) {
+                timerStats = JSON.parse(saved);
+                updateTimerStats();
+            }
+        }
+        
+        // Save Timer Stats
+        function saveTimerStats() {
+            localStorage.setItem('timerStats', JSON.stringify(timerStats));
+        }
+        
+        // Render Formulas
+        function renderFormulas() {
+            const grid = document.getElementById('formulaGrid');
+            let html = '';
+            
+            for (const [subject, formList] of Object.entries(formulas)) {
+                html += `
+                    <div class="formula-card">
+                        <h3 class="formula-subject">${subject.charAt(0).toUpperCase() + subject.slice(1)}</h3>
+                        ${formList.map(f => `
+                            <div class="formula-item">
+                                <div class="formula-name">${f.name} (${f.chapter})</div>
+                                <div class="formula-expr">${f.formula}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            grid.innerHTML = html;
+        }
+        
+        // Render PDFs
+        function renderPDFs() {
+            const grid = document.getElementById('pdfGrid');
+            const html = pdfs.map(pdf => `
+                <div class="pdf-card" onclick="viewPDF(${pdf.id})">
+                    <div class="pdf-icon">📄</div>
+                    <h3 class="pdf-title">${pdf.title}</h3>
+                    <div class="pdf-meta">${pdf.subject} • ${pdf.pages} pages • ${pdf.size}</div>
+                    <div class="pdf-actions">
+                        <button class="btn btn-primary" onclick="event.stopPropagation(); downloadPDF(${pdf.id})">⬇ Download</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            grid.innerHTML = html;
+        }
+        
+        // Flashcard Functions
+        function showCard(index) {
+            currentCardIndex = index;
+            isFlipped = false;
+            
+            document.getElementById('cardQuestion').textContent = flashcards[index].q;
+            document.getElementById('cardAnswer').textContent = flashcards[index].a;
+            document.getElementById('cardCounter').textContent = `Card ${index + 1} of ${flashcards.length}`;
+            
+            document.querySelector('.card-front').classList.add('active');
+            document.querySelector('.card-back').classList.remove('active');
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+        
+        function flipCard() {
+            isFlipped = !isFlipped;
+            
+            if (isFlipped) {
+                document.querySelector('.card-front').classList.remove('active');
+                document.querySelector('.card-back').classList.add('active');
+                document.getElementById('flashcard').classList.add('flipped');
+            } else {
+                document.querySelector('.card-front').classList.add('active');
+                document.querySelector('.card-back').classList.remove('active');
+                document.getElementById('flashcard').classList.remove('flipped');
+            }
+        }
+        
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcards.length;
+            showCard(currentCardIndex);
+        }
+        
+        function previousCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcards.length) % flashcards.length;
+            showCard(currentCardIndex);
+        }
+        
+        function shuffleCards() {
+            flashcards.sort(() => Math.random() - 0.5);
+            showCard(0);
+        }
+        
+        // Timer Functions
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        function startTimer() {
+            if (isRunning) return;
+            
+            isRunning = true;
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('pauseBtn').style.display = 'inline-block';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    pauseTimer();
+                    completeSession();
+                    alert('🎉 Session Complete! Great work!');
+                }
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            document.getElementById('startBtn').style.display = 'inline-block';
+            document.getElementById('pauseBtn').style.display = 'none';
+        }
+        
+        function resetTimer() {
+            pauseTimer();
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+        }
+        
+        function setTimer(minutes) {
+            pauseTimer();
+            timeLeft = minutes * 60;
+            updateTimerDisplay();
+        }
+        
+        function completeSession() {
+            const minutes = Math.floor((25 * 60 - timeLeft) / 60);
+            timerStats.sessionsToday++;
+            timerStats.minutesToday += minutes;
+            timerStats.totalSessions++;
+            saveTimerStats();
+            updateTimerStats();
+        }
+        
+        function updateTimerStats() {
+            document.getElementById('sessionsToday').textContent = timerStats.sessionsToday;
+            document.getElementById('minutesToday').textContent = timerStats.minutesToday;
+            document.getElementById('totalSessions').textContent = timerStats.totalSessions;
+        }
+        
+        // PDF Functions
+        function viewPDF(id) {
+            const pdf = pdfs.find(p => p.id === id);
+            alert(`Opening: ${pdf.title}\n\nThis would open the PDF viewer with the full document.`);
+        }
+        
+        function downloadPDF(id) {
+            const pdf = pdfs.find(p => p.id === id);
+            alert(`Downloading: ${pdf.title}\n\nSize: ${pdf.size}\n\nDownload would start now!`);
+        }
+        
+        // Tab Navigation
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Initialize
+        renderFormulas();
+        renderPDFs();
+        showCard(0);
+        loadTimerStats();
+        updateTimerDisplay();
+        
+        console.log('📚 NEXUS REALITY - Resources Ready!');
+        console.log(`📐 ${Object.values(formulas).flat().length} formulas`);
+        console.log(`📄 ${pdfs.length} PDF notes`);
+        console.log(`🎴 ${flashcards.length} flashcards`);
+    </script>
+</body>
+</html>
