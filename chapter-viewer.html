@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS REALITY - Chapter Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="chapters-data.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { 
+            --bg: #000; 
+            --card: rgba(10,10,26,0.9);
+            --cyan: #00ffff; 
+            --pink: #ff00ff; 
+            --green: #00ff88; 
+            --orange: #ffaa00; 
+            --gold: #ffd700;
+            --red: #ff3366;
+            --text: #fff;
+            --border: rgba(0,255,255,0.3);
+        }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        
+        /* Chapter Selector */
+        .selector-section { background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .selector-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--cyan); margin-bottom: 1.5rem; text-align: center; }
+        .subject-tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .subject-tab { padding: 0.8rem 2rem; background: rgba(0,255,255,0.1); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
+        .subject-tab.active { background: rgba(0,255,255,0.3); border-color: var(--cyan); }
+        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .chapter-btn { padding: 1rem; background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 10px; cursor: pointer; transition: all 0.3s; text-align: center; }
+        .chapter-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(255,0,255,0.4); border-color: var(--cyan); }
+        .chapter-num { font-family: 'Orbitron', sans-serif; color: var(--gold); font-weight: 900; font-size: 1.2rem; }
+        .chapter-name { color: var(--cyan); font-size: 0.9rem; margin-top: 0.3rem; }
+        
+        /* Chapter Content */
+        .chapter-content { display: none; }
+        .chapter-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .header { background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
+        .chapter-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
+        .chapter-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; opacity: 0.9; }
+        
+        .section { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--cyan); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        
+        .theory-block { background: rgba(0,255,255,0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; }
+        .theory-block h3 { color: var(--green); margin-bottom: 1rem; font-size: 1.3rem; }
+        .theory-block p { margin-bottom: 1rem; font-size: 1.05rem; }
+        .theory-block ul { margin-left: 2rem; margin-bottom: 1rem; }
+        .theory-block li { margin-bottom: 0.5rem; }
+        
+        .formula-box { background: rgba(0,0,0,0.5); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 1.1rem; }
+        .formula-item { margin-bottom: 1rem; padding: 0.8rem; background: rgba(0,255,136,0.05); border-radius: 5px; }
+        
+        .key-point { background: rgba(255,215,0,0.1); border-left: 4px solid var(--gold); padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .key-point strong { color: var(--gold); }
+        
+        .problem-card { background: rgba(255,0,255,0.05); border: 2px solid var(--pink); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        .problem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .problem-num { font-family: 'Orbitron', sans-serif; color: var(--pink); font-weight: 900; font-size: 1.2rem; }
+        .difficulty { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; }
+        .difficulty.easy { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
+        .difficulty.medium { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .difficulty.hard { background: rgba(255,51,102,0.2); color: var(--red); border: 1px solid var(--red); }
+        .problem-text { font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.8; }
+        .options { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
+        .option { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: rgba(0,255,255,0.15); border-color: var(--cyan); }
+        .option.selected { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
+        
+        .solution-box { background: rgba(0,255,136,0.05); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin-top: 1rem; display: none; }
+        .solution-box.show { display: block; animation: slideDown 0.3s; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { color: var(--green); margin-bottom: 1rem; }
+        
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
+        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
+        
+        .loading { text-align: center; padding: 3rem; font-size: 1.5rem; color: var(--cyan); }
+        
+        @media (max-width: 768px) { 
+            .chapter-title { font-size: 1.8rem; }
+            .chapter-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-bg"></div>
+    
+    <div class="container">
+        <!-- Chapter Selector -->
+        <div class="selector-section" id="selectorSection">
+            <h2 class="selector-title">📚 Select Chapter</h2>
+            
+            <div class="subject-tabs">
+                <div class="subject-tab active" onclick="showSubject('physics')">⚛️ Physics</div>
+                <div class="subject-tab" onclick="showSubject('chemistry')">🧪 Chemistry</div>
+                <div class="subject-tab" onclick="showSubject('maths')">📐 Mathematics</div>
+            </div>
+            
+            <div class="chapter-grid" id="chapterGrid"></div>
+        </div>
+        
+        <!-- Chapter Content -->
+        <div class="chapter-content" id="chapterContent">
+            <div class="header" id="chapterHeader"></div>
+            <div id="theorySection"></div>
+            <div id="problemsSection"></div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--card); border: 2px solid var(--border); border-radius: 12px;">
+                <h3 style="color: var(--cyan); margin-bottom: 1rem;">✅ Chapter Complete!</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" onclick="backToSelector()">← Back to Chapters</button>
+                    <button class="btn btn-success" onclick="markComplete()">Mark as Complete</button>
+                    <a href="test.html" class="btn btn-primary">Take Chapter Test →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentSubject = 'physics';
+        let currentChapter = null;
+        
+        // Load chapters on page load
+        window.addEventListener('load', () => {
+            showSubject('physics');
+        });
+        
+        // Show subject chapters
+        function showSubject(subject) {
+            currentSubject = subject;
+            
+            // Update active tab
+            document.querySelectorAll('.subject-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Get chapters
+            const chapters = CHAPTERS_DATABASE[subject];
+            
+            // Render chapter grid
+            const grid = document.getElementById('chapterGrid');
+            grid.innerHTML = chapters.map(ch => `
+                <div class="chapter-btn" onclick="loadChapter('${subject}', '${ch.id}')">
+                    <div class="chapter-num">Ch ${ch.num}</div>
+                    <div class="chapter-name">${ch.title}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Load chapter content
+        function loadChapter(subject, chapterId) {
+            const chapters = CHAPTERS_DATABASE[subject];
+            const chapter = chapters.find(ch => ch.id === chapterId);
+            
+            if (!chapter) {
+                alert('Chapter not found!');
+                return;
+            }
+            
+            currentChapter = chapter;
+            
+            // Hide selector, show content
+            document.getElementById('selectorSection').style.display = 'none';
+            document.getElementById('chapterContent').classList.add('active');
+            
+            // Render header
+            renderHeader(chapter);
+            
+            // Render theory
+            if (chapter.theory) {
+                renderTheory(chapter.theory);
+            } else {
+                document.getElementById('theorySection').innerHTML = `
+                    <div class="section">
+                        <h2 class="section-title">📖 Theory</h2>
+                        <div class="theory-block">
+                            <p>Complete theory for this chapter is being prepared. Check back soon!</p>
+                            <p>In the meantime, you can:</p>
+                            <ul>
+                                <li>Watch video lectures</li>
+                                <li>Solve practice problems</li>
+                                <li>Refer to the formula sheet</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Render problems
+            if (chapter.problems && chapter.problems.length > 0) {
+                renderProblems(chapter.problems);
+            } else {
+                document.getElementById('problemsSection').innerHTML = `
+                    <div class="section">
+                        <h2 class="section-title">🧩 Practice Problems</h2>
+                        <div class="theory-block">
+                            <p>Practice problems for this chapter are being prepared. Check back soon!</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Trigger MathJax rendering
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+        
+        // Render header
+        function renderHeader(chapter) {
+            const header = document.getElementById('chapterHeader');
+            header.innerHTML = `
+                <div style="font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--orange); font-weight: 900; margin-bottom: 0.5rem;">
+                    CHAPTER ${chapter.num} • ${currentSubject.toUpperCase()}
+                </div>
+                <h1 class="chapter-title">${chapter.title}</h1>
+                <div class="chapter-meta">
+                    <div class="meta-item"><i class="fas fa-book"></i> ${chapter.topics} Topics</div>
+                    <div class="meta-item"><i class="fas fa-puzzle-piece"></i> ${chapter.problems} Problems</div>
+                    <div class="meta-item"><i class="fas fa-video"></i> ${chapter.videos} Videos</div>
+                    <div class="meta-item"><i class="fas fa-clock"></i> ${chapter.hours} Hours</div>
+                    <div class="meta-item">
+                        <span style="padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.85rem; font-weight: 700; 
+                            ${chapter.difficulty === 'Easy' ? 'background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green);' : 
+                              chapter.difficulty === 'Medium' ? 'background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange);' : 
+                              'background: rgba(255,51,102,0.2); color: var(--red); border: 1px solid var(--red);'}">
+                            ${chapter.difficulty}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Render theory
+        function renderTheory(theory) {
+            let html = '<div class="section"><h2 class="section-title">📖 Theory</h2>';
+            
+            // Introduction
+            if (theory.introduction) {
+                html += `
+                    <div class="theory-block">
+                        <h3>Introduction</h3>
+                        <p>${theory.introduction}</p>
+                    </div>
+                `;
+            }
+            
+            // Sections
+            if (theory.sections) {
+                theory.sections.forEach(section => {
+                    html += `<div class="theory-block">`;
+                    html += `<h3>${section.title}</h3>`;
+                    html += `<p>${section.content.replace(/\n/g, '</p><p>')}</p>`;
+                    
+                    // Formulas
+                    if (section.formulas && section.formulas.length > 0) {
+                        html += `<div class="formula-box">`;
+                        section.formulas.forEach(formula => {
+                            html += `<div class="formula-item">`;
+                            html += `<strong style="color: var(--cyan);">${formula.name}:</strong> `;
+                            html += `<span style="color: var(--green);">${formula.expr}</span>`;
+                            if (formula.unit) html += ` <span style="opacity: 0.7;">(${formula.unit})</span>`;
+                            if (formula.description) html += `<br><span style="opacity: 0.8; font-size: 0.9rem;">${formula.description}</span>`;
+                            html += `</div>`;
+                        });
+                        html += `</div>`;
+                    }
+                    
+                    // Key Points
+                    if (section.keyPoints && section.keyPoints.length > 0) {
+                        html += `<div class="key-point">`;
+                        html += `<strong>Key Points:</strong><ul style="margin-top: 0.5rem;">`;
+                        section.keyPoints.forEach(point => {
+                            html += `<li>${point}</li>`;
+                        });
+                        html += `</ul></div>`;
+                    }
+                    
+                    html += `</div>`;
+                });
+            }
+            
+            html += '</div>';
+            document.getElementById('theorySection').innerHTML = html;
+        }
+        
+        // Render problems
+        function renderProblems(problems) {
+            let html = '<div class="section"><h2 class="section-title">🧩 Practice Problems</h2>';
+            
+            problems.forEach((problem, index) => {
+                html += `
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <span class="problem-num">Problem ${index + 1}</span>
+                            <span class="difficulty ${problem.difficulty}">${problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}</span>
+                        </div>
+                        <div class="problem-text">${problem.question}</div>
+                        <div class="options">
+                            ${problem.options.map((opt, i) => `
+                                <div class="option" onclick="selectOption(this, ${index}, ${i})">
+                                    ${String.fromCharCode(65 + i)}) ${opt}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="btn btn-primary" onclick="toggleSolution(${index})">Show Solution</button>
+                        <div class="solution-box" id="solution${index}">
+                            <h4>✅ Solution</h4>
+                            <p style="white-space: pre-line;">${problem.solution}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            document.getElementById('problemsSection').innerHTML = html;
+        }
+        
+        // Select option
+        function selectOption(element, problemNum, optionNum) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+        
+        // Toggle solution
+        function toggleSolution(num) {
+            const solution = document.getElementById('solution' + num);
+            solution.classList.toggle('show');
+        }
+        
+        // Back to selector
+        function backToSelector() {
+            document.getElementById('selectorSection').style.display = 'block';
+            document.getElementById('chapterContent').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+        
+        // Mark complete
+        function markComplete() {
+            if (!currentChapter) return;
+            
+            alert(`🎉 Chapter ${currentChapter.num}: ${currentChapter.title} marked as complete!\n\nGreat job! Your progress has been saved.`);
+            
+            // Save to localStorage
+            const progress = JSON.parse(localStorage.getItem('nexusProgress') || '{}');
+            if (!progress.chaptersCompleted) progress.chaptersCompleted = [];
+            if (!progress.chaptersCompleted.includes(currentChapter.id)) {
+                progress.chaptersCompleted.push(currentChapter.id);
+                localStorage.setItem('nexusProgress', JSON.stringify(progress));
+            }
+        }
+        
+        console.log('🚀 NEXUS REALITY - Dynamic Chapter Viewer Ready!');
+        console.log('📚 Total Chapters:', 
+            CHAPTERS_DATABASE.physics.length + 
+            CHAPTERS_DATABASE.chemistry.length + 
+            CHAPTERS_DATABASE.maths.length
+        );
+    </script>
+</body>
+</html>
