@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Study Plan - AIR <1000 Strategy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; border: 2px solid #0f3460; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.2rem; color: #aaa; }
+        
+        .warning-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1.5rem; margin-bottom: 2rem; border-radius: 5px; }
+        .warning-box h3 { color: #ff4444; margin-bottom: 0.5rem; }
+        
+        .strategy-section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.8rem; color: #00d4ff; margin-bottom: 1rem; font-weight: 700; }
+        
+        .phase-card { background: #16213e; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; border-left: 4px solid #00d4ff; }
+        .phase-title { font-size: 1.3rem; color: #00d4ff; font-weight: 700; margin-bottom: 0.8rem; }
+        .phase-duration { color: #ff9800; font-weight: 600; margin-bottom: 0.5rem; }
+        
+        .daily-schedule { display: grid; grid-template-columns: 100px 1fr; gap: 1rem; margin: 1rem 0; }
+        .time-slot { background: #0f3460; padding: 0.8rem; border-radius: 5px; font-weight: 600; text-align: center; }
+        .activity { background: #16213e; padding: 0.8rem; border-radius: 5px; border-left: 3px solid #00d4ff; }
+        
+        .topic-list { list-style: none; }
+        .topic-list li { padding: 0.8rem; margin: 0.5rem 0; background: #0f3460; border-radius: 5px; position: relative; padding-left: 2rem; }
+        .topic-list li:before { content: '✓'; position: absolute; left: 0.8rem; color: #00ff88; font-weight: 900; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .stat-card { background: #0f3460; padding: 1.5rem; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 2.5rem; color: #00ff88; font-weight: 900; }
+        .stat-label { color: #aaa; margin-top: 0.5rem; }
+        
+        .important-note { background: #1a2332; border: 2px solid #00d4ff; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+        .important-note h4 { color: #00d4ff; margin-bottom: 0.8rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #0f3460; }
+        th { background: #0f3460; color: #00d4ff; font-weight: 700; }
+        tr:hover { background: #16213e; }
+        
+        .btn { display: inline-block; padding: 1rem 2rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700; margin: 0.5rem; transition: all 0.3s; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 1.8rem; }
+            .daily-schedule { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 JEE Advanced AIR <1000 Strategy</h1>
+            <p class="subtitle">Complete 365-Day Roadmap | Proven Method | No Shortcuts</p>
+        </div>
+        
+        <div class="warning-box">
+            <h3>⚠️ REALITY CHECK</h3>
+            <p><strong>This is NOT easy.</strong> AIR <1000 requires 8-10 hours daily study for 12-18 months. If you're not ready for this commitment, lower your expectations. This plan assumes you're starting from Class 11 or have 18 months before JEE Advanced.</p>
+        </div>
+        
+        <!-- Success Formula -->
+        <div class="strategy-section">
+            <h2 class="section-title">📊 Success Formula for AIR <1000</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">8-10</div>
+                    <div class="stat-label">Hours Daily Study</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Problems Solved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Full Mock Tests</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3+</div>
+                    <div class="stat-label">Revisions Per Topic</div>
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <h4>🎯 Target Scores for AIR <1000</h4>
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 0.5rem 0;">✓ <strong>JEE Main:</strong> 250+ / 300 (99.5+ percentile)</li>
+                    <li style="padding: 0.5rem 0;">✓ <strong>JEE Advanced:</strong> 200+ / 360 (55-60%)</li>
+                    <li style="padding: 0.5rem 0;">✓ <strong>Physics:</strong> 70-75 / 120</li>
+                    <li style="padding: 0.5rem 0;">✓ <strong>Chemistry:</strong> 65-70 / 120</li>
+                    <li style="padding: 0.5rem 0;">✓ <strong>Mathematics:</strong> 65-70 / 120</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 18-Month Plan -->
+        <div class="strategy-section">
+            <h2 class="section-title">📅 18-Month Master Plan</h2>
+            
+            <div class="phase-card">
+                <div class="phase-title">Phase 1: Foundation Building (Months 1-6)</div>
+                <div class="phase-duration">⏱️ Duration: 6 months | Focus: NCERT + Basic Concepts</div>
+                <p><strong>Goal:</strong> Complete entire syllabus once with strong fundamentals</p>
+                
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Month-wise Breakdown:</h4>
+                <table>
+                    <tr>
+                        <th>Month</th>
+                        <th>Physics</th>
+                        <th>Chemistry</th>
+                        <th>Mathematics</th>
+                    </tr>
+                    <tr>
+                        <td>Month 1-2</td>
+                        <td>Mechanics (Units, Motion, Laws, Work-Energy)</td>
+                        <td>Physical Chemistry (Atomic Structure, Bonding, Mole Concept)</td>
+                        <td>Algebra (Sets, Relations, Functions, Quadratic)</td>
+                    </tr>
+                    <tr>
+                        <td>Month 3-4</td>
+                        <td>Mechanics (Rotation, Gravitation, SHM, Waves)</td>
+                        <td>Inorganic (Periodic Table, s-block, p-block)</td>
+                        <td>Calculus (Limits, Derivatives, Applications)</td>
+                    </tr>
+                    <tr>
+                        <td>Month 5-6</td>
+                        <td>Electromagnetism (Electrostatics, Current, Magnetism)</td>
+                        <td>Organic (Hydrocarbons, Reactions, Mechanisms)</td>
+                        <td>Coordinate Geometry (Straight Line, Circle, Conic Sections)</td>
+                    </tr>
+                </table>
+                
+                <div class="important-note">
+                    <h4>Daily Routine (Phase 1):</h4>
+                    <div class="daily-schedule">
+                        <div class="time-slot">6:00 AM</div>
+                        <div class="activity">Wake up + Quick revision of previous day</div>
+                        
+                        <div class="time-slot">7:00 AM</div>
+                        <div class="activity"><strong>Physics Theory</strong> - 2 hours (New chapter + NCERT)</div>
+                        
+                        <div class="time-slot">9:00 AM</div>
+                        <div class="activity">Breakfast + Break</div>
+                        
+                        <div class="time-slot">10:00 AM</div>
+                        <div class="activity"><strong>Chemistry Theory</strong> - 2 hours (New chapter + NCERT)</div>
+                        
+                        <div class="time-slot">12:00 PM</div>
+                        <div class="activity">Lunch + Rest</div>
+                        
+                        <div class="time-slot">2:00 PM</div>
+                        <div class="activity"><strong>Mathematics Theory</strong> - 2 hours (New chapter + NCERT)</div>
+                        
+                        <div class="time-slot">4:00 PM</div>
+                        <div class="activity">Break + Light exercise</div>
+                        
+                        <div class="time-slot">5:00 PM</div>
+                        <div class="activity"><strong>Problem Solving</strong> - 3 hours (All subjects - NCERT Exemplar level)</div>
+                        
+                        <div class="time-slot">8:00 PM</div>
+                        <div class="activity">Dinner + Break</div>
+                        
+                        <div class="time-slot">9:00 PM</div>
+                        <div class="activity"><strong>Revision + Doubt Clearing</strong> - 1.5 hours</div>
+                        
+                        <div class="time-slot">10:30 PM</div>
+                        <div class="activity">Sleep (7.5 hours minimum)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-title">Phase 2: Advanced Problem Solving (Months 7-12)</div>
+                <div class="phase-duration">⏱️ Duration: 6 months | Focus: JEE Main + Advanced Level Problems</div>
+                <p><strong>Goal:</strong> Solve 3000+ problems, complete 2nd revision, start mock tests</p>
+                
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Key Activities:</h4>
+                <ul class="topic-list">
+                    <li>Complete HC Verma (Physics) - All chapters</li>
+                    <li>Complete Cengage/Arihant (Chemistry) - All chapters</li>
+                    <li>Complete Cengage (Mathematics) - All chapters</li>
+                    <li>Solve 40 years JEE Main previous papers (chapter-wise)</li>
+                    <li>Start weekly mock tests (JEE Main pattern)</li>
+                    <li>Complete 2nd revision of all topics</li>
+                    <li>Maintain error log for all mistakes</li>
+                </ul>
+                
+                <div class="important-note">
+                    <h4>Daily Routine (Phase 2):</h4>
+                    <div class="daily-schedule">
+                        <div class="time-slot">6:00 AM</div>
+                        <div class="activity">Wake up + Formula revision (30 min)</div>
+                        
+                        <div class="time-slot">6:30 AM</div>
+                        <div class="activity"><strong>Physics Problems</strong> - 2.5 hours (HC Verma + Previous Year)</div>
+                        
+                        <div class="time-slot">9:00 AM</div>
+                        <div class="activity">Breakfast + Break</div>
+                        
+                        <div class="time-slot">10:00 AM</div>
+                        <div class="activity"><strong>Chemistry Problems</strong> - 2.5 hours (Cengage + Previous Year)</div>
+                        
+                        <div class="time-slot">12:30 PM</div>
+                        <div class="activity">Lunch + Rest</div>
+                        
+                        <div class="time-slot">2:00 PM</div>
+                        <div class="activity"><strong>Mathematics Problems</strong> - 2.5 hours (Cengage + Previous Year)</div>
+                        
+                        <div class="time-slot">4:30 PM</div>
+                        <div class="activity">Break + Exercise</div>
+                        
+                        <div class="time-slot">5:30 PM</div>
+                        <div class="activity"><strong>Weak Topics Practice</strong> - 2 hours</div>
+                        
+                        <div class="time-slot">7:30 PM</div>
+                        <div class="activity">Dinner + Break</div>
+                        
+                        <div class="time-slot">8:30 PM</div>
+                        <div class="activity"><strong>Revision + Error Log</strong> - 1.5 hours</div>
+                        
+                        <div class="time-slot">10:00 PM</div>
+                        <div class="activity">Sleep</div>
+                    </div>
+                    
+                    <p style="margin-top: 1rem;"><strong>Sunday:</strong> Full-length JEE Main mock test (3 hours) + Analysis (2 hours)</p>
+                </div>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-title">Phase 3: JEE Advanced Mastery (Months 13-16)</div>
+                <div class="phase-duration">⏱️ Duration: 4 months | Focus: JEE Advanced Level + Mock Tests</div>
+                <p><strong>Goal:</strong> Master JEE Advanced pattern, solve 1500+ Advanced problems, 30+ full mocks</p>
+                
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Key Activities:</h4>
+                <ul class="topic-list">
+                    <li>Solve all JEE Advanced previous years (2006-2024)</li>
+                    <li>Complete Advanced Problem Books (Irodov selections, Balaji, etc.)</li>
+                    <li>2 full mock tests per week (JEE Advanced pattern)</li>
+                    <li>Complete 3rd revision of entire syllabus</li>
+                    <li>Focus on multi-concept problems</li>
+                    <li>Master time management (3 hours for 54 questions)</li>
+                </ul>
+                
+                <div class="important-note">
+                    <h4>Weekly Schedule (Phase 3):</h4>
+                    <table>
+                        <tr>
+                            <th>Day</th>
+                            <th>Morning (6 AM - 12 PM)</th>
+                            <th>Afternoon (2 PM - 6 PM)</th>
+                            <th>Evening (7 PM - 10 PM)</th>
+                        </tr>
+                        <tr>
+                            <td>Monday</td>
+                            <td>Physics Advanced Problems</td>
+                            <td>Chemistry Advanced Problems</td>
+                            <td>Revision + Error Analysis</td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>Mathematics Advanced Problems</td>
+                            <td>Previous Year JEE Advanced</td>
+                            <td>Weak Topics</td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td><strong>FULL MOCK TEST</strong> (Paper 1)</td>
+                            <td><strong>FULL MOCK TEST</strong> (Paper 2)</td>
+                            <td>Mock Analysis + Error Log</td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td>Physics Multi-concept</td>
+                            <td>Chemistry Multi-concept</td>
+                            <td>Revision</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>Mathematics Multi-concept</td>
+                            <td>Previous Year JEE Advanced</td>
+                            <td>Weak Topics</td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td><strong>FULL MOCK TEST</strong> (Paper 1)</td>
+                            <td><strong>FULL MOCK TEST</strong> (Paper 2)</td>
+                            <td>Mock Analysis + Error Log</td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td>Complete Revision (All subjects)</td>
+                            <td>Formula Sheets + Short Notes</td>
+                            <td>Light study + Rest</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-title">Phase 4: Final Revision & Peak Performance (Months 17-18)</div>
+                <div class="phase-duration">⏱️ Duration: 2 months | Focus: Revision + Mock Tests + Peak Performance</div>
+                <p><strong>Goal:</strong> 4th complete revision, 20+ mocks, achieve consistent 200+ in Advanced</p>
+                
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Last 60 Days Strategy:</h4>
+                <ul class="topic-list">
+                    <li><strong>Days 60-45:</strong> Complete 4th revision + 10 full mocks</li>
+                    <li><strong>Days 44-30:</strong> Focus on weak areas + 8 full mocks</li>
+                    <li><strong>Days 29-15:</strong> Quick revision + 6 full mocks + Previous years</li>
+                    <li><strong>Days 14-7:</strong> Formula sheets + 4 full mocks + Confidence building</li>
+                    <li><strong>Days 6-1:</strong> Light revision + 2 mocks + Relax + Sleep well</li>
+                </ul>
+                
+                <div class="important-note">
+                    <h4>⚠️ CRITICAL: Last Month Do's and Don'ts</h4>
+                    <p><strong>DO:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Revise formula sheets daily</li>
+                        <li>Solve previous year papers again</li>
+                        <li>Maintain consistent sleep schedule</li>
+                        <li>Stay physically active</li>
+                        <li>Practice time management</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>DON'T:</strong></p>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Start new topics or books</li>
+                        <li>Panic if mock scores drop</li>
+                        <li>Compare with others</li>
+                        <li>Compromise on sleep</li>
+                        <li>Skip meals or exercise</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Subject-wise Strategy -->
+        <div class="strategy-section">
+            <h2 class="section-title">📚 Subject-wise Mastery Strategy</h2>
+            
+            <div class="phase-card">
+                <div class="phase-title">⚛️ Physics Strategy</div>
+                <h4 style="color: #00d4ff; margin: 1rem 0;">High Weightage Topics (Focus 60% time):</h4>
+                <ul class="topic-list">
+                    <li>Mechanics (30%): Kinematics, Laws of Motion, Work-Energy, Rotation, Gravitation</li>
+                    <li>Electromagnetism (25%): Electrostatics, Current Electricity, Magnetism, EMI</li>
+                    <li>Modern Physics (15%): Photoelectric Effect, Atoms, Nuclei</li>
+                    <li>Thermodynamics (10%): Laws, Kinetic Theory, Heat Transfer</li>
+                    <li>Optics + Waves (10%): Ray Optics, Wave Optics, SHM, Waves</li>
+                </ul>
+                
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Problem-Solving Approach:</h4>
+                <ol style="margin-left: 1.5rem;">
+                    <li>Draw diagram ALWAYS (even for simple problems)</li>
+                    <li>Write given data and required quantity</li>
+                    <li>Identify applicable laws/formulas</li>
+                    <li>Solve step-by-step with units</li>
+                    <li>Verify answer (dimensional analysis, limiting cases)</li>
+                </ol>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-title">🧪 Chemistry Strategy</div>
+                <h4 style="color: #00d4ff; margin: 1rem 0;">Subject Division:</h4>
+                <ul class="topic-list">
+                    <li><strong>Physical Chemistry (40%):</strong> Easiest to score, formula-based
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Mole Concept, Atomic Structure, Thermodynamics, Equilibrium, Electrochemistry</li>
+                            <li>Practice 500+ numerical problems</li>
+                        </ul>
+                    </li>
+                    <li><strong>Inorganic Chemistry (30%):</strong> Memory-based, high scoring
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Periodic Table, Chemical Bonding, s/p/d/f block, Coordination</li>
+                            <li>Make detailed notes with color coding</li>
+                            <li>Revise every week</li>
+                        </ul>
+                    </li>
+                    <li><strong>Organic Chemistry (30%):</strong> Concept + Practice
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>GOC, Hydrocarbons, Reactions, Mechanisms, Named Reactions</li>
+                            <li>Practice 300+ reaction problems</li>
+                            <li>Master all mechanisms</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <div class="phase-title">📐 Mathematics Strategy</div>
+                <h4 style="color: #00d4ff; margin: 1rem 0;">High Scoring Topics:</h4>
+                <ul class="topic-list">
+                    <li><strong>Calculus (35%):</strong> Limits, Derivatives, Integration, Differential Equations, AOD
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Practice 1000+ problems</li>
+                            <li>Master all standard integrals</li>
+                        </ul>
+                    </li>
+                    <li><strong>Algebra (25%):</strong> Complex Numbers, Quadratic, Sequences, Binomial, Matrices
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Focus on concept clarity</li>
+                            <li>Practice 800+ problems</li>
+                        </ul>
+                    </li>
+                    <li><strong>Coordinate Geometry (20%):</strong> Straight Line, Circle, Parabola, Ellipse, Hyperbola
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Master all formulas</li>
+                            <li>Practice 600+ problems</li>
+                        </ul>
+                    </li>
+                    <li><strong>Vectors & 3D (10%):</strong> Vectors, 3D Geometry
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Visualization is key</li>
+                            <li>Practice 400+ problems</li>
+                        </ul>
+                    </li>
+                    <li><strong>Trigonometry (10%):</strong> Ratios, Equations, Properties
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Memorize all formulas</li>
+                            <li>Practice 300+ problems</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Resources -->
+        <div class="strategy-section">
+            <h2 class="section-title">📖 Recommended Resources (Priority Order)</h2>
+            
+            <table>
+                <tr>
+                    <th>Subject</th>
+                    <th>Theory</th>
+                    <th>Problems (Main)</th>
+                    <th>Problems (Advanced)</th>
+                </tr>
+                <tr>
+                    <td><strong>Physics</strong></td>
+                    <td>NCERT + DC Pandey/Resnick Halliday</td>
+                    <td>HC Verma + DC Pandey</td>
+                    <td>Irodov (selected) + Previous Years</td>
+                </tr>
+                <tr>
+                    <td><strong>Chemistry</strong></td>
+                    <td>NCERT + OP Tandon/MS Chouhan</td>
+                    <td>Cengage + NCERT Exemplar</td>
+                    <td>Advanced Problems in Chemistry + Previous Years</td>
+                </tr>
+                <tr>
+                    <td><strong>Mathematics</strong></td>
+                    <td>NCERT + RD Sharma</td>
+                    <td>Cengage + Arihant</td>
+                    <td>TMH + Previous Years</td>
+                </tr>
+            </table>
+            
+            <div class="important-note">
+                <h4>⚠️ IMPORTANT: Don't collect books, complete them!</h4>
+                <p>One book completed 3 times > Three books completed once</p>
+            </div>
+        </div>
+        
+        <!-- Mock Test Strategy -->
+        <div class="strategy-section">
+            <h2 class="section-title">🎯 Mock Test Strategy</h2>
+            
+            <div class="phase-card">
+                <h4 style="color: #00d4ff;">Mock Test Schedule:</h4>
+                <ul class="topic-list">
+                    <li><strong>Months 7-12:</strong> 1 JEE Main mock per week (Total: 24 mocks)</li>
+                    <li><strong>Months 13-16:</strong> 2 JEE Advanced mocks per week (Total: 32 mocks)</li>
+                    <li><strong>Last 2 months:</strong> 3 mocks per week (Total: 24 mocks)</li>
+                    <li><strong>Total Mocks:</strong> 80+ full-length tests</li>
+                </ul>
+                
+                <h4 style="color: #00d4ff; margin-top: 1.5rem;">Mock Test Analysis (CRITICAL):</h4>
+                <ol style="margin-left: 1.5rem;">
+                    <li><strong>Immediate Review (2 hours):</strong> Check all answers, understand mistakes</li>
+                    <li><strong>Error Categorization:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Silly mistakes (calculation, reading error)</li>
+                            <li>Concept gaps (didn't know the concept)</li>
+                            <li>Application errors (knew concept, wrong application)</li>
+                            <li>Time management (couldn't attempt)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Action Plan:</strong> Note weak topics, plan revision</li>
+                    <li><strong>Redo Wrong Questions:</strong> After 3 days, solve again</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Mental Preparation -->
+        <div class="strategy-section">
+            <h2 class="section-title">🧠 Mental Preparation & Exam Strategy</h2>
+            
+            <div class="phase-card">
+                <h4 style="color: #00d4ff;">Exam Day Strategy:</h4>
+                <ol style="margin-left: 1.5rem;">
+                    <li><strong>First 15 minutes:</strong> Scan entire paper, mark easy/medium/hard</li>
+                    <li><strong>Next 90 minutes:</strong> Solve all easy + medium questions (aim: 35-40 questions)</li>
+                    <li><strong>Next 60 minutes:</strong> Attempt hard questions (aim: 10-12 questions)</li>
+                    <li><strong>Last 15 minutes:</strong> Review, fill OMR carefully, verify</li>
+                </ol>
+                
+                <h4 style="color: #00d4ff; margin-top: 1.5rem;">Question Selection:</h4>
+                <ul class="topic-list">
+                    <li>Attempt 45-48 questions out of 54 (don't attempt all blindly)</li>
+                    <li>Target 85-90% accuracy in attempted questions</li>
+                    <li>Skip if you're not 70% confident</li>
+                    <li>Negative marking is your enemy: -2 for wrong, +4 for correct</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 3rem 0;">
+            <a href="app.html" class="btn">📚 Start Learning Now</a>
+            <a href="test.html" class="btn">📝 Take Mock Test</a>
+            <a href="dashboard.html" class="btn">📊 Track Progress</a>
+        </div>
+        
+        <div class="warning-box">
+            <h3>💪 Final Words</h3>
+            <p>This plan is aggressive but achievable. Thousands have done it before you. The difference between AIR 1000 and AIR 10000 is not intelligence - it's <strong>consistency, discipline, and smart work</strong>.</p>
+            <p style="margin-top: 1rem;"><strong>Remember:</strong> Every hour you waste, 10,000 students are studying. Every problem you skip, someone else is solving. Stay focused. Stay consistent. Success will follow.</p>
+        </div>
+    </div>
+</body>
+</html>
