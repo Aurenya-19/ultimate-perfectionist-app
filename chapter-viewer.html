@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Chapter Viewer</title>
+    <title>Chapter Viewer - NEXUS REALITY</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="chapters-data.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { 
@@ -18,361 +15,379 @@
             --pink: #ff00ff; 
             --green: #00ff88; 
             --orange: #ffaa00; 
-            --gold: #ffd700;
-            --red: #ff3366;
             --text: #fff;
             --border: rgba(0,255,255,0.3);
         }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
         .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
         
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .navbar { background: rgba(0,0,0,0.9); padding: 1rem 2rem; border-bottom: 2px solid var(--cyan); position: sticky; top: 0; z-index: 100; }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); font-weight: 900; }
+        .back-btn { padding: 0.5rem 1rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 5px; color: var(--text); text-decoration: none; transition: all 0.2s; }
+        .back-btn:hover { background: rgba(0,255,255,0.2); }
         
-        /* Chapter Selector */
-        .selector-section { background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
-        .selector-title { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--cyan); margin-bottom: 1.5rem; text-align: center; }
-        .subject-tabs { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
-        .subject-tab { padding: 0.8rem 2rem; background: rgba(0,255,255,0.1); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
-        .subject-tab.active { background: rgba(0,255,255,0.3); border-color: var(--cyan); }
-        .chapter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-        .chapter-btn { padding: 1rem; background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 10px; cursor: pointer; transition: all 0.3s; text-align: center; }
-        .chapter-btn:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(255,0,255,0.4); border-color: var(--cyan); }
-        .chapter-num { font-family: 'Orbitron', sans-serif; color: var(--gold); font-weight: 900; font-size: 1.2rem; }
-        .chapter-name { color: var(--cyan); font-size: 0.9rem; margin-top: 0.3rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .chapter-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; }
+        .chapter-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--cyan); margin-bottom: 1rem; }
+        .chapter-meta { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
         
-        /* Chapter Content */
-        .chapter-content { display: none; }
-        .chapter-content.active { display: block; animation: fadeIn 0.5s; }
+        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+        .tab { padding: 1rem 2rem; cursor: pointer; transition: all 0.3s; font-weight: 700; border-bottom: 3px solid transparent; }
+        .tab:hover { color: var(--cyan); }
+        .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+        
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.4s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .header { background: var(--card); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; margin-bottom: 2rem; }
-        .chapter-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; }
-        .chapter-meta { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .meta-item { display: flex; align-items: center; gap: 0.5rem; opacity: 0.9; }
+        .theory-section { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+        .section-title { color: var(--pink); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+        .theory-content { line-height: 1.8; font-size: 1.1rem; }
+        .theory-content strong { color: var(--cyan); }
+        .formula-box { background: rgba(0,0,0,0.5); padding: 1rem; border-left: 4px solid var(--green); margin: 1rem 0; font-family: 'Courier New', monospace; color: var(--green); }
         
-        .section { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--cyan); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        .problems-grid { display: grid; gap: 1.5rem; }
+        .problem-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; }
+        .problem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+        .problem-number { color: var(--cyan); font-weight: 700; font-size: 1.2rem; }
+        .difficulty-badge { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.9rem; font-weight: 700; }
+        .diff-easy { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
+        .diff-medium { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .diff-hard { background: rgba(255,0,255,0.2); color: var(--pink); border: 1px solid var(--pink); }
+        .diff-olympiad { background: rgba(255,215,0,0.2); color: #ffd700; border: 1px solid #ffd700; }
         
-        .theory-block { background: rgba(0,255,255,0.05); border-left: 4px solid var(--cyan); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 8px; }
-        .theory-block h3 { color: var(--green); margin-bottom: 1rem; font-size: 1.3rem; }
-        .theory-block p { margin-bottom: 1rem; font-size: 1.05rem; }
-        .theory-block ul { margin-left: 2rem; margin-bottom: 1rem; }
-        .theory-block li { margin-bottom: 0.5rem; }
+        .problem-question { font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.6; }
+        .options-list { list-style: none; margin: 1rem 0; }
+        .option { padding: 0.8rem; margin: 0.5rem 0; background: rgba(0,0,0,0.3); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: rgba(0,255,255,0.1); border-left: 3px solid var(--cyan); }
         
-        .formula-box { background: rgba(0,0,0,0.5); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 1.1rem; }
-        .formula-item { margin-bottom: 1rem; padding: 0.8rem; background: rgba(0,255,136,0.05); border-radius: 5px; }
-        
-        .key-point { background: rgba(255,215,0,0.1); border-left: 4px solid var(--gold); padding: 1rem; margin: 1rem 0; border-radius: 5px; }
-        .key-point strong { color: var(--gold); }
-        
-        .problem-card { background: rgba(255,0,255,0.05); border: 2px solid var(--pink); border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .problem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-        .problem-num { font-family: 'Orbitron', sans-serif; color: var(--pink); font-weight: 900; font-size: 1.2rem; }
-        .difficulty { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; }
-        .difficulty.easy { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
-        .difficulty.medium { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
-        .difficulty.hard { background: rgba(255,51,102,0.2); color: var(--red); border: 1px solid var(--red); }
-        .problem-text { font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.8; }
-        .options { display: flex; flex-direction: column; gap: 0.8rem; margin: 1rem 0; }
-        .option { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; cursor: pointer; transition: all 0.2s; }
-        .option:hover { background: rgba(0,255,255,0.15); border-color: var(--cyan); }
-        .option.selected { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
-        
-        .solution-box { background: rgba(0,255,136,0.05); border: 2px solid var(--green); border-radius: 10px; padding: 1.5rem; margin-top: 1rem; display: none; }
+        .solution-box { background: rgba(0,255,136,0.1); border: 2px solid var(--green); border-radius: 8px; padding: 1.5rem; margin-top: 1rem; display: none; }
         .solution-box.show { display: block; animation: slideDown 0.3s; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .solution-box h4 { color: var(--green); margin-bottom: 1rem; }
         
-        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
         
         .loading { text-align: center; padding: 3rem; font-size: 1.5rem; color: var(--cyan); }
+        .error { text-align: center; padding: 3rem; color: var(--pink); }
         
         @media (max-width: 768px) { 
             .chapter-title { font-size: 1.8rem; }
-            .chapter-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .tabs { justify-content: center; }
         }
     </style>
 </head>
 <body>
     <div class="quantum-bg"></div>
     
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">🎯 NEXUS REALITY</div>
+            <a href="app.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Chapters</a>
+        </div>
+    </nav>
+    
     <div class="container">
-        <!-- Chapter Selector -->
-        <div class="selector-section" id="selectorSection">
-            <h2 class="selector-title">📚 Select Chapter</h2>
-            
-            <div class="subject-tabs">
-                <div class="subject-tab active" onclick="showSubject('physics')">⚛️ Physics</div>
-                <div class="subject-tab" onclick="showSubject('chemistry')">🧪 Chemistry</div>
-                <div class="subject-tab" onclick="showSubject('maths')">📐 Mathematics</div>
-            </div>
-            
-            <div class="chapter-grid" id="chapterGrid"></div>
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner fa-spin"></i> Loading chapter...
+        </div>
+        
+        <!-- Error State -->
+        <div id="error" class="error" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i> Chapter not found or failed to load.
+            <br><br>
+            <a href="app.html" class="btn">← Back to Chapters</a>
         </div>
         
         <!-- Chapter Content -->
-        <div class="chapter-content" id="chapterContent">
-            <div class="header" id="chapterHeader"></div>
-            <div id="theorySection"></div>
-            <div id="problemsSection"></div>
+        <div id="chapterContent" style="display: none;">
+            <!-- Header -->
+            <div class="chapter-header">
+                <h1 class="chapter-title" id="chapterTitle"></h1>
+                <div class="chapter-meta" id="chapterMeta"></div>
+            </div>
             
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--card); border: 2px solid var(--border); border-radius: 12px;">
-                <h3 style="color: var(--cyan); margin-bottom: 1rem;">✅ Chapter Complete!</h3>
-                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                    <button class="btn" onclick="backToSelector()">← Back to Chapters</button>
-                    <button class="btn btn-success" onclick="markComplete()">Mark as Complete</button>
-                    <a href="test.html" class="btn btn-primary">Take Chapter Test →</a>
-                </div>
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('theory')">📖 Theory</div>
+                <div class="tab" onclick="showTab('problems')">📝 Problems</div>
+                <div class="tab" onclick="showTab('formulas')">📐 Formulas</div>
+            </div>
+            
+            <!-- Theory Section -->
+            <div id="theory" class="content-section active">
+                <div id="theoryContent"></div>
+            </div>
+            
+            <!-- Problems Section -->
+            <div id="problems" class="content-section">
+                <div id="problemsContent"></div>
+            </div>
+            
+            <!-- Formulas Section -->
+            <div id="formulas" class="content-section">
+                <div id="formulasContent"></div>
             </div>
         </div>
     </div>
     
+    <script src="chapters-complete-physics.js"></script>
+    <script src="chapters-complete-physics-2.js"></script>
+    <script src="chapters-complete-chemistry.js"></script>
+    <script src="chapters-complete-chemistry-2.js"></script>
+    <script src="chapters-complete-maths.js"></script>
     <script>
-        let currentSubject = 'physics';
         let currentChapter = null;
         
-        // Load chapters on page load
-        window.addEventListener('load', () => {
-            showSubject('physics');
-        });
-        
-        // Show subject chapters
-        function showSubject(subject) {
-            currentSubject = subject;
-            
-            // Update active tab
-            document.querySelectorAll('.subject-tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Get chapters
-            const chapters = CHAPTERS_DATABASE[subject];
-            
-            // Render chapter grid
-            const grid = document.getElementById('chapterGrid');
-            grid.innerHTML = chapters.map(ch => `
-                <div class="chapter-btn" onclick="loadChapter('${subject}', '${ch.id}')">
-                    <div class="chapter-num">Ch ${ch.num}</div>
-                    <div class="chapter-name">${ch.title}</div>
-                </div>
-            `).join('');
+        // Get chapter ID from URL
+        function getChapterId() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
         }
         
-        // Load chapter content
-        function loadChapter(subject, chapterId) {
-            const chapters = CHAPTERS_DATABASE[subject];
-            const chapter = chapters.find(ch => ch.id === chapterId);
+        // Load chapter data
+        function loadChapter() {
+            const chapterId = getChapterId();
             
-            if (!chapter) {
-                alert('Chapter not found!');
+            if (!chapterId) {
+                showError();
                 return;
             }
             
-            currentChapter = chapter;
+            // Try to load from different sources
+            let chapterData = null;
             
-            // Hide selector, show content
-            document.getElementById('selectorSection').style.display = 'none';
-            document.getElementById('chapterContent').classList.add('active');
-            
-            // Render header
-            renderHeader(chapter);
-            
-            // Render theory
-            if (chapter.theory) {
-                renderTheory(chapter.theory);
-            } else {
-                document.getElementById('theorySection').innerHTML = `
-                    <div class="section">
-                        <h2 class="section-title">📖 Theory</h2>
-                        <div class="theory-block">
-                            <p>Complete theory for this chapter is being prepared. Check back soon!</p>
-                            <p>In the meantime, you can:</p>
-                            <ul>
-                                <li>Watch video lectures</li>
-                                <li>Solve practice problems</li>
-                                <li>Refer to the formula sheet</li>
-                            </ul>
-                        </div>
-                    </div>
-                `;
+            // Check COMPLETE_PHYSICS
+            if (typeof COMPLETE_PHYSICS !== 'undefined' && COMPLETE_PHYSICS[chapterId]) {
+                chapterData = COMPLETE_PHYSICS[chapterId];
+            }
+            // Check COMPLETE_PHYSICS_2
+            else if (typeof COMPLETE_PHYSICS_2 !== 'undefined' && COMPLETE_PHYSICS_2[chapterId]) {
+                chapterData = COMPLETE_PHYSICS_2[chapterId];
+            }
+            // Check COMPLETE_CHEMISTRY
+            else if (typeof COMPLETE_CHEMISTRY !== 'undefined' && COMPLETE_CHEMISTRY[chapterId]) {
+                chapterData = COMPLETE_CHEMISTRY[chapterId];
+            }
+            // Check COMPLETE_CHEMISTRY_2
+            else if (typeof COMPLETE_CHEMISTRY_2 !== 'undefined' && COMPLETE_CHEMISTRY_2[chapterId]) {
+                chapterData = COMPLETE_CHEMISTRY_2[chapterId];
+            }
+            // Check COMPLETE_MATHS
+            else if (typeof COMPLETE_MATHS !== 'undefined' && COMPLETE_MATHS[chapterId]) {
+                chapterData = COMPLETE_MATHS[chapterId];
             }
             
-            // Render problems
-            if (chapter.problems && chapter.problems.length > 0) {
-                renderProblems(chapter.problems);
+            if (chapterData) {
+                currentChapter = { id: chapterId, ...chapterData };
+                displayChapter();
             } else {
-                document.getElementById('problemsSection').innerHTML = `
-                    <div class="section">
-                        <h2 class="section-title">🧩 Practice Problems</h2>
-                        <div class="theory-block">
-                            <p>Practice problems for this chapter are being prepared. Check back soon!</p>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-            
-            // Trigger MathJax rendering
-            if (window.MathJax) {
-                MathJax.typesetPromise();
+                showError();
             }
         }
         
-        // Render header
-        function renderHeader(chapter) {
-            const header = document.getElementById('chapterHeader');
-            header.innerHTML = `
-                <div style="font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--orange); font-weight: 900; margin-bottom: 0.5rem;">
-                    CHAPTER ${chapter.num} • ${currentSubject.toUpperCase()}
+        // Display chapter
+        function displayChapter() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('chapterContent').style.display = 'block';
+            
+            // Set title
+            const titleMap = {
+                p5: 'Rotational Motion',
+                p9: 'Kinetic Theory of Gases',
+                p10: 'Oscillations and Waves',
+                p12: 'Current Electricity',
+                p15: 'Electromagnetic Induction',
+                p18: 'Ray Optics',
+                c1: 'Atomic Structure',
+                c5: 'Thermodynamics',
+                c8: 'Equilibrium',
+                c10: 'Hydrocarbons',
+                c12: 'Aldehydes, Ketones and Carboxylic Acids',
+                c16: 'Electrochemistry',
+                m1: 'Sets, Relations and Functions',
+                m6: 'Matrices and Determinants',
+                m13: 'Probability'
+            };
+            
+            document.getElementById('chapterTitle').textContent = titleMap[currentChapter.id] || 'Chapter';
+            
+            // Set meta
+            const problemCount = currentChapter.problems ? currentChapter.problems.length : 0;
+            document.getElementById('chapterMeta').innerHTML = `
+                <div class="meta-item">
+                    <i class="fas fa-book"></i>
+                    <span>${problemCount} Problems</span>
                 </div>
-                <h1 class="chapter-title">${chapter.title}</h1>
-                <div class="chapter-meta">
-                    <div class="meta-item"><i class="fas fa-book"></i> ${chapter.topics} Topics</div>
-                    <div class="meta-item"><i class="fas fa-puzzle-piece"></i> ${chapter.problems} Problems</div>
-                    <div class="meta-item"><i class="fas fa-video"></i> ${chapter.videos} Videos</div>
-                    <div class="meta-item"><i class="fas fa-clock"></i> ${chapter.hours} Hours</div>
-                    <div class="meta-item">
-                        <span style="padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.85rem; font-weight: 700; 
-                            ${chapter.difficulty === 'Easy' ? 'background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green);' : 
-                              chapter.difficulty === 'Medium' ? 'background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange);' : 
-                              'background: rgba(255,51,102,0.2); color: var(--red); border: 1px solid var(--red);'}">
-                            ${chapter.difficulty}
-                        </span>
-                    </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>~${Math.ceil(problemCount / 10)} hours</span>
                 </div>
             `;
+            
+            // Display theory
+            displayTheory();
+            
+            // Display problems
+            displayProblems();
+            
+            // Display formulas
+            displayFormulas();
         }
         
-        // Render theory
-        function renderTheory(theory) {
-            let html = '<div class="section"><h2 class="section-title">📖 Theory</h2>';
+        // Display theory
+        function displayTheory() {
+            const theoryDiv = document.getElementById('theoryContent');
             
-            // Introduction
-            if (theory.introduction) {
+            if (!currentChapter.theory || !currentChapter.theory.sections) {
+                theoryDiv.innerHTML = '<div class="theory-section"><p>Theory content coming soon...</p></div>';
+                return;
+            }
+            
+            let html = '';
+            
+            if (currentChapter.theory.introduction) {
                 html += `
-                    <div class="theory-block">
-                        <h3>Introduction</h3>
-                        <p>${theory.introduction}</p>
+                    <div class="theory-section">
+                        <div class="section-title">Introduction</div>
+                        <div class="theory-content">${currentChapter.theory.introduction}</div>
                     </div>
                 `;
             }
             
-            // Sections
-            if (theory.sections) {
-                theory.sections.forEach(section => {
-                    html += `<div class="theory-block">`;
-                    html += `<h3>${section.title}</h3>`;
-                    html += `<p>${section.content.replace(/\n/g, '</p><p>')}</p>`;
-                    
-                    // Formulas
-                    if (section.formulas && section.formulas.length > 0) {
-                        html += `<div class="formula-box">`;
-                        section.formulas.forEach(formula => {
-                            html += `<div class="formula-item">`;
-                            html += `<strong style="color: var(--cyan);">${formula.name}:</strong> `;
-                            html += `<span style="color: var(--green);">${formula.expr}</span>`;
-                            if (formula.unit) html += ` <span style="opacity: 0.7;">(${formula.unit})</span>`;
-                            if (formula.description) html += `<br><span style="opacity: 0.8; font-size: 0.9rem;">${formula.description}</span>`;
-                            html += `</div>`;
-                        });
-                        html += `</div>`;
-                    }
-                    
-                    // Key Points
-                    if (section.keyPoints && section.keyPoints.length > 0) {
-                        html += `<div class="key-point">`;
-                        html += `<strong>Key Points:</strong><ul style="margin-top: 0.5rem;">`;
-                        section.keyPoints.forEach(point => {
-                            html += `<li>${point}</li>`;
-                        });
-                        html += `</ul></div>`;
-                    }
-                    
-                    html += `</div>`;
-                });
-            }
+            currentChapter.theory.sections.forEach(section => {
+                html += `
+                    <div class="theory-section">
+                        <div class="section-title">${section.title}</div>
+                        <div class="theory-content">${section.content.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+            });
             
-            html += '</div>';
-            document.getElementById('theorySection').innerHTML = html;
+            theoryDiv.innerHTML = html;
         }
         
-        // Render problems
-        function renderProblems(problems) {
-            let html = '<div class="section"><h2 class="section-title">🧩 Practice Problems</h2>';
+        // Display problems
+        function displayProblems() {
+            const problemsDiv = document.getElementById('problemsContent');
             
-            problems.forEach((problem, index) => {
+            if (!currentChapter.problems || currentChapter.problems.length === 0) {
+                problemsDiv.innerHTML = '<div class="theory-section"><p>Problems coming soon...</p></div>';
+                return;
+            }
+            
+            let html = '<div class="problems-grid">';
+            
+            currentChapter.problems.forEach((problem, index) => {
+                const diffClass = {
+                    easy: 'diff-easy',
+                    medium: 'diff-medium',
+                    hard: 'diff-hard',
+                    olympiad: 'diff-olympiad'
+                }[problem.difficulty] || 'diff-medium';
+                
                 html += `
                     <div class="problem-card">
                         <div class="problem-header">
-                            <span class="problem-num">Problem ${index + 1}</span>
-                            <span class="difficulty ${problem.difficulty}">${problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}</span>
+                            <div class="problem-number">Problem ${index + 1}</div>
+                            <div class="difficulty-badge ${diffClass}">${problem.difficulty.toUpperCase()}</div>
                         </div>
-                        <div class="problem-text">${problem.question}</div>
-                        <div class="options">
-                            ${problem.options.map((opt, i) => `
-                                <div class="option" onclick="selectOption(this, ${index}, ${i})">
-                                    ${String.fromCharCode(65 + i)}) ${opt}
-                                </div>
-                            `).join('')}
-                        </div>
-                        <button class="btn btn-primary" onclick="toggleSolution(${index})">Show Solution</button>
-                        <div class="solution-box" id="solution${index}">
-                            <h4>✅ Solution</h4>
-                            <p style="white-space: pre-line;">${problem.solution}</p>
+                        <div class="problem-question">${problem.question}</div>
+                        ${problem.options ? `
+                            <ul class="options-list">
+                                ${problem.options.map((opt, i) => `
+                                    <li class="option">
+                                        <strong>${String.fromCharCode(65 + i)})</strong> ${opt}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        ` : ''}
+                        <button class="btn" onclick="toggleSolution(${index})">
+                            <i class="fas fa-lightbulb"></i> Show Solution
+                        </button>
+                        <div class="solution-box" id="solution-${index}">
+                            <strong style="color: var(--green); font-size: 1.2rem;">Solution:</strong>
+                            <div style="margin-top: 1rem; line-height: 1.8;">
+                                ${problem.solution ? problem.solution.replace(/\n/g, '<br>') : 'Solution coming soon...'}
+                            </div>
                         </div>
                     </div>
                 `;
             });
             
             html += '</div>';
-            document.getElementById('problemsSection').innerHTML = html;
+            problemsDiv.innerHTML = html;
         }
         
-        // Select option
-        function selectOption(element, problemNum, optionNum) {
-            const parent = element.parentElement;
-            parent.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
+        // Display formulas
+        function displayFormulas() {
+            const formulasDiv = document.getElementById('formulasContent');
+            
+            if (!currentChapter.theory || !currentChapter.theory.sections) {
+                formulasDiv.innerHTML = '<div class="theory-section"><p>Formulas coming soon...</p></div>';
+                return;
+            }
+            
+            let html = '<div class="theory-section"><div class="section-title">Important Formulas</div>';
+            
+            currentChapter.theory.sections.forEach(section => {
+                if (section.formulas && section.formulas.length > 0) {
+                    html += `<h3 style="color: var(--cyan); margin: 1.5rem 0 1rem;">${section.title}</h3>`;
+                    section.formulas.forEach(formula => {
+                        html += `
+                            <div class="formula-box">
+                                <strong>${formula.name}:</strong> ${formula.expr}
+                                ${formula.description ? `<br><span style="opacity: 0.8; font-size: 0.9rem;">${formula.description}</span>` : ''}
+                                ${formula.unit ? `<br><span style="opacity: 0.8; font-size: 0.9rem;">Unit: ${formula.unit}</span>` : ''}
+                            </div>
+                        `;
+                    });
+                }
+            });
+            
+            html += '</div>';
+            formulasDiv.innerHTML = html;
         }
         
         // Toggle solution
-        function toggleSolution(num) {
-            const solution = document.getElementById('solution' + num);
+        function toggleSolution(index) {
+            const solution = document.getElementById(`solution-${index}`);
             solution.classList.toggle('show');
         }
         
-        // Back to selector
-        function backToSelector() {
-            document.getElementById('selectorSection').style.display = 'block';
-            document.getElementById('chapterContent').classList.remove('active');
-            window.scrollTo(0, 0);
+        // Show tab
+        function showTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate clicked tab
+            event.target.classList.add('active');
         }
         
-        // Mark complete
-        function markComplete() {
-            if (!currentChapter) return;
-            
-            alert(`🎉 Chapter ${currentChapter.num}: ${currentChapter.title} marked as complete!\n\nGreat job! Your progress has been saved.`);
-            
-            // Save to localStorage
-            const progress = JSON.parse(localStorage.getItem('nexusProgress') || '{}');
-            if (!progress.chaptersCompleted) progress.chaptersCompleted = [];
-            if (!progress.chaptersCompleted.includes(currentChapter.id)) {
-                progress.chaptersCompleted.push(currentChapter.id);
-                localStorage.setItem('nexusProgress', JSON.stringify(progress));
-            }
+        // Show error
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
         }
         
-        console.log('🚀 NEXUS REALITY - Dynamic Chapter Viewer Ready!');
-        console.log('📚 Total Chapters:', 
-            CHAPTERS_DATABASE.physics.length + 
-            CHAPTERS_DATABASE.chemistry.length + 
-            CHAPTERS_DATABASE.maths.length
-        );
+        // Initialize
+        window.addEventListener('load', loadChapter);
+        
+        console.log('📖 Chapter Viewer - Ready!');
     </script>
 </body>
 </html>
