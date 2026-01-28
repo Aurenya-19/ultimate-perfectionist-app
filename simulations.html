@@ -3,499 +3,498 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Interactive Simulations</title>
+    <title>Interactive Simulations - NEXUS REALITY</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { 
             --bg: #000; 
-            --card: rgba(10,10,26,0.9);
             --cyan: #00ffff; 
             --pink: #ff00ff; 
             --green: #00ff88; 
             --orange: #ffaa00; 
-            --gold: #ffd700;
             --text: #fff;
             --border: rgba(0,255,255,0.3);
         }
         body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
         .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
         
+        .navbar { background: rgba(0,0,0,0.9); padding: 1rem 2rem; border-bottom: 2px solid var(--cyan); }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); font-weight: 900; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-link { color: var(--text); text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
+        .nav-link:hover { color: var(--cyan); background: rgba(0,255,255,0.1); }
+        
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 2rem; }
         
-        .sim-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .sim-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; cursor: pointer; }
-        .sim-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
-        .sim-icon { font-size: 3rem; text-align: center; margin-bottom: 1rem; }
-        .sim-title { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 1.3rem; text-align: center; margin-bottom: 0.5rem; }
-        .sim-desc { text-align: center; font-size: 0.9rem; opacity: 0.8; }
+        .sim-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+        .sim-tab { padding: 1rem 2rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; cursor: pointer; transition: all 0.3s; font-weight: 700; }
+        .sim-tab:hover { background: rgba(0,255,255,0.2); }
+        .sim-tab.active { background: linear-gradient(135deg, var(--cyan), #0099cc); }
         
-        .simulation-container { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; display: none; }
-        .simulation-container.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .sim-container { display: none; }
+        .sim-container.active { display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
         
-        canvas { border: 2px solid var(--cyan); border-radius: 8px; background: rgba(0,0,0,0.5); display: block; margin: 0 auto; }
+        .canvas-container { background: linear-gradient(135deg, rgba(0,255,255,0.05), rgba(255,0,255,0.05)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1rem; }
+        canvas { width: 100%; height: 500px; background: rgba(0,0,0,0.5); border-radius: 8px; display: block; }
         
-        .controls { display: flex; gap: 1rem; justify-content: center; margin: 1.5rem 0; flex-wrap: wrap; }
-        .control-group { display: flex; flex-direction: column; gap: 0.5rem; }
-        .control-label { font-size: 0.9rem; color: var(--cyan); font-weight: 700; }
-        input[type="range"] { width: 200px; }
-        input[type="number"] { padding: 0.5rem; background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 5px; color: var(--text); font-family: 'Rajdhani', sans-serif; width: 100px; }
+        .controls-panel { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; }
+        .control-group { margin-bottom: 1.5rem; }
+        .control-label { color: var(--cyan); font-weight: 700; margin-bottom: 0.5rem; display: block; }
+        .control-input { width: 100%; padding: 0.5rem; background: rgba(0,0,0,0.5); border: 2px solid var(--border); border-radius: 5px; color: var(--text); font-family: 'Rajdhani', sans-serif; }
+        .control-value { color: var(--green); font-weight: 700; font-size: 1.1rem; }
         
-        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; }
+        .stats-panel { background: rgba(0,0,0,0.5); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+        .stat-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+        .stat-item:last-child { border-bottom: none; }
+        .stat-label { opacity: 0.8; }
+        .stat-value { color: var(--green); font-weight: 700; }
+        
+        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, var(--cyan), #0099cc); color: #fff; transition: all 0.3s; font-size: 1rem; font-family: 'Rajdhani', sans-serif; border: none; width: 100%; margin-top: 0.5rem; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
-        .btn-danger { background: linear-gradient(135deg, #ff3366, #cc0033); }
+        .btn-danger { background: linear-gradient(135deg, var(--pink), #cc0066); }
         
-        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-        .stat-box { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--green); font-weight: 900; }
-        .stat-label { font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem; }
-        
-        @media (max-width: 768px) { 
+        @media (max-width: 1024px) { 
+            .sim-container.active { grid-template-columns: 1fr; }
             .title { font-size: 2rem; }
-            canvas { width: 100% !important; height: auto !important; }
         }
     </style>
 </head>
 <body>
     <div class="quantum-bg"></div>
     
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">🎯 NEXUS REALITY</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="app.html" class="nav-link">📚 Chapters</a>
+                <a href="simulations.html" class="nav-link">🎮 Simulations</a>
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
-        <div class="header">
-            <h1 class="title">🎮 Interactive Simulations</h1>
-            <p style="color: var(--cyan); font-size: 1.2rem;">Visualize Physics Concepts in Real-Time</p>
+        <h1 class="title">🎮 Interactive Physics Simulations</h1>
+        
+        <div class="sim-tabs">
+            <div class="sim-tab active" onclick="showSimulation('projectile')">🎯 Projectile Motion</div>
+            <div class="sim-tab" onclick="showSimulation('pendulum')">⚖️ Simple Pendulum</div>
         </div>
         
-        <div class="sim-grid" id="simGrid">
-            <div class="sim-card" onclick="showSimulation('projectile')">
-                <div class="sim-icon">🎯</div>
-                <h3 class="sim-title">Projectile Motion</h3>
-                <p class="sim-desc">Simulate projectile motion with air resistance</p>
+        <!-- Projectile Motion -->
+        <div id="projectile" class="sim-container active">
+            <div class="canvas-container">
+                <canvas id="projectileCanvas"></canvas>
             </div>
             
-            <div class="sim-card" onclick="showSimulation('pendulum')">
-                <div class="sim-icon">⚖️</div>
-                <h3 class="sim-title">Simple Pendulum</h3>
-                <p class="sim-desc">Visualize pendulum oscillations</p>
-            </div>
-            
-            <div class="sim-card" onclick="showSimulation('waves')">
-                <div class="sim-icon">🌊</div>
-                <h3 class="sim-title">Wave Motion</h3>
-                <p class="sim-desc">Explore wave interference and superposition</p>
-            </div>
-            
-            <div class="sim-card" onclick="showSimulation('collision')">
-                <div class="sim-icon">💥</div>
-                <h3 class="sim-title">Elastic Collision</h3>
-                <p class="sim-desc">Simulate 2D elastic collisions</p>
-            </div>
-            
-            <div class="sim-card" onclick="showSimulation('orbit')">
-                <div class="sim-icon">🪐</div>
-                <h3 class="sim-title">Orbital Motion</h3>
-                <p class="sim-desc">Planetary orbits and Kepler's laws</p>
-            </div>
-            
-            <div class="sim-card" onclick="showSimulation('spring')">
-                <div class="sim-icon">🔄</div>
-                <h3 class="sim-title">Spring Oscillation</h3>
-                <p class="sim-desc">Mass-spring system with damping</p>
-            </div>
-        </div>
-        
-        <!-- PROJECTILE MOTION SIMULATION -->
-        <div id="projectile" class="simulation-container">
-            <button class="btn" onclick="backToGrid()" style="margin-bottom: 1rem;">← Back to Simulations</button>
-            <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1.5rem; text-align: center;">🎯 Projectile Motion Simulator</h2>
-            
-            <canvas id="projectileCanvas" width="800" height="500"></canvas>
-            
-            <div class="controls">
+            <div class="controls-panel">
+                <h3 style="color: var(--cyan); margin-bottom: 1rem;">Controls</h3>
+                
                 <div class="control-group">
-                    <label class="control-label">Initial Velocity (m/s): <span id="velocityValue">50</span></label>
-                    <input type="range" id="velocity" min="10" max="100" value="50" oninput="updateValue('velocity')">
+                    <label class="control-label">Initial Velocity (m/s): <span class="control-value" id="velocityValue">30</span></label>
+                    <input type="range" class="control-input" id="velocity" min="10" max="100" value="30" oninput="updateProjectile()">
                 </div>
+                
                 <div class="control-group">
-                    <label class="control-label">Angle (degrees): <span id="angleValue">45</span></label>
-                    <input type="range" id="angle" min="0" max="90" value="45" oninput="updateValue('angle')">
+                    <label class="control-label">Launch Angle (°): <span class="control-value" id="angleValue">45</span></label>
+                    <input type="range" class="control-input" id="angle" min="0" max="90" value="45" oninput="updateProjectile()">
                 </div>
+                
                 <div class="control-group">
-                    <label class="control-label">Air Resistance: <span id="dragValue">0.0</span></label>
-                    <input type="range" id="drag" min="0" max="0.1" step="0.01" value="0" oninput="updateValue('drag')">
+                    <label class="control-label">Gravity (m/s²): <span class="control-value" id="gravityValue">9.8</span></label>
+                    <input type="range" class="control-input" id="gravity" min="1" max="20" step="0.1" value="9.8" oninput="updateProjectile()">
                 </div>
-            </div>
-            
-            <div class="controls">
-                <button class="btn btn-success" onclick="launchProjectile()">🚀 Launch</button>
-                <button class="btn btn-danger" onclick="resetProjectile()">↻ Reset</button>
-            </div>
-            
-            <div class="stats" id="projectileStats">
-                <div class="stat-box">
-                    <div class="stat-value" id="maxHeight">0</div>
-                    <div class="stat-label">Max Height (m)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="range">0</div>
-                    <div class="stat-label">Range (m)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="timeOfFlight">0</div>
-                    <div class="stat-label">Time of Flight (s)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="currentVelocity">0</div>
-                    <div class="stat-label">Current Velocity (m/s)</div>
+                
+                <button class="btn" onclick="launchProjectile()">
+                    <i class="fas fa-rocket"></i> Launch
+                </button>
+                <button class="btn btn-danger" onclick="resetProjectile()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+                
+                <div class="stats-panel">
+                    <h4 style="color: var(--pink); margin-bottom: 0.5rem;">Statistics</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">Max Height:</span>
+                        <span class="stat-value" id="maxHeight">0 m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Range:</span>
+                        <span class="stat-value" id="range">0 m</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time of Flight:</span>
+                        <span class="stat-value" id="timeOfFlight">0 s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Current Velocity:</span>
+                        <span class="stat-value" id="currentVelocity">0 m/s</span>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- PENDULUM SIMULATION -->
-        <div id="pendulum" class="simulation-container">
-            <button class="btn" onclick="backToGrid()" style="margin-bottom: 1rem;">← Back to Simulations</button>
-            <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1.5rem; text-align: center;">⚖️ Simple Pendulum Simulator</h2>
-            
-            <canvas id="pendulumCanvas" width="800" height="600"></canvas>
-            
-            <div class="controls">
-                <div class="control-group">
-                    <label class="control-label">Length (m): <span id="lengthValue">2.0</span></label>
-                    <input type="range" id="length" min="0.5" max="5" step="0.1" value="2" oninput="updateValue('length')">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Initial Angle (degrees): <span id="initAngleValue">30</span></label>
-                    <input type="range" id="initAngle" min="5" max="85" value="30" oninput="updateValue('initAngle')">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Damping: <span id="dampingValue">0.00</span></label>
-                    <input type="range" id="damping" min="0" max="0.1" step="0.01" value="0" oninput="updateValue('damping')">
-                </div>
+        <!-- Simple Pendulum -->
+        <div id="pendulum" class="sim-container">
+            <div class="canvas-container">
+                <canvas id="pendulumCanvas"></canvas>
             </div>
             
-            <div class="controls">
-                <button class="btn btn-success" onclick="startPendulum()">▶ Start</button>
-                <button class="btn btn-danger" onclick="stopPendulum()">⏸ Stop</button>
-                <button class="btn" onclick="resetPendulum()">↻ Reset</button>
+            <div class="controls-panel">
+                <h3 style="color: var(--cyan); margin-bottom: 1rem;">Controls</h3>
+                
+                <div class="control-group">
+                    <label class="control-label">Length (m): <span class="control-value" id="lengthValue">2.0</span></label>
+                    <input type="range" class="control-input" id="length" min="0.5" max="5" step="0.1" value="2.0" oninput="updatePendulum()">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Initial Angle (°): <span class="control-value" id="pendAngleValue">30</span></label>
+                    <input type="range" class="control-input" id="pendAngle" min="5" max="85" value="30" oninput="updatePendulum()">
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label">Damping: <span class="control-value" id="dampingValue">0.00</span></label>
+                    <input type="range" class="control-input" id="damping" min="0" max="0.1" step="0.01" value="0" oninput="updatePendulum()">
+                </div>
+                
+                <button class="btn" onclick="startPendulum()">
+                    <i class="fas fa-play"></i> Start
+                </button>
+                <button class="btn btn-danger" onclick="stopPendulum()">
+                    <i class="fas fa-stop"></i> Stop
+                </button>
+                
+                <div class="stats-panel">
+                    <h4 style="color: var(--pink); margin-bottom: 0.5rem;">Statistics</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">Period:</span>
+                        <span class="stat-value" id="period">0 s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Frequency:</span>
+                        <span class="stat-value" id="frequency">0 Hz</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Current Angle:</span>
+                        <span class="stat-value" id="currentAngle">0°</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Angular Velocity:</span>
+                        <span class="stat-value" id="angularVelocity">0 rad/s</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="stats" id="pendulumStats">
-                <div class="stat-box">
-                    <div class="stat-value" id="period">0</div>
-                    <div class="stat-label">Period (s)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="frequency">0</div>
-                    <div class="stat-label">Frequency (Hz)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="currentAngle">0</div>
-                    <div class="stat-label">Current Angle (°)</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="energy">0</div>
-                    <div class="stat-label">Total Energy (J)</div>
-                </div>
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="app.html" class="btn" style="padding: 1rem 2rem; font-size: 1rem;">← Back to App</a>
         </div>
     </div>
     
     <script>
-        let currentSimulation = null;
-        let animationId = null;
-        
-        // Projectile Motion Variables
-        let projectile = {
-            x: 0, y: 0, vx: 0, vy: 0,
-            launched: false,
-            trail: []
+        // Projectile Motion Simulation
+        let projectileCanvas, projectileCtx;
+        let projectileAnimationId = null;
+        let projectileData = {
+            v0: 30,
+            angle: 45,
+            g: 9.8,
+            x: 0,
+            y: 0,
+            vx: 0,
+            vy: 0,
+            t: 0,
+            isLaunched: false
         };
         
-        // Pendulum Variables
-        let pendulum = {
-            angle: 0,
-            angularVelocity: 0,
-            length: 2,
-            running: false
-        };
+        function initProjectile() {
+            projectileCanvas = document.getElementById('projectileCanvas');
+            projectileCtx = projectileCanvas.getContext('2d');
+            projectileCanvas.width = projectileCanvas.offsetWidth;
+            projectileCanvas.height = projectileCanvas.offsetHeight;
+            drawProjectileScene();
+        }
         
-        const g = 9.8; // gravity
-        
-        // Show simulation
-        function showSimulation(simName) {
-            document.getElementById('simGrid').style.display = 'none';
-            document.querySelectorAll('.simulation-container').forEach(sim => sim.classList.remove('active'));
-            document.getElementById(simName).classList.add('active');
-            currentSimulation = simName;
+        function updateProjectile() {
+            projectileData.v0 = parseFloat(document.getElementById('velocity').value);
+            projectileData.angle = parseFloat(document.getElementById('angle').value);
+            projectileData.g = parseFloat(document.getElementById('gravity').value);
             
-            if (simName === 'projectile') {
-                initProjectile();
-            } else if (simName === 'pendulum') {
-                initPendulum();
+            document.getElementById('velocityValue').textContent = projectileData.v0;
+            document.getElementById('angleValue').textContent = projectileData.angle;
+            document.getElementById('gravityValue').textContent = projectileData.g.toFixed(1);
+            
+            if (!projectileData.isLaunched) {
+                calculateProjectileStats();
             }
         }
         
-        // Back to grid
-        function backToGrid() {
-            if (animationId) cancelAnimationFrame(animationId);
-            document.getElementById('simGrid').style.display = 'grid';
-            document.querySelectorAll('.simulation-container').forEach(sim => sim.classList.remove('active'));
-            currentSimulation = null;
-        }
-        
-        // Update slider values
-        function updateValue(id) {
-            const element = document.getElementById(id);
-            const valueElement = document.getElementById(id + 'Value');
-            valueElement.textContent = parseFloat(element.value).toFixed(id === 'drag' || id === 'damping' ? 2 : id === 'length' ? 1 : 0);
-        }
-        
-        // ==================== PROJECTILE MOTION ====================
-        function initProjectile() {
-            const canvas = document.getElementById('projectileCanvas');
-            const ctx = canvas.getContext('2d');
+        function calculateProjectileStats() {
+            const v0 = projectileData.v0;
+            const angle = projectileData.angle * Math.PI / 180;
+            const g = projectileData.g;
             
-            // Draw ground
-            ctx.fillStyle = '#00ff88';
-            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
+            const maxHeight = (v0 * v0 * Math.sin(angle) * Math.sin(angle)) / (2 * g);
+            const range = (v0 * v0 * Math.sin(2 * angle)) / g;
+            const timeOfFlight = (2 * v0 * Math.sin(angle)) / g;
             
-            // Draw axes
-            ctx.strokeStyle = '#00ffff';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(50, canvas.height - 50);
-            ctx.lineTo(canvas.width - 50, canvas.height - 50);
-            ctx.stroke();
-            
-            // Labels
-            ctx.fillStyle = '#00ffff';
-            ctx.font = '14px Rajdhani';
-            ctx.fillText('0', 40, canvas.height - 30);
-            ctx.fillText('Range (m)', canvas.width / 2 - 30, canvas.height - 10);
+            document.getElementById('maxHeight').textContent = maxHeight.toFixed(2) + ' m';
+            document.getElementById('range').textContent = range.toFixed(2) + ' m';
+            document.getElementById('timeOfFlight').textContent = timeOfFlight.toFixed(2) + ' s';
         }
         
         function launchProjectile() {
-            const v0 = parseFloat(document.getElementById('velocity').value);
-            const angle = parseFloat(document.getElementById('angle').value) * Math.PI / 180;
-            const drag = parseFloat(document.getElementById('drag').value);
+            if (projectileData.isLaunched) return;
             
-            projectile = {
-                x: 50,
-                y: document.getElementById('projectileCanvas').height - 50,
-                vx: v0 * Math.cos(angle),
-                vy: -v0 * Math.sin(angle),
-                launched: true,
-                trail: [],
-                drag: drag,
-                startTime: Date.now(),
-                maxHeight: 0
-            };
+            projectileData.isLaunched = true;
+            projectileData.t = 0;
+            projectileData.x = 0;
+            projectileData.y = 0;
+            
+            const angleRad = projectileData.angle * Math.PI / 180;
+            projectileData.vx = projectileData.v0 * Math.cos(angleRad);
+            projectileData.vy = projectileData.v0 * Math.sin(angleRad);
             
             animateProjectile();
         }
         
         function animateProjectile() {
-            const canvas = document.getElementById('projectileCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            if (!projectile.launched) return;
-            
-            // Clear canvas
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Redraw ground
-            ctx.fillStyle = '#00ff88';
-            ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
-            
-            // Update physics
             const dt = 0.016; // ~60 FPS
-            const speed = Math.sqrt(projectile.vx ** 2 + projectile.vy ** 2);
-            const dragForce = projectile.drag * speed;
+            projectileData.t += dt;
             
-            projectile.vx -= dragForce * projectile.vx / speed * dt;
-            projectile.vy += (g - dragForce * projectile.vy / speed) * dt;
+            projectileData.x = projectileData.vx * projectileData.t;
+            projectileData.y = projectileData.vy * projectileData.t - 0.5 * projectileData.g * projectileData.t * projectileData.t;
             
-            projectile.x += projectile.vx * 5 * dt; // Scale for visualization
-            projectile.y += projectile.vy * 5 * dt;
+            const currentVx = projectileData.vx;
+            const currentVy = projectileData.vy - projectileData.g * projectileData.t;
+            const currentV = Math.sqrt(currentVx * currentVx + currentVy * currentVy);
             
-            // Track max height
-            const height = (canvas.height - 50 - projectile.y) / 5;
-            if (height > projectile.maxHeight) {
-                projectile.maxHeight = height;
+            document.getElementById('currentVelocity').textContent = currentV.toFixed(2) + ' m/s';
+            
+            drawProjectileScene();
+            
+            if (projectileData.y >= 0) {
+                projectileAnimationId = requestAnimationFrame(animateProjectile);
+            } else {
+                projectileData.isLaunched = false;
             }
-            
-            // Add to trail
-            projectile.trail.push({x: projectile.x, y: projectile.y});
-            if (projectile.trail.length > 100) projectile.trail.shift();
-            
-            // Draw trail
-            ctx.strokeStyle = '#ff00ff';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            for (let i = 0; i < projectile.trail.length; i++) {
-                const point = projectile.trail[i];
-                if (i === 0) ctx.moveTo(point.x, point.y);
-                else ctx.lineTo(point.x, point.y);
-            }
-            ctx.stroke();
-            
-            // Draw projectile
-            ctx.fillStyle = '#00ffff';
-            ctx.beginPath();
-            ctx.arc(projectile.x, projectile.y, 8, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Update stats
-            document.getElementById('maxHeight').textContent = projectile.maxHeight.toFixed(1);
-            document.getElementById('range').textContent = ((projectile.x - 50) / 5).toFixed(1);
-            document.getElementById('timeOfFlight').textContent = ((Date.now() - projectile.startTime) / 1000).toFixed(2);
-            document.getElementById('currentVelocity').textContent = speed.toFixed(1);
-            
-            // Check if hit ground
-            if (projectile.y >= canvas.height - 50) {
-                projectile.launched = false;
-                return;
-            }
-            
-            // Check if out of bounds
-            if (projectile.x > canvas.width) {
-                projectile.launched = false;
-                return;
-            }
-            
-            animationId = requestAnimationFrame(animateProjectile);
         }
         
-        function resetProjectile() {
-            if (animationId) cancelAnimationFrame(animationId);
-            projectile.launched = false;
-            initProjectile();
-            document.getElementById('maxHeight').textContent = '0';
-            document.getElementById('range').textContent = '0';
-            document.getElementById('timeOfFlight').textContent = '0';
-            document.getElementById('currentVelocity').textContent = '0';
-        }
-        
-        // ==================== PENDULUM ====================
-        function initPendulum() {
-            const canvas = document.getElementById('pendulumCanvas');
-            const ctx = canvas.getContext('2d');
+        function drawProjectileScene() {
+            const canvas = projectileCanvas;
+            const ctx = projectileCtx;
+            const width = canvas.width;
+            const height = canvas.height;
             
-            const length = parseFloat(document.getElementById('length').value);
-            const initAngle = parseFloat(document.getElementById('initAngle').value) * Math.PI / 180;
+            // Clear
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, width, height);
             
-            pendulum = {
-                angle: initAngle,
-                angularVelocity: 0,
-                length: length,
-                running: false,
-                pivotX: canvas.width / 2,
-                pivotY: 100
-            };
-            
-            drawPendulum();
-        }
-        
-        function drawPendulum() {
-            const canvas = document.getElementById('pendulumCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Clear canvas
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Calculate bob position
-            const scale = 80; // pixels per meter
-            const bobX = pendulum.pivotX + pendulum.length * scale * Math.sin(pendulum.angle);
-            const bobY = pendulum.pivotY + pendulum.length * scale * Math.cos(pendulum.angle);
-            
-            // Draw pivot
-            ctx.fillStyle = '#00ffff';
-            ctx.beginPath();
-            ctx.arc(pendulum.pivotX, pendulum.pivotY, 8, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Draw string
+            // Ground
             ctx.strokeStyle = '#00ffff';
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(pendulum.pivotX, pendulum.pivotY);
-            ctx.lineTo(bobX, bobY);
+            ctx.moveTo(0, height - 50);
+            ctx.lineTo(width, height - 50);
             ctx.stroke();
             
-            // Draw bob
-            ctx.fillStyle = '#ff00ff';
-            ctx.beginPath();
-            ctx.arc(bobX, bobY, 20, 0, Math.PI * 2);
-            ctx.fill();
+            // Scale
+            const scale = Math.min(width / 150, (height - 100) / 100);
             
-            // Draw angle arc
-            ctx.strokeStyle = '#00ff88';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.arc(pendulum.pivotX, pendulum.pivotY, 50, 0, pendulum.angle);
-            ctx.stroke();
+            // Projectile
+            if (projectileData.isLaunched || projectileData.x > 0) {
+                const px = 50 + projectileData.x * scale;
+                const py = height - 50 - projectileData.y * scale;
+                
+                ctx.fillStyle = '#ff00ff';
+                ctx.beginPath();
+                ctx.arc(px, py, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Trail
+                ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let i = 0; i <= projectileData.t; i += 0.1) {
+                    const tx = 50 + projectileData.vx * i * scale;
+                    const ty = height - 50 - (projectileData.vy * i - 0.5 * projectileData.g * i * i) * scale;
+                    if (i === 0) ctx.moveTo(tx, ty);
+                    else ctx.lineTo(tx, ty);
+                }
+                ctx.stroke();
+            } else {
+                // Launch position
+                ctx.fillStyle = '#00ff88';
+                ctx.beginPath();
+                ctx.arc(50, height - 50, 8, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function resetProjectile() {
+            if (projectileAnimationId) {
+                cancelAnimationFrame(projectileAnimationId);
+            }
+            projectileData.isLaunched = false;
+            projectileData.x = 0;
+            projectileData.y = 0;
+            projectileData.t = 0;
+            document.getElementById('currentVelocity').textContent = '0 m/s';
+            drawProjectileScene();
+        }
+        
+        // Pendulum Simulation
+        let pendulumCanvas, pendulumCtx;
+        let pendulumAnimationId = null;
+        let pendulumData = {
+            length: 2.0,
+            angle: 30,
+            damping: 0,
+            angularVel: 0,
+            isRunning: false,
+            g: 9.8
+        };
+        
+        function initPendulum() {
+            pendulumCanvas = document.getElementById('pendulumCanvas');
+            pendulumCtx = pendulumCanvas.getContext('2d');
+            pendulumCanvas.width = pendulumCanvas.offsetWidth;
+            pendulumCanvas.height = pendulumCanvas.offsetHeight;
+            drawPendulumScene();
+        }
+        
+        function updatePendulum() {
+            pendulumData.length = parseFloat(document.getElementById('length').value);
+            pendulumData.angle = parseFloat(document.getElementById('pendAngle').value);
+            pendulumData.damping = parseFloat(document.getElementById('damping').value);
+            
+            document.getElementById('lengthValue').textContent = pendulumData.length.toFixed(1);
+            document.getElementById('pendAngleValue').textContent = pendulumData.angle;
+            document.getElementById('dampingValue').textContent = pendulumData.damping.toFixed(2);
+            
+            calculatePendulumStats();
+            if (!pendulumData.isRunning) {
+                drawPendulumScene();
+            }
+        }
+        
+        function calculatePendulumStats() {
+            const period = 2 * Math.PI * Math.sqrt(pendulumData.length / pendulumData.g);
+            const frequency = 1 / period;
+            
+            document.getElementById('period').textContent = period.toFixed(2) + ' s';
+            document.getElementById('frequency').textContent = frequency.toFixed(2) + ' Hz';
         }
         
         function startPendulum() {
-            pendulum.running = true;
+            if (pendulumData.isRunning) return;
+            
+            pendulumData.isRunning = true;
+            pendulumData.angle = parseFloat(document.getElementById('pendAngle').value) * Math.PI / 180;
+            pendulumData.angularVel = 0;
+            
             animatePendulum();
         }
         
-        function stopPendulum() {
-            pendulum.running = false;
-            if (animationId) cancelAnimationFrame(animationId);
-        }
-        
         function animatePendulum() {
-            if (!pendulum.running) return;
-            
             const dt = 0.016;
-            const damping = parseFloat(document.getElementById('damping').value);
             
-            // Pendulum equation: d²θ/dt² = -(g/L)sin(θ) - b(dθ/dt)
-            const angularAcceleration = -(g / pendulum.length) * Math.sin(pendulum.angle) - damping * pendulum.angularVelocity;
+            const angularAcc = -(pendulumData.g / pendulumData.length) * Math.sin(pendulumData.angle);
+            pendulumData.angularVel += angularAcc * dt;
+            pendulumData.angularVel *= (1 - pendulumData.damping);
+            pendulumData.angle += pendulumData.angularVel * dt;
             
-            pendulum.angularVelocity += angularAcceleration * dt;
-            pendulum.angle += pendulum.angularVelocity * dt;
+            document.getElementById('currentAngle').textContent = (pendulumData.angle * 180 / Math.PI).toFixed(1) + '°';
+            document.getElementById('angularVelocity').textContent = pendulumData.angularVel.toFixed(2) + ' rad/s';
             
-            drawPendulum();
+            drawPendulumScene();
             
-            // Update stats
-            const period = 2 * Math.PI * Math.sqrt(pendulum.length / g);
-            document.getElementById('period').textContent = period.toFixed(2);
-            document.getElementById('frequency').textContent = (1 / period).toFixed(3);
-            document.getElementById('currentAngle').textContent = (pendulum.angle * 180 / Math.PI).toFixed(1);
-            
-            const mass = 1; // kg
-            const height = pendulum.length * (1 - Math.cos(pendulum.angle));
-            const PE = mass * g * height;
-            const KE = 0.5 * mass * (pendulum.length * pendulum.angularVelocity) ** 2;
-            document.getElementById('energy').textContent = (PE + KE).toFixed(2);
-            
-            animationId = requestAnimationFrame(animatePendulum);
+            if (pendulumData.isRunning) {
+                pendulumAnimationId = requestAnimationFrame(animatePendulum);
+            }
         }
         
-        function resetPendulum() {
-            stopPendulum();
+        function drawPendulumScene() {
+            const canvas = pendulumCanvas;
+            const ctx = pendulumCtx;
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            // Clear
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Pivot
+            const pivotX = width / 2;
+            const pivotY = 50;
+            
+            ctx.fillStyle = '#00ffff';
+            ctx.beginPath();
+            ctx.arc(pivotX, pivotY, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Scale
+            const scale = Math.min(width / 6, (height - 150) / 5);
+            const length = pendulumData.length * scale;
+            
+            // Pendulum
+            const angle = pendulumData.isRunning ? pendulumData.angle : pendulumData.angle * Math.PI / 180;
+            const bobX = pivotX + length * Math.sin(angle);
+            const bobY = pivotY + length * Math.cos(angle);
+            
+            // String
+            ctx.strokeStyle = '#00ff88';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pivotX, pivotY);
+            ctx.lineTo(bobX, bobY);
+            ctx.stroke();
+            
+            // Bob
+            ctx.fillStyle = '#ff00ff';
+            ctx.beginPath();
+            ctx.arc(bobX, bobY, 15, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        function stopPendulum() {
+            pendulumData.isRunning = false;
+            if (pendulumAnimationId) {
+                cancelAnimationFrame(pendulumAnimationId);
+            }
+        }
+        
+        // Tab switching
+        function showSimulation(simName) {
+            document.querySelectorAll('.sim-container').forEach(sim => {
+                sim.classList.remove('active');
+            });
+            document.querySelectorAll('.sim-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(simName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (simName === 'projectile') {
+                initProjectile();
+                calculateProjectileStats();
+            } else if (simName === 'pendulum') {
+                initPendulum();
+                calculatePendulumStats();
+            }
+        }
+        
+        // Initialize
+        window.addEventListener('load', () => {
+            initProjectile();
             initPendulum();
-            document.getElementById('period').textContent = '0';
-            document.getElementById('frequency').textContent = '0';
-            document.getElementById('currentAngle').textContent = '0';
-            document.getElementById('energy').textContent = '0';
-        }
+            calculateProjectileStats();
+            calculatePendulumStats();
+        });
         
-        console.log('🎮 NEXUS REALITY - Interactive Simulations Ready!');
+        console.log('🎮 Simulations - Fully Functional with Real Physics!');
     </script>
 </body>
 </html>
