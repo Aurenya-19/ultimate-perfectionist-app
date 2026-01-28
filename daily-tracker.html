@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Progress Tracker - JEE Prep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        .date-display { font-size: 1.2rem; color: #aaa; }
+        
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 1.5rem; border-radius: 10px; border: 2px solid #0f3460; text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 900; color: #00ff88; margin-bottom: 0.5rem; }
+        .stat-label { color: #aaa; font-size: 0.9rem; }
+        
+        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; }
+        
+        .time-log { display: grid; gap: 1rem; }
+        .time-entry { background: #16213e; padding: 1rem; border-radius: 8px; display: grid; grid-template-columns: 100px 150px 1fr 100px 80px; gap: 1rem; align-items: center; }
+        .time-input { padding: 0.5rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 5px; color: #fff; font-family: 'Inter', sans-serif; }
+        .subject-select { padding: 0.5rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 5px; color: #fff; font-family: 'Inter', sans-serif; }
+        .topic-input { padding: 0.5rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 5px; color: #fff; font-family: 'Inter', sans-serif; width: 100%; }
+        .duration-input { padding: 0.5rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 5px; color: #fff; font-family: 'Inter', sans-serif; width: 100%; }
+        
+        .btn { padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        .btn-danger { background: #ff4444; color: #fff; }
+        .btn-small { padding: 0.5rem 1rem; font-size: 0.9rem; }
+        
+        .topic-checklist { display: grid; gap: 0.8rem; }
+        .topic-item { background: #16213e; padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .topic-item.completed { background: #1a3a2e; border-left: 4px solid #00ff88; }
+        .checkbox { width: 20px; height: 20px; cursor: pointer; }
+        
+        .progress-bar { width: 100%; height: 30px; background: #0f3460; border-radius: 15px; overflow: hidden; margin: 1rem 0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #00d4ff, #00ff88); transition: width 0.3s; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #000; }
+        
+        .notes-area { width: 100%; min-height: 100px; padding: 1rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 8px; color: #fff; font-family: 'Inter', sans-serif; resize: vertical; }
+        
+        .streak-display { text-align: center; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; border: 2px solid #00d4ff; }
+        .streak-number { font-size: 4rem; font-weight: 900; color: #ff9800; }
+        .streak-label { font-size: 1.2rem; color: #aaa; margin-top: 0.5rem; }
+        
+        @media (max-width: 768px) { 
+            .time-entry { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📊 Daily Progress Tracker</h1>
+            <div class="date-display" id="currentDate"></div>
+        </div>
+        
+        <!-- Today's Stats -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-value" id="totalHours">0.0</div>
+                <div class="stat-label">Hours Studied Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="problemsSolved">0</div>
+                <div class="stat-label">Problems Solved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="topicsCompleted">0</div>
+                <div class="stat-label">Topics Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="currentStreak">0</div>
+                <div class="stat-label">Day Streak 🔥</div>
+            </div>
+        </div>
+        
+        <!-- Study Time Log -->
+        <div class="section">
+            <div class="section-title">⏱️ Study Time Log</div>
+            <div class="time-log" id="timeLog">
+                <!-- Entries will be added here -->
+            </div>
+            <button class="btn" onclick="addTimeEntry()" style="margin-top: 1rem;">+ Add Study Session</button>
+        </div>
+        
+        <!-- Subject-wise Progress -->
+        <div class="section">
+            <div class="section-title">📚 Subject-wise Progress (Today)</div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>⚛️ Physics</span>
+                    <span id="physicsHours">0.0 hours</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="physicsProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>🧪 Chemistry</span>
+                    <span id="chemistryHours">0.0 hours</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="chemistryProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span>📐 Mathematics</span>
+                    <span id="mathsHours">0.0 hours</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="mathsProgress" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Today's Topics Checklist -->
+        <div class="section">
+            <div class="section-title">✅ Today's Topics Checklist</div>
+            <div class="topic-checklist" id="topicChecklist">
+                <!-- Topics will be loaded here -->
+            </div>
+            <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                <input type="text" id="newTopicInput" placeholder="Add new topic..." class="topic-input" style="flex: 1;">
+                <button class="btn" onclick="addTopic()">Add Topic</button>
+            </div>
+        </div>
+        
+        <!-- Problems Solved Counter -->
+        <div class="section">
+            <div class="section-title">📝 Problems Solved Today</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #aaa;">Physics Problems:</label>
+                    <input type="number" id="physicsProblems" class="duration-input" value="0" min="0" onchange="updateProblems()">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #aaa;">Chemistry Problems:</label>
+                    <input type="number" id="chemistryProblems" class="duration-input" value="0" min="0" onchange="updateProblems()">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; color: #aaa;">Maths Problems:</label>
+                    <input type="number" id="mathsProblems" class="duration-input" value="0" min="0" onchange="updateProblems()">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Daily Notes -->
+        <div class="section">
+            <div class="section-title">📝 Daily Notes & Reflections</div>
+            <textarea id="dailyNotes" class="notes-area" placeholder="What went well today? What needs improvement? Key learnings?"></textarea>
+            <button class="btn" onclick="saveNotes()" style="margin-top: 1rem;">Save Notes</button>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin: 2rem 0;">
+            <button class="btn" onclick="saveProgress()">💾 Save Today's Progress</button>
+            <button class="btn btn-danger" onclick="resetDay()">🔄 Reset Today</button>
+            <a href="study-plan.html" class="btn" style="text-decoration: none; display: inline-block;">📅 View Study Plan</a>
+        </div>
+    </div>
+    
+    <script>
+        let studySessions = [];
+        let topics = [];
+        let dailyData = {
+            date: new Date().toDateString(),
+            physics: 0,
+            chemistry: 0,
+            maths: 0,
+            physicsProblems: 0,
+            chemistryProblems: 0,
+            mathsProblems: 0,
+            notes: ''
+        };
+        
+        // Initialize
+        function init() {
+            updateDate();
+            loadProgress();
+            updateStats();
+            loadTopics();
+        }
+        
+        function updateDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+        }
+        
+        function addTimeEntry() {
+            const entry = {
+                id: Date.now(),
+                time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+                subject: 'physics',
+                topic: '',
+                duration: 1.0
+            };
+            
+            studySessions.push(entry);
+            renderTimeLog();
+        }
+        
+        function renderTimeLog() {
+            const container = document.getElementById('timeLog');
+            container.innerHTML = studySessions.map(entry => `
+                <div class="time-entry">
+                    <input type="time" class="time-input" value="${entry.time}" onchange="updateEntry(${entry.id}, 'time', this.value)">
+                    <select class="subject-select" onchange="updateEntry(${entry.id}, 'subject', this.value)">
+                        <option value="physics" ${entry.subject === 'physics' ? 'selected' : ''}>⚛️ Physics</option>
+                        <option value="chemistry" ${entry.subject === 'chemistry' ? 'selected' : ''}>🧪 Chemistry</option>
+                        <option value="maths" ${entry.subject === 'maths' ? 'selected' : ''}>📐 Maths</option>
+                    </select>
+                    <input type="text" class="topic-input" placeholder="Topic/Chapter" value="${entry.topic}" onchange="updateEntry(${entry.id}, 'topic', this.value)">
+                    <input type="number" class="duration-input" placeholder="Hours" value="${entry.duration}" step="0.5" min="0.5" max="12" onchange="updateEntry(${entry.id}, 'duration', this.value)">
+                    <button class="btn btn-danger btn-small" onclick="deleteEntry(${entry.id})">Delete</button>
+                </div>
+            `).join('');
+            
+            updateStats();
+        }
+        
+        function updateEntry(id, field, value) {
+            const entry = studySessions.find(e => e.id === id);
+            if (entry) {
+                entry[field] = field === 'duration' ? parseFloat(value) : value;
+                updateStats();
+            }
+        }
+        
+        function deleteEntry(id) {
+            studySessions = studySessions.filter(e => e.id !== id);
+            renderTimeLog();
+        }
+        
+        function updateStats() {
+            // Calculate total hours per subject
+            dailyData.physics = studySessions.filter(e => e.subject === 'physics').reduce((sum, e) => sum + e.duration, 0);
+            dailyData.chemistry = studySessions.filter(e => e.subject === 'chemistry').reduce((sum, e) => sum + e.duration, 0);
+            dailyData.maths = studySessions.filter(e => e.subject === 'maths').reduce((sum, e) => sum + e.duration, 0);
+            
+            const totalHours = dailyData.physics + dailyData.chemistry + dailyData.maths;
+            const targetHours = 9; // Target 9 hours per day
+            
+            // Update displays
+            document.getElementById('totalHours').textContent = totalHours.toFixed(1);
+            document.getElementById('physicsHours').textContent = dailyData.physics.toFixed(1) + ' hours';
+            document.getElementById('chemistryHours').textContent = dailyData.chemistry.toFixed(1) + ' hours';
+            document.getElementById('mathsHours').textContent = dailyData.maths.toFixed(1) + ' hours';
+            
+            // Update progress bars
+            const physicsPercent = Math.min((dailyData.physics / 3) * 100, 100);
+            const chemistryPercent = Math.min((dailyData.chemistry / 3) * 100, 100);
+            const mathsPercent = Math.min((dailyData.maths / 3) * 100, 100);
+            
+            document.getElementById('physicsProgress').style.width = physicsPercent + '%';
+            document.getElementById('chemistryProgress').style.width = chemistryPercent + '%';
+            document.getElementById('mathsProgress').style.width = mathsPercent + '%';
+            
+            document.getElementById('physicsProgress').textContent = physicsPercent.toFixed(0) + '%';
+            document.getElementById('chemistryProgress').textContent = chemistryPercent.toFixed(0) + '%';
+            document.getElementById('mathsProgress').textContent = mathsPercent.toFixed(0) + '%';
+            
+            // Update topics completed
+            const completedTopics = topics.filter(t => t.completed).length;
+            document.getElementById('topicsCompleted').textContent = completedTopics;
+        }
+        
+        function addTopic() {
+            const input = document.getElementById('newTopicInput');
+            const topicName = input.value.trim();
+            
+            if (topicName) {
+                topics.push({
+                    id: Date.now(),
+                    name: topicName,
+                    completed: false
+                });
+                input.value = '';
+                renderTopics();
+            }
+        }
+        
+        function renderTopics() {
+            const container = document.getElementById('topicChecklist');
+            container.innerHTML = topics.map(topic => `
+                <div class="topic-item ${topic.completed ? 'completed' : ''}">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <input type="checkbox" class="checkbox" ${topic.completed ? 'checked' : ''} onchange="toggleTopic(${topic.id})">
+                        <span style="${topic.completed ? 'text-decoration: line-through; opacity: 0.6;' : ''}">${topic.name}</span>
+                    </div>
+                    <button class="btn btn-danger btn-small" onclick="deleteTopic(${topic.id})">Delete</button>
+                </div>
+            `).join('');
+            
+            updateStats();
+        }
+        
+        function toggleTopic(id) {
+            const topic = topics.find(t => t.id === id);
+            if (topic) {
+                topic.completed = !topic.completed;
+                renderTopics();
+            }
+        }
+        
+        function deleteTopic(id) {
+            topics = topics.filter(t => t.id !== id);
+            renderTopics();
+        }
+        
+        function loadTopics() {
+            // Load default topics for today
+            const defaultTopics = [
+                'Complete NCERT Exercise',
+                'Solve 20 JEE Main PYQs',
+                'Revise yesterday\'s topics',
+                'Watch concept video',
+                'Make formula sheet'
+            ];
+            
+            const saved = localStorage.getItem('dailyTopics_' + dailyData.date);
+            if (saved) {
+                topics = JSON.parse(saved);
+            } else {
+                topics = defaultTopics.map((name, i) => ({
+                    id: Date.now() + i,
+                    name,
+                    completed: false
+                }));
+            }
+            
+            renderTopics();
+        }
+        
+        function updateProblems() {
+            dailyData.physicsProblems = parseInt(document.getElementById('physicsProblems').value) || 0;
+            dailyData.chemistryProblems = parseInt(document.getElementById('chemistryProblems').value) || 0;
+            dailyData.mathsProblems = parseInt(document.getElementById('mathsProblems').value) || 0;
+            
+            const total = dailyData.physicsProblems + dailyData.chemistryProblems + dailyData.mathsProblems;
+            document.getElementById('problemsSolved').textContent = total;
+        }
+        
+        function saveNotes() {
+            dailyData.notes = document.getElementById('dailyNotes').value;
+            alert('Notes saved!');
+        }
+        
+        function saveProgress() {
+            dailyData.notes = document.getElementById('dailyNotes').value;
+            
+            // Save to localStorage
+            localStorage.setItem('dailyProgress_' + dailyData.date, JSON.stringify({
+                ...dailyData,
+                sessions: studySessions,
+                topics: topics
+            }));
+            
+            localStorage.setItem('dailyTopics_' + dailyData.date, JSON.stringify(topics));
+            
+            // Update streak
+            updateStreak();
+            
+            alert('Progress saved successfully! Keep going! 💪');
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('dailyProgress_' + dailyData.date);
+            if (saved) {
+                const data = JSON.parse(saved);
+                dailyData = data;
+                studySessions = data.sessions || [];
+                topics = data.topics || [];
+                
+                document.getElementById('physicsProblems').value = data.physicsProblems || 0;
+                document.getElementById('chemistryProblems').value = data.chemistryProblems || 0;
+                document.getElementById('mathsProblems').value = data.mathsProblems || 0;
+                document.getElementById('dailyNotes').value = data.notes || '';
+                
+                renderTimeLog();
+                renderTopics();
+                updateProblems();
+            }
+            
+            // Load streak
+            const streak = localStorage.getItem('studyStreak') || 0;
+            document.getElementById('currentStreak').textContent = streak;
+        }
+        
+        function updateStreak() {
+            const lastStudyDate = localStorage.getItem('lastStudyDate');
+            const today = new Date().toDateString();
+            const yesterday = new Date(Date.now() - 86400000).toDateString();
+            
+            let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
+            
+            if (lastStudyDate === yesterday) {
+                streak++;
+            } else if (lastStudyDate !== today) {
+                streak = 1;
+            }
+            
+            localStorage.setItem('studyStreak', streak);
+            localStorage.setItem('lastStudyDate', today);
+            document.getElementById('currentStreak').textContent = streak;
+        }
+        
+        function resetDay() {
+            if (confirm('Are you sure you want to reset today\'s progress? This cannot be undone!')) {
+                studySessions = [];
+                topics = [];
+                dailyData = {
+                    date: new Date().toDateString(),
+                    physics: 0,
+                    chemistry: 0,
+                    maths: 0,
+                    physicsProblems: 0,
+                    chemistryProblems: 0,
+                    mathsProblems: 0,
+                    notes: ''
+                };
+                
+                document.getElementById('physicsProblems').value = 0;
+                document.getElementById('chemistryProblems').value = 0;
+                document.getElementById('mathsProblems').value = 0;
+                document.getElementById('dailyNotes').value = '';
+                
+                renderTimeLog();
+                loadTopics();
+                updateStats();
+                updateProblems();
+            }
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', init);
+        
+        console.log('📊 Daily Tracker - Track every minute of your JEE prep!');
+    </script>
+</body>
+</html>
