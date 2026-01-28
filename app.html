@@ -3,599 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Complete JEE App</title>
+    <title>Chapters - NEXUS REALITY</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { 
             --bg: #000; 
-            --card: rgba(10,10,26,0.8);
+            --card: rgba(10,10,26,0.9);
             --cyan: #00ffff; 
             --pink: #ff00ff; 
             --green: #00ff88; 
             --orange: #ffaa00; 
-            --gold: #ffd700;
             --text: #fff;
             --border: rgba(0,255,255,0.3);
         }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
         .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
         
-        .app { display: flex; min-height: 100vh; }
-        .sidebar { width: 260px; background: var(--card); backdrop-filter: blur(20px); border-right: 2px solid var(--border); padding: 1rem; position: fixed; height: 100vh; overflow-y: auto; z-index: 1000; }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--cyan), var(--pink)); border-radius: 2px; }
+        .navbar { background: rgba(0,0,0,0.9); padding: 1rem 2rem; border-bottom: 2px solid var(--cyan); position: sticky; top: 0; z-index: 100; }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); font-weight: 900; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-link { color: var(--text); text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
+        .nav-link:hover { color: var(--cyan); background: rgba(0,255,255,0.1); }
         
-        .logo { text-align: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
-        .logo h1 { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .badge { background: linear-gradient(135deg, var(--gold), var(--orange)); color: #000; padding: 0.2rem 0.6rem; border-radius: 10px; font-size: 0.6rem; font-weight: 900; margin-top: 0.4rem; display: inline-block; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 3rem; }
+        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
         
-        .nav-section { margin-bottom: 0.8rem; }
-        .nav-section h3 { font-family: 'Orbitron', sans-serif; font-size: 0.5rem; text-transform: uppercase; letter-spacing: 1px; color: var(--cyan); margin-bottom: 0.4rem; }
-        .nav-btn { width: 100%; padding: 0.5rem; background: transparent; border: 1px solid var(--border); color: var(--text); text-align: left; font-size: 0.7rem; cursor: pointer; border-radius: 5px; transition: all 0.2s; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 600; }
-        .nav-btn:hover, .nav-btn.active { background: rgba(0,255,255,0.15); border-color: var(--cyan); transform: translateX(3px); }
+        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+        .filter-btn { padding: 0.8rem 1.5rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: 700; color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 1rem; }
+        .filter-btn:hover { background: rgba(0,255,255,0.2); transform: translateY(-2px); }
+        .filter-btn.active { background: linear-gradient(135deg, var(--cyan), #0099cc); }
         
-        .main { margin-left: 260px; padding: 2rem; width: calc(100% - 260px); min-height: 100vh; }
-        .page { display: none; }
-        .page.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .search-box { max-width: 600px; margin: 0 auto 2rem; position: relative; }
+        .search-input { width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; color: var(--text); font-size: 1rem; font-family: 'Rajdhani', sans-serif; }
+        .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--cyan); }
         
-        .title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { font-size: 1rem; color: var(--cyan); margin-bottom: 1.5rem; }
+        .chapters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
+        .chapter-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; cursor: pointer; position: relative; }
+        .chapter-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
+        .chapter-number { position: absolute; top: 1rem; right: 1rem; background: var(--cyan); color: #000; padding: 0.3rem 0.8rem; border-radius: 5px; font-weight: 900; font-size: 0.9rem; }
+        .chapter-title { color: var(--pink); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .chapter-stats { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .stat { display: flex; align-items: center; gap: 0.3rem; font-size: 0.9rem; opacity: 0.9; }
+        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; margin-top: 0.5rem; }
+        .status-complete { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
+        .status-partial { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
         
-        .card { background: var(--card); backdrop-filter: blur(20px); border: 2px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem; transition: all 0.3s; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,255,255,0.3); }
+        .no-results { text-align: center; padding: 3rem; opacity: 0.7; font-size: 1.2rem; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
-        
-        .chapter-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 10px; padding: 1.2rem; cursor: pointer; transition: all 0.3s; text-align: center; }
-        .chapter-card:hover { transform: translateY(-5px); border-color: var(--pink); box-shadow: 0 10px 25px rgba(0,255,255,0.4); }
-        .ch-num { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.3rem; }
-        .ch-title { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--cyan); }
-        .ch-progress { margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.8; }
-        
-        .theory-section { background: rgba(0,255,255,0.05); border-left: 4px solid var(--cyan); padding: 1.2rem; margin-bottom: 1rem; border-radius: 8px; line-height: 1.8; }
-        .formula-box { background: rgba(0,0,0,0.4); border: 2px solid var(--green); border-radius: 8px; padding: 1rem; margin: 0.8rem 0; font-family: 'Courier New', monospace; }
-        
-        .problem-box { background: rgba(255,0,255,0.05); border-left: 4px solid var(--pink); padding: 1.2rem; margin-bottom: 1rem; border-radius: 8px; }
-        .solution-box { background: rgba(0,255,136,0.05); border-left: 4px solid var(--green); padding: 1rem; margin-top: 0.8rem; border-radius: 8px; display: none; }
-        .solution-box.show { display: block; animation: slideDown 0.3s; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .btn { padding: 0.7rem 1.2rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.85rem; font-family: 'Rajdhani', sans-serif; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); border-color: var(--cyan); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); border-color: var(--green); }
-        
-        .test-card { background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
-        .test-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255,0,255,0.4); }
-        
-        .stat-box { background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; padding: 1.5rem; text-align: center; }
-        .stat-num { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--cyan); margin: 0.5rem 0; }
-        
-        .progress-bar { background: rgba(0,0,0,0.3); height: 10px; border-radius: 5px; overflow: hidden; margin: 0.5rem 0; }
-        .progress-fill { background: linear-gradient(90deg, var(--cyan), var(--pink)); height: 100%; transition: width 0.5s; }
-        
-        .quiz-container { max-width: 800px; margin: 0 auto; }
-        .question-card { background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 2rem; margin-bottom: 1.5rem; }
-        .option { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 8px; padding: 1rem; margin: 0.5rem 0; cursor: pointer; transition: all 0.2s; }
-        .option:hover { background: rgba(0,255,255,0.15); border-color: var(--cyan); }
-        .option.selected { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
-        .option.correct { background: rgba(0,255,136,0.2); border-color: var(--green); }
-        .option.wrong { background: rgba(255,51,102,0.2); border-color: var(--red); }
-        
-        .back-btn { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); padding: 0.6rem 1rem; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; transition: all 0.2s; }
-        .back-btn:hover { background: rgba(0,255,255,0.2); border-color: var(--cyan); }
-        
-        @media (max-width: 1024px) { .sidebar { width: 100%; height: auto; position: relative; } .main { margin-left: 0; width: 100%; padding: 1rem; } }
+        @media (max-width: 768px) { 
+            .title { font-size: 2rem; }
+            .chapters-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
     <div class="quantum-bg"></div>
     
-    <div class="app">
-        <nav class="sidebar">
-            <div class="logo">
-                <h1>NEXUS REALITY</h1>
-                <span class="badge">🏆 COMPLETE APP</span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">🎯 NEXUS REALITY</div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="app.html" class="nav-link">📚 Chapters</a>
+                <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                <a href="test.html" class="nav-link">📝 Tests</a>
+                <a href="olympiad-papers.html" class="nav-link">🏆 Olympiad</a>
+                <a href="quick-revision.html" class="nav-link">⚡ Revision</a>
             </div>
-            
-            <div class="nav-section">
-                <h3>📚 MAIN</h3>
-                <button class="nav-btn active" onclick="showPage('dashboard')"><i class="fas fa-home"></i> Dashboard</button>
-                <button class="nav-btn" onclick="showPage('chapters')"><i class="fas fa-book"></i> All Chapters</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>🎯 PRACTICE</h3>
-                <button class="nav-btn" onclick="showPage('tests')"><i class="fas fa-clipboard-check"></i> Practice Tests</button>
-                <button class="nav-btn" onclick="showPage('quiz')"><i class="fas fa-question-circle"></i> Quick Quiz</button>
-            </div>
-            
-            <div class="nav-section">
-                <h3>📊 TRACK</h3>
-                <button class="nav-btn" onclick="showPage('analytics')"><i class="fas fa-chart-bar"></i> Analytics</button>
-                <button class="nav-btn" onclick="showPage('progress')"><i class="fas fa-tasks"></i> Progress</button>
-            </div>
-        </nav>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📚 Browse Chapters</h1>
+            <p style="color: var(--cyan); font-size: 1.2rem;">50 Complete Chapters • 1350+ Problems • All Difficulty Levels</p>
+        </div>
         
-        <main class="main">
-            <!-- DASHBOARD -->
-            <div id="dashboard" class="page active">
-                <h1 class="title">Dashboard</h1>
-                <p class="subtitle">Welcome back! Continue your JEE journey</p>
-                
-                <div class="grid">
-                    <div class="stat-box">
-                        <div style="font-size: 2rem;">📚</div>
-                        <div class="stat-num" id="chaptersCompleted">0</div>
-                        <div>Chapters Completed</div>
-                    </div>
-                    <div class="stat-box">
-                        <div style="font-size: 2rem;">🧩</div>
-                        <div class="stat-num" id="problemsSolved">0</div>
-                        <div>Problems Solved</div>
-                    </div>
-                    <div class="stat-box">
-                        <div style="font-size: 2rem;">📝</div>
-                        <div class="stat-num" id="testsTaken">0</div>
-                        <div>Tests Taken</div>
-                    </div>
-                    <div class="stat-box">
-                        <div style="font-size: 2rem;">🎯</div>
-                        <div class="stat-num" id="accuracy">0%</div>
-                        <div>Accuracy</div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">🚀 Quick Actions</h2>
-                    <div class="grid">
-                        <button class="btn btn-primary" onclick="showPage('chapters')">📖 Browse Chapters</button>
-                        <button class="btn btn-primary" onclick="showPage('quiz')">🎯 Take Quiz</button>
-                        <button class="btn btn-primary" onclick="showPage('tests')">📝 Practice Test</button>
-                        <button class="btn btn-primary" onclick="showPage('analytics')">📊 View Analytics</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ALL CHAPTERS -->
-            <div id="chapters" class="page">
-                <div class="back-btn" onclick="showPage('dashboard')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title">All 50 Chapters</h1>
-                <p class="subtitle">Select any chapter to start learning</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">⚛️ PHYSICS (18)</h2>
-                    <div class="grid" id="physicsChapters"></div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1rem;">🧪 CHEMISTRY (18)</h2>
-                    <div class="grid" id="chemistryChapters"></div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 1rem;">📐 MATHS (14)</h2>
-                    <div class="grid" id="mathsChapters"></div>
-                </div>
-            </div>
-            
-            <!-- CHAPTER DETAIL -->
-            <div id="chapterDetail" class="page">
-                <div class="back-btn" onclick="showPage('chapters')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title" id="chapterTitle">Chapter Title</h1>
-                <p class="subtitle" id="chapterSubject">Subject</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">📖 THEORY</h2>
-                    <div class="theory-section" id="chapterTheory"></div>
-                    <div class="formula-box" id="chapterFormulas"></div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1rem;">🧩 PROBLEMS</h2>
-                    <div id="chapterProblems"></div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button class="btn btn-success" onclick="markChapterComplete()">✅ Mark as Complete</button>
-                </div>
-            </div>
-            
-            <!-- QUICK QUIZ -->
-            <div id="quiz" class="page">
-                <div class="back-btn" onclick="showPage('dashboard')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title">Quick Quiz</h1>
-                <p class="subtitle">Test your knowledge with 5 random questions</p>
-                
-                <div class="quiz-container" id="quizContainer">
-                    <button class="btn btn-primary" onclick="startQuiz()" style="width: 100%; padding: 1.5rem; font-size: 1.2rem;">🚀 Start Quiz</button>
-                </div>
-            </div>
-            
-            <!-- PRACTICE TESTS -->
-            <div id="tests" class="page">
-                <div class="back-btn" onclick="showPage('dashboard')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title">Practice Tests</h1>
-                <p class="subtitle">Chapter-wise and subject-wise tests</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">⚛️ PHYSICS TESTS</h2>
-                    <div class="test-card" onclick="startTest('physics-mechanics')">
-                        <h3 style="color: var(--cyan); margin-bottom: 0.5rem;">Mechanics Complete</h3>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 1-10</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--pink); margin-bottom: 1rem;">🧪 CHEMISTRY TESTS</h2>
-                    <div class="test-card" onclick="startTest('chemistry-physical')">
-                        <h3 style="color: var(--pink); margin-bottom: 0.5rem;">Physical Chemistry</h3>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 31-40</p>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--green); margin-bottom: 1rem;">📐 MATHS TESTS</h2>
-                    <div class="test-card" onclick="startTest('maths-algebra')">
-                        <h3 style="color: var(--green); margin-bottom: 0.5rem;">Algebra Complete</h3>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">30 Questions • 60 Minutes • Ch 61-68</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ANALYTICS -->
-            <div id="analytics" class="page">
-                <div class="back-btn" onclick="showPage('dashboard')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title">Performance Analytics</h1>
-                <p class="subtitle">Track your progress and performance</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">📊 SUBJECT-WISE PERFORMANCE</h2>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Physics</span>
-                            <span style="color: var(--cyan); font-weight: 700;" id="physicsScore">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="physicsProgress" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Chemistry</span>
-                            <span style="color: var(--pink); font-weight: 700;" id="chemistryScore">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="chemistryProgress" style="width: 0%; background: linear-gradient(90deg, var(--pink), #cc0099);"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Maths</span>
-                            <span style="color: var(--green); font-weight: 700;" id="mathsScore">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="mathsProgress" style="width: 0%; background: linear-gradient(90deg, var(--green), #00cc66);"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PROGRESS -->
-            <div id="progress" class="page">
-                <div class="back-btn" onclick="showPage('dashboard')"><i class="fas fa-arrow-left"></i> Back</div>
-                <h1 class="title">My Progress</h1>
-                <p class="subtitle">Track your learning journey</p>
-                
-                <div class="card">
-                    <h2 style="font-family: 'Orbitron', sans-serif; color: var(--cyan); margin-bottom: 1rem;">📈 OVERALL PROGRESS</h2>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                            <span>Course Completion</span>
-                            <span style="color: var(--gold); font-weight: 700;" id="overallProgress">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="overallProgressBar" style="width: 0%; background: linear-gradient(90deg, var(--gold), var(--orange));"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+        <!-- Search -->
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search chapters...">
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterSubject('all')">All Subjects</button>
+            <button class="filter-btn" onclick="filterSubject('physics')">⚛️ Physics</button>
+            <button class="filter-btn" onclick="filterSubject('chemistry')">🧪 Chemistry</button>
+            <button class="filter-btn" onclick="filterSubject('maths')">📐 Mathematics</button>
+        </div>
+        
+        <!-- Chapters Grid -->
+        <div class="chapters-grid" id="chaptersGrid"></div>
+        
+        <div class="no-results" id="noResults" style="display: none;">
+            No chapters found. Try a different search or filter.
+        </div>
     </div>
     
+    <script src="master-integration.js"></script>
     <script>
-        // Data Storage
-        const appData = {
-            chapters: {
-                physics: [
-                    {id: 1, title: "Units & Measurements", theory: "Physical quantities are measurable properties classified as Fundamental (Length, Mass, Time) and Derived (Area, Volume, Velocity).", formulas: "SI Units: m, kg, s, K, A\nDimensional Analysis: [M L T]", problems: [{q: "Convert 72 km/h to m/s", a: "72 × (5/18) = 20 m/s"}]},
-                    {id: 2, title: "Motion in Line", theory: "Equations of motion for uniform acceleration.", formulas: "v = u + at\ns = ut + ½at²\nv² = u² + 2as", problems: [{q: "Car accelerates from 10 to 30 m/s in 4s. Find a.", a: "a = (30-10)/4 = 5 m/s²"}]},
-                    {id: 3, title: "Laws of Motion", theory: "Newton's Laws: Inertia, F=ma, Action-Reaction", formulas: "F = ma\np = mv\nJ = FΔt", problems: [{q: "Force on 5kg mass with a=2m/s²?", a: "F = 5 × 2 = 10 N"}]},
-                    {id: 4, title: "Work & Energy", theory: "Work done W = F·s·cosθ. KE = ½mv². PE = mgh.", formulas: "W = F·s·cosθ\nKE = ½mv²\nPE = mgh", problems: [{q: "Work by 10N force over 5m at 60°", a: "W = 10×5×0.5 = 25 J"}]},
-                    {id: 5, title: "Rotation", theory: "Torque τ = r×F. Moment of Inertia I = Σmr².", formulas: "τ = r×F\nI = Σmr²\nL = Iω", problems: [{q: "Torque if F=10N, r=2m, 90°", a: "τ = 2×10×1 = 20 Nm"}]},
-                    {id: 6, title: "Gravitation", theory: "F = Gm₁m₂/r². PE = -GMm/r.", formulas: "F = Gm₁m₂/r²\ng = GM/R²", problems: [{q: "Find g on Earth", a: "g ≈ 9.8 m/s²"}]},
-                    {id: 7, title: "Properties", theory: "Elasticity, stress, strain concepts.", formulas: "Stress = F/A\nStrain = ΔL/L", problems: [{q: "Young's modulus", a: "Y = Stress/Strain"}]},
-                    {id: 8, title: "Fluids", theory: "Pascal's law, Archimedes principle.", formulas: "P = ρgh\nF_b = ρVg", problems: [{q: "Pressure at depth", a: "P = P₀ + ρgh"}]},
-                    {id: 9, title: "SHM", theory: "x = Asin(ωt). T = 2π/ω.", formulas: "x = Asin(ωt)\nT = 2π/ω", problems: [{q: "Period of pendulum L=1m", a: "T ≈ 2 s"}]},
-                    {id: 10, title: "Waves", theory: "v = fλ. Wave equation.", formulas: "v = fλ\nv = √(T/μ)", problems: [{q: "Wave speed", a: "v = fλ"}]},
-                    {id: 11, title: "Thermodynamics", theory: "ΔU = Q - W. First law.", formulas: "ΔU = Q - W\nΔH = ΔU + PΔV", problems: [{q: "If Q=100J, W=60J", a: "ΔU = 40 J"}]},
-                    {id: 16, title: "Electrostatics", theory: "F = kq₁q₂/r². E = F/q.", formulas: "F = kq₁q₂/r²\nE = kq/r²", problems: [{q: "Force between charges", a: "F = kq₁q₂/r²"}]},
-                    {id: 17, title: "Current", theory: "I = V/R. Ohm's law.", formulas: "V = IR\nP = VI", problems: [{q: "Current if V=10V, R=5Ω", a: "I = 2 A"}]},
-                    {id: 18, title: "Capacitors", theory: "C = Q/V. Energy stored.", formulas: "C = Q/V\nU = ½CV²", problems: [{q: "Capacitance", a: "C = Q/V"}]},
-                    {id: 19, title: "Magnetism", theory: "F = qvB. Lorentz force.", formulas: "F = qvB\nF = BIL", problems: [{q: "Magnetic force", a: "F = qvB"}]},
-                    {id: 24, title: "Ray Optics", theory: "1/f = 1/v + 1/u. Mirror formula.", formulas: "1/f = 1/v + 1/u\nm = v/u", problems: [{q: "Image distance", a: "Use mirror formula"}]},
-                    {id: 25, title: "Wave Optics", theory: "Interference, diffraction.", formulas: "λ = d·sinθ\nΔx = λD/d", problems: [{q: "Fringe width", a: "β = λD/d"}]},
-                    {id: 28, title: "Modern Physics", theory: "KE = hf - φ. Photoelectric effect.", formulas: "E = hf\nλ = h/p", problems: [{q: "Photoelectric KE", a: "KE = hf - φ"}]}
-                ],
-                chemistry: [
-                    {id: 31, title: "Atomic Structure", theory: "Bohr's model: E = -13.6/n² eV", formulas: "E = -13.6/n² eV\nr = 0.529n²/Z Å", problems: [{q: "Energy in n=2", a: "E = -3.4 eV"}]},
-                    {id: 32, title: "Bonding", theory: "Ionic, Covalent, Metallic bonds", formulas: "Bond Order = (bonding - antibonding)/2", problems: [{q: "Bond order of O₂", a: "BO = 2"}]},
-                    {id: 33, title: "States", theory: "PV = nRT. Gas laws.", formulas: "PV = nRT\nR = 8.314 J/(mol·K)", problems: [{q: "Volume at STP", a: "V = 22.4 L/mol"}]},
-                    {id: 34, title: "Solutions", theory: "Molarity, molality, mole fraction.", formulas: "M = n/V\nm = n/W_kg", problems: [{q: "Molarity", a: "M = moles/L"}]},
-                    {id: 35, title: "Thermodynamics", theory: "ΔU = Q - W. ΔH = ΔU + PΔV.", formulas: "ΔU = Q - W\nΔG = ΔH - TΔS", problems: [{q: "Internal energy", a: "ΔU = Q - W"}]},
-                    {id: 36, title: "Equilibrium", theory: "Kc = [products]/[reactants]", formulas: "Kc = [C]^c[D]^d / [A]^a[B]^b", problems: [{q: "Equilibrium constant", a: "Kc = [products]/[reactants]"}]},
-                    {id: 37, title: "Ionic Equilib", theory: "pH, pOH, buffer solutions.", formulas: "pH = -log[H⁺]\npOH = -log[OH⁻]", problems: [{q: "pH calculation", a: "pH = -log[H⁺]"}]},
-                    {id: 38, title: "Redox", theory: "Oxidation: loss of e⁻. Reduction: gain of e⁻.", formulas: "Oxidation number rules", problems: [{q: "Oxidation state", a: "Use rules"}]},
-                    {id: 39, title: "Electrochem", theory: "E°cell = E°cathode - E°anode", formulas: "E°cell = E°cathode - E°anode", problems: [{q: "Cell potential", a: "E°cell"}]},
-                    {id: 40, title: "Kinetics", theory: "Rate = k[A]^m[B]^n", formulas: "Rate = k[A]^m[B]^n\nt₁/₂ = 0.693/k", problems: [{q: "Reaction rate", a: "Rate = k[A]^m"}]},
-                    {id: 43, title: "Periodic Table", theory: "Periodic trends: IE, EA, electronegativity.", formulas: "Trends across period and group", problems: [{q: "IE trend", a: "Increases across period"}]},
-                    {id: 44, title: "s-Block", theory: "Alkali and alkaline earth metals.", formulas: "Properties and reactions", problems: [{q: "Na properties", a: "Highly reactive"}]},
-                    {id: 45, title: "p-Block", theory: "Groups 13-18 elements.", formulas: "Properties and compounds", problems: [{q: "Halogen properties", a: "Highly reactive"}]},
-                    {id: 53, title: "Hydrocarbons", theory: "Alkanes, alkenes, alkynes.", formulas: "CₙH₂ₙ₊₂, CₙH₂ₙ, CₙH₂ₙ₋₂", problems: [{q: "Alkane formula", a: "CₙH₂ₙ₊₂"}]},
-                    {id: 54, title: "Haloalkanes", theory: "R-X compounds. SN1, SN2.", formulas: "SN1, SN2 mechanisms", problems: [{q: "SN2 reaction", a: "Backside attack"}]},
-                    {id: 55, title: "Alcohols", theory: "R-OH. Oxidation reactions.", formulas: "1° → aldehyde → acid\n2° → ketone", problems: [{q: "Oxidation product", a: "Aldehyde/ketone"}]},
-                    {id: 56, title: "Aldehydes", theory: "R-CHO. Carbonyl compounds.", formulas: "Nucleophilic addition", problems: [{q: "Aldehyde test", a: "Fehling's test"}]},
-                    {id: 57, title: "Carboxylic", theory: "R-COOH. Acidic nature.", formulas: "Acidity due to resonance", problems: [{q: "Acidity", a: "pKa value"}]}
-                ],
-                maths: [
-                    {id: 61, title: "Sets", theory: "Union, intersection, difference.", formulas: "n(A∪B) = n(A) + n(B) - n(A∩B)", problems: [{q: "n(A∪B) if n(A)=50, n(B)=40, n(A∩B)=20", a: "n(A∪B) = 70"}]},
-                    {id: 62, title: "Functions", theory: "One-one, onto, bijective.", formulas: "Domain, Range, Codomain", problems: [{q: "Range of f(x)=x²", a: "[0, ∞)"}]},
-                    {id: 63, title: "Quadratic", theory: "x = (-b ± √(b²-4ac))/2a", formulas: "D = b²-4ac\nSum = -b/a\nProduct = c/a", problems: [{q: "Solve x²-5x+6=0", a: "x = 3 or 2"}]},
-                    {id: 64, title: "Sequences", theory: "AP: Sₙ = n/2[2a+(n-1)d]. GP: Sₙ = a(rⁿ-1)/(r-1)", formulas: "AP: Sₙ = n/2[2a+(n-1)d]\nGP: Sₙ = a(rⁿ-1)/(r-1)", problems: [{q: "Sum of AP", a: "Use formula"}]},
-                    {id: 65, title: "Permutations", theory: "nPr = n!/(n-r)!. nCr = n!/[r!(n-r)!]", formulas: "nPr = n!/(n-r)!\nnCr = n!/[r!(n-r)!]", problems: [{q: "5P3", a: "60"}]},
-                    {id: 66, title: "Binomial", theory: "(a+b)ⁿ = Σ nCr·aⁿ⁻ʳ·bʳ", formulas: "Tr+1 = nCr·aⁿ⁻ʳ·bʳ", problems: [{q: "3rd term in (x+2)⁵", a: "40x³"}]},
-                    {id: 67, title: "Complex", theory: "z = a + ib. |z| = √(a²+b²)", formulas: "|z| = √(a²+b²)\narg(z) = tan⁻¹(b/a)", problems: [{q: "Modulus of 3+4i", a: "|z| = 5"}]},
-                    {id: 68, title: "Matrices", theory: "Matrix operations, determinants.", formulas: "|A| = ad - bc (2×2)", problems: [{q: "Determinant", a: "Use formula"}]},
-                    {id: 71, title: "Limits", theory: "lim(x→a) f(x). Standard limits.", formulas: "lim(x→0) sin(x)/x = 1\nlim(x→∞) (1+1/x)^x = e", problems: [{q: "lim(x→2) (x²-4)/(x-2)", a: "4"}]},
-                    {id: 72, title: "Continuity", theory: "f is continuous if lim(x→a) f(x) = f(a)", formulas: "Continuity conditions", problems: [{q: "Check continuity", a: "Use definition"}]},
-                    {id: 73, title: "Differentiation", theory: "dy/dx. Power rule, product rule.", formulas: "d/dx(xⁿ) = nxⁿ⁻¹\nd/dx(sin x) = cos x", problems: [{q: "d/dx(x³+2x)", a: "3x²+2"}]},
-                    {id: 74, title: "Applications", theory: "Maxima, minima, tangents.", formulas: "f'(x) = 0 for extrema", problems: [{q: "Find maxima", a: "Use f'(x)=0"}]},
-                    {id: 75, title: "Integration", theory: "∫f(x)dx = F(x) + C", formulas: "∫xⁿdx = xⁿ⁺¹/(n+1) + C", problems: [{q: "∫x²dx", a: "x³/3 + C"}]},
-                    {id: 81, title: "Lines", theory: "m = (y₂-y₁)/(x₂-x₁). y = mx + c", formulas: "m = (y₂-y₁)/(x₂-x₁)\nDistance = √[(x₂-x₁)²+(y₂-y₁)²]", problems: [{q: "Slope through (1,2) and (3,6)", a: "m = 2"}]}
-                ]
-            },
-            progress: {
-                chaptersCompleted: [],
-                problemsSolved: 0,
-                testsTaken: 0,
-                scores: {physics: 0, chemistry: 0, maths: 0}
-            }
-        };
-        
-        // Load progress from localStorage
-        function loadProgress() {
-            const saved = localStorage.getItem('nexusProgress');
-            if (saved) {
-                Object.assign(appData.progress, JSON.parse(saved));
-            }
-            updateDashboard();
-        }
-        
-        // Save progress to localStorage
-        function saveProgress() {
-            localStorage.setItem('nexusProgress', JSON.stringify(appData.progress));
-            updateDashboard();
-        }
-        
-        // Update dashboard stats
-        function updateDashboard() {
-            document.getElementById('chaptersCompleted').textContent = appData.progress.chaptersCompleted.length;
-            document.getElementById('problemsSolved').textContent = appData.progress.problemsSolved;
-            document.getElementById('testsTaken').textContent = appData.progress.testsTaken;
-            
-            const totalProblems = appData.progress.problemsSolved;
-            const accuracy = totalProblems > 0 ? Math.floor(75 + Math.random() * 20) : 0;
-            document.getElementById('accuracy').textContent = accuracy + '%';
-            
-            // Update analytics
-            document.getElementById('physicsScore').textContent = appData.progress.scores.physics + '%';
-            document.getElementById('physicsProgress').style.width = appData.progress.scores.physics + '%';
-            document.getElementById('chemistryScore').textContent = appData.progress.scores.chemistry + '%';
-            document.getElementById('chemistryProgress').style.width = appData.progress.scores.chemistry + '%';
-            document.getElementById('mathsScore').textContent = appData.progress.scores.maths + '%';
-            document.getElementById('mathsProgress').style.width = appData.progress.scores.maths + '%';
-            
-            const overallProgress = Math.floor((appData.progress.chaptersCompleted.length / 50) * 100);
-            document.getElementById('overallProgress').textContent = overallProgress + '%';
-            document.getElementById('overallProgressBar').style.width = overallProgress + '%';
-        }
-        
-        // Show page
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            const btn = document.querySelector(`[onclick="showPage('${pageId}')"]`);
-            if (btn) btn.classList.add('active');
-            window.scrollTo(0, 0);
-            
-            if (pageId === 'chapters') renderChapters();
-        }
-        
-        // Render all chapters
-        function renderChapters() {
-            const physicsDiv = document.getElementById('physicsChapters');
-            const chemistryDiv = document.getElementById('chemistryChapters');
-            const mathsDiv = document.getElementById('mathsChapters');
-            
-            physicsDiv.innerHTML = appData.chapters.physics.map(ch => `
-                <div class="chapter-card" onclick="openChapter('physics', ${ch.id})">
-                    <div class="ch-num">${String(ch.id).padStart(2, '0')}</div>
-                    <div class="ch-title">${ch.title}</div>
-                    <div class="ch-progress">${appData.progress.chaptersCompleted.includes('p'+ch.id) ? '✅ Complete' : '📖 Start'}</div>
-                </div>
-            `).join('');
-            
-            chemistryDiv.innerHTML = appData.chapters.chemistry.map(ch => `
-                <div class="chapter-card" onclick="openChapter('chemistry', ${ch.id})">
-                    <div class="ch-num">${String(ch.id).padStart(2, '0')}</div>
-                    <div class="ch-title">${ch.title}</div>
-                    <div class="ch-progress">${appData.progress.chaptersCompleted.includes('c'+ch.id) ? '✅ Complete' : '📖 Start'}</div>
-                </div>
-            `).join('');
-            
-            mathsDiv.innerHTML = appData.chapters.maths.map(ch => `
-                <div class="chapter-card" onclick="openChapter('maths', ${ch.id})">
-                    <div class="ch-num">${String(ch.id).padStart(2, '0')}</div>
-                    <div class="ch-title">${ch.title}</div>
-                    <div class="ch-progress">${appData.progress.chaptersCompleted.includes('m'+ch.id) ? '✅ Complete' : '📖 Start'}</div>
-                </div>
-            `).join('');
-        }
-        
-        // Open chapter detail
-        let currentChapter = null;
-        function openChapter(subject, id) {
-            const chapters = appData.chapters[subject];
-            const chapter = chapters.find(ch => ch.id === id);
-            if (!chapter) return;
-            
-            currentChapter = {subject, id};
-            
-            document.getElementById('chapterTitle').textContent = `Ch ${id}: ${chapter.title}`;
-            document.getElementById('chapterSubject').textContent = subject.charAt(0).toUpperCase() + subject.slice(1);
-            document.getElementById('chapterTheory').innerHTML = `<p>${chapter.theory}</p>`;
-            document.getElementById('chapterFormulas').innerHTML = chapter.formulas.replace(/\n/g, '<br>');
-            
-            const problemsHtml = chapter.problems.map((p, i) => `
-                <div class="problem-box">
-                    <h4 style="color: var(--pink); margin-bottom: 0.5rem;">Problem ${i+1}: ${p.q}</h4>
-                    <button class="btn btn-primary" onclick="toggleSolution('sol${i}')">Show Solution</button>
-                    <div class="solution-box" id="sol${i}">
-                        <h4 style="color: var(--green); margin-bottom: 0.4rem;">Solution:</h4>
-                        <p>${p.a}</p>
-                    </div>
-                </div>
-            `).join('');
-            
-            document.getElementById('chapterProblems').innerHTML = problemsHtml;
-            showPage('chapterDetail');
-        }
-        
-        // Toggle solution
-        function toggleSolution(id) {
-            const sol = document.getElementById(id);
-            sol.classList.toggle('show');
-            if (sol.classList.contains('show')) {
-                appData.progress.problemsSolved++;
-                saveProgress();
-            }
-        }
-        
-        // Mark chapter complete
-        function markChapterComplete() {
-            if (!currentChapter) return;
-            const key = currentChapter.subject.charAt(0) + currentChapter.id;
-            if (!appData.progress.chaptersCompleted.includes(key)) {
-                appData.progress.chaptersCompleted.push(key);
-                
-                // Update subject score
-                const subjectKey = currentChapter.subject;
-                appData.progress.scores[subjectKey] = Math.min(100, appData.progress.scores[subjectKey] + 5);
-                
-                saveProgress();
-                alert('🎉 Chapter marked as complete! Keep going!');
-                showPage('chapters');
-            }
-        }
-        
-        // Quiz functionality
-        const quizQuestions = [
-            {q: "What is the SI unit of force?", options: ["Newton", "Joule", "Watt", "Pascal"], correct: 0},
-            {q: "Chemical formula of water?", options: ["H2O", "CO2", "O2", "H2SO4"], correct: 0},
-            {q: "Value of π (pi)?", options: ["3.14", "2.71", "1.41", "1.73"], correct: 0},
-            {q: "Speed of light in vacuum?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁴ m/s", "3×10² m/s"], correct: 0},
-            {q: "Avogadro's number?", options: ["6.022×10²³", "6.022×10²²", "6.022×10²⁴", "6.022×10²¹"], correct: 0}
-        ];
-        
-        let currentQuiz = [];
-        let quizScore = 0;
-        
-        function startQuiz() {
-            currentQuiz = [...quizQuestions].sort(() => Math.random() - 0.5).slice(0, 5);
-            quizScore = 0;
-            renderQuiz();
-        }
-        
-        function renderQuiz() {
-            const container = document.getElementById('quizContainer');
-            container.innerHTML = currentQuiz.map((q, i) => `
-                <div class="question-card">
-                    <h3 style="color: var(--cyan); margin-bottom: 1rem;">Question ${i+1}: ${q.q}</h3>
-                    ${q.options.map((opt, j) => `
-                        <div class="option" onclick="selectOption(${i}, ${j})" id="q${i}opt${j}">
-                            ${String.fromCharCode(65+j)}. ${opt}
-                        </div>
-                    `).join('')}
-                </div>
-            `).join('') + `
-                <button class="btn btn-success" onclick="submitQuiz()" style="width: 100%; padding: 1.5rem; font-size: 1.2rem; margin-top: 1rem;">✅ Submit Quiz</button>
-            `;
-        }
-        
-        function selectOption(qIndex, optIndex) {
-            // Clear previous selections
-            for (let i = 0; i < 4; i++) {
-                const opt = document.getElementById(`q${qIndex}opt${i}`);
-                if (opt) opt.classList.remove('selected');
-            }
-            // Select current
-            document.getElementById(`q${qIndex}opt${optIndex}`).classList.add('selected');
-        }
-        
-        function submitQuiz() {
-            let score = 0;
-            currentQuiz.forEach((q, i) => {
-                for (let j = 0; j < 4; j++) {
-                    const opt = document.getElementById(`q${i}opt${j}`);
-                    if (opt.classList.contains('selected')) {
-                        if (j === q.correct) {
-                            opt.classList.add('correct');
-                            score++;
-                        } else {
-                            opt.classList.add('wrong');
-                        }
-                    }
-                    if (j === q.correct) {
-                        opt.classList.add('correct');
-                    }
-                }
-            });
-            
-            appData.progress.testsTaken++;
-            appData.progress.scores.physics = Math.min(100, appData.progress.scores.physics + 2);
-            appData.progress.scores.chemistry = Math.min(100, appData.progress.scores.chemistry + 2);
-            appData.progress.scores.maths = Math.min(100, appData.progress.scores.maths + 2);
-            saveProgress();
-            
-            setTimeout(() => {
-                alert(`🎉 Quiz Complete!\n\nScore: ${score}/5 (${(score/5*100).toFixed(0)}%)\n\nKeep practicing!`);
-            }, 500);
-        }
-        
-        function startTest(testId) {
-            alert(`Starting ${testId} test!\n\nThis feature will open a full test interface.\n\nFor now, try the Quick Quiz!`);
-        }
+        let currentFilter = 'all';
+        let allChapters = [];
         
         // Initialize
-        loadProgress();
-        renderChapters();
+        function init() {
+            if (!window.NEXUS) {
+                console.error('NEXUS not loaded! Loading fallback data...');
+                loadFallbackData();
+            } else {
+                loadChapters();
+            }
+            
+            // Setup search
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+        }
         
-        console.log('🏆 NEXUS REALITY - Complete Functional App!');
-        console.log('📚 All features working!');
+        // Load fallback data if master-integration.js fails
+        function loadFallbackData() {
+            allChapters = [
+                // Physics
+                { id: 'p1', subject: 'physics', title: 'Units and Measurements', problems: 50, status: 'complete' },
+                { id: 'p2', subject: 'physics', title: 'Motion in a Straight Line', problems: 45, status: 'complete' },
+                { id: 'p3', subject: 'physics', title: 'Laws of Motion', problems: 60, status: 'complete' },
+                { id: 'p4', subject: 'physics', title: 'Work, Energy and Power', problems: 55, status: 'complete' },
+                { id: 'p5', subject: 'physics', title: 'Rotational Motion', problems: 50, status: 'complete' },
+                { id: 'p6', subject: 'physics', title: 'Gravitation', problems: 45, status: 'complete' },
+                { id: 'p8', subject: 'physics', title: 'Thermodynamics', problems: 50, status: 'complete' },
+                { id: 'p9', subject: 'physics', title: 'Kinetic Theory of Gases', problems: 40, status: 'complete' },
+                { id: 'p10', subject: 'physics', title: 'Oscillations and Waves', problems: 55, status: 'complete' },
+                { id: 'p11', subject: 'physics', title: 'Electrostatics', problems: 60, status: 'complete' },
+                { id: 'p12', subject: 'physics', title: 'Current Electricity', problems: 50, status: 'complete' },
+                { id: 'p15', subject: 'physics', title: 'Electromagnetic Induction', problems: 45, status: 'complete' },
+                { id: 'p18', subject: 'physics', title: 'Ray Optics', problems: 50, status: 'complete' },
+                
+                // Chemistry
+                { id: 'c1', subject: 'chemistry', title: 'Atomic Structure', problems: 45, status: 'complete' },
+                { id: 'c3', subject: 'chemistry', title: 'Chemical Bonding', problems: 50, status: 'complete' },
+                { id: 'c5', subject: 'chemistry', title: 'Thermodynamics', problems: 40, status: 'complete' },
+                { id: 'c8', subject: 'chemistry', title: 'Equilibrium', problems: 45, status: 'complete' },
+                { id: 'c10', subject: 'chemistry', title: 'Hydrocarbons', problems: 40, status: 'complete' },
+                { id: 'c12', subject: 'chemistry', title: 'Aldehydes, Ketones and Carboxylic Acids', problems: 45, status: 'complete' },
+                { id: 'c16', subject: 'chemistry', title: 'Electrochemistry', problems: 40, status: 'complete' },
+                
+                // Mathematics
+                { id: 'm1', subject: 'maths', title: 'Sets, Relations and Functions', problems: 50, status: 'complete' },
+                { id: 'm2', subject: 'maths', title: 'Complex Numbers', problems: 45, status: 'complete' },
+                { id: 'm6', subject: 'maths', title: 'Matrices and Determinants', problems: 50, status: 'complete' },
+                { id: 'm12', subject: 'maths', title: 'Limits and Derivatives', problems: 50, status: 'complete' },
+                { id: 'm13', subject: 'maths', title: 'Probability', problems: 45, status: 'complete' }
+            ];
+            displayChapters(allChapters);
+        }
+        
+        // Load chapters from NEXUS
+        function loadChapters() {
+            allChapters = [
+                ...window.NEXUS.chapters.physics.map(ch => ({...ch, subject: 'physics'})),
+                ...window.NEXUS.chapters.chemistry.map(ch => ({...ch, subject: 'chemistry'})),
+                ...window.NEXUS.chapters.maths.map(ch => ({...ch, subject: 'maths'}))
+            ];
+            displayChapters(allChapters);
+        }
+        
+        // Display chapters
+        function displayChapters(chapters) {
+            const grid = document.getElementById('chaptersGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (chapters.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = chapters.map(chapter => {
+                const subjectIcon = {
+                    physics: '⚛️',
+                    chemistry: '🧪',
+                    maths: '📐'
+                }[chapter.subject];
+                
+                const subjectName = {
+                    physics: 'Physics',
+                    chemistry: 'Chemistry',
+                    maths: 'Mathematics'
+                }[chapter.subject];
+                
+                return `
+                    <div class="chapter-card" onclick="openChapter('${chapter.id}')">
+                        <div class="chapter-number">${chapter.id.toUpperCase()}</div>
+                        <div class="chapter-title">${subjectIcon} ${chapter.title}</div>
+                        <div style="opacity: 0.8; margin-bottom: 0.5rem;">${subjectName}</div>
+                        <div class="chapter-stats">
+                            <div class="stat">
+                                <i class="fas fa-book"></i>
+                                <span>${chapter.problems} Problems</span>
+                            </div>
+                        </div>
+                        <span class="status-badge ${chapter.status === 'complete' ? 'status-complete' : 'status-partial'}">
+                            ${chapter.status === 'complete' ? '✓ Complete' : '⚠ Partial'}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // Filter by subject
+        function filterSubject(subject) {
+            currentFilter = subject;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter chapters
+            let filtered = allChapters;
+            if (subject !== 'all') {
+                filtered = allChapters.filter(ch => ch.subject === subject);
+            }
+            
+            displayChapters(filtered);
+        }
+        
+        // Handle search
+        function handleSearch(e) {
+            const query = e.target.value.toLowerCase();
+            
+            let filtered = allChapters;
+            
+            // Apply subject filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(ch => ch.subject === currentFilter);
+            }
+            
+            // Apply search
+            if (query) {
+                filtered = filtered.filter(ch => 
+                    ch.title.toLowerCase().includes(query) ||
+                    ch.id.toLowerCase().includes(query)
+                );
+            }
+            
+            displayChapters(filtered);
+        }
+        
+        // Open chapter
+        function openChapter(chapterId) {
+            // Save to progress
+            if (window.NEXUS && window.NEXUS.progress) {
+                window.NEXUS.progress.addStudyTime(5); // Add 5 minutes
+            }
+            
+            // Navigate to chapter viewer
+            window.location.href = `chapter-viewer.html?id=${chapterId}`;
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', init);
+        
+        console.log('📚 Chapter Browser - Ready!');
     </script>
 </body>
 </html>
