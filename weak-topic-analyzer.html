@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weak Topic Analyzer - Identify & Improve</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        
+        .alert-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1.5rem; margin-bottom: 2rem; border-radius: 5px; }
+        .alert-box.warning { background: #2d2416; border-left-color: #ff9800; }
+        .alert-box.success { background: #1a3a2e; border-left-color: #00ff88; }
+        
+        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; }
+        
+        .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+        .topic-card { background: #16213e; padding: 1.5rem; border-radius: 8px; border: 1px solid #0f3460; }
+        .topic-card.weak { border-left: 4px solid #ff4444; background: #2d1b1b; }
+        .topic-card.average { border-left: 4px solid #ff9800; background: #2d2416; }
+        .topic-card.strong { border-left: 4px solid #00ff88; background: #1a3a2e; }
+        
+        .topic-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; }
+        .topic-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin: 1rem 0; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 900; }
+        .stat-label { font-size: 0.8rem; color: #aaa; margin-top: 0.3rem; }
+        
+        .progress-bar { width: 100%; height: 8px; background: #0f3460; border-radius: 4px; overflow: hidden; margin: 1rem 0; }
+        .progress-fill { height: 100%; transition: width 0.3s; }
+        .progress-weak { background: #ff4444; }
+        .progress-average { background: #ff9800; }
+        .progress-strong { background: #00ff88; }
+        
+        .recommendation-card { background: #16213e; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #00d4ff; }
+        .recommendation-title { color: #00d4ff; font-weight: 700; margin-bottom: 0.8rem; }
+        .recommendation-list { list-style: none; padding-left: 0; }
+        .recommendation-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .recommendation-list li:before { content: '→'; position: absolute; left: 0; color: #00ff88; }
+        
+        .chart-container { position: relative; height: 300px; margin: 1.5rem 0; }
+        
+        .btn { padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        .btn-danger { background: #ff4444; color: #fff; }
+        
+        .practice-plan { background: #0f3460; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; }
+        .practice-day { padding: 1rem; margin: 0.5rem 0; background: #16213e; border-radius: 5px; }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 1.8rem; }
+            .topic-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 Weak Topic Analyzer</h1>
+            <p style="color: #aaa; margin-top: 0.5rem;">AI-Powered Analysis of Your Performance</p>
+        </div>
+        
+        <!-- Overall Analysis -->
+        <div class="alert-box" id="overallAlert">
+            <h3 style="margin-bottom: 0.5rem;">📊 Overall Performance Analysis</h3>
+            <p id="overallMessage">Analyzing your performance across all topics...</p>
+        </div>
+        
+        <!-- Subject-wise Charts -->
+        <div class="section">
+            <div class="section-title">📈 Subject-wise Performance</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: #00d4ff; margin-bottom: 1rem; text-align: center;">⚛️ Physics</h4>
+                    <div class="chart-container">
+                        <canvas id="physicsChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #00d4ff; margin-bottom: 1rem; text-align: center;">🧪 Chemistry</h4>
+                    <div class="chart-container">
+                        <canvas id="chemistryChart"></canvas>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #00d4ff; margin-bottom: 1rem; text-align: center;">📐 Mathematics</h4>
+                    <div class="chart-container">
+                        <canvas id="mathsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weak Topics -->
+        <div class="section">
+            <div class="section-title">🔴 Critical Weak Topics (Accuracy < 50%)</div>
+            <div class="topic-grid" id="weakTopics"></div>
+        </div>
+        
+        <!-- Average Topics -->
+        <div class="section">
+            <div class="section-title">🟡 Average Topics (Accuracy 50-75%)</div>
+            <div class="topic-grid" id="averageTopics"></div>
+        </div>
+        
+        <!-- Strong Topics -->
+        <div class="section">
+            <div class="section-title">🟢 Strong Topics (Accuracy > 75%)</div>
+            <div class="topic-grid" id="strongTopics"></div>
+        </div>
+        
+        <!-- Personalized Recommendations -->
+        <div class="section">
+            <div class="section-title">💡 Personalized Improvement Plan</div>
+            <div id="recommendations"></div>
+        </div>
+        
+        <!-- 7-Day Practice Plan -->
+        <div class="section">
+            <div class="section-title">📅 7-Day Focused Practice Plan</div>
+            <div id="practicePlan"></div>
+        </div>
+        
+        <div style="text-align: center; margin: 2rem 0;">
+            <a href="daily-tracker.html" class="btn">📊 Track Daily Progress</a>
+            <a href="pyq-solver.html" class="btn">📚 Practice PYQs</a>
+            <a href="test.html" class="btn">📝 Take Mock Test</a>
+        </div>
+    </div>
+    
+    <script>
+        // Sample performance data (In real app, this would come from user's actual performance)
+        const PERFORMANCE_DATA = {
+            physics: {
+                'Mechanics': { attempted: 50, correct: 35, time: 120 },
+                'Electrostatics': { attempted: 40, correct: 25, time: 95 },
+                'Current Electricity': { attempted: 35, correct: 28, time: 80 },
+                'Magnetism': { attempted: 30, correct: 12, time: 75 },
+                'Optics': { attempted: 25, correct: 20, time: 60 },
+                'Modern Physics': { attempted: 20, correct: 8, time: 50 },
+                'Thermodynamics': { attempted: 30, correct: 22, time: 70 },
+                'Waves': { attempted: 25, correct: 15, time: 65 }
+            },
+            chemistry: {
+                'Physical Chemistry': { attempted: 60, correct: 45, time: 140 },
+                'Inorganic Chemistry': { attempted: 50, correct: 20, time: 110 },
+                'Organic Chemistry': { attempted: 55, correct: 30, time: 130 },
+                'Chemical Bonding': { attempted: 30, correct: 24, time: 70 },
+                'Thermodynamics': { attempted: 35, correct: 28, time: 80 },
+                'Equilibrium': { attempted: 40, correct: 32, time: 90 }
+            },
+            mathematics: {
+                'Calculus': { attempted: 70, correct: 56, time: 160 },
+                'Algebra': { attempted: 60, correct: 42, time: 140 },
+                'Coordinate Geometry': { attempted: 50, correct: 25, time: 120 },
+                'Trigonometry': { attempted: 40, correct: 32, time: 90 },
+                'Vectors': { attempted: 30, correct: 12, time: 75 },
+                'Probability': { attempted: 35, correct: 28, time: 80 },
+                'Matrices': { attempted: 25, correct: 20, time: 60 }
+            }
+        };
+        
+        function init() {
+            analyzePerformance();
+            createCharts();
+            generateRecommendations();
+            generatePracticePlan();
+        }
+        
+        function analyzePerformance() {
+            let totalAttempted = 0;
+            let totalCorrect = 0;
+            let weakCount = 0;
+            
+            const weakTopics = document.getElementById('weakTopics');
+            const averageTopics = document.getElementById('averageTopics');
+            const strongTopics = document.getElementById('strongTopics');
+            
+            weakTopics.innerHTML = '';
+            averageTopics.innerHTML = '';
+            strongTopics.innerHTML = '';
+            
+            Object.entries(PERFORMANCE_DATA).forEach(([subject, topics]) => {
+                Object.entries(topics).forEach(([topic, data]) => {
+                    totalAttempted += data.attempted;
+                    totalCorrect += data.correct;
+                    
+                    const accuracy = (data.correct / data.attempted * 100).toFixed(1);
+                    const avgTime = (data.time / data.attempted).toFixed(1);
+                    
+                    let category, container, progressClass;
+                    if (accuracy < 50) {
+                        category = 'weak';
+                        container = weakTopics;
+                        progressClass = 'progress-weak';
+                        weakCount++;
+                    } else if (accuracy < 75) {
+                        category = 'average';
+                        container = averageTopics;
+                        progressClass = 'progress-average';
+                    } else {
+                        category = 'strong';
+                        container = strongTopics;
+                        progressClass = 'progress-strong';
+                    }
+                    
+                    const card = `
+                        <div class="topic-card ${category}">
+                            <div class="topic-name">${topic}</div>
+                            <div style="color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem;">${subject.charAt(0).toUpperCase() + subject.slice(1)}</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ${progressClass}" style="width: ${accuracy}%"></div>
+                            </div>
+                            <div class="topic-stats">
+                                <div class="stat-item">
+                                    <div class="stat-value" style="color: ${accuracy < 50 ? '#ff4444' : accuracy < 75 ? '#ff9800' : '#00ff88'}">${accuracy}%</div>
+                                    <div class="stat-label">Accuracy</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" style="color: #00d4ff">${data.attempted}</div>
+                                    <div class="stat-label">Attempted</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" style="color: #00ff88">${data.correct}</div>
+                                    <div class="stat-label">Correct</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value" style="color: #ff9800">${avgTime}s</div>
+                                    <div class="stat-label">Avg Time</div>
+                                </div>
+                            </div>
+                            <button class="btn" onclick="practiceTopic('${subject}', '${topic}')" style="width: 100%; margin-top: 0.5rem;">
+                                📝 Practice Now
+                            </button>
+                        </div>
+                    `;
+                    
+                    container.innerHTML += card;
+                });
+            });
+            
+            // Overall message
+            const overallAccuracy = (totalCorrect / totalAttempted * 100).toFixed(1);
+            const alertBox = document.getElementById('overallAlert');
+            const message = document.getElementById('overallMessage');
+            
+            if (weakCount > 5) {
+                alertBox.className = 'alert-box';
+                message.innerHTML = `<strong>⚠️ Critical:</strong> You have ${weakCount} weak topics with accuracy below 50%. Focus on these immediately! Overall accuracy: ${overallAccuracy}%`;
+            } else if (weakCount > 0) {
+                alertBox.className = 'alert-box warning';
+                message.innerHTML = `<strong>⚠️ Warning:</strong> You have ${weakCount} weak topics. Dedicate 2-3 hours daily to improve these. Overall accuracy: ${overallAccuracy}%`;
+            } else {
+                alertBox.className = 'alert-box success';
+                message.innerHTML = `<strong>✅ Excellent:</strong> No critical weak topics! Overall accuracy: ${overallAccuracy}%. Keep practicing to maintain consistency.`;
+            }
+        }
+        
+        function createCharts() {
+            createSubjectChart('physicsChart', 'physics', 'Physics');
+            createSubjectChart('chemistryChart', 'chemistry', 'Chemistry');
+            createSubjectChart('mathsChart', 'mathematics', 'Mathematics');
+        }
+        
+        function createSubjectChart(canvasId, subject, title) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const topics = PERFORMANCE_DATA[subject];
+            
+            const labels = Object.keys(topics);
+            const accuracies = Object.values(topics).map(t => (t.correct / t.attempted * 100).toFixed(1));
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Accuracy %',
+                        data: accuracies,
+                        backgroundColor: accuracies.map(acc => 
+                            acc < 50 ? '#ff4444' : acc < 75 ? '#ff9800' : '#00ff88'
+                        ),
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#fff', maxRotation: 45, minRotation: 45 },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function generateRecommendations() {
+            const container = document.getElementById('recommendations');
+            
+            // Find weakest topics
+            let allTopics = [];
+            Object.entries(PERFORMANCE_DATA).forEach(([subject, topics]) => {
+                Object.entries(topics).forEach(([topic, data]) => {
+                    allTopics.push({
+                        subject,
+                        topic,
+                        accuracy: (data.correct / data.attempted * 100),
+                        attempted: data.attempted
+                    });
+                });
+            });
+            
+            allTopics.sort((a, b) => a.accuracy - b.accuracy);
+            const weakest = allTopics.slice(0, 5);
+            
+            let html = `
+                <div class="recommendation-card">
+                    <div class="recommendation-title">🎯 Priority Action Items</div>
+                    <ul class="recommendation-list">
+                        <li><strong>Immediate Focus:</strong> Dedicate 3 hours daily to your weakest 3 topics</li>
+                        <li><strong>Study Method:</strong> Theory → Examples → Easy Problems → Medium → Hard</li>
+                        <li><strong>Revision:</strong> Revise each weak topic after 1 day, 3 days, and 7 days</li>
+                        <li><strong>Mock Tests:</strong> Take topic-wise tests every week to track improvement</li>
+                    </ul>
+                </div>
+                
+                <div class="recommendation-card">
+                    <div class="recommendation-title">📚 Top 5 Topics Needing Immediate Attention</div>
+                    <ol style="padding-left: 1.5rem;">
+                        ${weakest.map((t, i) => `
+                            <li style="padding: 0.5rem 0;">
+                                <strong>${t.topic}</strong> (${t.subject.charAt(0).toUpperCase() + t.subject.slice(1)}) - 
+                                <span style="color: #ff4444;">${t.accuracy.toFixed(1)}% accuracy</span>
+                            </li>
+                        `).join('')}
+                    </ol>
+                </div>
+                
+                <div class="recommendation-card">
+                    <div class="recommendation-title">📖 Recommended Resources</div>
+                    <ul class="recommendation-list">
+                        <li><strong>Physics:</strong> HC Verma for weak topics, solve all examples first</li>
+                        <li><strong>Chemistry:</strong> NCERT + OP Tandon, make detailed notes</li>
+                        <li><strong>Mathematics:</strong> RD Sharma + Cengage, practice 20 problems daily</li>
+                        <li><strong>Video Lectures:</strong> Watch concept videos for topics below 40% accuracy</li>
+                    </ul>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        function generatePracticePlan() {
+            const container = document.getElementById('practicePlan');
+            
+            // Get weakest topics
+            let allTopics = [];
+            Object.entries(PERFORMANCE_DATA).forEach(([subject, topics]) => {
+                Object.entries(topics).forEach(([topic, data]) => {
+                    if ((data.correct / data.attempted * 100) < 60) {
+                        allTopics.push({ subject, topic, accuracy: (data.correct / data.attempted * 100) });
+                    }
+                });
+            });
+            
+            allTopics.sort((a, b) => a.accuracy - b.accuracy);
+            const topWeak = allTopics.slice(0, 7);
+            
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            
+            let html = '<div class="practice-plan">';
+            
+            topWeak.forEach((topic, i) => {
+                html += `
+                    <div class="practice-day">
+                        <strong style="color: #00d4ff;">${days[i]}:</strong> 
+                        <strong>${topic.topic}</strong> (${topic.subject.charAt(0).toUpperCase() + topic.subject.slice(1)})
+                        <div style="margin-top: 0.5rem; color: #aaa; font-size: 0.9rem;">
+                            • Morning (2 hrs): Theory revision + NCERT examples<br>
+                            • Afternoon (2 hrs): Solve 30 easy-medium problems<br>
+                            • Evening (1 hr): Solve 10 hard problems + Previous year questions
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        function practiceTopic(subject, topic) {
+            alert(`Opening practice session for ${topic} (${subject})...\n\nYou'll be redirected to targeted practice problems.`);
+            // In real app, this would open a practice session with filtered questions
+            window.location.href = `pyq-solver.html?subject=${subject}&topic=${encodeURIComponent(topic)}`;
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', init);
+        
+        console.log('🎯 Weak Topic Analyzer - Identify and Improve!');
+    </script>
+</body>
+</html>
