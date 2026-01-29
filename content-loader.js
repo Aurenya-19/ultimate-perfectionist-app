@@ -190,11 +190,12 @@ const CONTENT_LOADER = {
         
         // Mathematics - Calculus
         'maths-calculus-1': {
-            file: null,
+            file: 'maths-calculus-1.js',
             title: 'Limits and Continuity',
             subject: 'Mathematics',
             category: 'Calculus',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_CALCULUS_1'
         },
         'maths-calculus-2': {
             file: null,
@@ -231,6 +232,22 @@ const CONTENT_LOADER = {
             title: 'Conic Sections',
             subject: 'Mathematics',
             category: 'Coordinate Geometry',
+            hasContent: false
+        },
+        
+        // Mathematics - Trigonometry
+        'maths-trig-1': {
+            file: null,
+            title: 'Trigonometric Functions',
+            subject: 'Mathematics',
+            category: 'Trigonometry',
+            hasContent: false
+        },
+        'maths-trig-2': {
+            file: null,
+            title: 'Inverse Trigonometric Functions',
+            subject: 'Mathematics',
+            category: 'Trigonometry',
             hasContent: false
         }
     },
@@ -278,6 +295,8 @@ const CONTENT_LOADER = {
     
     // Get placeholder content for chapters without real content
     getPlaceholderContent(chapter) {
+        const completedChapters = this.getCompletedChapters();
+        
         return {
             id: chapter.id || 'unknown',
             title: chapter.title,
@@ -292,36 +311,46 @@ const CONTENT_LOADER = {
                         <div style="text-align: center; padding: 3rem;">
                             <h2 style="color: #00d4ff; margin-bottom: 1rem;">📚 ${chapter.title}</h2>
                             <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 2rem;">
-                                Complete content for this chapter is being prepared.
+                                Complete content for this chapter is being prepared with the same quality as our existing chapters.
                             </p>
+                            
                             <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 600px;">
-                                <h3 style="color: #00ff88; margin-bottom: 1rem;">What's Coming:</h3>
+                                <h3 style="color: #00ff88; margin-bottom: 1rem;">📊 Platform Progress</h3>
+                                <div style="background: #0f3460; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
+                                    <div style="font-size: 2rem; color: #00d4ff; font-weight: 900;">${completedChapters.length} / ${Object.keys(this.chapters).length}</div>
+                                    <div style="color: #aaa; margin-top: 0.5rem;">Chapters Complete</div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 600px;">
+                                <h3 style="color: #00ff88; margin-bottom: 1rem;">What Each Chapter Includes:</h3>
                                 <ul style="text-align: left; color: #aaa; line-height: 2;">
-                                    <li>✅ Complete theory with explanations</li>
-                                    <li>✅ Derivations and proofs</li>
-                                    <li>✅ Worked examples (step-by-step)</li>
-                                    <li>✅ Practice problems with solutions</li>
-                                    <li>✅ Important formulas and key points</li>
-                                    <li>✅ Tips and tricks for JEE</li>
+                                    <li>✅ Complete theory with detailed explanations</li>
+                                    <li>✅ Derivations and mathematical proofs</li>
+                                    <li>✅ 4-5 worked examples (step-by-step)</li>
+                                    <li>✅ 5+ practice problems with solutions</li>
+                                    <li>✅ Important formulas with descriptions</li>
+                                    <li>✅ Key points summary for quick revision</li>
+                                    <li>✅ JEE Main + Advanced level content</li>
                                 </ul>
                             </div>
-                            <p style="color: #aaa; margin-top: 2rem;">
-                                Meanwhile, check out other completed chapters:
+                            
+                            <p style="color: #aaa; margin-top: 2rem; font-size: 1.1rem;">
+                                <strong>Meanwhile, explore our ${completedChapters.length} completed chapters:</strong>
                             </p>
+                            
                             <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                <a href="chapter-viewer.html?id=physics-mechanics-1" style="padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700;">
-                                    Units & Measurements
-                                </a>
-                                <a href="chapter-viewer.html?id=physics-mechanics-2" style="padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700;">
-                                    Motion in Line
-                                </a>
-                                <a href="chapter-viewer.html?id=physics-mechanics-3" style="padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700;">
-                                    Laws of Motion
-                                </a>
+                                ${completedChapters.slice(0, 6).map(ch => `
+                                    <a href="chapter-viewer.html?id=${ch.id}" 
+                                       style="padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700; font-size: 0.9rem;">
+                                        ${ch.title}
+                                    </a>
+                                `).join('')}
                             </div>
+                            
                             <div style="margin-top: 2rem;">
                                 <a href="app.html" style="display: inline-block; padding: 1rem 2rem; background: transparent; border: 2px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 5px; font-weight: 700;">
-                                    ← Back to All Chapters
+                                    ← View All Chapters
                                 </a>
                             </div>
                         </div>
@@ -330,7 +359,7 @@ const CONTENT_LOADER = {
             ],
             examples: [],
             problems: [],
-            keyPoints: ['Content being prepared...'],
+            keyPoints: ['Content being prepared with high quality...'],
             formulae: []
         };
     },
