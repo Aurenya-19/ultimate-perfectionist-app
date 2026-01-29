@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula Sheets - Complete JEE Reference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        
+        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+        .tab { padding: 1rem 2rem; background: #16213e; border: 2px solid #0f3460; border-radius: 8px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
+        .tab:hover { background: #1a1a2e; border-color: #00d4ff; }
+        .tab.active { background: #00d4ff; color: #000; border-color: #00d4ff; }
+        
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .chapter-section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .chapter-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; border-bottom: 2px solid #0f3460; padding-bottom: 0.5rem; }
+        
+        .formula-grid { display: grid; gap: 1rem; }
+        .formula-card { background: #16213e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #00ff88; }
+        .formula-name { color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .formula-expr { font-family: 'Courier New', monospace; font-size: 1.2rem; color: #00d4ff; margin: 1rem 0; padding: 1rem; background: #0f3460; border-radius: 5px; }
+        .formula-desc { color: #aaa; font-size: 0.95rem; line-height: 1.6; margin-top: 0.5rem; }
+        .formula-unit { color: #ff9800; font-weight: 600; margin-top: 0.5rem; }
+        
+        .important-note { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        
+        .search-box { margin-bottom: 2rem; }
+        .search-input { width: 100%; padding: 1rem; background: #16213e; border: 2px solid #0f3460; border-radius: 8px; color: #fff; font-size: 1rem; font-family: 'Inter', sans-serif; }
+        .search-input:focus { outline: none; border-color: #00d4ff; }
+        
+        .btn { padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; margin: 0.5rem; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 1.8rem; }
+            .tabs { flex-direction: column; }
+        }
+        
+        @media print {
+            body { background: #fff; color: #000; }
+            .header, .tabs, .search-box, .btn { display: none; }
+            .chapter-section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📐 Complete Formula Sheets</h1>
+            <p style="color: #aaa; margin-top: 0.5rem;">All JEE Formulas in One Place - Print & Revise Daily</p>
+            <div style="margin-top: 1rem;">
+                <button class="btn" onclick="window.print()">🖨️ Print All Formulas</button>
+                <button class="btn" onclick="downloadPDF()">📥 Download PDF</button>
+            </div>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search formulas... (e.g., 'kinetic energy', 'quadratic', 'equilibrium')" oninput="searchFormulas()">
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('physics')">⚛️ Physics</div>
+            <div class="tab" onclick="showTab('chemistry')">🧪 Chemistry</div>
+            <div class="tab" onclick="showTab('mathematics')">📐 Mathematics</div>
+            <div class="tab" onclick="showTab('constants')">🔢 Constants</div>
+        </div>
+        
+        <!-- PHYSICS FORMULAS -->
+        <div id="physics" class="content-section active">
+            <div class="chapter-section">
+                <h2 class="chapter-title">1. Mechanics - Kinematics</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Equations of Motion (Uniform Acceleration)</div>
+                        <div class="formula-expr">v = u + at</div>
+                        <div class="formula-expr">s = ut + ½at²</div>
+                        <div class="formula-expr">v² = u² + 2as</div>
+                        <div class="formula-desc">u = initial velocity, v = final velocity, a = acceleration, t = time, s = displacement</div>
+                        <div class="formula-unit">SI Units: m/s, m/s², s, m</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Average Velocity & Acceleration</div>
+                        <div class="formula-expr">v_avg = (u + v) / 2</div>
+                        <div class="formula-expr">a_avg = (v - u) / t</div>
+                        <div class="formula-desc">For uniformly accelerated motion</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Projectile Motion</div>
+                        <div class="formula-expr">Time of Flight: T = 2u sinθ / g</div>
+                        <div class="formula-expr">Maximum Height: H = u² sin²θ / 2g</div>
+                        <div class="formula-expr">Range: R = u² sin2θ / g</div>
+                        <div class="formula-desc">u = initial velocity, θ = angle of projection, g = 9.8 m/s²</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">2. Laws of Motion</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Newton's Second Law</div>
+                        <div class="formula-expr">F = ma</div>
+                        <div class="formula-expr">F = dp/dt (General form)</div>
+                        <div class="formula-desc">F = force, m = mass, a = acceleration, p = momentum</div>
+                        <div class="formula-unit">SI Unit: Newton (N) = kg⋅m/s²</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Friction</div>
+                        <div class="formula-expr">f = μN</div>
+                        <div class="formula-expr">f_max = μ_s N (Static)</div>
+                        <div class="formula-expr">f_k = μ_k N (Kinetic)</div>
+                        <div class="formula-desc">μ = coefficient of friction, N = normal force</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Momentum & Impulse</div>
+                        <div class="formula-expr">p = mv</div>
+                        <div class="formula-expr">Impulse: J = Δp = FΔt</div>
+                        <div class="formula-desc">Conservation: p₁ + p₂ = constant (isolated system)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">3. Work, Energy & Power</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Work</div>
+                        <div class="formula-expr">W = F⋅s = Fs cosθ</div>
+                        <div class="formula-desc">θ = angle between force and displacement</div>
+                        <div class="formula-unit">SI Unit: Joule (J) = N⋅m</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Kinetic Energy</div>
+                        <div class="formula-expr">KE = ½mv²</div>
+                        <div class="formula-expr">KE = p²/2m</div>
+                        <div class="formula-desc">Work-Energy Theorem: W = ΔKE</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Potential Energy</div>
+                        <div class="formula-expr">PE = mgh (Gravitational)</div>
+                        <div class="formula-expr">PE = ½kx² (Spring)</div>
+                        <div class="formula-desc">h = height, k = spring constant, x = displacement</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Power</div>
+                        <div class="formula-expr">P = W/t = F⋅v</div>
+                        <div class="formula-expr">P = dW/dt</div>
+                        <div class="formula-unit">SI Unit: Watt (W) = J/s</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">4. Rotational Motion</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Angular Kinematics</div>
+                        <div class="formula-expr">ω = ω₀ + αt</div>
+                        <div class="formula-expr">θ = ω₀t + ½αt²</div>
+                        <div class="formula-expr">ω² = ω₀² + 2αθ</div>
+                        <div class="formula-desc">ω = angular velocity, α = angular acceleration, θ = angular displacement</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Torque & Moment of Inertia</div>
+                        <div class="formula-expr">τ = Iα = r × F</div>
+                        <div class="formula-expr">I = Σmr² (Discrete)</div>
+                        <div class="formula-expr">I = ∫r²dm (Continuous)</div>
+                        <div class="formula-desc">τ = torque, I = moment of inertia, r = perpendicular distance</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Angular Momentum</div>
+                        <div class="formula-expr">L = Iω = r × p</div>
+                        <div class="formula-expr">τ = dL/dt</div>
+                        <div class="formula-desc">Conservation: L = constant (no external torque)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Rotational Kinetic Energy</div>
+                        <div class="formula-expr">KE_rot = ½Iω²</div>
+                        <div class="formula-expr">KE_total = ½mv² + ½Iω² (Rolling)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">5. Gravitation</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Universal Law of Gravitation</div>
+                        <div class="formula-expr">F = GMm/r²</div>
+                        <div class="formula-desc">G = 6.67 × 10⁻¹¹ N⋅m²/kg²</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Acceleration due to Gravity</div>
+                        <div class="formula-expr">g = GM/R²</div>
+                        <div class="formula-expr">g' = g(1 - 2h/R) (at height h)</div>
+                        <div class="formula-expr">g' = g(1 - d/R) (at depth d)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Orbital Velocity & Escape Velocity</div>
+                        <div class="formula-expr">v_orbital = √(GM/r)</div>
+                        <div class="formula-expr">v_escape = √(2GM/R) = √(2gR)</div>
+                        <div class="formula-desc">For Earth: v_escape ≈ 11.2 km/s</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Kepler's Laws</div>
+                        <div class="formula-expr">T² ∝ r³</div>
+                        <div class="formula-expr">T² = (4π²/GM)r³</div>
+                        <div class="formula-desc">T = time period, r = orbital radius</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">6. Electrostatics</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Coulomb's Law</div>
+                        <div class="formula-expr">F = kq₁q₂/r²</div>
+                        <div class="formula-expr">k = 1/(4πε₀) = 9 × 10⁹ N⋅m²/C²</div>
+                        <div class="formula-desc">ε₀ = 8.85 × 10⁻¹² C²/N⋅m² (permittivity of free space)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Electric Field</div>
+                        <div class="formula-expr">E = F/q = kQ/r²</div>
+                        <div class="formula-expr">E = -dV/dr (relation with potential)</div>
+                        <div class="formula-unit">SI Unit: N/C or V/m</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Electric Potential</div>
+                        <div class="formula-expr">V = kQ/r</div>
+                        <div class="formula-expr">V = W/q</div>
+                        <div class="formula-expr">ΔV = -∫E⋅dr</div>
+                        <div class="formula-unit">SI Unit: Volt (V) = J/C</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Capacitance</div>
+                        <div class="formula-expr">C = Q/V</div>
+                        <div class="formula-expr">C = ε₀A/d (Parallel plate)</div>
+                        <div class="formula-expr">Energy: U = ½CV² = ½Q²/C</div>
+                        <div class="formula-unit">SI Unit: Farad (F) = C/V</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">7. Current Electricity</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Ohm's Law</div>
+                        <div class="formula-expr">V = IR</div>
+                        <div class="formula-expr">R = ρL/A</div>
+                        <div class="formula-desc">ρ = resistivity, L = length, A = cross-sectional area</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Power</div>
+                        <div class="formula-expr">P = VI = I²R = V²/R</div>
+                        <div class="formula-expr">Energy: E = Pt = VIt</div>
+                        <div class="formula-unit">SI Unit: Watt (W)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Series & Parallel Resistances</div>
+                        <div class="formula-expr">Series: R_eq = R₁ + R₂ + R₃ + ...</div>
+                        <div class="formula-expr">Parallel: 1/R_eq = 1/R₁ + 1/R₂ + 1/R₃ + ...</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Kirchhoff's Laws</div>
+                        <div class="formula-expr">KCL: ΣI_in = ΣI_out</div>
+                        <div class="formula-expr">KVL: ΣV = 0 (closed loop)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">8. Thermodynamics</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">First Law of Thermodynamics</div>
+                        <div class="formula-expr">ΔU = Q - W</div>
+                        <div class="formula-expr">dU = dQ - dW</div>
+                        <div class="formula-desc">ΔU = change in internal energy, Q = heat added, W = work done by system</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Ideal Gas Law</div>
+                        <div class="formula-expr">PV = nRT</div>
+                        <div class="formula-expr">PV = NkT</div>
+                        <div class="formula-desc">R = 8.314 J/(mol⋅K), k = 1.38 × 10⁻²³ J/K</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Work Done</div>
+                        <div class="formula-expr">W = ∫PdV</div>
+                        <div class="formula-expr">W = nRT ln(V₂/V₁) (Isothermal)</div>
+                        <div class="formula-expr">W = P(V₂ - V₁) (Isobaric)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Heat Capacity</div>
+                        <div class="formula-expr">C_v = (f/2)R (Molar heat capacity at constant volume)</div>
+                        <div class="formula-expr">C_p = C_v + R</div>
+                        <div class="formula-expr">γ = C_p/C_v</div>
+                        <div class="formula-desc">f = degrees of freedom (3 for monoatomic, 5 for diatomic)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Carnot Efficiency</div>
+                        <div class="formula-expr">η = 1 - T₂/T₁ = W/Q₁</div>
+                        <div class="formula-desc">T₁ = source temperature, T₂ = sink temperature (in Kelvin)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CHEMISTRY FORMULAS -->
+        <div id="chemistry" class="content-section">
+            <div class="chapter-section">
+                <h2 class="chapter-title">1. Atomic Structure</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Bohr's Model</div>
+                        <div class="formula-expr">E_n = -13.6Z²/n² eV</div>
+                        <div class="formula-expr">r_n = 0.529n²/Z Å</div>
+                        <div class="formula-desc">Z = atomic number, n = principal quantum number</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Rydberg Formula</div>
+                        <div class="formula-expr">1/λ = R(1/n₁² - 1/n₂²)</div>
+                        <div class="formula-desc">R = 1.097 × 10⁷ m⁻¹ (Rydberg constant)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">de Broglie Wavelength</div>
+                        <div class="formula-expr">λ = h/mv = h/p</div>
+                        <div class="formula-desc">h = 6.626 × 10⁻³⁴ J⋅s (Planck's constant)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Heisenberg Uncertainty Principle</div>
+                        <div class="formula-expr">Δx⋅Δp ≥ h/4π</div>
+                        <div class="formula-desc">Cannot simultaneously determine position and momentum with absolute precision</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">2. Chemical Thermodynamics</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Enthalpy</div>
+                        <div class="formula-expr">ΔH = ΔU + ΔnRT</div>
+                        <div class="formula-expr">ΔH = H_products - H_reactants</div>
+                        <div class="formula-desc">Δn = change in number of moles of gas</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Gibbs Free Energy</div>
+                        <div class="formula-expr">ΔG = ΔH - TΔS</div>
+                        <div class="formula-expr">ΔG° = -RT ln K</div>
+                        <div class="formula-expr">ΔG = ΔG° + RT ln Q</div>
+                        <div class="formula-desc">ΔG < 0: spontaneous, ΔG = 0: equilibrium, ΔG > 0: non-spontaneous</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Entropy</div>
+                        <div class="formula-expr">ΔS = Q_rev/T</div>
+                        <div class="formula-expr">ΔS_universe = ΔS_system + ΔS_surroundings ≥ 0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">3. Chemical Equilibrium</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Equilibrium Constant</div>
+                        <div class="formula-expr">K_c = [C]^c[D]^d / [A]^a[B]^b</div>
+                        <div class="formula-expr">K_p = K_c(RT)^Δn</div>
+                        <div class="formula-desc">For aA + bB ⇌ cC + dD</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">pH & pOH</div>
+                        <div class="formula-expr">pH = -log[H⁺]</div>
+                        <div class="formula-expr">pOH = -log[OH⁻]</div>
+                        <div class="formula-expr">pH + pOH = 14 (at 25°C)</div>
+                        <div class="formula-expr">K_w = [H⁺][OH⁻] = 10⁻¹⁴</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Henderson-Hasselbalch Equation</div>
+                        <div class="formula-expr">pH = pK_a + log([A⁻]/[HA])</div>
+                        <div class="formula-desc">For buffer solutions</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">4. Electrochemistry</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Nernst Equation</div>
+                        <div class="formula-expr">E_cell = E°_cell - (RT/nF) ln Q</div>
+                        <div class="formula-expr">E_cell = E°_cell - (0.0591/n) log Q (at 25°C)</div>
+                        <div class="formula-desc">F = 96500 C/mol (Faraday constant)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Cell Potential</div>
+                        <div class="formula-expr">E°_cell = E°_cathode - E°_anode</div>
+                        <div class="formula-expr">ΔG° = -nFE°_cell</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Faraday's Laws of Electrolysis</div>
+                        <div class="formula-expr">m = (M × i × t) / (n × F)</div>
+                        <div class="formula-expr">Q = i × t</div>
+                        <div class="formula-desc">m = mass deposited, M = molar mass, i = current, t = time, n = electrons transferred</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">5. Chemical Kinetics</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Rate Law</div>
+                        <div class="formula-expr">Rate = k[A]^m[B]^n</div>
+                        <div class="formula-desc">k = rate constant, m,n = order of reaction</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Integrated Rate Laws</div>
+                        <div class="formula-expr">Zero Order: [A] = [A]₀ - kt</div>
+                        <div class="formula-expr">First Order: ln[A] = ln[A]₀ - kt</div>
+                        <div class="formula-expr">Second Order: 1/[A] = 1/[A]₀ + kt</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Half-Life</div>
+                        <div class="formula-expr">Zero Order: t₁/₂ = [A]₀/2k</div>
+                        <div class="formula-expr">First Order: t₁/₂ = 0.693/k</div>
+                        <div class="formula-expr">Second Order: t₁/₂ = 1/(k[A]₀)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Arrhenius Equation</div>
+                        <div class="formula-expr">k = Ae^(-E_a/RT)</div>
+                        <div class="formula-expr">ln(k₂/k₁) = (E_a/R)(1/T₁ - 1/T₂)</div>
+                        <div class="formula-desc">E_a = activation energy, A = frequency factor</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MATHEMATICS FORMULAS -->
+        <div id="mathematics" class="content-section">
+            <div class="chapter-section">
+                <h2 class="chapter-title">1. Algebra</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Quadratic Equation</div>
+                        <div class="formula-expr">x = [-b ± √(b² - 4ac)] / 2a</div>
+                        <div class="formula-expr">Discriminant: D = b² - 4ac</div>
+                        <div class="formula-desc">D > 0: two real roots, D = 0: one real root, D < 0: complex roots</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Binomial Theorem</div>
+                        <div class="formula-expr">(a + b)^n = Σ(nCr)a^(n-r)b^r</div>
+                        <div class="formula-expr">nCr = n!/(r!(n-r)!)</div>
+                        <div class="formula-desc">General term: T_(r+1) = nCr × a^(n-r) × b^r</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Arithmetic Progression (AP)</div>
+                        <div class="formula-expr">a_n = a + (n-1)d</div>
+                        <div class="formula-expr">S_n = n/2[2a + (n-1)d]</div>
+                        <div class="formula-expr">S_n = n/2(a + l)</div>
+                        <div class="formula-desc">a = first term, d = common difference, l = last term</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Geometric Progression (GP)</div>
+                        <div class="formula-expr">a_n = ar^(n-1)</div>
+                        <div class="formula-expr">S_n = a(r^n - 1)/(r - 1) for r ≠ 1</div>
+                        <div class="formula-expr">S_∞ = a/(1-r) for |r| < 1</div>
+                        <div class="formula-desc">a = first term, r = common ratio</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">2. Trigonometry</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Fundamental Identities</div>
+                        <div class="formula-expr">sin²θ + cos²θ = 1</div>
+                        <div class="formula-expr">1 + tan²θ = sec²θ</div>
+                        <div class="formula-expr">1 + cot²θ = cosec²θ</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Compound Angle Formulas</div>
+                        <div class="formula-expr">sin(A ± B) = sinA cosB ± cosA sinB</div>
+                        <div class="formula-expr">cos(A ± B) = cosA cosB ∓ sinA sinB</div>
+                        <div class="formula-expr">tan(A ± B) = (tanA ± tanB)/(1 ∓ tanA tanB)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Double Angle Formulas</div>
+                        <div class="formula-expr">sin2θ = 2sinθ cosθ</div>
+                        <div class="formula-expr">cos2θ = cos²θ - sin²θ = 2cos²θ - 1 = 1 - 2sin²θ</div>
+                        <div class="formula-expr">tan2θ = 2tanθ/(1 - tan²θ)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">3. Calculus</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Differentiation Rules</div>
+                        <div class="formula-expr">d/dx(x^n) = nx^(n-1)</div>
+                        <div class="formula-expr">d/dx(e^x) = e^x</div>
+                        <div class="formula-expr">d/dx(ln x) = 1/x</div>
+                        <div class="formula-expr">d/dx(sinx) = cosx</div>
+                        <div class="formula-expr">d/dx(cosx) = -sinx</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Product & Quotient Rules</div>
+                        <div class="formula-expr">d/dx(uv) = u(dv/dx) + v(du/dx)</div>
+                        <div class="formula-expr">d/dx(u/v) = [v(du/dx) - u(dv/dx)]/v²</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Chain Rule</div>
+                        <div class="formula-expr">d/dx[f(g(x))] = f'(g(x)) × g'(x)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Integration Formulas</div>
+                        <div class="formula-expr">∫x^n dx = x^(n+1)/(n+1) + C (n ≠ -1)</div>
+                        <div class="formula-expr">∫e^x dx = e^x + C</div>
+                        <div class="formula-expr">∫(1/x) dx = ln|x| + C</div>
+                        <div class="formula-expr">∫sinx dx = -cosx + C</div>
+                        <div class="formula-expr">∫cosx dx = sinx + C</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">4. Coordinate Geometry</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Distance & Section Formula</div>
+                        <div class="formula-expr">Distance: d = √[(x₂-x₁)² + (y₂-y₁)²]</div>
+                        <div class="formula-expr">Section Formula: (mx₂+nx₁)/(m+n), (my₂+ny₁)/(m+n)</div>
+                        <div class="formula-expr">Midpoint: ((x₁+x₂)/2, (y₁+y₂)/2)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Straight Line</div>
+                        <div class="formula-expr">Slope: m = (y₂-y₁)/(x₂-x₁)</div>
+                        <div class="formula-expr">Point-Slope: y - y₁ = m(x - x₁)</div>
+                        <div class="formula-expr">Slope-Intercept: y = mx + c</div>
+                        <div class="formula-expr">General Form: ax + by + c = 0</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Circle</div>
+                        <div class="formula-expr">Standard: (x-h)² + (y-k)² = r²</div>
+                        <div class="formula-expr">General: x² + y² + 2gx + 2fy + c = 0</div>
+                        <div class="formula-desc">Center: (-g, -f), Radius: √(g² + f² - c)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Conic Sections</div>
+                        <div class="formula-expr">Parabola: y² = 4ax</div>
+                        <div class="formula-expr">Ellipse: x²/a² + y²/b² = 1</div>
+                        <div class="formula-expr">Hyperbola: x²/a² - y²/b² = 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONSTANTS -->
+        <div id="constants" class="content-section">
+            <div class="chapter-section">
+                <h2 class="chapter-title">Universal Constants</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">Speed of Light</div>
+                        <div class="formula-expr">c = 3 × 10⁸ m/s</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Planck's Constant</div>
+                        <div class="formula-expr">h = 6.626 × 10⁻³⁴ J⋅s</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Gravitational Constant</div>
+                        <div class="formula-expr">G = 6.67 × 10⁻¹¹ N⋅m²/kg²</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Avogadro's Number</div>
+                        <div class="formula-expr">N_A = 6.022 × 10²³ mol⁻¹</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Gas Constant</div>
+                        <div class="formula-expr">R = 8.314 J/(mol⋅K)</div>
+                        <div class="formula-expr">R = 0.0821 L⋅atm/(mol⋅K)</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Boltzmann Constant</div>
+                        <div class="formula-expr">k = 1.38 × 10⁻²³ J/K</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Electron Charge</div>
+                        <div class="formula-expr">e = 1.6 × 10⁻¹⁹ C</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Electron Mass</div>
+                        <div class="formula-expr">m_e = 9.1 × 10⁻³¹ kg</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Proton Mass</div>
+                        <div class="formula-expr">m_p = 1.67 × 10⁻²⁷ kg</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">Faraday Constant</div>
+                        <div class="formula-expr">F = 96500 C/mol</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chapter-section">
+                <h2 class="chapter-title">Mathematical Constants</h2>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <div class="formula-name">π (Pi)</div>
+                        <div class="formula-expr">π = 3.14159...</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">e (Euler's Number)</div>
+                        <div class="formula-expr">e = 2.71828...</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">√2</div>
+                        <div class="formula-expr">√2 = 1.414</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">√3</div>
+                        <div class="formula-expr">√3 = 1.732</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">log 2</div>
+                        <div class="formula-expr">log₁₀ 2 = 0.301</div>
+                    </div>
+                    
+                    <div class="formula-card">
+                        <div class="formula-name">log 3</div>
+                        <div class="formula-expr">log₁₀ 3 = 0.477</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activate clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function searchFormulas() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const allCards = document.querySelectorAll('.formula-card');
+            
+            allCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                    card.style.border = '2px solid #00d4ff';
+                } else {
+                    card.style.display = query ? 'none' : 'block';
+                    card.style.border = '';
+                }
+            });
+        }
+        
+        function downloadPDF() {
+            alert('PDF download feature coming soon! For now, use Print (Ctrl+P) and save as PDF.');
+            window.print();
+        }
+        
+        console.log('📐 Formula Sheets - Complete Reference Ready!');
+    </script>
+</body>
+</html>
