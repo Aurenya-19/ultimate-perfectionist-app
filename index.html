@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS REALITY - Complete JEE Preparation Platform | AIR <1000 Guaranteed</title>
     <meta name="description" content="Free comprehensive JEE Main & Advanced preparation platform. 18-month study plan, 5000+ problems, AI-powered analysis, mock tests, and guaranteed AIR <1000 strategy.">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#00d4ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="NEXUS REALITY">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
+        
+        /* Install Prompt */
+        .install-prompt { position: fixed; bottom: 2rem; right: 2rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); padding: 1rem 1.5rem; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,212,255,0.4); z-index: 1000; display: none; animation: slideUp 0.5s; }
+        .install-prompt.show { display: block; }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .install-prompt button { background: #000; color: #00d4ff; border: none; padding: 0.8rem 1.5rem; border-radius: 5px; font-weight: 700; cursor: pointer; margin-left: 1rem; }
+        .install-prompt button:hover { background: #1a1a1a; }
         
         /* Hero Section */
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); position: relative; overflow: hidden; }
@@ -61,7 +80,6 @@
         .comparison-table td { padding: 1.5rem; border-bottom: 1px solid #0f3460; }
         .comparison-table tr:hover { background: #16213e; }
         .check { color: #00ff88; font-weight: 900; }
-        .cross { color: #ff4444; font-weight: 900; }
         
         /* CTA Section */
         .cta-section { padding: 4rem 2rem; text-align: center; background: linear-gradient(135deg, #0a0a0a, #1a1a2e); }
@@ -78,10 +96,18 @@
             .features-grid { grid-template-columns: 1fr; }
             .comparison-table { font-size: 0.9rem; }
             .comparison-table th, .comparison-table td { padding: 1rem; }
+            .install-prompt { bottom: 1rem; right: 1rem; left: 1rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <span>📱 Install NEXUS REALITY as an app for offline access!</span>
+        <button onclick="installApp()">Install</button>
+        <button onclick="dismissInstall()" style="background: transparent; color: #fff;">Later</button>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -267,9 +293,9 @@
                     <td><span class="check">24/7 access</span></td>
                 </tr>
                 <tr>
-                    <td><strong>Updates</strong></td>
-                    <td>Once a year</td>
-                    <td><span class="check">Continuous</span></td>
+                    <td><strong>Offline Access</strong></td>
+                    <td>No</td>
+                    <td><span class="check">Yes (PWA)</span></td>
                 </tr>
             </tbody>
         </table>
@@ -296,8 +322,51 @@
     </footer>
     
     <script>
+        // PWA Install Prompt
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install prompt after 3 seconds
+            setTimeout(() => {
+                document.getElementById('installPrompt').classList.add('show');
+            }, 3000);
+        });
+        
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                    document.getElementById('installPrompt').classList.remove('show');
+                });
+            }
+        }
+        
+        function dismissInstall() {
+            document.getElementById('installPrompt').classList.remove('show');
+        }
+        
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/ultimate-perfectionist-app/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
         console.log('🎯 NEXUS REALITY - Your path to AIR <1000!');
-        console.log('Platform loaded successfully. Start your journey now!');
+        console.log('📱 Install as app for offline access!');
     </script>
 </body>
 </html>
