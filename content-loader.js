@@ -8,6 +8,7 @@
 <body>
 // Content Loader System for NEXUS REALITY
 // Dynamically loads chapter content from individual files
+// 🎉 10 COMPLETE CHAPTERS MILESTONE! 🎉
 
 const CONTENT_LOADER = {
     // Base URL for content files
@@ -15,7 +16,7 @@ const CONTENT_LOADER = {
     
     // Available chapters with their file paths
     chapters: {
-        // Physics - Mechanics
+        // ========== PHYSICS - MECHANICS ==========
         'physics-mechanics-1': {
             file: 'physics-mechanics-1.js',
             title: 'Units and Measurements',
@@ -49,11 +50,12 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_MECHANICS_4'
         },
         'physics-mechanics-5': {
-            file: null,
+            file: 'physics-mechanics-5.js',
             title: 'Rotational Motion',
             subject: 'Physics',
             category: 'Mechanics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_MECHANICS_5'
         },
         'physics-mechanics-6': {
             file: null,
@@ -63,7 +65,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // Physics - Thermodynamics
+        // ========== PHYSICS - THERMODYNAMICS ==========
         'physics-thermo-1': {
             file: null,
             title: 'Thermodynamics',
@@ -79,7 +81,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // Physics - Electromagnetism
+        // ========== PHYSICS - ELECTROMAGNETISM ==========
         'physics-em-1': {
             file: null,
             title: 'Electrostatics',
@@ -94,8 +96,31 @@ const CONTENT_LOADER = {
             category: 'Electromagnetism',
             hasContent: false
         },
+        'physics-em-3': {
+            file: null,
+            title: 'Magnetic Effects of Current',
+            subject: 'Physics',
+            category: 'Electromagnetism',
+            hasContent: false
+        },
         
-        // Chemistry - Physical
+        // ========== PHYSICS - OPTICS ==========
+        'physics-optics-1': {
+            file: null,
+            title: 'Ray Optics',
+            subject: 'Physics',
+            category: 'Optics',
+            hasContent: false
+        },
+        'physics-optics-2': {
+            file: null,
+            title: 'Wave Optics',
+            subject: 'Physics',
+            category: 'Optics',
+            hasContent: false
+        },
+        
+        // ========== CHEMISTRY - PHYSICAL ==========
         'chemistry-physical-1': {
             file: 'chemistry-physical-1.js',
             title: 'Atomic Structure',
@@ -105,11 +130,12 @@ const CONTENT_LOADER = {
             variable: 'CHEMISTRY_PHYSICAL_1'
         },
         'chemistry-physical-2': {
-            file: null,
+            file: 'chemistry-physical-2.js',
             title: 'Chemical Bonding',
             subject: 'Chemistry',
             category: 'Physical Chemistry',
-            hasContent: false
+            hasContent: true,
+            variable: 'CHEMISTRY_PHYSICAL_2'
         },
         'chemistry-physical-3': {
             file: null,
@@ -125,8 +151,15 @@ const CONTENT_LOADER = {
             category: 'Physical Chemistry',
             hasContent: false
         },
+        'chemistry-physical-5': {
+            file: null,
+            title: 'Ionic Equilibrium',
+            subject: 'Chemistry',
+            category: 'Physical Chemistry',
+            hasContent: false
+        },
         
-        // Chemistry - Inorganic
+        // ========== CHEMISTRY - INORGANIC ==========
         'chemistry-inorganic-1': {
             file: null,
             title: 'Periodic Table',
@@ -136,13 +169,20 @@ const CONTENT_LOADER = {
         },
         'chemistry-inorganic-2': {
             file: null,
-            title: 'Chemical Bonding',
+            title: 's-Block Elements',
+            subject: 'Chemistry',
+            category: 'Inorganic Chemistry',
+            hasContent: false
+        },
+        'chemistry-inorganic-3': {
+            file: null,
+            title: 'p-Block Elements',
             subject: 'Chemistry',
             category: 'Inorganic Chemistry',
             hasContent: false
         },
         
-        // Chemistry - Organic
+        // ========== CHEMISTRY - ORGANIC ==========
         'chemistry-organic-1': {
             file: null,
             title: 'Basic Concepts',
@@ -157,8 +197,15 @@ const CONTENT_LOADER = {
             category: 'Organic Chemistry',
             hasContent: false
         },
+        'chemistry-organic-3': {
+            file: null,
+            title: 'Organic Compounds with Functional Groups',
+            subject: 'Chemistry',
+            category: 'Organic Chemistry',
+            hasContent: false
+        },
         
-        // Mathematics - Algebra
+        // ========== MATHEMATICS - ALGEBRA ==========
         'maths-algebra-1': {
             file: 'maths-algebra-1.js',
             title: 'Sets, Relations and Functions',
@@ -168,11 +215,12 @@ const CONTENT_LOADER = {
             variable: 'MATHS_ALGEBRA_1'
         },
         'maths-algebra-2': {
-            file: null,
+            file: 'maths-algebra-2.js',
             title: 'Complex Numbers',
             subject: 'Mathematics',
             category: 'Algebra',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_ALGEBRA_2'
         },
         'maths-algebra-3': {
             file: null,
@@ -188,8 +236,22 @@ const CONTENT_LOADER = {
             category: 'Algebra',
             hasContent: false
         },
+        'maths-algebra-5': {
+            file: null,
+            title: 'Permutations and Combinations',
+            subject: 'Mathematics',
+            category: 'Algebra',
+            hasContent: false
+        },
+        'maths-algebra-6': {
+            file: null,
+            title: 'Binomial Theorem',
+            subject: 'Mathematics',
+            category: 'Algebra',
+            hasContent: false
+        },
         
-        // Mathematics - Calculus
+        // ========== MATHEMATICS - CALCULUS ==========
         'maths-calculus-1': {
             file: 'maths-calculus-1.js',
             title: 'Limits and Continuity',
@@ -207,13 +269,27 @@ const CONTENT_LOADER = {
         },
         'maths-calculus-3': {
             file: null,
+            title: 'Applications of Derivatives',
+            subject: 'Mathematics',
+            category: 'Calculus',
+            hasContent: false
+        },
+        'maths-calculus-4': {
+            file: null,
             title: 'Integration',
             subject: 'Mathematics',
             category: 'Calculus',
             hasContent: false
         },
+        'maths-calculus-5': {
+            file: null,
+            title: 'Definite Integrals',
+            subject: 'Mathematics',
+            category: 'Calculus',
+            hasContent: false
+        },
         
-        // Mathematics - Coordinate Geometry
+        // ========== MATHEMATICS - COORDINATE GEOMETRY ==========
         'maths-coordinate-1': {
             file: null,
             title: 'Straight Lines',
@@ -236,7 +312,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // Mathematics - Trigonometry
+        // ========== MATHEMATICS - TRIGONOMETRY ==========
         'maths-trig-1': {
             file: null,
             title: 'Trigonometric Functions',
@@ -252,12 +328,21 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // Mathematics - Vectors
+        // ========== MATHEMATICS - VECTORS ==========
         'maths-vectors-1': {
             file: null,
             title: 'Vectors and 3D Geometry',
             subject: 'Mathematics',
             category: 'Vectors',
+            hasContent: false
+        },
+        
+        // ========== MATHEMATICS - PROBABILITY ==========
+        'maths-probability-1': {
+            file: null,
+            title: 'Probability',
+            subject: 'Mathematics',
+            category: 'Probability',
             hasContent: false
         }
     },
@@ -320,57 +405,69 @@ const CONTENT_LOADER = {
                     title: 'Content Coming Soon',
                     content: `
                         <div style="text-align: center; padding: 3rem;">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
                             <h2 style="color: #00d4ff; margin-bottom: 1rem;">📚 ${chapter.title}</h2>
                             <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 2rem;">
                                 Complete content for this chapter is being prepared with the same quality as our existing chapters.
                             </p>
                             
-                            <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 700px; border: 1px solid #0f3460;">
-                                <h3 style="color: #00ff88; margin-bottom: 1.5rem;">📊 Platform Progress</h3>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
-                                        <div style="font-size: 2.5rem; color: #00d4ff; font-weight: 900;">${stats.completed}</div>
-                                        <div style="color: #aaa; margin-top: 0.5rem;">Chapters Complete</div>
+                            <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2.5rem; border-radius: 15px; margin: 2rem auto; max-width: 800px; border: 2px solid #0f3460; box-shadow: 0 10px 30px rgba(0,212,255,0.1);">
+                                <h3 style="color: #00ff88; margin-bottom: 2rem; font-size: 1.5rem;">🎉 Platform Milestone Achieved!</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+                                    <div style="background: linear-gradient(135deg, #0f3460, #1a5490); padding: 2rem; border-radius: 10px; border: 1px solid #00d4ff;">
+                                        <div style="font-size: 3rem; color: #00d4ff; font-weight: 900;">${stats.completed}</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem; font-size: 0.9rem;">Chapters Complete</div>
                                     </div>
-                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
-                                        <div style="font-size: 2.5rem; color: #00ff88; font-weight: 900;">${stats.percentage}%</div>
-                                        <div style="color: #aaa; margin-top: 0.5rem;">Progress</div>
+                                    <div style="background: linear-gradient(135deg, #1a3a2e, #2d5a3d); padding: 2rem; border-radius: 10px; border: 1px solid #00ff88;">
+                                        <div style="font-size: 3rem; color: #00ff88; font-weight: 900;">${stats.percentage}%</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem; font-size: 0.9rem;">Progress</div>
                                     </div>
-                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
-                                        <div style="font-size: 2.5rem; color: #ff9800; font-weight: 900;">${stats.total}</div>
-                                        <div style="color: #aaa; margin-top: 0.5rem;">Total Chapters</div>
+                                    <div style="background: linear-gradient(135deg, #3d2a1a, #5a3d2d); padding: 2rem; border-radius: 10px; border: 1px solid #ff9800;">
+                                        <div style="font-size: 3rem; color: #ff9800; font-weight: 900;">${stats.total}</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem; font-size: 0.9rem;">Total Chapters</div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 600px;">
-                                <h3 style="color: #00ff88; margin-bottom: 1rem;">✨ What Each Chapter Includes:</h3>
-                                <ul style="text-align: left; color: #aaa; line-height: 2;">
-                                    <li>✅ Complete theory with detailed explanations</li>
-                                    <li>✅ Derivations and mathematical proofs</li>
-                                    <li>✅ 4-5 worked examples (step-by-step)</li>
-                                    <li>✅ 5+ practice problems with solutions</li>
-                                    <li>✅ Important formulas with descriptions</li>
-                                    <li>✅ Key points summary for quick revision</li>
-                                    <li>✅ JEE Main + Advanced level content</li>
-                                </ul>
-                            </div>
-                            
-                            <p style="color: #aaa; margin-top: 2rem; font-size: 1.1rem;">
-                                <strong>🎯 Explore our ${stats.completed} completed chapters:</strong>
-                            </p>
-                            
-                            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin-left: auto; margin-right: auto;">
-                                ${completedChapters.map(ch => `
-                                    <a href="chapter-viewer.html?id=${ch.id}" 
-                                       style="padding: 1rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; display: block;">
-                                        ${ch.title}
-                                    </a>
-                                `).join('')}
+                            <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 700px; border: 1px solid #0f3460;">
+                                <h3 style="color: #00ff88; margin-bottom: 1.5rem;">✨ What Each Chapter Includes:</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; text-align: left;">
+                                    <div>
+                                        <ul style="color: #aaa; line-height: 2; list-style: none; padding: 0;">
+                                            <li>✅ Complete theory & explanations</li>
+                                            <li>✅ Derivations & proofs</li>
+                                            <li>✅ 4-5 worked examples</li>
+                                            <li>✅ Step-by-step solutions</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul style="color: #aaa; line-height: 2; list-style: none; padding: 0;">
+                                            <li>✅ 5+ practice problems</li>
+                                            <li>✅ Important formulas</li>
+                                            <li>✅ Key points summary</li>
+                                            <li>✅ JEE Main + Advanced level</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div style="margin-top: 3rem;">
-                                <a href="app.html" style="display: inline-block; padding: 1rem 2rem; background: transparent; border: 2px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 5px; font-weight: 700;">
+                                <p style="color: #aaa; font-size: 1.2rem; margin-bottom: 1.5rem;">
+                                    <strong>🎯 Explore our ${stats.completed} completed chapters:</strong>
+                                </p>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; max-width: 1000px; margin: 0 auto;">
+                                    ${completedChapters.map(ch => `
+                                        <a href="chapter-viewer.html?id=${ch.id}" 
+                                           style="padding: 1.2rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 0.95rem; transition: all 0.3s; display: block; box-shadow: 0 4px 15px rgba(0,212,255,0.3);">
+                                            ${ch.title}
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 3rem;">
+                                <a href="app.html" style="display: inline-block; padding: 1.2rem 2.5rem; background: transparent; border: 2px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s;">
                                     ← View All Chapters
                                 </a>
                             </div>
@@ -412,13 +509,25 @@ const CONTENT_LOADER = {
         const pending = total - completed;
         
         const bySubject = {};
+        const byCategory = {};
+        
         Object.values(this.chapters).forEach(chapter => {
+            // By subject
             if (!bySubject[chapter.subject]) {
                 bySubject[chapter.subject] = { total: 0, completed: 0 };
             }
             bySubject[chapter.subject].total++;
             if (chapter.hasContent) {
                 bySubject[chapter.subject].completed++;
+            }
+            
+            // By category
+            if (!byCategory[chapter.category]) {
+                byCategory[chapter.category] = { total: 0, completed: 0 };
+            }
+            byCategory[chapter.category].total++;
+            if (chapter.hasContent) {
+                byCategory[chapter.category].completed++;
             }
         });
         
@@ -427,7 +536,8 @@ const CONTENT_LOADER = {
             completed,
             pending,
             percentage: Math.round((completed / total) * 100),
-            bySubject
+            bySubject,
+            byCategory
         };
     },
     
@@ -462,12 +572,23 @@ window.CONTENT_LOADER = CONTENT_LOADER;
 
 // Log statistics on load
 const stats = CONTENT_LOADER.getStatistics();
-console.log('📚 CONTENT LOADER initialized');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('🎉 NEXUS REALITY - CONTENT LOADER');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 console.log(`📊 Progress: ${stats.completed}/${stats.total} chapters (${stats.percentage}%)`);
-console.log('✅ Completed chapters:', 
-    CONTENT_LOADER.getCompletedChapters().map(c => c.title).join(', ')
-);
-console.log('📈 By Subject:', stats.bySubject);
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('✅ COMPLETED CHAPTERS:');
+CONTENT_LOADER.getCompletedChapters().forEach((c, i) => {
+    console.log(`   ${i+1}. ${c.title} (${c.subject})`);
+});
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('📈 BY SUBJECT:');
+Object.entries(stats.bySubject).forEach(([subject, data]) => {
+    console.log(`   ${subject}: ${data.completed}/${data.total}`);
+});
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+console.log('🎯 MILESTONE: 10 CHAPTERS ACHIEVED!');
+console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
