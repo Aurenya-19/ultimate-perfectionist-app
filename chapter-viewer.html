@@ -4,390 +4,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter Viewer - NEXUS REALITY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { 
-            --bg: #000; 
-            --card: rgba(10,10,26,0.9);
-            --cyan: #00ffff; 
-            --pink: #ff00ff; 
-            --green: #00ff88; 
-            --orange: #ffaa00; 
-            --text: #fff;
-            --border: rgba(0,255,255,0.3);
-        }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
         
-        .navbar { background: rgba(0,0,0,0.9); padding: 1rem 2rem; border-bottom: 2px solid var(--cyan); position: sticky; top: 0; z-index: 100; }
+        .navbar { background: rgba(0,0,0,0.95); padding: 1rem 2rem; border-bottom: 2px solid #0f3460; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
         .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); font-weight: 900; }
-        .back-btn { padding: 0.5rem 1rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 5px; color: var(--text); text-decoration: none; transition: all 0.2s; }
-        .back-btn:hover { background: rgba(0,255,255,0.2); }
+        .logo { font-size: 1.5rem; color: #00d4ff; font-weight: 900; text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-link { color: #fff; text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
+        .nav-link:hover { color: #00d4ff; background: rgba(0,212,255,0.1); }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .chapter-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; }
-        .chapter-title { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--cyan); margin-bottom: 1rem; }
-        .chapter-meta { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
-        .meta-item { display: flex; align-items: center; gap: 0.5rem; }
         
-        .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
-        .tab { padding: 1rem 2rem; cursor: pointer; transition: all 0.3s; font-weight: 700; border-bottom: 3px solid transparent; }
-        .tab:hover { color: var(--cyan); }
-        .tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+        .loading { text-align: center; padding: 4rem; }
+        .spinner { border: 4px solid #1a1a2e; border-top: 4px solid #00d4ff; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        .content-section { display: none; }
-        .content-section.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .chapter-header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid #0f3460; }
+        .chapter-title { font-size: 2.5rem; color: #00d4ff; margin-bottom: 0.5rem; }
+        .chapter-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+        .meta-badge { background: rgba(0,212,255,0.2); color: #00d4ff; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
         
-        .theory-section { background: rgba(0,255,255,0.05); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
-        .section-title { color: var(--pink); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
-        .theory-content { line-height: 1.8; font-size: 1.1rem; }
-        .theory-content strong { color: var(--cyan); }
-        .formula-box { background: rgba(0,0,0,0.5); padding: 1rem; border-left: 4px solid var(--green); margin: 1rem 0; font-family: 'Courier New', monospace; color: var(--green); }
+        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.8rem; color: #00d4ff; margin-bottom: 1.5rem; border-bottom: 2px solid #0f3460; padding-bottom: 0.5rem; }
         
-        .problems-grid { display: grid; gap: 1.5rem; }
-        .problem-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; }
-        .problem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
-        .problem-number { color: var(--cyan); font-weight: 700; font-size: 1.2rem; }
-        .difficulty-badge { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.9rem; font-weight: 700; }
-        .diff-easy { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
-        .diff-medium { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
-        .diff-hard { background: rgba(255,0,255,0.2); color: var(--pink); border: 1px solid var(--pink); }
-        .diff-olympiad { background: rgba(255,215,0,0.2); color: #ffd700; border: 1px solid #ffd700; }
+        .content-table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: #16213e; border-radius: 5px; overflow: hidden; }
+        .content-table th { background: #0f3460; padding: 1rem; text-align: left; color: #00d4ff; }
+        .content-table td { padding: 1rem; border-bottom: 1px solid #0f3460; }
+        .content-table tr:last-child td { border-bottom: none; }
         
-        .problem-question { font-size: 1.1rem; margin-bottom: 1rem; line-height: 1.6; }
-        .options-list { list-style: none; margin: 1rem 0; }
-        .option { padding: 0.8rem; margin: 0.5rem 0; background: rgba(0,0,0,0.3); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-        .option:hover { background: rgba(0,255,255,0.1); border-left: 3px solid var(--cyan); }
+        .example-box { background: #16213e; border-left: 4px solid #00ff88; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; }
+        .important-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; }
+        .formula-box { background: #0f3460; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; border: 2px solid #00d4ff; }
+        .formula { font-family: 'Courier New', monospace; font-size: 1.1rem; color: #00ff88; margin: 0.5rem 0; }
         
-        .solution-box { background: rgba(0,255,136,0.1); border: 2px solid var(--green); border-radius: 8px; padding: 1.5rem; margin-top: 1rem; display: none; }
-        .solution-box.show { display: block; animation: slideDown 0.3s; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .examples-section { margin-top: 3rem; }
+        .example-card { background: #16213e; padding: 2rem; margin-bottom: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .example-title { color: #00ff88; font-size: 1.3rem; margin-bottom: 1rem; }
+        .problem { color: #aaa; margin-bottom: 1rem; font-size: 1.1rem; }
+        .solution { background: #0f3460; padding: 1.5rem; border-radius: 5px; margin-top: 1rem; }
         
-        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .problems-section { margin-top: 3rem; }
+        .problem-card { background: #16213e; padding: 2rem; margin-bottom: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; cursor: pointer; transition: all 0.3s; }
+        .problem-card:hover { border-color: #00d4ff; transform: translateY(-2px); }
+        .question { font-size: 1.1rem; margin-bottom: 1rem; color: #fff; }
+        .options { list-style: none; margin: 1rem 0; }
+        .options li { padding: 0.8rem; margin: 0.5rem 0; background: #0f3460; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
+        .options li:hover { background: #1a5490; }
+        .options li.correct { background: #1a3a2e; border: 2px solid #00ff88; }
+        .options li.wrong { background: #2d1b1b; border: 2px solid #ff4444; }
+        .explanation { background: #0f3460; padding: 1rem; border-radius: 5px; margin-top: 1rem; display: none; }
+        .explanation.show { display: block; }
         
-        .loading { text-align: center; padding: 3rem; font-size: 1.5rem; color: var(--cyan); }
-        .error { text-align: center; padding: 3rem; color: var(--pink); }
+        .key-points { background: #1a1a2e; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
+        .key-points ul { list-style: none; }
+        .key-points li { padding: 0.8rem; margin: 0.5rem 0; padding-left: 2rem; position: relative; }
+        .key-points li:before { content: '✓'; position: absolute; left: 0; color: #00ff88; font-weight: 900; font-size: 1.2rem; }
         
-        @media (max-width: 768px) { 
+        .formulae-section { background: #1a1a2e; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
+        .formula-item { background: #16213e; padding: 1.5rem; margin: 1rem 0; border-radius: 5px; border-left: 4px solid #00d4ff; }
+        .formula-name { color: #00d4ff; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        
+        .difficulty-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; font-weight: 600; }
+        .difficulty-easy { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .difficulty-medium { background: rgba(255,152,0,0.2); color: #ff9800; }
+        .difficulty-hard { background: rgba(255,68,68,0.2); color: #ff4444; }
+        
+        .back-btn { display: inline-block; padding: 1rem 2rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700; margin-bottom: 2rem; }
+        .back-btn:hover { background: #00a8cc; }
+        
+        @media (max-width: 768px) {
             .chapter-title { font-size: 1.8rem; }
-            .tabs { justify-content: center; }
+            .section-title { font-size: 1.4rem; }
+            .container { padding: 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
-    
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-content">
-            <div class="logo">🎯 NEXUS REALITY</div>
-            <a href="app.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Chapters</a>
+            <a href="index.html" class="logo">🎯 NEXUS REALITY</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="app.html" class="nav-link">📚 Chapters</a>
+                <a href="study-plan.html" class="nav-link">📅 Study Plan</a>
+                <a href="test.html" class="nav-link">📝 Tests</a>
+            </div>
         </div>
     </nav>
     
     <div class="container">
-        <!-- Loading State -->
+        <a href="app.html" class="back-btn">← Back to Chapters</a>
+        
         <div id="loading" class="loading">
-            <i class="fas fa-spinner fa-spin"></i> Loading chapter...
+            <div class="spinner"></div>
+            <p style="color: #aaa;">Loading chapter content...</p>
         </div>
         
-        <!-- Error State -->
-        <div id="error" class="error" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i> Chapter not found or failed to load.
-            <br><br>
-            <a href="app.html" class="btn">← Back to Chapters</a>
-        </div>
-        
-        <!-- Chapter Content -->
-        <div id="chapterContent" style="display: none;">
-            <!-- Header -->
-            <div class="chapter-header">
-                <h1 class="chapter-title" id="chapterTitle"></h1>
-                <div class="chapter-meta" id="chapterMeta"></div>
-            </div>
-            
-            <!-- Tabs -->
-            <div class="tabs">
-                <div class="tab active" onclick="showTab('theory')">📖 Theory</div>
-                <div class="tab" onclick="showTab('problems')">📝 Problems</div>
-                <div class="tab" onclick="showTab('formulas')">📐 Formulas</div>
-            </div>
-            
-            <!-- Theory Section -->
-            <div id="theory" class="content-section active">
-                <div id="theoryContent"></div>
-            </div>
-            
-            <!-- Problems Section -->
-            <div id="problems" class="content-section">
-                <div id="problemsContent"></div>
-            </div>
-            
-            <!-- Formulas Section -->
-            <div id="formulas" class="content-section">
-                <div id="formulasContent"></div>
-            </div>
+        <div id="content" style="display: none;">
+            <!-- Chapter content will be loaded here -->
         </div>
     </div>
     
-    <script src="chapters-complete-physics.js"></script>
-    <script src="chapters-complete-physics-2.js"></script>
-    <script src="chapters-complete-chemistry.js"></script>
-    <script src="chapters-complete-chemistry-2.js"></script>
-    <script src="chapters-complete-maths.js"></script>
+    <!-- Load content loader -->
+    <script src="content-loader.js"></script>
+    
     <script>
-        let currentChapter = null;
-        
         // Get chapter ID from URL
-        function getChapterId() {
-            const params = new URLSearchParams(window.location.search);
-            return params.get('id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const chapterId = urlParams.get('id');
+        
+        if (!chapterId) {
+            document.getElementById('loading').innerHTML = `
+                <h2 style="color: #ff4444;">Error: No chapter specified</h2>
+                <p style="color: #aaa; margin-top: 1rem;">Please select a chapter from the chapters page.</p>
+                <a href="app.html" class="back-btn" style="margin-top: 2rem;">Go to Chapters</a>
+            `;
+        } else {
+            loadChapterContent(chapterId);
         }
         
-        // Load chapter data
-        function loadChapter() {
-            const chapterId = getChapterId();
-            
-            if (!chapterId) {
-                showError();
-                return;
-            }
-            
-            // Try to load from different sources
-            let chapterData = null;
-            
-            // Check COMPLETE_PHYSICS
-            if (typeof COMPLETE_PHYSICS !== 'undefined' && COMPLETE_PHYSICS[chapterId]) {
-                chapterData = COMPLETE_PHYSICS[chapterId];
-            }
-            // Check COMPLETE_PHYSICS_2
-            else if (typeof COMPLETE_PHYSICS_2 !== 'undefined' && COMPLETE_PHYSICS_2[chapterId]) {
-                chapterData = COMPLETE_PHYSICS_2[chapterId];
-            }
-            // Check COMPLETE_CHEMISTRY
-            else if (typeof COMPLETE_CHEMISTRY !== 'undefined' && COMPLETE_CHEMISTRY[chapterId]) {
-                chapterData = COMPLETE_CHEMISTRY[chapterId];
-            }
-            // Check COMPLETE_CHEMISTRY_2
-            else if (typeof COMPLETE_CHEMISTRY_2 !== 'undefined' && COMPLETE_CHEMISTRY_2[chapterId]) {
-                chapterData = COMPLETE_CHEMISTRY_2[chapterId];
-            }
-            // Check COMPLETE_MATHS
-            else if (typeof COMPLETE_MATHS !== 'undefined' && COMPLETE_MATHS[chapterId]) {
-                chapterData = COMPLETE_MATHS[chapterId];
-            }
-            
-            if (chapterData) {
-                currentChapter = { id: chapterId, ...chapterData };
-                displayChapter();
-            } else {
-                showError();
+        async function loadChapterContent(chapterId) {
+            try {
+                const chapter = await CONTENT_LOADER.loadChapter(chapterId);
+                
+                if (!chapter) {
+                    throw new Error('Chapter not found');
+                }
+                
+                renderChapter(chapter);
+                
+                // Hide loading, show content
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading chapter:', error);
+                document.getElementById('loading').innerHTML = `
+                    <h2 style="color: #ff4444;">Error loading chapter</h2>
+                    <p style="color: #aaa; margin-top: 1rem;">${error.message}</p>
+                    <a href="app.html" class="back-btn" style="margin-top: 2rem;">Go to Chapters</a>
+                `;
             }
         }
         
-        // Display chapter
-        function displayChapter() {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('chapterContent').style.display = 'block';
+        function renderChapter(chapter) {
+            const contentDiv = document.getElementById('content');
             
-            // Set title
-            const titleMap = {
-                p5: 'Rotational Motion',
-                p9: 'Kinetic Theory of Gases',
-                p10: 'Oscillations and Waves',
-                p12: 'Current Electricity',
-                p15: 'Electromagnetic Induction',
-                p18: 'Ray Optics',
-                c1: 'Atomic Structure',
-                c5: 'Thermodynamics',
-                c8: 'Equilibrium',
-                c10: 'Hydrocarbons',
-                c12: 'Aldehydes, Ketones and Carboxylic Acids',
-                c16: 'Electrochemistry',
-                m1: 'Sets, Relations and Functions',
-                m6: 'Matrices and Determinants',
-                m13: 'Probability'
-            };
-            
-            document.getElementById('chapterTitle').textContent = titleMap[currentChapter.id] || 'Chapter';
-            
-            // Set meta
-            const problemCount = currentChapter.problems ? currentChapter.problems.length : 0;
-            document.getElementById('chapterMeta').innerHTML = `
-                <div class="meta-item">
-                    <i class="fas fa-book"></i>
-                    <span>${problemCount} Problems</span>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-clock"></i>
-                    <span>~${Math.ceil(problemCount / 10)} hours</span>
+            let html = `
+                <div class="chapter-header">
+                    <h1 class="chapter-title">${chapter.title}</h1>
+                    <div class="chapter-meta">
+                        <span class="meta-badge">${chapter.subject}</span>
+                        <span class="meta-badge">${chapter.category}</span>
+                        <span class="meta-badge">${chapter.difficulty}</span>
+                    </div>
                 </div>
             `;
             
-            // Display theory
-            displayTheory();
-            
-            // Display problems
-            displayProblems();
-            
-            // Display formulas
-            displayFormulas();
-        }
-        
-        // Display theory
-        function displayTheory() {
-            const theoryDiv = document.getElementById('theoryContent');
-            
-            if (!currentChapter.theory || !currentChapter.theory.sections) {
-                theoryDiv.innerHTML = '<div class="theory-section"><p>Theory content coming soon...</p></div>';
-                return;
-            }
-            
-            let html = '';
-            
-            if (currentChapter.theory.introduction) {
-                html += `
-                    <div class="theory-section">
-                        <div class="section-title">Introduction</div>
-                        <div class="theory-content">${currentChapter.theory.introduction}</div>
-                    </div>
-                `;
-            }
-            
-            currentChapter.theory.sections.forEach(section => {
-                html += `
-                    <div class="theory-section">
-                        <div class="section-title">${section.title}</div>
-                        <div class="theory-content">${section.content.replace(/\n/g, '<br>')}</div>
-                    </div>
-                `;
-            });
-            
-            theoryDiv.innerHTML = html;
-        }
-        
-        // Display problems
-        function displayProblems() {
-            const problemsDiv = document.getElementById('problemsContent');
-            
-            if (!currentChapter.problems || currentChapter.problems.length === 0) {
-                problemsDiv.innerHTML = '<div class="theory-section"><p>Problems coming soon...</p></div>';
-                return;
-            }
-            
-            let html = '<div class="problems-grid">';
-            
-            currentChapter.problems.forEach((problem, index) => {
-                const diffClass = {
-                    easy: 'diff-easy',
-                    medium: 'diff-medium',
-                    hard: 'diff-hard',
-                    olympiad: 'diff-olympiad'
-                }[problem.difficulty] || 'diff-medium';
-                
-                html += `
-                    <div class="problem-card">
-                        <div class="problem-header">
-                            <div class="problem-number">Problem ${index + 1}</div>
-                            <div class="difficulty-badge ${diffClass}">${problem.difficulty.toUpperCase()}</div>
+            // Render sections
+            if (chapter.sections && chapter.sections.length > 0) {
+                chapter.sections.forEach(section => {
+                    html += `
+                        <div class="section">
+                            <h2 class="section-title">${section.title}</h2>
+                            <div class="section-content">
+                                ${section.content}
+                            </div>
                         </div>
-                        <div class="problem-question">${problem.question}</div>
-                        ${problem.options ? `
-                            <ul class="options-list">
-                                ${problem.options.map((opt, i) => `
-                                    <li class="option">
-                                        <strong>${String.fromCharCode(65 + i)})</strong> ${opt}
-                                    </li>
+                    `;
+                });
+            }
+            
+            // Render examples
+            if (chapter.examples && chapter.examples.length > 0) {
+                html += `
+                    <div class="examples-section">
+                        <div class="section">
+                            <h2 class="section-title">📝 Worked Examples</h2>
+                `;
+                
+                chapter.examples.forEach(example => {
+                    html += `
+                        <div class="example-card">
+                            <div class="example-title">
+                                ${example.title}
+                                <span class="difficulty-badge difficulty-${example.difficulty}">${example.difficulty}</span>
+                            </div>
+                            <div class="problem"><strong>Problem:</strong> ${example.problem}</div>
+                            <div class="solution">${example.solution}</div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div></div>`;
+            }
+            
+            // Render practice problems
+            if (chapter.problems && chapter.problems.length > 0) {
+                html += `
+                    <div class="problems-section">
+                        <div class="section">
+                            <h2 class="section-title">🎯 Practice Problems</h2>
+                `;
+                
+                chapter.problems.forEach((problem, index) => {
+                    html += `
+                        <div class="problem-card" id="problem-${index}">
+                            <div class="question">
+                                <strong>Q${index + 1}.</strong> ${problem.question}
+                                <span class="difficulty-badge difficulty-${problem.difficulty}">${problem.difficulty}</span>
+                            </div>
+                            <ul class="options">
+                                ${problem.options.map((option, optIndex) => `
+                                    <li onclick="checkAnswer(${index}, ${optIndex}, ${problem.correct})">${String.fromCharCode(65 + optIndex)}. ${option}</li>
                                 `).join('')}
                             </ul>
-                        ` : ''}
-                        <button class="btn" onclick="toggleSolution(${index})">
-                            <i class="fas fa-lightbulb"></i> Show Solution
-                        </button>
-                        <div class="solution-box" id="solution-${index}">
-                            <strong style="color: var(--green); font-size: 1.2rem;">Solution:</strong>
-                            <div style="margin-top: 1rem; line-height: 1.8;">
-                                ${problem.solution ? problem.solution.replace(/\n/g, '<br>') : 'Solution coming soon...'}
+                            <div class="explanation" id="explanation-${index}">
+                                <strong>Explanation:</strong> ${problem.explanation}
                             </div>
                         </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            problemsDiv.innerHTML = html;
-        }
-        
-        // Display formulas
-        function displayFormulas() {
-            const formulasDiv = document.getElementById('formulasContent');
-            
-            if (!currentChapter.theory || !currentChapter.theory.sections) {
-                formulasDiv.innerHTML = '<div class="theory-section"><p>Formulas coming soon...</p></div>';
-                return;
+                    `;
+                });
+                
+                html += `</div></div>`;
             }
             
-            let html = '<div class="theory-section"><div class="section-title">Important Formulas</div>';
+            // Render key points
+            if (chapter.keyPoints && chapter.keyPoints.length > 0) {
+                html += `
+                    <div class="key-points">
+                        <h2 class="section-title">💡 Key Points to Remember</h2>
+                        <ul>
+                            ${chapter.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
             
-            currentChapter.theory.sections.forEach(section => {
-                if (section.formulas && section.formulas.length > 0) {
-                    html += `<h3 style="color: var(--cyan); margin: 1.5rem 0 1rem;">${section.title}</h3>`;
-                    section.formulas.forEach(formula => {
-                        html += `
-                            <div class="formula-box">
-                                <strong>${formula.name}:</strong> ${formula.expr}
-                                ${formula.description ? `<br><span style="opacity: 0.8; font-size: 0.9rem;">${formula.description}</span>` : ''}
-                                ${formula.unit ? `<br><span style="opacity: 0.8; font-size: 0.9rem;">Unit: ${formula.unit}</span>` : ''}
+            // Render formulae
+            if (chapter.formulae && chapter.formulae.length > 0) {
+                html += `
+                    <div class="formulae-section">
+                        <h2 class="section-title">📐 Important Formulae</h2>
+                        ${chapter.formulae.map(formula => `
+                            <div class="formula-item">
+                                <div class="formula-name">${formula.name}</div>
+                                <div class="formula">${formula.formula}</div>
+                                <div style="color: #aaa; margin-top: 0.5rem;">${formula.description}</div>
                             </div>
-                        `;
-                    });
-                }
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            contentDiv.innerHTML = html;
+        }
+        
+        function checkAnswer(problemIndex, selectedOption, correctOption) {
+            const problemCard = document.getElementById(`problem-${problemIndex}`);
+            const options = problemCard.querySelectorAll('.options li');
+            const explanation = document.getElementById(`explanation-${problemIndex}`);
+            
+            // Remove previous selections
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
             });
             
-            html += '</div>';
-            formulasDiv.innerHTML = html;
-        }
-        
-        // Toggle solution
-        function toggleSolution(index) {
-            const solution = document.getElementById(`solution-${index}`);
-            solution.classList.toggle('show');
-        }
-        
-        // Show tab
-        function showTab(tabName) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
+            // Mark selected option
+            if (selectedOption === correctOption) {
+                options[selectedOption].classList.add('correct');
+            } else {
+                options[selectedOption].classList.add('wrong');
+                options[correctOption].classList.add('correct');
+            }
             
-            // Remove active from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(tabName).classList.add('active');
-            
-            // Activate clicked tab
-            event.target.classList.add('active');
+            // Show explanation
+            explanation.classList.add('show');
         }
         
-        // Show error
-        function showError() {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('error').style.display = 'block';
-        }
-        
-        // Initialize
-        window.addEventListener('load', loadChapter);
-        
-        console.log('📖 Chapter Viewer - Ready!');
+        console.log('📚 Chapter Viewer loaded with real content!');
     </script>
 </body>
 </html>
