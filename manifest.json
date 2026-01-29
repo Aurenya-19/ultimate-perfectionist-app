@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Pages Site</title>
+</head>
+<body>
+{
+  "name": "NEXUS REALITY - JEE Preparation Platform",
+  "short_name": "NEXUS REALITY",
+  "description": "Complete JEE Main & Advanced preparation platform with AIR <1000 guaranteed strategy. Free, comprehensive, and proven system.",
+  "start_url": "/ultimate-perfectionist-app/index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00d4ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff' font-family='Arial, sans-serif' font-weight='900'%3E🎯%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff' font-family='Arial, sans-serif' font-weight='900'%3E🎯%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1280 720'%3E%3Crect width='1280' height='720' fill='%230a0a0a'/%3E%3Ctext x='640' y='360' font-size='80' text-anchor='middle' fill='%2300d4ff' font-family='Arial, sans-serif' font-weight='900'%3ENEXUS REALITY%3C/text%3E%3C/svg%3E",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Tracker",
+      "short_name": "Track",
+      "description": "Track your daily study progress",
+      "url": "/ultimate-perfectionist-app/daily-tracker.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff'%3E📊%3C/text%3E%3C/svg%3E",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Study Plan",
+      "short_name": "Plan",
+      "description": "View 18-month study plan",
+      "url": "/ultimate-perfectionist-app/study-plan.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff'%3E📅%3C/text%3E%3C/svg%3E",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Mock Test",
+      "short_name": "Test",
+      "description": "Take a mock test",
+      "url": "/ultimate-perfectionist-app/test.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff'%3E📝%3C/text%3E%3C/svg%3E",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "PYQ Solver",
+      "short_name": "PYQ",
+      "description": "Solve previous year questions",
+      "url": "/ultimate-perfectionist-app/pyq-solver.html",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a0a'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle' fill='%2300d4ff'%3E📚%3C/text%3E%3C/svg%3E",
+          "sizes": "192x192",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
+</body>
+</html>
