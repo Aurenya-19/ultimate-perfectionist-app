@@ -3,388 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Revision - NEXUS REALITY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Quick Revision - Last Minute JEE Prep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { 
-            --bg: #000; 
-            --card: rgba(10,10,26,0.9);
-            --cyan: #00ffff; 
-            --pink: #ff00ff; 
-            --green: #00ff88; 
-            --orange: #ffaa00; 
-            --gold: #ffd700;
-            --text: #fff;
-            --border: rgba(0,255,255,0.3);
-        }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
         
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        .navbar { background: rgba(0,0,0,0.95); padding: 1rem 2rem; border-bottom: 2px solid #0f3460; position: sticky; top: 0; z-index: 100; }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; color: #00d4ff; font-weight: 900; text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-link { color: #fff; text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
+        .nav-link:hover { color: #00d4ff; background: rgba(0,212,255,0.1); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
         
         .tabs { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
-        .tab { padding: 1rem 2rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; cursor: pointer; transition: all 0.3s; font-weight: 700; }
-        .tab:hover { background: rgba(0,255,255,0.2); transform: translateY(-2px); }
-        .tab.active { background: linear-gradient(135deg, var(--cyan), #0099cc); border-color: var(--cyan); }
+        .tab { padding: 1rem 2rem; background: #16213e; border: 2px solid #0f3460; border-radius: 8px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
+        .tab:hover { background: #1a1a2e; border-color: #00d4ff; }
+        .tab.active { background: #00d4ff; color: #000; }
         
         .content-section { display: none; }
-        .content-section.active { display: block; animation: fadeIn 0.4s; }
+        .content-section.active { display: block; animation: fadeIn 0.3s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .formula-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
-        .formula-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; }
-        .formula-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
-        .formula-title { color: var(--pink); font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
-        .formula { background: rgba(0,0,0,0.5); padding: 1rem; border-radius: 8px; font-family: 'Courier New', monospace; color: var(--green); font-size: 1.1rem; margin-bottom: 0.5rem; overflow-x: auto; }
-        .formula-desc { opacity: 0.8; font-size: 0.9rem; margin-top: 0.5rem; }
+        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; }
         
-        .concept-list { display: grid; gap: 1rem; }
-        .concept-item { background: rgba(255,0,255,0.1); border-left: 4px solid var(--pink); padding: 1.5rem; border-radius: 8px; }
-        .concept-title { color: var(--cyan); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.8rem; }
-        .concept-points { list-style: none; padding-left: 0; }
-        .concept-points li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
-        .concept-points li:before { content: '▸'; position: absolute; left: 0; color: var(--green); }
+        .card-grid { display: grid; gap: 1rem; }
+        .card { background: #16213e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #00ff88; }
+        .card-title { color: #00ff88; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.8rem; }
+        .card-content { color: #aaa; line-height: 1.8; }
         
-        .oneliner-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
-        .oneliner { background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(255,170,0,0.1)); border: 2px solid var(--green); border-radius: 10px; padding: 1.2rem; text-align: center; font-weight: 700; font-size: 1.1rem; }
+        .formula-box { background: #0f3460; padding: 1rem; border-radius: 5px; font-family: 'Courier New', monospace; color: #00d4ff; margin: 0.5rem 0; }
         
-        .trick-card { background: rgba(255,170,0,0.1); border: 2px solid var(--orange); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-        .trick-title { color: var(--orange); font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
-        .trick-content { line-height: 1.8; }
+        .important-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .tip-box { background: #1a3a2e; border-left: 4px solid #00ff88; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
         
-        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; margin: 0.5rem; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
+        .list { list-style: none; padding: 0; }
+        .list li { padding: 0.8rem; margin: 0.5rem 0; background: #0f3460; border-radius: 5px; padding-left: 2.5rem; position: relative; }
+        .list li:before { content: '→'; position: absolute; left: 1rem; color: #00ff88; font-weight: 900; }
         
         @media (max-width: 768px) { 
-            .title { font-size: 2rem; }
-            .formula-grid, .oneliner-grid { grid-template-columns: 1fr; }
+            .title { font-size: 1.8rem; }
+            .tabs { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">🎯 NEXUS REALITY</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="formula-sheets.html" class="nav-link">📐 Formulas</a>
+                <a href="quick-revision.html" class="nav-link">⚡ Quick Revision</a>
+                <a href="test.html" class="nav-link">📝 Tests</a>
+            </div>
+        </div>
+    </nav>
     
     <div class="container">
         <div class="header">
             <h1 class="title">⚡ Quick Revision</h1>
-            <p style="color: var(--cyan); font-size: 1.2rem;">Last Minute Preparation • Formula Sheets • Key Concepts</p>
+            <p style="color: #aaa; margin-top: 0.5rem;">Last-minute preparation essentials for JEE</p>
         </div>
         
         <div class="tabs">
-            <div class="tab active" onclick="showTab('formulas')">📐 Formulas</div>
-            <div class="tab" onclick="showTab('concepts')">💡 Key Concepts</div>
-            <div class="tab" onclick="showTab('oneliners')">⚡ One-Liners</div>
+            <div class="tab active" onclick="showTab('formulas')">📐 Key Formulas</div>
+            <div class="tab" onclick="showTab('oneliners')">💡 One-Liners</div>
             <div class="tab" onclick="showTab('tricks')">🎯 Tricks & Tips</div>
+            <div class="tab" onclick="showTab('constants')">🔢 Constants</div>
+            <div class="tab" onclick="showTab('mistakes')">⚠️ Common Mistakes</div>
         </div>
         
-        <!-- FORMULAS SECTION -->
+        <!-- Key Formulas -->
         <div id="formulas" class="content-section active">
-            <h2 style="color: var(--cyan); font-size: 2rem; margin-bottom: 2rem; text-align: center;">📐 Essential Formulas</h2>
-            
-            <h3 style="color: var(--pink); font-size: 1.5rem; margin: 2rem 0 1rem;">⚛️ Physics</h3>
-            <div class="formula-grid">
-                <div class="formula-card">
-                    <div class="formula-title">Kinematics</div>
-                    <div class="formula">v = u + at</div>
-                    <div class="formula">s = ut + ½at²</div>
-                    <div class="formula">v² = u² + 2as</div>
-                    <div class="formula-desc">First three equations of motion</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Newton's Laws</div>
-                    <div class="formula">F = ma</div>
-                    <div class="formula">F₁₂ = -F₂₁</div>
-                    <div class="formula">f = μN</div>
-                    <div class="formula-desc">Force, action-reaction, friction</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Work & Energy</div>
-                    <div class="formula">W = F·s = Fs cos θ</div>
-                    <div class="formula">KE = ½mv²</div>
-                    <div class="formula">PE = mgh</div>
-                    <div class="formula-desc">Work-energy theorem</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Rotational Motion</div>
-                    <div class="formula">τ = Iα</div>
-                    <div class="formula">L = Iω</div>
-                    <div class="formula">KE = ½Iω²</div>
-                    <div class="formula-desc">Torque, angular momentum, rotational KE</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Gravitation</div>
-                    <div class="formula">F = GMm/r²</div>
-                    <div class="formula">g = GM/R²</div>
-                    <div class="formula">v_escape = √(2GM/R)</div>
-                    <div class="formula-desc">Universal gravitation</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Thermodynamics</div>
-                    <div class="formula">ΔU = Q + W</div>
-                    <div class="formula">PV = nRT</div>
-                    <div class="formula">ΔG = ΔH - TΔS</div>
-                    <div class="formula-desc">First law, ideal gas, Gibbs energy</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Electrostatics</div>
-                    <div class="formula">F = kq₁q₂/r²</div>
-                    <div class="formula">E = F/q = kQ/r²</div>
-                    <div class="formula">V = kQ/r</div>
-                    <div class="formula-desc">Coulomb's law, field, potential</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Current Electricity</div>
-                    <div class="formula">V = IR</div>
-                    <div class="formula">P = VI = I²R = V²/R</div>
-                    <div class="formula">R = ρL/A</div>
-                    <div class="formula-desc">Ohm's law, power, resistance</div>
+            <div class="section">
+                <h2 class="section-title">⚛️ Physics - Must Remember</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-title">Mechanics Essentials</div>
+                        <div class="formula-box">v² = u² + 2as</div>
+                        <div class="formula-box">F = ma = dp/dt</div>
+                        <div class="formula-box">KE = ½mv² = p²/2m</div>
+                        <div class="formula-box">Range = u²sin2θ/g</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Rotational Motion</div>
+                        <div class="formula-box">τ = Iα = r × F</div>
+                        <div class="formula-box">L = Iω = r × p</div>
+                        <div class="formula-box">KE_rot = ½Iω²</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Electrostatics</div>
+                        <div class="formula-box">F = kq₁q₂/r²</div>
+                        <div class="formula-box">E = kQ/r²</div>
+                        <div class="formula-box">V = kQ/r</div>
+                        <div class="formula-box">C = Q/V = ε₀A/d</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Current Electricity</div>
+                        <div class="formula-box">V = IR</div>
+                        <div class="formula-box">P = VI = I²R = V²/R</div>
+                        <div class="formula-box">Series: R_eq = R₁ + R₂</div>
+                        <div class="formula-box">Parallel: 1/R_eq = 1/R₁ + 1/R₂</div>
+                    </div>
                 </div>
             </div>
             
-            <h3 style="color: var(--pink); font-size: 1.5rem; margin: 2rem 0 1rem;">🧪 Chemistry</h3>
-            <div class="formula-grid">
-                <div class="formula-card">
-                    <div class="formula-title">Atomic Structure</div>
-                    <div class="formula">E = -13.6Z²/n² eV</div>
-                    <div class="formula">1/λ = R(1/n₁² - 1/n₂²)</div>
-                    <div class="formula">λ = h/mv</div>
-                    <div class="formula-desc">Bohr model, Rydberg, de Broglie</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Thermodynamics</div>
-                    <div class="formula">ΔH = ΔU + ΔnRT</div>
-                    <div class="formula">ΔG° = -RT ln K</div>
-                    <div class="formula">ΔG = ΔH - TΔS</div>
-                    <div class="formula-desc">Enthalpy, free energy, spontaneity</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Equilibrium</div>
-                    <div class="formula">Kp = Kc(RT)^Δn</div>
-                    <div class="formula">pH = -log[H⁺]</div>
-                    <div class="formula">pH = pKa + log([A⁻]/[HA])</div>
-                    <div class="formula-desc">Equilibrium constant, pH, buffer</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Electrochemistry</div>
-                    <div class="formula">E°cell = E°cathode - E°anode</div>
-                    <div class="formula">ΔG° = -nFE°</div>
-                    <div class="formula">m = (M×i×t)/(n×F)</div>
-                    <div class="formula-desc">Cell potential, Gibbs, electrolysis</div>
+            <div class="section">
+                <h2 class="section-title">🧪 Chemistry - Must Remember</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-title">Thermodynamics</div>
+                        <div class="formula-box">ΔU = Q - W</div>
+                        <div class="formula-box">ΔH = ΔU + ΔnRT</div>
+                        <div class="formula-box">ΔG = ΔH - TΔS</div>
+                        <div class="formula-box">ΔG° = -RT ln K</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Equilibrium</div>
+                        <div class="formula-box">K_c = [C]^c[D]^d / [A]^a[B]^b</div>
+                        <div class="formula-box">pH = -log[H⁺]</div>
+                        <div class="formula-box">pH + pOH = 14</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Electrochemistry</div>
+                        <div class="formula-box">E_cell = E°_cell - (0.0591/n)logQ</div>
+                        <div class="formula-box">ΔG° = -nFE°_cell</div>
+                        <div class="formula-box">m = (M×i×t)/(n×F)</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Chemical Kinetics</div>
+                        <div class="formula-box">First Order: t₁/₂ = 0.693/k</div>
+                        <div class="formula-box">k = Ae^(-E_a/RT)</div>
+                    </div>
                 </div>
             </div>
             
-            <h3 style="color: var(--pink); font-size: 1.5rem; margin: 2rem 0 1rem;">📐 Mathematics</h3>
-            <div class="formula-grid">
-                <div class="formula-card">
-                    <div class="formula-title">Trigonometry</div>
-                    <div class="formula">sin²θ + cos²θ = 1</div>
-                    <div class="formula">sin(A±B) = sinA cosB ± cosA sinB</div>
-                    <div class="formula">cos(A±B) = cosA cosB ∓ sinA sinB</div>
-                    <div class="formula-desc">Fundamental identities</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Calculus</div>
-                    <div class="formula">d/dx(xⁿ) = nxⁿ⁻¹</div>
-                    <div class="formula">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div>
-                    <div class="formula">d/dx(eˣ) = eˣ</div>
-                    <div class="formula-desc">Differentiation, integration</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Probability</div>
-                    <div class="formula">P(A∪B) = P(A) + P(B) - P(A∩B)</div>
-                    <div class="formula">P(A∩B) = P(A)×P(B|A)</div>
-                    <div class="formula">E(X) = Σ xᵢpᵢ</div>
-                    <div class="formula-desc">Addition, multiplication, expectation</div>
-                </div>
-                
-                <div class="formula-card">
-                    <div class="formula-title">Matrices</div>
-                    <div class="formula">|A| = ad - bc (2×2)</div>
-                    <div class="formula">A⁻¹ = adj(A)/|A|</div>
-                    <div class="formula">(AB)ᵀ = BᵀAᵀ</div>
-                    <div class="formula-desc">Determinant, inverse, transpose</div>
+            <div class="section">
+                <h2 class="section-title">📐 Mathematics - Must Remember</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-title">Quadratic & Algebra</div>
+                        <div class="formula-box">x = [-b ± √(b²-4ac)] / 2a</div>
+                        <div class="formula-box">(a+b)^n = Σ(nCr)a^(n-r)b^r</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Trigonometry</div>
+                        <div class="formula-box">sin²θ + cos²θ = 1</div>
+                        <div class="formula-box">sin2θ = 2sinθcosθ</div>
+                        <div class="formula-box">cos2θ = cos²θ - sin²θ</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Calculus</div>
+                        <div class="formula-box">d/dx(x^n) = nx^(n-1)</div>
+                        <div class="formula-box">∫x^n dx = x^(n+1)/(n+1) + C</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Coordinate Geometry</div>
+                        <div class="formula-box">Distance = √[(x₂-x₁)² + (y₂-y₁)²]</div>
+                        <div class="formula-box">Circle: (x-h)² + (y-k)² = r²</div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- KEY CONCEPTS SECTION -->
-        <div id="concepts" class="content-section">
-            <h2 style="color: var(--cyan); font-size: 2rem; margin-bottom: 2rem; text-align: center;">💡 Key Concepts</h2>
-            
-            <div class="concept-list">
-                <div class="concept-item">
-                    <div class="concept-title">⚛️ Newton's Laws of Motion</div>
-                    <ul class="concept-points">
-                        <li><strong>First Law:</strong> Object remains at rest or uniform motion unless acted upon by external force</li>
-                        <li><strong>Second Law:</strong> F = ma (Force equals mass times acceleration)</li>
-                        <li><strong>Third Law:</strong> Every action has equal and opposite reaction</li>
-                        <li><strong>Application:</strong> Rocket propulsion, walking, swimming</li>
-                    </ul>
-                </div>
-                
-                <div class="concept-item">
-                    <div class="concept-title">⚡ Conservation Laws</div>
-                    <ul class="concept-points">
-                        <li><strong>Energy:</strong> Total energy in isolated system remains constant</li>
-                        <li><strong>Momentum:</strong> Total momentum conserved in absence of external force</li>
-                        <li><strong>Angular Momentum:</strong> Conserved when no external torque</li>
-                        <li><strong>Charge:</strong> Total charge in isolated system is constant</li>
-                    </ul>
-                </div>
-                
-                <div class="concept-item">
-                    <div class="concept-title">🧪 Le Chatelier's Principle</div>
-                    <ul class="concept-points">
-                        <li>System at equilibrium opposes any change</li>
-                        <li><strong>Concentration:</strong> Increase reactant → shifts right</li>
-                        <li><strong>Pressure:</strong> Increase P → shifts to fewer moles</li>
-                        <li><strong>Temperature:</strong> Increase T → shifts endothermic direction</li>
-                        <li><strong>Catalyst:</strong> No effect on equilibrium position</li>
-                    </ul>
-                </div>
-                
-                <div class="concept-item">
-                    <div class="concept-title">📐 Differentiation Rules</div>
-                    <ul class="concept-points">
-                        <li><strong>Power Rule:</strong> d/dx(xⁿ) = nxⁿ⁻¹</li>
-                        <li><strong>Product Rule:</strong> d/dx(uv) = u(dv/dx) + v(du/dx)</li>
-                        <li><strong>Quotient Rule:</strong> d/dx(u/v) = [v(du/dx) - u(dv/dx)]/v²</li>
-                        <li><strong>Chain Rule:</strong> d/dx[f(g(x))] = f'(g(x))·g'(x)</li>
-                    </ul>
-                </div>
-                
-                <div class="concept-item">
-                    <div class="concept-title">🔋 Kirchhoff's Laws</div>
-                    <ul class="concept-points">
-                        <li><strong>Current Law (KCL):</strong> Sum of currents entering = Sum leaving junction</li>
-                        <li><strong>Voltage Law (KVL):</strong> Sum of voltages around closed loop = 0</li>
-                        <li><strong>Application:</strong> Solving complex circuits</li>
-                        <li><strong>Sign Convention:</strong> Important for correct solution</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- ONE-LINERS SECTION -->
+        <!-- One-Liners -->
         <div id="oneliners" class="content-section">
-            <h2 style="color: var(--cyan); font-size: 2rem; margin-bottom: 2rem; text-align: center;">⚡ Quick One-Liners</h2>
+            <div class="section">
+                <h2 class="section-title">⚛️ Physics One-Liners</h2>
+                <ul class="list">
+                    <li>Acceleration due to gravity: g = 9.8 m/s² (Earth)</li>
+                    <li>Speed of light: c = 3 × 10⁸ m/s</li>
+                    <li>Planck's constant: h = 6.626 × 10⁻³⁴ J·s</li>
+                    <li>Gravitational constant: G = 6.67 × 10⁻¹¹ N·m²/kg²</li>
+                    <li>For maximum range in projectile: θ = 45°</li>
+                    <li>Escape velocity from Earth: 11.2 km/s</li>
+                    <li>Work done in circular motion: W = 0</li>
+                    <li>Power of lens: P = 1/f (in meters)</li>
+                    <li>Refractive index of water: 1.33</li>
+                    <li>Refractive index of glass: 1.5</li>
+                </ul>
+            </div>
             
-            <div class="oneliner-grid">
-                <div class="oneliner">Speed of light: c = 3 × 10⁸ m/s</div>
-                <div class="oneliner">Planck's constant: h = 6.63 × 10⁻³⁴ J·s</div>
-                <div class="oneliner">Avogadro's number: Nₐ = 6.022 × 10²³</div>
-                <div class="oneliner">Gravitational constant: G = 6.67 × 10⁻¹¹</div>
-                <div class="oneliner">Electron charge: e = 1.6 × 10⁻¹⁹ C</div>
-                <div class="oneliner">Electron mass: 9.1 × 10⁻³¹ kg</div>
-                <div class="oneliner">Proton mass: 1.67 × 10⁻²⁷ kg</div>
-                <div class="oneliner">Boltzmann constant: k = 1.38 × 10⁻²³ J/K</div>
-                <div class="oneliner">Gas constant: R = 8.314 J/(mol·K)</div>
-                <div class="oneliner">Faraday constant: F = 96500 C/mol</div>
-                <div class="oneliner">π = 3.14159, e = 2.71828</div>
-                <div class="oneliner">√2 = 1.414, √3 = 1.732</div>
-                <div class="oneliner">sin 30° = 1/2, cos 30° = √3/2</div>
-                <div class="oneliner">sin 45° = cos 45° = 1/√2</div>
-                <div class="oneliner">sin 60° = √3/2, cos 60° = 1/2</div>
-                <div class="oneliner">log 2 = 0.301, log 3 = 0.477</div>
+            <div class="section">
+                <h2 class="section-title">🧪 Chemistry One-Liners</h2>
+                <ul class="list">
+                    <li>Avogadro's number: 6.022 × 10²³ mol⁻¹</li>
+                    <li>Gas constant: R = 8.314 J/(mol·K)</li>
+                    <li>Faraday constant: F = 96500 C/mol</li>
+                    <li>pH of pure water: 7 (at 25°C)</li>
+                    <li>Atomic number of Carbon: 6</li>
+                    <li>Most electronegative element: Fluorine</li>
+                    <li>Noble gases: He, Ne, Ar, Kr, Xe, Rn</li>
+                    <li>STP conditions: 273 K, 1 atm</li>
+                    <li>1 mole of gas at STP: 22.4 L</li>
+                    <li>Oxidation state of O in H₂O₂: -1</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📐 Mathematics One-Liners</h2>
+                <ul class="list">
+                    <li>π (pi) ≈ 3.14159</li>
+                    <li>e (Euler's number) ≈ 2.71828</li>
+                    <li>√2 ≈ 1.414</li>
+                    <li>√3 ≈ 1.732</li>
+                    <li>log₁₀ 2 ≈ 0.301</li>
+                    <li>Sum of angles in triangle: 180°</li>
+                    <li>Sum of angles in quadrilateral: 360°</li>
+                    <li>Area of circle: πr²</li>
+                    <li>Volume of sphere: (4/3)πr³</li>
+                    <li>Pythagoras: a² + b² = c²</li>
+                </ul>
             </div>
         </div>
         
-        <!-- TRICKS & TIPS SECTION -->
+        <!-- Tricks & Tips -->
         <div id="tricks" class="content-section">
-            <h2 style="color: var(--cyan); font-size: 2rem; margin-bottom: 2rem; text-align: center;">🎯 Tricks & Tips</h2>
-            
-            <div class="trick-card">
-                <div class="trick-title">⚡ VIBGYOR - Electromagnetic Spectrum</div>
-                <div class="trick-content">
-                    <strong>V</strong>iolet, <strong>I</strong>ndigo, <strong>B</strong>lue, <strong>G</strong>reen, <strong>Y</strong>ellow, <strong>O</strong>range, <strong>R</strong>ed<br>
-                    Increasing wavelength: Violet (shortest) → Red (longest)<br>
-                    Increasing frequency: Red (lowest) → Violet (highest)
+            <div class="section">
+                <h2 class="section-title">🎯 Exam Strategy Tricks</h2>
+                
+                <div class="tip-box">
+                    <strong>⏱️ Time Management:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>First 15 min: Scan entire paper, mark easy/medium/hard</li>
+                        <li>Next 90 min: Solve all easy + medium (aim 35-40 questions)</li>
+                        <li>Next 60 min: Attempt hard questions (aim 10-12)</li>
+                        <li>Last 15 min: Review, verify calculations</li>
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="trick-card">
-                <div class="trick-title">🧪 Reactivity Series - "Please Send Charlie's Monkeys And Zebras In Lead Cages Having Secure Padlocks"</div>
-                <div class="trick-content">
-                    <strong>P</strong>otassium, <strong>S</strong>odium, <strong>C</strong>alcium, <strong>M</strong>agnesium, <strong>A</strong>luminium, <strong>Z</strong>inc, <strong>I</strong>ron, <strong>L</strong>ead, <strong>C</strong>opper, <strong>H</strong>ydrogen, <strong>S</strong>ilver, <strong>P</strong>latinum<br>
-                    Most reactive → Least reactive
+                
+                <div class="tip-box">
+                    <strong>🎯 Question Selection:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Attempt 45-48 out of 54 questions (don't attempt all blindly)</li>
+                        <li>Target 85-90% accuracy in attempted questions</li>
+                        <li>Skip if you're not 70% confident</li>
+                        <li>Remember: -2 for wrong, +4 for correct</li>
+                    </ul>
                 </div>
-            </div>
-            
-            <div class="trick-card">
-                <div class="trick-title">📐 Quadratic Formula Memory</div>
-                <div class="trick-content">
-                    For ax² + bx + c = 0:<br>
-                    x = [-b ± √(b² - 4ac)] / 2a<br>
-                    <strong>Trick:</strong> "Negative boy, plus or minus square root, boy squared minus four a c, all over two a"
-                </div>
-            </div>
-            
-            <div class="trick-card">
-                <div class="trick-title">⚛️ Right Hand Rules</div>
-                <div class="trick-content">
-                    <strong>Fleming's Right Hand Rule (Generator):</strong><br>
-                    Thumb = Motion, First finger = Field, Middle finger = Current<br><br>
-                    <strong>Fleming's Left Hand Rule (Motor):</strong><br>
-                    Thumb = Force, First finger = Field, Middle finger = Current
-                </div>
-            </div>
-            
-            <div class="trick-card">
-                <div class="trick-title">🔢 Divisibility Rules Quick Check</div>
-                <div class="trick-content">
-                    <strong>2:</strong> Last digit even<br>
-                    <strong>3:</strong> Sum of digits divisible by 3<br>
-                    <strong>4:</strong> Last two digits divisible by 4<br>
-                    <strong>5:</strong> Last digit 0 or 5<br>
-                    <strong>9:</strong> Sum of digits divisible by 9<br>
-                    <strong>11:</strong> Difference of alternate digit sums divisible by 11
+                
+                <div class="card-grid" style="margin-top: 1.5rem;">
+                    <div class="card">
+                        <div class="card-title">Physics Tricks</div>
+                        <ul style="margin-left: 1.5rem; color: #aaa;">
+                            <li>Always draw diagrams (even for simple problems)</li>
+                            <li>Check units in final answer</li>
+                            <li>Use dimensional analysis to verify</li>
+                            <li>For projectile: max range at 45°, max height at 90°</li>
+                            <li>In collisions: momentum always conserved</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Chemistry Tricks</div>
+                        <ul style="margin-left: 1.5rem; color: #aaa;">
+                            <li>Periodic table trends: left to right, top to bottom</li>
+                            <li>Oxidation states: sum = charge on species</li>
+                            <li>Balancing: start with most complex molecule</li>
+                            <li>pH: <7 acidic, =7 neutral, >7 basic</li>
+                            <li>Organic: learn reaction mechanisms, not just products</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Mathematics Tricks</div>
+                        <ul style="margin-left: 1.5rem; color: #aaa;">
+                            <li>Check answer by substitution</li>
+                            <li>Use options to eliminate wrong answers</li>
+                            <li>For integration: verify by differentiation</li>
+                            <li>Quadratic: check discriminant first</li>
+                            <li>Coordinate geometry: draw rough sketch</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="app.html" class="btn">📚 Back to Chapters</a>
-            <a href="dashboard.html" class="btn">📊 Dashboard</a>
-            <a href="test.html" class="btn">📝 Take Test</a>
+        <!-- Constants -->
+        <div id="constants" class="content-section">
+            <div class="section">
+                <h2 class="section-title">🔢 Important Constants</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-title">Universal Constants</div>
+                        <div class="card-content">
+                            <strong>Speed of light:</strong> c = 3 × 10⁸ m/s<br>
+                            <strong>Planck's constant:</strong> h = 6.626 × 10⁻³⁴ J·s<br>
+                            <strong>Gravitational constant:</strong> G = 6.67 × 10⁻¹¹ N·m²/kg²<br>
+                            <strong>Avogadro's number:</strong> N_A = 6.022 × 10²³ mol⁻¹<br>
+                            <strong>Gas constant:</strong> R = 8.314 J/(mol·K)<br>
+                            <strong>Boltzmann constant:</strong> k = 1.38 × 10⁻²³ J/K<br>
+                            <strong>Electron charge:</strong> e = 1.6 × 10⁻¹⁹ C<br>
+                            <strong>Faraday constant:</strong> F = 96500 C/mol
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">Mathematical Constants</div>
+                        <div class="card-content">
+                            <strong>π (pi):</strong> 3.14159...<br>
+                            <strong>e (Euler):</strong> 2.71828...<br>
+                            <strong>√2:</strong> 1.414<br>
+                            <strong>√3:</strong> 1.732<br>
+                            <strong>log₁₀ 2:</strong> 0.301<br>
+                            <strong>log₁₀ 3:</strong> 0.477<br>
+                            <strong>ln 2:</strong> 0.693<br>
+                            <strong>ln 10:</strong> 2.303
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Common Mistakes -->
+        <div id="mistakes" class="content-section">
+            <div class="section">
+                <h2 class="section-title">⚠️ Common Mistakes to Avoid</h2>
+                
+                <div class="important-box">
+                    <strong>❌ Physics Mistakes:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Forgetting to convert units (cm to m, km/h to m/s)</li>
+                        <li>Sign errors in vector problems</li>
+                        <li>Using wrong formula for rotational motion</li>
+                        <li>Confusing velocity and speed</li>
+                        <li>Not considering direction in momentum problems</li>
+                    </ul>
+                </div>
+                
+                <div class="important-box">
+                    <strong>❌ Chemistry Mistakes:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Wrong oxidation states</li>
+                        <li>Forgetting to balance equations</li>
+                        <li>Confusing molarity and molality</li>
+                        <li>Wrong electron configuration</li>
+                        <li>Mixing up SN1 and SN2 mechanisms</li>
+                    </ul>
+                </div>
+                
+                <div class="important-box">
+                    <strong>❌ Mathematics Mistakes:</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>Calculation errors (use calculator carefully)</li>
+                        <li>Wrong sign in quadratic formula</li>
+                        <li>Forgetting +C in indefinite integration</li>
+                        <li>Domain/range errors in functions</li>
+                        <li>Angle mode (degree vs radian) in calculator</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
     
     <script>
         function showTab(tabName) {
-            // Hide all sections
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.remove('active');
             });
-            
-            // Remove active from all tabs
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
             
-            // Show selected section
             document.getElementById(tabName).classList.add('active');
-            
-            // Activate clicked tab
             event.target.classList.add('active');
         }
         
-        console.log('⚡ Quick Revision - Ready for Last Minute Prep!');
+        console.log('⚡ Quick Revision - Last minute prep ready!');
     </script>
 </body>
 </html>
