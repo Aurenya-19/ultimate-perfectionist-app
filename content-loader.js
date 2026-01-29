@@ -41,11 +41,12 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_MECHANICS_3'
         },
         'physics-mechanics-4': {
-            file: null,
+            file: 'physics-mechanics-4.js',
             title: 'Work, Energy and Power',
             subject: 'Physics',
             category: 'Mechanics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_MECHANICS_4'
         },
         'physics-mechanics-5': {
             file: null,
@@ -249,6 +250,15 @@ const CONTENT_LOADER = {
             subject: 'Mathematics',
             category: 'Trigonometry',
             hasContent: false
+        },
+        
+        // Mathematics - Vectors
+        'maths-vectors-1': {
+            file: null,
+            title: 'Vectors and 3D Geometry',
+            subject: 'Mathematics',
+            category: 'Vectors',
+            hasContent: false
         }
     },
     
@@ -296,6 +306,7 @@ const CONTENT_LOADER = {
     // Get placeholder content for chapters without real content
     getPlaceholderContent(chapter) {
         const completedChapters = this.getCompletedChapters();
+        const stats = this.getStatistics();
         
         return {
             id: chapter.id || 'unknown',
@@ -314,16 +325,26 @@ const CONTENT_LOADER = {
                                 Complete content for this chapter is being prepared with the same quality as our existing chapters.
                             </p>
                             
-                            <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 600px;">
-                                <h3 style="color: #00ff88; margin-bottom: 1rem;">📊 Platform Progress</h3>
-                                <div style="background: #0f3460; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
-                                    <div style="font-size: 2rem; color: #00d4ff; font-weight: 900;">${completedChapters.length} / ${Object.keys(this.chapters).length}</div>
-                                    <div style="color: #aaa; margin-top: 0.5rem;">Chapters Complete</div>
+                            <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 700px; border: 1px solid #0f3460;">
+                                <h3 style="color: #00ff88; margin-bottom: 1.5rem;">📊 Platform Progress</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
+                                        <div style="font-size: 2.5rem; color: #00d4ff; font-weight: 900;">${stats.completed}</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem;">Chapters Complete</div>
+                                    </div>
+                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
+                                        <div style="font-size: 2.5rem; color: #00ff88; font-weight: 900;">${stats.percentage}%</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem;">Progress</div>
+                                    </div>
+                                    <div style="background: #0f3460; padding: 1.5rem; border-radius: 5px;">
+                                        <div style="font-size: 2.5rem; color: #ff9800; font-weight: 900;">${stats.total}</div>
+                                        <div style="color: #aaa; margin-top: 0.5rem;">Total Chapters</div>
+                                    </div>
                                 </div>
                             </div>
                             
                             <div style="background: #1a1a2e; padding: 2rem; border-radius: 10px; margin: 2rem auto; max-width: 600px;">
-                                <h3 style="color: #00ff88; margin-bottom: 1rem;">What Each Chapter Includes:</h3>
+                                <h3 style="color: #00ff88; margin-bottom: 1rem;">✨ What Each Chapter Includes:</h3>
                                 <ul style="text-align: left; color: #aaa; line-height: 2;">
                                     <li>✅ Complete theory with detailed explanations</li>
                                     <li>✅ Derivations and mathematical proofs</li>
@@ -336,19 +357,19 @@ const CONTENT_LOADER = {
                             </div>
                             
                             <p style="color: #aaa; margin-top: 2rem; font-size: 1.1rem;">
-                                <strong>Meanwhile, explore our ${completedChapters.length} completed chapters:</strong>
+                                <strong>🎯 Explore our ${stats.completed} completed chapters:</strong>
                             </p>
                             
-                            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                ${completedChapters.slice(0, 6).map(ch => `
+                            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                                ${completedChapters.map(ch => `
                                     <a href="chapter-viewer.html?id=${ch.id}" 
-                                       style="padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700; font-size: 0.9rem;">
+                                       style="padding: 1rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 0.9rem; transition: all 0.3s; display: block;">
                                         ${ch.title}
                                     </a>
                                 `).join('')}
                             </div>
                             
-                            <div style="margin-top: 2rem;">
+                            <div style="margin-top: 3rem;">
                                 <a href="app.html" style="display: inline-block; padding: 1rem 2rem; background: transparent; border: 2px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 5px; font-weight: 700;">
                                     ← View All Chapters
                                 </a>
