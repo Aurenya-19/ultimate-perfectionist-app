@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Rank Predictor & College Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        
+        .calculator-section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; }
+        
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .input-label { color: #aaa; font-weight: 600; }
+        .input-field { padding: 0.8rem; background: #0f3460; border: 2px solid #00d4ff; border-radius: 5px; color: #fff; font-size: 1rem; font-family: 'Inter', sans-serif; }
+        .input-field:focus { outline: none; border-color: #00ff88; }
+        
+        .btn { padding: 1rem 2rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 1.1rem; width: 100%; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        
+        .result-section { background: linear-gradient(135deg, #1a3a2e, #16213e); padding: 2rem; border-radius: 10px; border: 2px solid #00ff88; display: none; }
+        .result-section.show { display: block; animation: slideIn 0.5s; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .rank-display { text-align: center; padding: 2rem; background: #0f3460; border-radius: 10px; margin-bottom: 2rem; }
+        .rank-number { font-size: 4rem; font-weight: 900; color: #00ff88; }
+        .rank-label { color: #aaa; font-size: 1.2rem; margin-top: 0.5rem; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .stat-card { background: #16213e; padding: 1.5rem; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 2rem; font-weight: 900; color: #00d4ff; }
+        .stat-label { color: #aaa; margin-top: 0.5rem; }
+        
+        .college-list { display: grid; gap: 1rem; margin-top: 1.5rem; }
+        .college-card { background: #16213e; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #00d4ff; }
+        .college-card.iit { border-left-color: #00ff88; }
+        .college-card.nit { border-left-color: #ff9800; }
+        .college-name { font-size: 1.2rem; font-weight: 700; color: #00d4ff; margin-bottom: 0.5rem; }
+        .college-branch { color: #00ff88; font-weight: 600; margin-bottom: 0.3rem; }
+        .college-cutoff { color: #aaa; font-size: 0.9rem; }
+        
+        .category-tabs { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .category-tab { padding: 0.8rem 1.5rem; background: #16213e; border: 2px solid #0f3460; border-radius: 5px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .category-tab:hover { background: #1a1a2e; border-color: #00d4ff; }
+        .category-tab.active { background: #00d4ff; color: #000; border-color: #00d4ff; }
+        
+        .alert-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .alert-box.info { background: #1a2332; border-left-color: #00d4ff; }
+        .alert-box.success { background: #1a3a2e; border-left-color: #00ff88; }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 1.8rem; }
+            .rank-number { font-size: 2.5rem; }
+            .input-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎯 JEE Rank Predictor</h1>
+            <p style="color: #aaa; margin-top: 0.5rem;">Predict your rank & find suitable colleges based on your score</p>
+        </div>
+        
+        <!-- JEE Main Calculator -->
+        <div class="calculator-section">
+            <h2 class="section-title">📊 JEE Main Rank Predictor</h2>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Your Score (out of 300)</label>
+                    <input type="number" id="mainScore" class="input-field" min="0" max="300" placeholder="Enter your score">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Category</label>
+                    <select id="mainCategory" class="input-field">
+                        <option value="general">General</option>
+                        <option value="ews">EWS</option>
+                        <option value="obc">OBC-NCL</option>
+                        <option value="sc">SC</option>
+                        <option value="st">ST</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">State</label>
+                    <select id="mainState" class="input-field">
+                        <option value="home">Home State</option>
+                        <option value="other">Other State</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="predictMainRank()">🎯 Predict JEE Main Rank</button>
+        </div>
+        
+        <!-- JEE Advanced Calculator -->
+        <div class="calculator-section">
+            <h2 class="section-title">🏆 JEE Advanced Rank Predictor</h2>
+            
+            <div class="input-grid">
+                <div class="input-group">
+                    <label class="input-label">Physics Score (out of 120)</label>
+                    <input type="number" id="advPhysics" class="input-field" min="0" max="120" placeholder="Physics">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Chemistry Score (out of 120)</label>
+                    <input type="number" id="advChemistry" class="input-field" min="0" max="120" placeholder="Chemistry">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Mathematics Score (out of 120)</label>
+                    <input type="number" id="advMaths" class="input-field" min="0" max="120" placeholder="Mathematics">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Category</label>
+                    <select id="advCategory" class="input-field">
+                        <option value="general">General</option>
+                        <option value="ews">EWS</option>
+                        <option value="obc">OBC-NCL</option>
+                        <option value="sc">SC</option>
+                        <option value="st">ST</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="predictAdvancedRank()">🏆 Predict JEE Advanced Rank</button>
+        </div>
+        
+        <!-- Results Section -->
+        <div id="resultsSection" class="result-section">
+            <h2 class="section-title">📈 Your Predicted Results</h2>
+            
+            <div class="rank-display">
+                <div class="rank-number" id="predictedRank">-</div>
+                <div class="rank-label" id="rankLabel">Predicted Rank</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="percentile">-</div>
+                    <div class="stat-label">Percentile</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalScore">-</div>
+                    <div class="stat-label">Total Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="categoryRank">-</div>
+                    <div class="stat-label">Category Rank</div>
+                </div>
+            </div>
+            
+            <div class="alert-box info">
+                <strong>📌 Note:</strong> This is an estimated rank based on previous year trends. Actual rank may vary based on paper difficulty, number of candidates, and normalization process.
+            </div>
+            
+            <!-- College Suggestions -->
+            <div style="margin-top: 2rem;">
+                <h3 class="section-title">🎓 Colleges You Can Get</h3>
+                
+                <div class="category-tabs">
+                    <div class="category-tab active" onclick="filterColleges('all')">All Colleges</div>
+                    <div class="category-tab" onclick="filterColleges('iit')">IITs</div>
+                    <div class="category-tab" onclick="filterColleges('nit')">NITs</div>
+                    <div class="category-tab" onclick="filterColleges('iiit')">IIITs</div>
+                    <div class="category-tab" onclick="filterColleges('gfti')">GFTIs</div>
+                </div>
+                
+                <div id="collegeList" class="college-list"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentExam = '';
+        let predictedRankValue = 0;
+        let userCategory = 'general';
+        
+        // College database (sample - in real app, this would be comprehensive)
+        const COLLEGES = [
+            // IITs
+            { name: 'IIT Bombay', type: 'iit', branch: 'Computer Science', cutoff: { general: 100, ews: 500, obc: 300, sc: 1500, st: 2000 } },
+            { name: 'IIT Delhi', type: 'iit', branch: 'Computer Science', cutoff: { general: 150, ews: 600, obc: 400, sc: 1800, st: 2500 } },
+            { name: 'IIT Madras', type: 'iit', branch: 'Computer Science', cutoff: { general: 120, ews: 550, obc: 350, sc: 1600, st: 2200 } },
+            { name: 'IIT Kanpur', type: 'iit', branch: 'Computer Science', cutoff: { general: 200, ews: 700, obc: 500, sc: 2000, st: 2800 } },
+            { name: 'IIT Kharagpur', type: 'iit', branch: 'Computer Science', cutoff: { general: 250, ews: 800, obc: 600, sc: 2500, st: 3500 } },
+            { name: 'IIT Bombay', type: 'iit', branch: 'Electrical Engineering', cutoff: { general: 400, ews: 1200, obc: 900, sc: 3500, st: 5000 } },
+            { name: 'IIT Delhi', type: 'iit', branch: 'Mechanical Engineering', cutoff: { general: 800, ews: 2000, obc: 1500, sc: 5000, st: 7000 } },
+            { name: 'IIT Roorkee', type: 'iit', branch: 'Civil Engineering', cutoff: { general: 1500, ews: 3500, obc: 2500, sc: 8000, st: 10000 } },
+            
+            // NITs
+            { name: 'NIT Trichy', type: 'nit', branch: 'Computer Science', cutoff: { general: 2000, ews: 4000, obc: 3000, sc: 10000, st: 15000 } },
+            { name: 'NIT Surathkal', type: 'nit', branch: 'Computer Science', cutoff: { general: 2500, ews: 5000, obc: 3500, sc: 12000, st: 18000 } },
+            { name: 'NIT Warangal', type: 'nit', branch: 'Computer Science', cutoff: { general: 3000, ews: 6000, obc: 4000, sc: 15000, st: 20000 } },
+            { name: 'NIT Trichy', type: 'nit', branch: 'Electrical Engineering', cutoff: { general: 5000, ews: 10000, obc: 7000, sc: 20000, st: 30000 } },
+            { name: 'NIT Surathkal', type: 'nit', branch: 'Mechanical Engineering', cutoff: { general: 8000, ews: 15000, obc: 10000, sc: 30000, st: 40000 } },
+            
+            // IIITs
+            { name: 'IIIT Hyderabad', type: 'iiit', branch: 'Computer Science', cutoff: { general: 1000, ews: 2500, obc: 1800, sc: 8000, st: 12000 } },
+            { name: 'IIIT Bangalore', type: 'iiit', branch: 'Computer Science', cutoff: { general: 1500, ews: 3000, obc: 2200, sc: 10000, st: 15000 } },
+            { name: 'IIIT Delhi', type: 'iiit', branch: 'Computer Science', cutoff: { general: 2000, ews: 4000, obc: 3000, sc: 12000, st: 18000 } },
+            
+            // GFTIs
+            { name: 'IIEST Shibpur', type: 'gfti', branch: 'Computer Science', cutoff: { general: 10000, ews: 20000, obc: 15000, sc: 40000, st: 50000 } },
+            { name: 'IIEST Shibpur', type: 'gfti', branch: 'Electrical Engineering', cutoff: { general: 15000, ews: 30000, obc: 20000, sc: 50000, st: 60000 } }
+        ];
+        
+        function predictMainRank() {
+            const score = parseFloat(document.getElementById('mainScore').value);
+            const category = document.getElementById('mainCategory').value;
+            
+            if (!score || score < 0 || score > 300) {
+                alert('Please enter a valid score between 0 and 300');
+                return;
+            }
+            
+            currentExam = 'main';
+            userCategory = category;
+            
+            // Rank prediction formula (based on historical data)
+            // This is a simplified model - real prediction uses complex algorithms
+            const percentile = calculatePercentile(score, 300);
+            const totalCandidates = 1200000; // Approximate JEE Main candidates
+            const rank = Math.round((100 - percentile) / 100 * totalCandidates);
+            
+            // Category rank multipliers
+            const categoryMultipliers = {
+                general: 1,
+                ews: 0.9,
+                obc: 0.7,
+                sc: 0.4,
+                st: 0.3
+            };
+            
+            const categoryRank = Math.round(rank * categoryMultipliers[category]);
+            
+            displayResults(rank, percentile, score, categoryRank, 'JEE Main');
+            suggestColleges(rank, category);
+        }
+        
+        function predictAdvancedRank() {
+            const physics = parseFloat(document.getElementById('advPhysics').value) || 0;
+            const chemistry = parseFloat(document.getElementById('advChemistry').value) || 0;
+            const maths = parseFloat(document.getElementById('advMaths').value) || 0;
+            const category = document.getElementById('advCategory').value;
+            
+            const totalScore = physics + chemistry + maths;
+            
+            if (totalScore === 0 || totalScore > 360) {
+                alert('Please enter valid scores');
+                return;
+            }
+            
+            currentExam = 'advanced';
+            userCategory = category;
+            
+            // Advanced rank prediction
+            const percentile = calculatePercentile(totalScore, 360);
+            const totalCandidates = 250000; // Approximate JEE Advanced candidates
+            const rank = Math.round((100 - percentile) / 100 * totalCandidates);
+            
+            const categoryMultipliers = {
+                general: 1,
+                ews: 0.9,
+                obc: 0.7,
+                sc: 0.4,
+                st: 0.3
+            };
+            
+            const categoryRank = Math.round(rank * categoryMultipliers[category]);
+            
+            displayResults(rank, percentile, totalScore, categoryRank, 'JEE Advanced');
+            suggestColleges(rank, category);
+        }
+        
+        function calculatePercentile(score, maxScore) {
+            // Simplified percentile calculation
+            // Real calculation involves normalization and statistical analysis
+            const percentage = (score / maxScore) * 100;
+            
+            // Non-linear mapping to percentile (higher scores get higher percentiles)
+            if (percentage >= 90) return 99 + (percentage - 90) / 10;
+            if (percentage >= 80) return 95 + (percentage - 80) / 2.5;
+            if (percentage >= 70) return 85 + (percentage - 70);
+            if (percentage >= 60) return 70 + (percentage - 60) * 1.5;
+            if (percentage >= 50) return 50 + (percentage - 50) * 2;
+            return percentage;
+        }
+        
+        function displayResults(rank, percentile, score, categoryRank, examName) {
+            predictedRankValue = rank;
+            
+            document.getElementById('predictedRank').textContent = rank.toLocaleString();
+            document.getElementById('rankLabel').textContent = `Predicted ${examName} Rank`;
+            document.getElementById('percentile').textContent = percentile.toFixed(2);
+            document.getElementById('totalScore').textContent = score;
+            document.getElementById('categoryRank').textContent = categoryRank.toLocaleString();
+            
+            document.getElementById('resultsSection').classList.add('show');
+            
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function suggestColleges(rank, category) {
+            const eligibleColleges = COLLEGES.filter(college => {
+                return rank <= college.cutoff[category];
+            });
+            
+            // Sort by cutoff (best colleges first)
+            eligibleColleges.sort((a, b) => a.cutoff[category] - b.cutoff[category]);
+            
+            displayColleges(eligibleColleges);
+        }
+        
+        function displayColleges(colleges) {
+            const container = document.getElementById('collegeList');
+            
+            if (colleges.length === 0) {
+                container.innerHTML = `
+                    <div class="alert-box">
+                        <strong>⚠️ No colleges found for your rank.</strong><br>
+                        Consider improving your score or exploring other options like state colleges, private universities, or attempting again next year.
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = colleges.map(college => `
+                <div class="college-card ${college.type}">
+                    <div class="college-name">${college.name}</div>
+                    <div class="college-branch">📚 ${college.branch}</div>
+                    <div class="college-cutoff">
+                        Closing Rank (${userCategory.toUpperCase()}): ${college.cutoff[userCategory].toLocaleString()}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function filterColleges(type) {
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter colleges
+            const eligibleColleges = COLLEGES.filter(college => {
+                const rankMatch = predictedRankValue <= college.cutoff[userCategory];
+                const typeMatch = type === 'all' || college.type === type;
+                return rankMatch && typeMatch;
+            });
+            
+            eligibleColleges.sort((a, b) => a.cutoff[userCategory] - b.cutoff[userCategory]);
+            displayColleges(eligibleColleges);
+        }
+        
+        console.log('🎯 Rank Predictor - Predict your JEE rank!');
+    </script>
+</body>
+</html>
