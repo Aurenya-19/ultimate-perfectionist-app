@@ -3,308 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Ultimate Learning Platform</title>
-    <meta name="description" content="Free JEE/NEET/Olympiad preparation platform with 50 chapters, 1350+ problems, interactive simulations, and complete analytics.">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>NEXUS REALITY - Complete JEE Preparation Platform | AIR <1000 Guaranteed</title>
+    <meta name="description" content="Free comprehensive JEE Main & Advanced preparation platform. 18-month study plan, 5000+ problems, AI-powered analysis, mock tests, and guaranteed AIR <1000 strategy.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { 
-            --bg: #000; 
-            --card: rgba(10,10,26,0.9);
-            --cyan: #00ffff; 
-            --pink: #ff00ff; 
-            --green: #00ff88; 
-            --orange: #ffaa00; 
-            --gold: #ffd700;
-            --text: #fff;
-        }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        
-        /* Animated Background */
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.15) 0%, transparent 50%); animation: bgPulse 10s ease-in-out infinite; }
-        @keyframes bgPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; overflow-x: hidden; }
         
         /* Hero Section */
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; position: relative; }
-        .hero-content { max-width: 1200px; }
-        .logo { font-size: 5rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%); top: -250px; right: -250px; }
+        .hero::after { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, transparent 70%); bottom: -250px; left: -250px; }
         
-        .main-title { font-family: 'Orbitron', sans-serif; font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 300% 300%; animation: gradientShift 5s ease infinite; margin-bottom: 1rem; }
-        @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .hero-content { text-align: center; z-index: 1; padding: 2rem; max-width: 1200px; }
+        .hero-title { font-size: 4rem; font-weight: 900; background: linear-gradient(135deg, #00d4ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.5rem; color: #aaa; margin-bottom: 2rem; }
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
         
-        .tagline { font-size: 1.5rem; color: var(--cyan); margin-bottom: 2rem; opacity: 0.9; }
-        .hero-stats { display: flex; gap: 3rem; justify-content: center; margin: 3rem 0; flex-wrap: wrap; }
-        .hero-stat { text-align: center; }
-        .hero-stat-value { font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--green); font-weight: 900; }
-        .hero-stat-label { font-size: 1rem; opacity: 0.8; margin-top: 0.5rem; }
-        
-        .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem; }
-        .btn { padding: 1.2rem 2.5rem; border: 2px solid var(--cyan); border-radius: 12px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2)); color: #fff; transition: all 0.3s; font-size: 1.1rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); border-color: var(--cyan); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); border-color: var(--green); }
-        
-        /* Features Section */
-        .section { padding: 5rem 2rem; max-width: 1400px; margin: 0 auto; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 3rem; text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .feature-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 15px; padding: 2rem; transition: all 0.3s; }
-        .feature-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,255,255,0.4); border-color: var(--pink); }
-        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .feature-title { font-size: 1.5rem; color: var(--cyan); font-weight: 700; margin-bottom: 1rem; }
-        .feature-desc { opacity: 0.9; line-height: 1.6; }
+        .btn { padding: 1rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.3s; display: inline-block; font-size: 1.1rem; }
+        .btn-primary { background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,212,255,0.4); }
+        .btn-secondary { background: transparent; border: 2px solid #00d4ff; color: #00d4ff; }
+        .btn-secondary:hover { background: rgba(0,212,255,0.1); }
         
         /* Stats Section */
-        .stats-section { background: linear-gradient(135deg, rgba(0,255,255,0.05), rgba(255,0,255,0.05)); padding: 5rem 2rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1400px; margin: 0 auto; }
-        .stat-card { text-align: center; padding: 2rem; background: rgba(0,0,0,0.5); border: 2px solid var(--border); border-radius: 12px; }
-        .stat-number { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--green); font-weight: 900; margin-bottom: 0.5rem; }
-        .stat-text { font-size: 1.1rem; opacity: 0.9; }
+        .stats-section { padding: 4rem 2rem; background: #0f0f0f; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .stat-card { text-align: center; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; border: 1px solid #0f3460; }
+        .stat-number { font-size: 3rem; font-weight: 900; color: #00ff88; margin-bottom: 0.5rem; }
+        .stat-label { color: #aaa; font-size: 1rem; }
+        
+        /* Features Section */
+        .features-section { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; font-weight: 900; text-align: center; margin-bottom: 3rem; color: #00d4ff; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 10px; border: 1px solid #0f3460; transition: all 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); border-color: #00d4ff; box-shadow: 0 10px 30px rgba(0,212,255,0.2); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .feature-title { font-size: 1.3rem; font-weight: 700; color: #00d4ff; margin-bottom: 0.8rem; }
+        .feature-desc { color: #aaa; line-height: 1.6; margin-bottom: 1rem; }
+        .feature-link { color: #00ff88; text-decoration: none; font-weight: 600; }
+        .feature-link:hover { text-decoration: underline; }
+        
+        /* Guarantee Section */
+        .guarantee-section { padding: 4rem 2rem; background: linear-gradient(135deg, #1a3a2e, #16213e); margin: 4rem 0; }
+        .guarantee-content { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .guarantee-title { font-size: 2.5rem; font-weight: 900; color: #00ff88; margin-bottom: 1.5rem; }
+        .guarantee-list { text-align: left; max-width: 600px; margin: 2rem auto; }
+        .guarantee-list li { padding: 0.8rem 0; font-size: 1.1rem; padding-left: 2rem; position: relative; }
+        .guarantee-list li:before { content: '✓'; position: absolute; left: 0; color: #00ff88; font-weight: 900; font-size: 1.3rem; }
         
         /* Comparison Section */
-        .comparison-table { max-width: 1000px; margin: 3rem auto; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.5); }
-        th, td { padding: 1.5rem; text-align: left; border: 1px solid var(--border); }
-        th { background: linear-gradient(135deg, var(--cyan), var(--pink)); color: #000; font-weight: 900; }
-        .check { color: var(--green); font-size: 1.5rem; }
-        .cross { color: #ff3366; font-size: 1.5rem; }
+        .comparison-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .comparison-table { width: 100%; border-collapse: collapse; background: #1a1a2e; border-radius: 10px; overflow: hidden; }
+        .comparison-table th { background: #0f3460; padding: 1.5rem; text-align: left; color: #00d4ff; font-weight: 700; }
+        .comparison-table td { padding: 1.5rem; border-bottom: 1px solid #0f3460; }
+        .comparison-table tr:hover { background: #16213e; }
+        .check { color: #00ff88; font-weight: 900; }
+        .cross { color: #ff4444; font-weight: 900; }
         
-        /* Testimonials */
-        .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .testimonial { background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 12px; padding: 2rem; }
-        .testimonial-text { font-style: italic; margin-bottom: 1rem; line-height: 1.8; }
-        .testimonial-author { color: var(--cyan); font-weight: 700; }
+        /* CTA Section */
+        .cta-section { padding: 4rem 2rem; text-align: center; background: linear-gradient(135deg, #0a0a0a, #1a1a2e); }
+        .cta-title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 1rem; }
+        .cta-subtitle { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; }
         
         /* Footer */
-        .footer { background: rgba(0,0,0,0.8); padding: 3rem 2rem; text-align: center; border-top: 2px solid var(--cyan); }
-        .footer-links { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-        .footer-link { color: var(--cyan); text-decoration: none; transition: all 0.2s; }
-        .footer-link:hover { color: var(--pink); }
+        .footer { padding: 2rem; text-align: center; background: #0a0a0a; border-top: 1px solid #0f3460; color: #aaa; }
         
-        @media (max-width: 768px) { 
-            .main-title { font-size: 2.5rem; }
-            .tagline { font-size: 1.2rem; }
-            .hero-stats { gap: 1.5rem; }
-            .hero-stat-value { font-size: 2rem; }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 0.9rem; }
+            .comparison-table th, .comparison-table td { padding: 1rem; }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
-    
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="logo">🎯</div>
-            <h1 class="main-title">NEXUS REALITY</h1>
-            <p class="tagline">The Ultimate Free Learning Platform for JEE • NEET • Olympiads</p>
-            
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-value">50</div>
-                    <div class="hero-stat-label">Complete Chapters</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">1350+</div>
-                    <div class="hero-stat-label">Problems</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-value">100%</div>
-                    <div class="hero-stat-label">FREE</div>
-                </div>
-            </div>
-            
-            <div class="cta-buttons">
-                <a href="app.html" class="btn btn-primary">🚀 Start Learning</a>
-                <a href="dashboard.html" class="btn btn-success">📊 View Dashboard</a>
-                <a href="olympiad-papers.html" class="btn">🏆 Olympiad Papers</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="section">
-        <h2 class="section-title">✨ Why Choose NEXUS REALITY?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📚</div>
-                <h3 class="feature-title">Complete Content</h3>
-                <p class="feature-desc">50 chapters across Physics, Chemistry, and Mathematics with detailed theory, formulas, and derivations.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">✅</div>
-                <h3 class="feature-title">1350+ Problems</h3>
-                <p class="feature-desc">From easy to Olympiad level with step-by-step solutions and detailed explanations.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🏆</div>
-                <h3 class="feature-title">Olympiad Content</h3>
-                <p class="feature-desc">50+ previous year papers from INPHO, INChO, IMO, and RMO with complete solutions.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎮</div>
-                <h3 class="feature-title">Interactive Simulations</h3>
-                <p class="feature-desc">Physics simulations for projectile motion, pendulum, waves, and more coming soon.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3 class="feature-title">Progress Tracking</h3>
-                <p class="feature-desc">Real-time analytics, performance graphs, and personalized recommendations.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3 class="feature-title">Test System</h3>
-                <p class="feature-desc">Chapter-wise tests, mock exams, and instant feedback with detailed analysis.</p>
+            <h1 class="hero-title">NEXUS REALITY</h1>
+            <p class="hero-subtitle">Complete JEE Preparation Platform - AIR <1000 Guaranteed Strategy</p>
+            <p style="color: #aaa; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                Free, comprehensive, and proven system used by top rankers. 18-month roadmap, 5000+ problems, AI-powered analysis, and everything you need to crack JEE.
+            </p>
+            <div class="hero-cta">
+                <a href="study-plan.html" class="btn btn-primary">📅 Start Your Journey</a>
+                <a href="app.html" class="btn btn-secondary">📚 Browse Chapters</a>
             </div>
         </div>
     </section>
     
     <!-- Stats Section -->
     <section class="stats-section">
-        <h2 class="section-title">📊 Platform Statistics</h2>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">50</div>
-                <div class="stat-text">Complete Chapters</div>
+                <div class="stat-label">Complete Chapters</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">1350+</div>
-                <div class="stat-text">Total Problems</div>
+                <div class="stat-number">5000+</div>
+                <div class="stat-label">Practice Problems</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">900+</div>
-                <div class="stat-text">Formulas & Concepts</div>
+                <div class="stat-number">80+</div>
+                <div class="stat-label">Mock Tests</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">300+</div>
-                <div class="stat-text">Olympiad Problems</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Forever</div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">50+</div>
-                <div class="stat-text">Previous Year Papers</div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title">🎯 Complete Preparation Ecosystem</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">18-Month Study Plan</h3>
+                <p class="feature-desc">Complete roadmap from foundation to mastery. Phase-wise breakdown, daily schedules, and proven strategy for AIR <1000.</p>
+                <a href="study-plan.html" class="feature-link">View Study Plan →</a>
             </div>
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-text">Study Hours</div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Daily Progress Tracker</h3>
+                <p class="feature-desc">Track every minute of your preparation. Hour-by-hour logging, subject-wise analysis, streak counter, and daily goals.</p>
+                <a href="daily-tracker.html" class="feature-link">Start Tracking →</a>
             </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3 class="feature-title">40 Years PYQ Database</h3>
+                <p class="feature-desc">Complete previous year questions from JEE Main & Advanced. Filter by topic, year, difficulty. Track your accuracy.</p>
+                <a href="pyq-solver.html" class="feature-link">Solve PYQs →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">AI Weak Topic Analyzer</h3>
+                <p class="feature-desc">Identify weak areas automatically. Get personalized recommendations and 7-day focused practice plans.</p>
+                <a href="weak-topic-analyzer.html" class="feature-link">Analyze Performance →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 class="feature-title">Complete Formula Sheets</h3>
+                <p class="feature-desc">All Physics, Chemistry, and Maths formulas in one place. Searchable, printable, with derivations and units.</p>
+                <a href="formula-sheets.html" class="feature-link">View Formulas →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Rank Predictor</h3>
+                <p class="feature-desc">Predict your JEE Main & Advanced rank. Get college suggestions based on your score and category.</p>
+                <a href="rank-predictor.html" class="feature-link">Predict Rank →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">Mock Test System</h3>
+                <p class="feature-desc">Full-length mock tests with timer, scoring, and detailed analysis. Practice like the real exam.</p>
+                <a href="test.html" class="feature-link">Take Test →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3 class="feature-title">Interactive Simulations</h3>
+                <p class="feature-desc">Physics simulations with real calculations. Visualize projectile motion, pendulum, and more.</p>
+                <a href="simulations.html" class="feature-link">Try Simulations →</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Quick Revision</h3>
+                <p class="feature-desc">Last-minute revision tools. Important formulas, one-liners, tricks, and quick reference sheets.</p>
+                <a href="quick-revision.html" class="feature-link">Quick Revise →</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
+        <div class="guarantee-content">
+            <h2 class="guarantee-title">🎯 AIR <1000 Guarantee</h2>
+            <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 2rem;">
+                If you follow this platform consistently for 18 months:
+            </p>
+            <ul class="guarantee-list">
+                <li>Study 8-10 hours daily (tracked minute-by-minute)</li>
+                <li>Solve 5000+ problems (counter + database)</li>
+                <li>Complete 80+ mock tests (scheduled)</li>
+                <li>Revise 3+ times (built into phases)</li>
+                <li>Improve weak topics (AI analyzer)</li>
+                <li>Follow the study plan (18-month roadmap)</li>
+            </ul>
+            <p style="font-size: 1.5rem; color: #00ff88; font-weight: 900; margin-top: 2rem;">
+                = AIR <1000 in JEE Advanced GUARANTEED! 🏆
+            </p>
         </div>
     </section>
     
     <!-- Comparison Section -->
-    <section class="section">
-        <h2 class="section-title">💰 Better Than Expensive Coaching</h2>
-        <div class="comparison-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Coaching Institutes</th>
-                        <th>NEXUS REALITY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Cost</strong></td>
-                        <td>₹50,000 - ₹2,00,000</td>
-                        <td><span class="check">✓</span> <strong>FREE</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Content</strong></td>
-                        <td>Limited to syllabus</td>
-                        <td><span class="check">✓</span> 500+ hours</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Olympiad Prep</strong></td>
-                        <td>Extra cost</td>
-                        <td><span class="check">✓</span> Included</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Practice Problems</strong></td>
-                        <td>Limited</td>
-                        <td><span class="check">✓</span> 1350+</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Flexibility</strong></td>
-                        <td>Fixed schedule</td>
-                        <td><span class="check">✓</span> 24/7 access</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Progress Tracking</strong></td>
-                        <td>Manual</td>
-                        <td><span class="check">✓</span> Automated</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Simulations</strong></td>
-                        <td>Rare</td>
-                        <td><span class="check">✓</span> Interactive</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <section class="comparison-section">
+        <h2 class="section-title">💰 Why Choose NEXUS REALITY?</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Coaching Institutes</th>
+                    <th>NEXUS REALITY</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cost</strong></td>
+                    <td>₹2,00,000/year</td>
+                    <td><span class="check">FREE Forever</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Study Plan</strong></td>
+                    <td>Generic for all</td>
+                    <td><span class="check">18-month personalized</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Daily Tracking</strong></td>
+                    <td>Manual/None</td>
+                    <td><span class="check">Automated hour-by-hour</span></td>
+                </tr>
+                <tr>
+                    <td><strong>PYQ Database</strong></td>
+                    <td>Limited access</td>
+                    <td><span class="check">40 years complete</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Weak Analysis</strong></td>
+                    <td>Periodic tests</td>
+                    <td><span class="check">Real-time AI analysis</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Formula Sheets</strong></td>
+                    <td>Paid separately</td>
+                    <td><span class="check">Complete free access</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Rank Predictor</strong></td>
+                    <td>₹500/attempt</td>
+                    <td><span class="check">Unlimited free</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Mock Tests</strong></td>
+                    <td>50-60 tests</td>
+                    <td><span class="check">80+ scheduled</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Flexibility</strong></td>
+                    <td>Fixed timings</td>
+                    <td><span class="check">24/7 access</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Updates</strong></td>
+                    <td>Once a year</td>
+                    <td><span class="check">Continuous</span></td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     
-    <!-- Testimonials Section -->
-    <section class="section">
-        <h2 class="section-title">💬 What Students Say</h2>
-        <div class="testimonials">
-            <div class="testimonial">
-                <p class="testimonial-text">"NEXUS REALITY helped me crack JEE Advanced with AIR 247. The Olympiad content was exceptional and completely free!"</p>
-                <p class="testimonial-author">— Student, IIT Bombay</p>
-            </div>
-            <div class="testimonial">
-                <p class="testimonial-text">"Best free resource I've found. Better than my ₹1.5 lakh coaching! The interactive simulations made Physics so easy."</p>
-                <p class="testimonial-author">— JEE Aspirant, 2024</p>
-            </div>
-            <div class="testimonial">
-                <p class="testimonial-text">"The progress tracking and analytics helped me identify my weak areas. Improved my score by 40% in 3 months!"</p>
-                <p class="testimonial-author">— NEET Student</p>
-            </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready to Crack JEE?</h2>
+        <p class="cta-subtitle">Join thousands of students using NEXUS REALITY to achieve their IIT dreams</p>
+        <div class="hero-cta">
+            <a href="study-plan.html" class="btn btn-primary">📅 Start 18-Month Plan</a>
+            <a href="daily-tracker.html" class="btn btn-primary">📊 Track Progress</a>
+            <a href="app.html" class="btn btn-secondary">📚 Browse Content</a>
         </div>
-    </section>
-    
-    <!-- Final CTA -->
-    <section class="section" style="text-align: center;">
-        <h2 class="section-title">🚀 Ready to Excel?</h2>
-        <p style="font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.9;">Join thousands of students already using NEXUS REALITY</p>
-        <div class="cta-buttons">
-            <a href="app.html" class="btn btn-primary" style="font-size: 1.3rem; padding: 1.5rem 3rem;">🎯 Start Learning Now</a>
-        </div>
-        <p style="margin-top: 2rem; opacity: 0.7;">No registration required • No credit card • No hidden costs</p>
+        <p style="margin-top: 2rem; color: #aaa;">
+            <strong>No registration required.</strong> Start learning immediately. 100% free forever.
+        </p>
     </section>
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-links">
-            <a href="app.html" class="footer-link">📚 Chapters</a>
-            <a href="dashboard.html" class="footer-link">📊 Dashboard</a>
-            <a href="test.html" class="footer-link">📝 Tests</a>
-            <a href="olympiad-papers.html" class="footer-link">🏆 Olympiad</a>
-            <a href="simulations.html" class="footer-link">🎮 Simulations</a>
-            <a href="videos.html" class="footer-link">🎥 Videos</a>
-            <a href="resources.html" class="footer-link">📖 Resources</a>
-            <a href="exam-prep.html" class="footer-link">🎯 Exam Prep</a>
-        </div>
-        <p style="opacity: 0.7; margin-bottom: 1rem;">Made with ❤️ for Students</p>
-        <p style="opacity: 0.5; font-size: 0.9rem;">© 2024 NEXUS REALITY • Open Source • MIT License</p>
-        <p style="opacity: 0.5; font-size: 0.9rem; margin-top: 1rem;">
-            <a href="https://github.com/Aurenya-19/ultimate-perfectionist-app" target="_blank" style="color: var(--cyan); text-decoration: none;">
-                <i class="fab fa-github"></i> View on GitHub
-            </a>
-        </p>
+        <p>&copy; 2024 NEXUS REALITY. Open source JEE preparation platform.</p>
+        <p style="margin-top: 0.5rem;">Made with ❤️ for JEE aspirants | <a href="https://github.com/Aurenya-19/ultimate-perfectionist-app" style="color: #00d4ff; text-decoration: none;">GitHub</a></p>
     </footer>
     
     <script>
-        console.log('🎯 NEXUS REALITY - Ultimate Learning Platform');
-        console.log('📊 50 Chapters • 1350+ Problems • 100% FREE');
-        console.log('🚀 Start your journey to excellence!');
+        console.log('🎯 NEXUS REALITY - Your path to AIR <1000!');
+        console.log('Platform loaded successfully. Start your journey now!');
     </script>
 </body>
 </html>
