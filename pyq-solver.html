@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Year Questions - JEE Main & Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
+        
+        .filters { background: #1a1a2e; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid #0f3460; }
+        .filter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .filter-label { color: #aaa; font-size: 0.9rem; margin-bottom: 0.5rem; display: block; }
+        .filter-select { width: 100%; padding: 0.8rem; background: #0f3460; border: 1px solid #00d4ff; border-radius: 5px; color: #fff; font-family: 'Inter', sans-serif; }
+        
+        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-box { background: #16213e; padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid #0f3460; }
+        .stat-number { font-size: 2rem; font-weight: 900; color: #00ff88; }
+        .stat-label { color: #aaa; font-size: 0.85rem; margin-top: 0.3rem; }
+        
+        .question-list { display: grid; gap: 1.5rem; }
+        .question-card { background: #1a1a2e; padding: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+        .question-meta { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .meta-badge { padding: 0.4rem 0.8rem; border-radius: 5px; font-size: 0.85rem; font-weight: 600; }
+        .badge-year { background: #0f3460; color: #00d4ff; }
+        .badge-exam { background: #2d1b1b; color: #ff9800; }
+        .badge-topic { background: #1a2332; color: #00ff88; }
+        .badge-difficulty { padding: 0.4rem 0.8rem; border-radius: 5px; font-size: 0.85rem; font-weight: 600; }
+        .diff-easy { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .diff-medium { background: rgba(255,170,0,0.2); color: #ff9800; }
+        .diff-hard { background: rgba(255,68,68,0.2); color: #ff4444; }
+        
+        .question-text { font-size: 1.1rem; line-height: 1.8; margin: 1rem 0; }
+        .options-list { list-style: none; margin: 1rem 0; }
+        .option-item { padding: 0.8rem; margin: 0.5rem 0; background: #0f3460; border-radius: 5px; border-left: 3px solid transparent; }
+        .option-item:hover { background: #16213e; border-left-color: #00d4ff; }
+        
+        .solution-box { background: #1a3a2e; border: 2px solid #00ff88; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; display: none; }
+        .solution-box.show { display: block; }
+        .solution-title { color: #00ff88; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem; }
+        
+        .btn { padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
+        .btn-secondary { background: #0f3460; color: #fff; }
+        
+        .no-results { text-align: center; padding: 3rem; color: #aaa; font-size: 1.2rem; }
+        
+        .pagination { display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem; flex-wrap: wrap; }
+        .page-btn { padding: 0.5rem 1rem; background: #0f3460; color: #fff; border: 1px solid #00d4ff; border-radius: 5px; cursor: pointer; }
+        .page-btn.active { background: #00d4ff; color: #000; }
+        
+        @media (max-width: 768px) { 
+            .title { font-size: 1.8rem; }
+            .filter-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">📚 Previous Year Questions (PYQ)</h1>
+            <p style="color: #aaa; margin-top: 0.5rem;">40 Years JEE Main & Advanced Questions with Solutions</p>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-row">
+                <div>
+                    <label class="filter-label">Exam Type</label>
+                    <select id="examFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="all">All Exams</option>
+                        <option value="jee-main">JEE Main</option>
+                        <option value="jee-advanced">JEE Advanced</option>
+                        <option value="aieee">AIEEE (Pre-2013)</option>
+                        <option value="iit-jee">IIT-JEE (Pre-2013)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="filter-label">Subject</label>
+                    <select id="subjectFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="all">All Subjects</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="mathematics">Mathematics</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="filter-label">Year Range</label>
+                    <select id="yearFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="all">All Years</option>
+                        <option value="2020-2024">2020-2024 (Recent)</option>
+                        <option value="2015-2019">2015-2019</option>
+                        <option value="2010-2014">2010-2014</option>
+                        <option value="2005-2009">2005-2009</option>
+                        <option value="2000-2004">2000-2004</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="filter-label">Difficulty</label>
+                    <select id="difficultyFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="all">All Levels</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="filter-label">Topic</label>
+                    <select id="topicFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="all">All Topics</option>
+                        <!-- Will be populated dynamically -->
+                    </select>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1rem;">
+                <input type="text" id="searchInput" placeholder="Search questions..." class="filter-select" style="width: 100%;" oninput="applyFilters()">
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-box">
+                <div class="stat-number" id="totalQuestions">0</div>
+                <div class="stat-label">Total Questions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="solvedCount">0</div>
+                <div class="stat-label">Solved</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="attemptedCount">0</div>
+                <div class="stat-label">Attempted</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="accuracyPercent">0%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+        </div>
+        
+        <!-- Questions List -->
+        <div class="question-list" id="questionsList"></div>
+        
+        <div class="no-results" id="noResults" style="display: none;">
+            No questions found matching your filters. Try different criteria.
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+    </div>
+    
+    <script>
+        // Sample PYQ Database (In real app, this would be loaded from backend)
+        const PYQ_DATABASE = [
+            // Physics Questions
+            {
+                id: 1,
+                exam: 'jee-advanced',
+                year: 2023,
+                subject: 'physics',
+                topic: 'Mechanics',
+                difficulty: 'hard',
+                question: 'A particle of mass m is projected with velocity v at an angle θ with horizontal. The angular momentum of the particle about the point of projection when it is at maximum height is:',
+                options: [
+                    'mv³sin²θcosθ / 2g',
+                    'mv³sin²θcosθ / g',
+                    'mv³sinθcos²θ / 2g',
+                    'Zero'
+                ],
+                correct: 0,
+                solution: 'At maximum height, vertical velocity = 0, horizontal velocity = vcosθ. Height h = v²sin²θ/2g. Angular momentum L = mvr = m(vcosθ)(v²sin²θ/2g) = mv³sin²θcosθ/2g',
+                marks: 4
+            },
+            {
+                id: 2,
+                exam: 'jee-main',
+                year: 2024,
+                subject: 'physics',
+                topic: 'Electrostatics',
+                difficulty: 'medium',
+                question: 'Two point charges +q and -q are placed at distance d apart. The electric field at a point on the perpendicular bisector at distance x from the center is:',
+                options: [
+                    '2kqd/(d²+4x²)^(3/2)',
+                    'kqd/(d²+4x²)^(3/2)',
+                    '2kqx/(d²+4x²)^(3/2)',
+                    'kqx/(d²+4x²)^(3/2)'
+                ],
+                correct: 0,
+                solution: 'Electric field due to dipole on perpendicular bisector: E = 2kqd/(d²+4x²)^(3/2). This is a standard dipole formula.',
+                marks: 4
+            },
+            {
+                id: 3,
+                exam: 'jee-main',
+                year: 2023,
+                subject: 'chemistry',
+                topic: 'Chemical Kinetics',
+                difficulty: 'easy',
+                question: 'For a first order reaction, the time required for 99% completion is twice the time required for 90% completion. This statement is:',
+                options: [
+                    'True',
+                    'False',
+                    'True only at high temperature',
+                    'True only at low temperature'
+                ],
+                correct: 1,
+                solution: 'For first order: t₉₉% = 2.303/k × log(100/1) = 4.606/k. t₉₀% = 2.303/k × log(100/10) = 2.303/k. Ratio = 2, so statement is FALSE (it\'s exactly 2, not twice).',
+                marks: 4
+            },
+            {
+                id: 4,
+                exam: 'jee-advanced',
+                year: 2022,
+                subject: 'chemistry',
+                topic: 'Organic Chemistry',
+                difficulty: 'hard',
+                question: 'Which of the following compounds will give a positive iodoform test?',
+                options: [
+                    'CH₃CH₂OH',
+                    'CH₃COCH₃',
+                    'CH₃CHO',
+                    'All of the above'
+                ],
+                correct: 3,
+                solution: 'Iodoform test is positive for compounds with CH₃CO- or CH₃CH(OH)- group. Ethanol (CH₃CH₂OH) oxidizes to acetaldehyde (CH₃CHO), acetone (CH₃COCH₃) has CH₃CO-, and acetaldehyde has CH₃CO-. All give positive test.',
+                marks: 4
+            },
+            {
+                id: 5,
+                exam: 'jee-main',
+                year: 2024,
+                subject: 'mathematics',
+                topic: 'Calculus',
+                difficulty: 'medium',
+                question: 'The value of ∫₀^(π/2) sin²x dx is:',
+                options: [
+                    'π/2',
+                    'π/4',
+                    'π/8',
+                    '1'
+                ],
+                correct: 1,
+                solution: 'Using formula: ∫sin²x dx = x/2 - sin(2x)/4. Evaluating from 0 to π/2: [π/4 - 0] - [0 - 0] = π/4',
+                marks: 4
+            },
+            {
+                id: 6,
+                exam: 'jee-advanced',
+                year: 2023,
+                subject: 'mathematics',
+                topic: 'Matrices',
+                difficulty: 'hard',
+                question: 'If A is a 3×3 matrix with |A| = 5, then |3A| equals:',
+                options: [
+                    '15',
+                    '45',
+                    '135',
+                    '125'
+                ],
+                correct: 2,
+                solution: 'For n×n matrix: |kA| = kⁿ|A|. Here n=3, k=3, so |3A| = 3³ × 5 = 27 × 5 = 135',
+                marks: 4
+            },
+            {
+                id: 7,
+                exam: 'jee-main',
+                year: 2022,
+                subject: 'physics',
+                topic: 'Thermodynamics',
+                difficulty: 'medium',
+                question: 'An ideal gas undergoes an isothermal expansion. Which of the following is true?',
+                options: [
+                    'ΔU = 0, Q = W',
+                    'ΔU = Q, W = 0',
+                    'ΔU = W, Q = 0',
+                    'ΔU = Q = W = 0'
+                ],
+                correct: 0,
+                solution: 'In isothermal process, temperature is constant, so ΔU = 0 (for ideal gas). From first law: Q = ΔU + W, so Q = W.',
+                marks: 4
+            },
+            {
+                id: 8,
+                exam: 'jee-main',
+                year: 2021,
+                subject: 'chemistry',
+                topic: 'Atomic Structure',
+                difficulty: 'easy',
+                question: 'The maximum number of electrons in an atom with n=3, l=2 is:',
+                options: [
+                    '2',
+                    '6',
+                    '10',
+                    '14'
+                ],
+                correct: 2,
+                solution: 'For l=2 (d-orbital), ml can be -2,-1,0,1,2 (5 orbitals). Each orbital can hold 2 electrons. Total = 5×2 = 10 electrons.',
+                marks: 4
+            }
+        ];
+        
+        let filteredQuestions = [...PYQ_DATABASE];
+        let currentPage = 1;
+        const questionsPerPage = 5;
+        let userProgress = JSON.parse(localStorage.getItem('pyqProgress')) || {};
+        
+        // Initialize
+        function init() {
+            populateTopicFilter();
+            applyFilters();
+            updateStats();
+        }
+        
+        function populateTopicFilter() {
+            const topics = [...new Set(PYQ_DATABASE.map(q => q.topic))];
+            const select = document.getElementById('topicFilter');
+            
+            topics.forEach(topic => {
+                const option = document.createElement('option');
+                option.value = topic;
+                option.textContent = topic;
+                select.appendChild(option);
+            });
+        }
+        
+        function applyFilters() {
+            const exam = document.getElementById('examFilter').value;
+            const subject = document.getElementById('subjectFilter').value;
+            const year = document.getElementById('yearFilter').value;
+            const difficulty = document.getElementById('difficultyFilter').value;
+            const topic = document.getElementById('topicFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            
+            filteredQuestions = PYQ_DATABASE.filter(q => {
+                let match = true;
+                
+                if (exam !== 'all' && q.exam !== exam) match = false;
+                if (subject !== 'all' && q.subject !== subject) match = false;
+                if (difficulty !== 'all' && q.difficulty !== difficulty) match = false;
+                if (topic !== 'all' && q.topic !== topic) match = false;
+                
+                if (year !== 'all') {
+                    const [start, end] = year.split('-').map(Number);
+                    if (q.year < start || q.year > end) match = false;
+                }
+                
+                if (search && !q.question.toLowerCase().includes(search)) match = false;
+                
+                return match;
+            });
+            
+            currentPage = 1;
+            displayQuestions();
+            updateStats();
+        }
+        
+        function displayQuestions() {
+            const container = document.getElementById('questionsList');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredQuestions.length === 0) {
+                container.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            const start = (currentPage - 1) * questionsPerPage;
+            const end = start + questionsPerPage;
+            const pageQuestions = filteredQuestions.slice(start, end);
+            
+            container.innerHTML = pageQuestions.map(q => {
+                const progress = userProgress[q.id] || { attempted: false, correct: false };
+                
+                return `
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-meta">
+                                <span class="meta-badge badge-year">${q.year}</span>
+                                <span class="meta-badge badge-exam">${q.exam.toUpperCase()}</span>
+                                <span class="meta-badge badge-topic">${q.topic}</span>
+                                <span class="badge-difficulty diff-${q.difficulty}">${q.difficulty.toUpperCase()}</span>
+                            </div>
+                            <div style="color: #aaa; font-size: 0.9rem;">
+                                ${progress.attempted ? (progress.correct ? '✅ Correct' : '❌ Incorrect') : '⭕ Not Attempted'}
+                            </div>
+                        </div>
+                        
+                        <div class="question-text">
+                            <strong>Q${q.id}.</strong> ${q.question}
+                        </div>
+                        
+                        <ul class="options-list">
+                            ${q.options.map((opt, i) => `
+                                <li class="option-item" onclick="selectAnswer(${q.id}, ${i})">
+                                    <strong>${String.fromCharCode(65 + i)})</strong> ${opt}
+                                </li>
+                            `).join('')}
+                        </ul>
+                        
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button class="btn" onclick="toggleSolution(${q.id})">
+                                💡 Show Solution
+                            </button>
+                            <button class="btn btn-secondary" onclick="markForReview(${q.id})">
+                                🔖 Mark for Review
+                            </button>
+                        </div>
+                        
+                        <div class="solution-box" id="solution-${q.id}">
+                            <div class="solution-title">✅ Correct Answer: ${String.fromCharCode(65 + q.correct)}</div>
+                            <div style="line-height: 1.8; margin-top: 1rem;">
+                                <strong>Solution:</strong><br>
+                                ${q.solution}
+                            </div>
+                            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #00ff88;">
+                                <strong>Marks:</strong> ${q.marks} | <strong>Subject:</strong> ${q.subject.charAt(0).toUpperCase() + q.subject.slice(1)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            displayPagination();
+        }
+        
+        function selectAnswer(questionId, answerIndex) {
+            const question = PYQ_DATABASE.find(q => q.id === questionId);
+            const isCorrect = answerIndex === question.correct;
+            
+            if (!userProgress[questionId]) {
+                userProgress[questionId] = {};
+            }
+            
+            userProgress[questionId].attempted = true;
+            userProgress[questionId].correct = isCorrect;
+            
+            localStorage.setItem('pyqProgress', JSON.stringify(userProgress));
+            
+            // Show solution
+            toggleSolution(questionId);
+            
+            // Update display
+            displayQuestions();
+            updateStats();
+            
+            // Show feedback
+            if (isCorrect) {
+                alert('✅ Correct! Well done!');
+            } else {
+                alert('❌ Incorrect. Check the solution below.');
+            }
+        }
+        
+        function toggleSolution(questionId) {
+            const solution = document.getElementById(`solution-${questionId}`);
+            solution.classList.toggle('show');
+        }
+        
+        function markForReview(questionId) {
+            if (!userProgress[questionId]) {
+                userProgress[questionId] = {};
+            }
+            userProgress[questionId].review = true;
+            localStorage.setItem('pyqProgress', JSON.stringify(userProgress));
+            alert('🔖 Marked for review!');
+        }
+        
+        function updateStats() {
+            const total = filteredQuestions.length;
+            const attempted = filteredQuestions.filter(q => userProgress[q.id]?.attempted).length;
+            const correct = filteredQuestions.filter(q => userProgress[q.id]?.correct).length;
+            const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+            
+            document.getElementById('totalQuestions').textContent = total;
+            document.getElementById('solvedCount').textContent = correct;
+            document.getElementById('attemptedCount').textContent = attempted;
+            document.getElementById('accuracyPercent').textContent = accuracy + '%';
+        }
+        
+        function displayPagination() {
+            const totalPages = Math.ceil(filteredQuestions.length / questionsPerPage);
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            
+            if (currentPage > 1) {
+                html += `<button class="page-btn" onclick="changePage(${currentPage - 1})">← Previous</button>`;
+            }
+            
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    html += `<span style="padding: 0.5rem;">...</span>`;
+                }
+            }
+            
+            if (currentPage < totalPages) {
+                html += `<button class="page-btn" onclick="changePage(${currentPage + 1})">Next →</button>`;
+            }
+            
+            pagination.innerHTML = html;
+        }
+        
+        function changePage(page) {
+            currentPage = page;
+            displayQuestions();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', init);
+        
+        console.log('📚 PYQ Solver - 40 Years Questions Ready!');
+    </script>
+</body>
+</html>
