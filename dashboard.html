@@ -3,234 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS REALITY - Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Dashboard - Your JEE Preparation Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { 
-            --bg: #000; 
-            --card: rgba(10,10,26,0.9);
-            --cyan: #00ffff; 
-            --pink: #ff00ff; 
-            --green: #00ff88; 
-            --orange: #ffaa00; 
-            --gold: #ffd700;
-            --text: #fff;
-            --border: rgba(0,255,255,0.3);
-        }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
+        
+        .navbar { background: rgba(0,0,0,0.95); padding: 1rem 2rem; border-bottom: 2px solid #0f3460; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; color: #00d4ff; font-weight: 900; text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-link { color: #fff; text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
+        .nav-link:hover { color: #00d4ff; background: rgba(0,212,255,0.1); }
+        .nav-link.active { background: #00d4ff; color: #000; }
         
         .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-        .subtitle { color: var(--cyan); font-size: 1.2rem; opacity: 0.9; }
+        .header { text-align: center; margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; }
+        .title { font-size: 2.5rem; font-weight: 900; color: #00d4ff; margin-bottom: 0.5rem; }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-        .stat-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
-        .stat-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .stat-value { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: var(--green); font-weight: 900; margin-bottom: 0.5rem; }
-        .stat-label { font-size: 0.9rem; opacity: 0.8; }
-        .stat-progress { width: 100%; height: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; margin-top: 1rem; overflow: hidden; }
-        .stat-progress-bar { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--pink)); transition: width 0.5s; }
+        .quick-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; text-align: center; transition: all 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); border-color: #00d4ff; }
+        .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .stat-value { font-size: 2.5rem; font-weight: 900; color: #00ff88; margin-bottom: 0.3rem; }
+        .stat-label { color: #aaa; font-size: 0.9rem; }
         
-        .section { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--cyan); margin-bottom: 1.5rem; border-bottom: 2px solid var(--border); padding-bottom: 0.8rem; }
+        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
+        .section-title { font-size: 1.5rem; color: #00d4ff; margin-bottom: 1.5rem; font-weight: 700; }
         
-        .chart-container { position: relative; height: 300px; margin-bottom: 2rem; }
+        .chart-container { position: relative; height: 300px; margin: 1.5rem 0; }
         
-        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        .subject-card { background: rgba(0,0,0,0.3); border: 2px solid var(--border); border-radius: 10px; padding: 1.5rem; }
-        .subject-name { font-size: 1.3rem; color: var(--pink); font-weight: 700; margin-bottom: 1rem; }
-        .subject-stats { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .progress-item { background: #16213e; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; }
+        .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .progress-bar { width: 100%; height: 10px; background: #0f3460; border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #00d4ff, #00ff88); transition: width 0.3s; }
         
-        .recommendation-list { display: grid; gap: 1rem; }
-        .recommendation-item { background: rgba(255,0,255,0.1); border: 2px solid var(--pink); border-radius: 8px; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .rec-title { font-weight: 700; color: var(--cyan); }
-        .rec-status { padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; }
-        .status-complete { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
-        .status-partial { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
+        .activity-list { display: grid; gap: 1rem; }
+        .activity-item { background: #16213e; padding: 1rem; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .activity-icon { font-size: 1.5rem; margin-right: 1rem; }
+        .activity-time { color: #aaa; font-size: 0.85rem; }
         
-        .btn { padding: 0.8rem 1.5rem; border: 2px solid var(--cyan); border-radius: 8px; font-weight: 700; cursor: pointer; background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); color: #fff; transition: all 0.2s; font-size: 0.9rem; font-family: 'Rajdhani', sans-serif; text-decoration: none; display: inline-block; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,255,255,0.5); }
-        .btn-primary { background: linear-gradient(135deg, var(--cyan), #0099cc); }
-        .btn-success { background: linear-gradient(135deg, var(--green), #00cc66); }
-        .btn-danger { background: linear-gradient(135deg, #ff3366, #cc0033); }
+        .btn { padding: 0.8rem 1.5rem; background: #00d4ff; color: #000; border: none; border-radius: 5px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #00a8cc; transform: translateY(-2px); }
         
-        .timeline { position: relative; padding-left: 2rem; }
-        .timeline-item { position: relative; padding-bottom: 2rem; }
-        .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 0; width: 2px; height: 100%; background: var(--cyan); }
-        .timeline-item::after { content: ''; position: absolute; left: -2.5rem; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--pink); border: 2px solid var(--cyan); }
-        .timeline-date { color: var(--orange); font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .timeline-content { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); }
+        .alert-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+        .alert-box.success { background: #1a3a2e; border-left-color: #00ff88; }
+        .alert-box.warning { background: #2d2416; border-left-color: #ff9800; }
         
         @media (max-width: 768px) { 
-            .title { font-size: 2rem; }
-            .stats-grid { grid-template-columns: 1fr; }
+            .title { font-size: 1.8rem; }
+            .quick-stats { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo">🎯 NEXUS REALITY</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="study-plan.html" class="nav-link">📅 Study Plan</a>
+                <a href="daily-tracker.html" class="nav-link">📊 Daily Tracker</a>
+                <a href="dashboard.html" class="nav-link active">📈 Dashboard</a>
+                <a href="app.html" class="nav-link">📚 Chapters</a>
+                <a href="test.html" class="nav-link">📝 Tests</a>
+            </div>
+        </div>
+    </nav>
     
     <div class="container">
         <div class="header">
-            <h1 class="title">📊 Performance Dashboard</h1>
-            <p class="subtitle">Track Your Progress • Analyze Performance • Achieve Excellence</p>
+            <h1 class="title">📊 Your Progress Dashboard</h1>
+            <p style="color: #aaa; margin-top: 0.5rem;">Complete analytics of your JEE preparation journey</p>
         </div>
         
-        <!-- Main Stats -->
-        <div class="stats-grid" id="mainStats">
+        <!-- Quick Stats -->
+        <div class="quick-stats">
             <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-value" id="chaptersCompleted">0</div>
-                <div class="stat-label">Chapters Completed</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="chapterProgress" style="width: 0%"></div>
-                </div>
+                <div class="stat-icon">🔥</div>
+                <div class="stat-value" id="currentStreak">0</div>
+                <div class="stat-label">Day Streak</div>
             </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">✅</div>
-                <div class="stat-value" id="problemsSolved">0</div>
-                <div class="stat-label">Problems Solved</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="problemProgress" style="width: 0%"></div>
-                </div>
-            </div>
-            
-            <div class="stat-card">
-                <div class="stat-icon">📝</div>
-                <div class="stat-value" id="testsAttempted">0</div>
-                <div class="stat-label">Tests Attempted</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="testProgress" style="width: 0%"></div>
-                </div>
-            </div>
-            
             <div class="stat-card">
                 <div class="stat-icon">⏱️</div>
-                <div class="stat-value" id="studyHours">0</div>
-                <div class="stat-label">Study Hours</div>
-                <div class="stat-progress">
-                    <div class="stat-progress-bar" id="timeProgress" style="width: 0%"></div>
+                <div class="stat-value" id="totalHours">0</div>
+                <div class="stat-label">Total Hours</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-value" id="problemsSolved">0</div>
+                <div class="stat-label">Problems Solved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="topicsCompleted">0</div>
+                <div class="stat-label">Topics Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value" id="accuracy">0%</div>
+                <div class="stat-label">Overall Accuracy</div>
+            </div>
+        </div>
+        
+        <!-- Performance Alert -->
+        <div id="performanceAlert" class="alert-box warning">
+            <strong>⚠️ Performance Alert:</strong> Start tracking your daily progress to see detailed analytics here!
+        </div>
+        
+        <!-- Study Time Chart -->
+        <div class="section">
+            <div class="section-title">📈 Study Time Trend (Last 7 Days)</div>
+            <div class="chart-container">
+                <canvas id="studyTimeChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Subject-wise Progress -->
+        <div class="section">
+            <div class="section-title">📚 Subject-wise Progress</div>
+            
+            <div class="progress-item">
+                <div class="progress-header">
+                    <div>
+                        <strong style="color: #00d4ff;">⚛️ Physics</strong>
+                        <div style="color: #aaa; font-size: 0.9rem; margin-top: 0.3rem;">
+                            <span id="physicsHours">0</span> hours • <span id="physicsProblems">0</span> problems
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: #00ff88;" id="physicsProgress">0%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="physicsBar" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-header">
+                    <div>
+                        <strong style="color: #00d4ff;">🧪 Chemistry</strong>
+                        <div style="color: #aaa; font-size: 0.9rem; margin-top: 0.3rem;">
+                            <span id="chemistryHours">0</span> hours • <span id="chemistryProblems">0</span> problems
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: #00ff88;" id="chemistryProgress">0%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="chemistryBar" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="progress-item">
+                <div class="progress-header">
+                    <div>
+                        <strong style="color: #00d4ff;">📐 Mathematics</strong>
+                        <div style="color: #aaa; font-size: 0.9rem; margin-top: 0.3rem;">
+                            <span id="mathsHours">0</span> hours • <span id="mathsProblems">0</span> problems
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; font-weight: 900; color: #00ff88;" id="mathsProgress">0%</div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="mathsBar" style="width: 0%"></div>
                 </div>
             </div>
         </div>
         
-        <!-- Subject-wise Performance -->
+        <!-- Performance Chart -->
         <div class="section">
-            <h2 class="section-title">📊 Subject-wise Performance</h2>
-            <div class="subject-grid" id="subjectPerformance"></div>
-        </div>
-        
-        <!-- Progress Chart -->
-        <div class="section">
-            <h2 class="section-title">📈 Progress Over Time</h2>
+            <div class="section-title">🎯 Accuracy Trend</div>
             <div class="chart-container">
-                <canvas id="progressChart"></canvas>
+                <canvas id="accuracyChart"></canvas>
             </div>
-        </div>
-        
-        <!-- Recommendations -->
-        <div class="section">
-            <h2 class="section-title">💡 Recommended Chapters</h2>
-            <div class="recommendation-list" id="recommendations"></div>
         </div>
         
         <!-- Recent Activity -->
         <div class="section">
-            <h2 class="section-title">🕐 Recent Activity</h2>
-            <div class="timeline" id="recentActivity"></div>
+            <div class="section-title">📋 Recent Activity</div>
+            <div class="activity-list" id="activityList">
+                <div class="activity-item">
+                    <div style="display: flex; align-items: center;">
+                        <span class="activity-icon">📊</span>
+                        <div>
+                            <strong>Start tracking your progress</strong>
+                            <div style="color: #aaa; font-size: 0.85rem;">Use Daily Tracker to log your study sessions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <!-- Actions -->
-        <div style="text-align: center; margin-top: 3rem;">
-            <a href="app.html" class="btn btn-primary" style="margin: 0.5rem;">📚 Browse Chapters</a>
-            <a href="test.html" class="btn btn-success" style="margin: 0.5rem;">📝 Take Test</a>
-            <a href="olympiad-papers.html" class="btn" style="margin: 0.5rem;">🏆 Olympiad Papers</a>
-            <button class="btn btn-danger" onclick="resetProgress()" style="margin: 0.5rem;">↻ Reset Progress</button>
+        <!-- Quick Actions -->
+        <div class="section">
+            <div class="section-title">⚡ Quick Actions</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <a href="daily-tracker.html" class="btn" style="text-align: center;">📊 Track Today</a>
+                <a href="test.html" class="btn" style="text-align: center;">📝 Take Test</a>
+                <a href="pyq-solver.html" class="btn" style="text-align: center;">📚 Solve PYQs</a>
+                <a href="weak-topic-analyzer.html" class="btn" style="text-align: center;">🎯 Analyze Weak Topics</a>
+                <a href="formula-sheets.html" class="btn" style="text-align: center;">📐 View Formulas</a>
+                <a href="rank-predictor.html" class="btn" style="text-align: center;">🏆 Predict Rank</a>
+            </div>
+        </div>
+        
+        <!-- Goals -->
+        <div class="section">
+            <div class="section-title">🎯 Your Goals</div>
+            <div style="display: grid; gap: 1rem;">
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <strong>Daily Study Target: 8 hours</strong>
+                        <span id="dailyGoal">0/8 hours</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="dailyGoalBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <strong>Weekly Problems Target: 150</strong>
+                        <span id="weeklyGoal">0/150 problems</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="weeklyGoalBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-item">
+                    <div class="progress-header">
+                        <strong>Monthly Mock Tests: 8</strong>
+                        <span id="monthlyGoal">0/8 tests</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="monthlyGoalBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <script src="master-integration.js"></script>
     <script>
-        // Initialize dashboard
-        function initDashboard() {
-            if (!window.NEXUS) {
-                console.error('NEXUS not loaded!');
-                return;
+        // Load data from localStorage
+        function loadDashboardData() {
+            // Get streak
+            const streak = localStorage.getItem('studyStreak') || 0;
+            document.getElementById('currentStreak').textContent = streak;
+            
+            // Calculate total hours and problems from all daily logs
+            let totalHours = 0;
+            let totalProblems = 0;
+            let physicsHours = 0, chemistryHours = 0, mathsHours = 0;
+            let physicsProblems = 0, chemistryProblems = 0, mathsProblems = 0;
+            
+            // Get all daily progress entries
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('dailyProgress_')) {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    totalHours += (data.physics || 0) + (data.chemistry || 0) + (data.maths || 0);
+                    totalProblems += (data.physicsProblems || 0) + (data.chemistryProblems || 0) + (data.mathsProblems || 0);
+                    
+                    physicsHours += data.physics || 0;
+                    chemistryHours += data.chemistry || 0;
+                    mathsHours += data.maths || 0;
+                    
+                    physicsProblems += data.physicsProblems || 0;
+                    chemistryProblems += data.chemistryProblems || 0;
+                    mathsProblems += data.mathsProblems || 0;
+                }
             }
             
-            updateMainStats();
-            updateSubjectPerformance();
-            updateProgressChart();
-            updateRecommendations();
-            updateRecentActivity();
+            // Update stats
+            document.getElementById('totalHours').textContent = totalHours.toFixed(1);
+            document.getElementById('problemsSolved').textContent = totalProblems;
+            
+            // Get PYQ progress
+            const pyqProgress = JSON.parse(localStorage.getItem('pyqProgress')) || {};
+            const attempted = Object.values(pyqProgress).filter(p => p.attempted).length;
+            const correct = Object.values(pyqProgress).filter(p => p.correct).length;
+            const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+            
+            document.getElementById('accuracy').textContent = accuracy + '%';
+            document.getElementById('topicsCompleted').textContent = Object.keys(pyqProgress).length;
+            
+            // Update subject-wise progress
+            const targetHours = 300; // Target hours per subject for JEE prep
+            
+            document.getElementById('physicsHours').textContent = physicsHours.toFixed(1);
+            document.getElementById('physicsProblems').textContent = physicsProblems;
+            const physicsPercent = Math.min((physicsHours / targetHours) * 100, 100);
+            document.getElementById('physicsProgress').textContent = physicsPercent.toFixed(0) + '%';
+            document.getElementById('physicsBar').style.width = physicsPercent + '%';
+            
+            document.getElementById('chemistryHours').textContent = chemistryHours.toFixed(1);
+            document.getElementById('chemistryProblems').textContent = chemistryProblems;
+            const chemistryPercent = Math.min((chemistryHours / targetHours) * 100, 100);
+            document.getElementById('chemistryProgress').textContent = chemistryPercent.toFixed(0) + '%';
+            document.getElementById('chemistryBar').style.width = chemistryPercent + '%';
+            
+            document.getElementById('mathsHours').textContent = mathsHours.toFixed(1);
+            document.getElementById('mathsProblems').textContent = mathsProblems;
+            const mathsPercent = Math.min((mathsHours / targetHours) * 100, 100);
+            document.getElementById('mathsProgress').textContent = mathsPercent.toFixed(0) + '%';
+            document.getElementById('mathsBar').style.width = mathsPercent + '%';
+            
+            // Update performance alert
+            const alertBox = document.getElementById('performanceAlert');
+            if (totalHours > 0) {
+                if (totalHours >= 50) {
+                    alertBox.className = 'alert-box success';
+                    alertBox.innerHTML = '<strong>✅ Excellent Progress!</strong> You\'re on track for AIR <1000. Keep up the consistency!';
+                } else if (totalHours >= 20) {
+                    alertBox.className = 'alert-box warning';
+                    alertBox.innerHTML = '<strong>⚠️ Good Start!</strong> Increase daily study hours to 8-10 for better results.';
+                } else {
+                    alertBox.className = 'alert-box';
+                    alertBox.innerHTML = '<strong>⚠️ Need More Effort!</strong> You need to study 8-10 hours daily for AIR <1000.';
+                }
+            }
+            
+            // Update goals
+            const today = new Date().toDateString();
+            const todayData = JSON.parse(localStorage.getItem('dailyProgress_' + today)) || {};
+            const todayHours = (todayData.physics || 0) + (todayData.chemistry || 0) + (todayData.maths || 0);
+            
+            document.getElementById('dailyGoal').textContent = todayHours.toFixed(1) + '/8 hours';
+            document.getElementById('dailyGoalBar').style.width = Math.min((todayHours / 8) * 100, 100) + '%';
+            
+            // Weekly problems (last 7 days)
+            let weeklyProblems = 0;
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(Date.now() - i * 86400000).toDateString();
+                const data = JSON.parse(localStorage.getItem('dailyProgress_' + date)) || {};
+                weeklyProblems += (data.physicsProblems || 0) + (data.chemistryProblems || 0) + (data.mathsProblems || 0);
+            }
+            
+            document.getElementById('weeklyGoal').textContent = weeklyProblems + '/150 problems';
+            document.getElementById('weeklyGoalBar').style.width = Math.min((weeklyProblems / 150) * 100, 100) + '%';
+            
+            // Mock tests (placeholder)
+            document.getElementById('monthlyGoal').textContent = '0/8 tests';
+            document.getElementById('monthlyGoalBar').style.width = '0%';
+            
+            // Create charts
+            createStudyTimeChart();
+            createAccuracyChart();
         }
         
-        // Update main statistics
-        function updateMainStats() {
-            const stats = window.NEXUS.progress.getStats();
+        function createStudyTimeChart() {
+            const ctx = document.getElementById('studyTimeChart').getContext('2d');
             
-            document.getElementById('chaptersCompleted').textContent = stats.chaptersCompleted;
-            document.getElementById('chapterProgress').style.width = stats.chapterProgress + '%';
+            // Get last 7 days data
+            const labels = [];
+            const data = [];
             
-            document.getElementById('problemsSolved').textContent = stats.problemsSolved;
-            document.getElementById('problemProgress').style.width = stats.problemProgress + '%';
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(Date.now() - i * 86400000);
+                labels.push(date.toLocaleDateString('en-US', { weekday: 'short' }));
+                
+                const dateStr = date.toDateString();
+                const dayData = JSON.parse(localStorage.getItem('dailyProgress_' + dateStr)) || {};
+                const hours = (dayData.physics || 0) + (dayData.chemistry || 0) + (dayData.maths || 0);
+                data.push(hours);
+            }
             
-            document.getElementById('testsAttempted').textContent = stats.testsAttempted;
-            document.getElementById('testProgress').style.width = Math.min(stats.testsAttempted * 10, 100) + '%';
-            
-            document.getElementById('studyHours').textContent = stats.studyHours;
-            document.getElementById('timeProgress').style.width = Math.min(stats.studyHours * 2, 100) + '%';
-        }
-        
-        // Update subject-wise performance
-        function updateSubjectPerformance() {
-            const performance = window.NEXUS.analytics.getSubjectWisePerformance();
-            const container = document.getElementById('subjectPerformance');
-            
-            const subjects = [
-                { name: 'Physics', data: performance.physics, icon: '⚛️' },
-                { name: 'Chemistry', data: performance.chemistry, icon: '🧪' },
-                { name: 'Mathematics', data: performance.maths, icon: '📐' }
-            ];
-            
-            container.innerHTML = subjects.map(subject => `
-                <div class="subject-card">
-                    <div class="subject-name">${subject.icon} ${subject.name}</div>
-                    <div class="subject-stats">
-                        <span>Problems Solved:</span>
-                        <span style="color: var(--green); font-weight: 700;">${subject.data.solved}/${subject.data.total}</span>
-                    </div>
-                    <div class="stat-progress">
-                        <div class="stat-progress-bar" style="width: ${subject.data.percentage}%"></div>
-                    </div>
-                    <div style="text-align: center; margin-top: 1rem; font-size: 1.5rem; color: var(--cyan); font-weight: 900;">
-                        ${subject.data.percentage}%
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // Update progress chart
-        function updateProgressChart() {
-            const timeline = window.NEXUS.analytics.getProgressOverTime();
-            
-            const ctx = document.getElementById('progressChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: timeline.map(t => t.date),
+                    labels: labels,
                     datasets: [{
-                        label: 'Test Score (%)',
-                        data: timeline.map(t => t.score),
-                        borderColor: '#00ffff',
-                        backgroundColor: 'rgba(0, 255, 255, 0.1)',
+                        label: 'Study Hours',
+                        data: data,
+                        borderColor: '#00d4ff',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
                         tension: 0.4,
                         fill: true
                     }]
@@ -239,9 +387,41 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            labels: { color: '#fff' }
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#fff' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#fff' },
+                            grid: { display: false }
                         }
+                    }
+                }
+            });
+        }
+        
+        function createAccuracyChart() {
+            const ctx = document.getElementById('accuracyChart').getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Physics', 'Chemistry', 'Mathematics'],
+                    datasets: [{
+                        label: 'Accuracy %',
+                        data: [75, 68, 82], // Placeholder data
+                        backgroundColor: ['#00d4ff', '#00ff88', '#ff9800']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
                     },
                     scales: {
                         y: {
@@ -252,72 +432,17 @@
                         },
                         x: {
                             ticks: { color: '#fff' },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            grid: { display: false }
                         }
                     }
                 }
             });
         }
         
-        // Update recommendations
-        function updateRecommendations() {
-            const recommended = window.NEXUS.recommendations.getRecommendedChapters(5);
-            const container = document.getElementById('recommendations');
-            
-            if (recommended.length === 0) {
-                container.innerHTML = '<p style="text-align: center; opacity: 0.7;">🎉 All chapters completed! Great job!</p>';
-                return;
-            }
-            
-            container.innerHTML = recommended.map(ch => `
-                <div class="recommendation-item">
-                    <div>
-                        <div class="rec-title">${ch.title}</div>
-                        <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 0.3rem;">
-                            ${ch.problems} problems
-                        </div>
-                    </div>
-                    <div>
-                        <span class="rec-status ${ch.status === 'complete' ? 'status-complete' : 'status-partial'}">
-                            ${ch.status === 'complete' ? 'Complete' : 'Partial'}
-                        </span>
-                    </div>
-                </div>
-            `).join('');
-        }
-        
-        // Update recent activity
-        function updateRecentActivity() {
-            const container = document.getElementById('recentActivity');
-            const stats = window.NEXUS.progress.getStats();
-            
-            const activities = [
-                { date: 'Today', content: `Solved ${stats.problemsSolved} problems` },
-                { date: 'This Week', content: `Completed ${stats.chaptersCompleted} chapters` },
-                { date: 'This Month', content: `Studied for ${stats.studyHours} hours` },
-                { date: 'Overall', content: `Attempted ${stats.testsAttempted} tests` }
-            ];
-            
-            container.innerHTML = activities.map(activity => `
-                <div class="timeline-item">
-                    <div class="timeline-date">${activity.date}</div>
-                    <div class="timeline-content">${activity.content}</div>
-                </div>
-            `).join('');
-        }
-        
-        // Reset progress
-        function resetProgress() {
-            if (confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
-                window.NEXUS.progress.reset();
-                location.reload();
-            }
-        }
-        
         // Initialize on load
-        window.addEventListener('load', initDashboard);
+        window.addEventListener('load', loadDashboardData);
         
-        console.log('📊 NEXUS REALITY - Dashboard Ready!');
+        console.log('📊 Dashboard - Complete analytics loaded!');
     </script>
 </body>
 </html>
