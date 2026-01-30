@@ -4,289 +4,372 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapter Viewer - NEXUS REALITY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #fff; }
-        
-        .navbar { background: rgba(0,0,0,0.95); padding: 1rem 2rem; border-bottom: 2px solid #0f3460; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
-        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.5rem; color: #00d4ff; font-weight: 900; text-decoration: none; }
-        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .nav-link { color: #fff; text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
-        .nav-link:hover { color: #00d4ff; background: rgba(0,212,255,0.1); }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        
-        .loading { text-align: center; padding: 4rem; }
-        .spinner { border: 4px solid #1a1a2e; border-top: 4px solid #00d4ff; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        .chapter-header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; border: 1px solid #0f3460; }
-        .chapter-title { font-size: 2.5rem; color: #00d4ff; margin-bottom: 0.5rem; }
-        .chapter-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-        .meta-badge { background: rgba(0,212,255,0.2); color: #00d4ff; padding: 0.5rem 1rem; border-radius: 5px; font-size: 0.9rem; }
-        
-        .section { background: #1a1a2e; padding: 2rem; margin-bottom: 2rem; border-radius: 10px; border: 1px solid #0f3460; }
-        .section-title { font-size: 1.8rem; color: #00d4ff; margin-bottom: 1.5rem; border-bottom: 2px solid #0f3460; padding-bottom: 0.5rem; }
-        
-        .content-table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: #16213e; border-radius: 5px; overflow: hidden; }
-        .content-table th { background: #0f3460; padding: 1rem; text-align: left; color: #00d4ff; }
-        .content-table td { padding: 1rem; border-bottom: 1px solid #0f3460; }
-        .content-table tr:last-child td { border-bottom: none; }
-        
-        .example-box { background: #16213e; border-left: 4px solid #00ff88; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; }
-        .important-box { background: #2d1b1b; border-left: 4px solid #ff4444; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; }
-        .formula-box { background: #0f3460; padding: 1.5rem; margin: 1.5rem 0; border-radius: 5px; border: 2px solid #00d4ff; }
-        .formula { font-family: 'Courier New', monospace; font-size: 1.1rem; color: #00ff88; margin: 0.5rem 0; }
-        
-        .examples-section { margin-top: 3rem; }
-        .example-card { background: #16213e; padding: 2rem; margin-bottom: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; }
-        .example-title { color: #00ff88; font-size: 1.3rem; margin-bottom: 1rem; }
-        .problem { color: #aaa; margin-bottom: 1rem; font-size: 1.1rem; }
-        .solution { background: #0f3460; padding: 1.5rem; border-radius: 5px; margin-top: 1rem; }
-        
-        .problems-section { margin-top: 3rem; }
-        .problem-card { background: #16213e; padding: 2rem; margin-bottom: 1.5rem; border-radius: 10px; border: 1px solid #0f3460; cursor: pointer; transition: all 0.3s; }
-        .problem-card:hover { border-color: #00d4ff; transform: translateY(-2px); }
-        .question { font-size: 1.1rem; margin-bottom: 1rem; color: #fff; }
-        .options { list-style: none; margin: 1rem 0; }
-        .options li { padding: 0.8rem; margin: 0.5rem 0; background: #0f3460; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
-        .options li:hover { background: #1a5490; }
-        .options li.correct { background: #1a3a2e; border: 2px solid #00ff88; }
-        .options li.wrong { background: #2d1b1b; border: 2px solid #ff4444; }
-        .explanation { background: #0f3460; padding: 1rem; border-radius: 5px; margin-top: 1rem; display: none; }
-        .explanation.show { display: block; }
-        
-        .key-points { background: #1a1a2e; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
-        .key-points ul { list-style: none; }
-        .key-points li { padding: 0.8rem; margin: 0.5rem 0; padding-left: 2rem; position: relative; }
-        .key-points li:before { content: '✓'; position: absolute; left: 0; color: #00ff88; font-weight: 900; font-size: 1.2rem; }
-        
-        .formulae-section { background: #1a1a2e; padding: 2rem; border-radius: 10px; margin-top: 2rem; }
-        .formula-item { background: #16213e; padding: 1.5rem; margin: 1rem 0; border-radius: 5px; border-left: 4px solid #00d4ff; }
-        .formula-name { color: #00d4ff; font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
-        
-        .difficulty-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem; font-weight: 600; }
-        .difficulty-easy { background: rgba(0,255,136,0.2); color: #00ff88; }
-        .difficulty-medium { background: rgba(255,152,0,0.2); color: #ff9800; }
-        .difficulty-hard { background: rgba(255,68,68,0.2); color: #ff4444; }
-        
-        .back-btn { display: inline-block; padding: 1rem 2rem; background: #00d4ff; color: #000; text-decoration: none; border-radius: 5px; font-weight: 700; margin-bottom: 2rem; }
-        .back-btn:hover { background: #00a8cc; }
-        
+        .chapter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .meta-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .chapter-content {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .section-content {
+            color: #e0e0e0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .section-content h3 {
+            color: #00ff88;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-content h4 {
+            color: #ffd700;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .formula {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 1rem;
+            border-left: 4px solid #00d4ff;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff88;
+            border-radius: 5px;
+        }
+
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .content-table th {
+            background: linear-gradient(135deg, #00d4ff, #00a8cc);
+            color: #000;
+            padding: 1rem;
+            font-weight: bold;
+        }
+
+        .content-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: #e0e0e0;
+        }
+
+        .examples-section, .problems-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .example-card, .problem-card {
+            background: rgba(0,212,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .example-title, .problem-question {
+            color: #00ff88;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .key-point {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1rem;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .formulae-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .formula-card {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .formula-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .formula-expression {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #00a8cc);
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,212,255,0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: #00d4ff;
+            font-size: 1.5rem;
+        }
+
+        .error {
+            text-align: center;
+            padding: 4rem;
+            color: #ff4444;
+            font-size: 1.5rem;
+        }
+
         @media (max-width: 768px) {
-            .chapter-title { font-size: 1.8rem; }
-            .section-title { font-size: 1.4rem; }
-            .container { padding: 1rem; }
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .chapter-container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="index.html" class="logo">🎯 NEXUS REALITY</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">🏠 Home</a>
-                <a href="app.html" class="nav-link">📚 Chapters</a>
-                <a href="study-plan.html" class="nav-link">📅 Study Plan</a>
-                <a href="test.html" class="nav-link">📝 Tests</a>
-            </div>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <a href="app.html" class="back-btn">← Back to Chapters</a>
+    <div class="chapter-container">
+        <a href="app.html" class="back-button">← Back to All Chapters</a>
         
-        <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <p style="color: #aaa;">Loading chapter content...</p>
-        </div>
-        
-        <div id="content" style="display: none;">
-            <!-- Chapter content will be loaded here -->
+        <div id="chapter-viewer">
+            <div class="loading">Loading chapter...</div>
         </div>
     </div>
-    
-    <!-- Load content loader -->
+
+    <!-- CRITICAL: Load content-loader.js FIRST -->
     <script src="content-loader.js"></script>
     
     <script>
         // Get chapter ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const chapterId = urlParams.get('id');
-        
-        if (!chapterId) {
-            document.getElementById('loading').innerHTML = `
-                <h2 style="color: #ff4444;">Error: No chapter specified</h2>
-                <p style="color: #aaa; margin-top: 1rem;">Please select a chapter from the chapters page.</p>
-                <a href="app.html" class="back-btn" style="margin-top: 2rem;">Go to Chapters</a>
-            `;
-        } else {
-            loadChapterContent(chapterId);
-        }
-        
-        async function loadChapterContent(chapterId) {
+
+        async function loadAndDisplayChapter() {
+            const viewer = document.getElementById('chapter-viewer');
+            
+            if (!chapterId) {
+                viewer.innerHTML = '<div class="error">No chapter ID provided!</div>';
+                return;
+            }
+
             try {
-                const chapter = await CONTENT_LOADER.loadChapter(chapterId);
-                
-                if (!chapter) {
-                    throw new Error('Chapter not found');
+                // Check if CONTENT_LOADER is available
+                if (typeof CONTENT_LOADER === 'undefined') {
+                    throw new Error('CONTENT_LOADER is not defined. Make sure content-loader.js is loaded.');
                 }
+
+                // Load chapter data
+                const chapterData = await CONTENT_LOADER.loadChapter(chapterId);
                 
-                renderChapter(chapter);
-                
-                // Hide loading, show content
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-                
+                if (!chapterData) {
+                    viewer.innerHTML = '<div class="error">Chapter not found!</div>';
+                    return;
+                }
+
+                // Display chapter
+                displayChapter(chapterData);
             } catch (error) {
                 console.error('Error loading chapter:', error);
-                document.getElementById('loading').innerHTML = `
-                    <h2 style="color: #ff4444;">Error loading chapter</h2>
-                    <p style="color: #aaa; margin-top: 1rem;">${error.message}</p>
-                    <a href="app.html" class="back-btn" style="margin-top: 2rem;">Go to Chapters</a>
-                `;
+                viewer.innerHTML = `<div class="error">Error loading chapter: ${error.message}</div>`;
             }
         }
-        
-        function renderChapter(chapter) {
-            const contentDiv = document.getElementById('content');
+
+        function displayChapter(chapter) {
+            const viewer = document.getElementById('chapter-viewer');
             
             let html = `
                 <div class="chapter-header">
                     <h1 class="chapter-title">${chapter.title}</h1>
                     <div class="chapter-meta">
-                        <span class="meta-badge">${chapter.subject}</span>
-                        <span class="meta-badge">${chapter.category}</span>
-                        <span class="meta-badge">${chapter.difficulty}</span>
+                        <span class="meta-badge">📚 ${chapter.subject}</span>
+                        <span class="meta-badge">📂 ${chapter.category}</span>
+                        <span class="meta-badge">⭐ ${chapter.difficulty}</span>
                     </div>
                 </div>
             `;
-            
-            // Render sections
+
+            // Sections
             if (chapter.sections && chapter.sections.length > 0) {
+                html += '<div class="chapter-content">';
                 chapter.sections.forEach(section => {
                     html += `
                         <div class="section">
                             <h2 class="section-title">${section.title}</h2>
-                            <div class="section-content">
-                                ${section.content}
-                            </div>
+                            <div class="section-content">${section.content}</div>
                         </div>
                     `;
                 });
+                html += '</div>';
             }
-            
-            // Render examples
+
+            // Examples
             if (chapter.examples && chapter.examples.length > 0) {
                 html += `
                     <div class="examples-section">
-                        <div class="section">
-                            <h2 class="section-title">📝 Worked Examples</h2>
+                        <h2 class="section-title">📝 Worked Examples</h2>
                 `;
-                
-                chapter.examples.forEach(example => {
+                chapter.examples.forEach((example, index) => {
                     html += `
                         <div class="example-card">
-                            <div class="example-title">
-                                ${example.title}
-                                <span class="difficulty-badge difficulty-${example.difficulty}">${example.difficulty}</span>
-                            </div>
-                            <div class="problem"><strong>Problem:</strong> ${example.problem}</div>
-                            <div class="solution">${example.solution}</div>
+                            <div class="example-title">Example ${index + 1}: ${example.title}</div>
+                            <div><strong>Problem:</strong> ${example.problem}</div>
+                            <div style="margin-top: 0.5rem;"><strong>Solution:</strong> ${example.solution}</div>
                         </div>
                     `;
                 });
-                
-                html += `</div></div>`;
+                html += '</div>';
             }
-            
-            // Render practice problems
+
+            // Problems
             if (chapter.problems && chapter.problems.length > 0) {
                 html += `
                     <div class="problems-section">
-                        <div class="section">
-                            <h2 class="section-title">🎯 Practice Problems</h2>
+                        <h2 class="section-title">🎯 Practice Problems</h2>
                 `;
-                
                 chapter.problems.forEach((problem, index) => {
+                    const correctAnswer = problem.options[problem.correct];
                     html += `
-                        <div class="problem-card" id="problem-${index}">
-                            <div class="question">
-                                <strong>Q${index + 1}.</strong> ${problem.question}
-                                <span class="difficulty-badge difficulty-${problem.difficulty}">${problem.difficulty}</span>
-                            </div>
-                            <ul class="options">
-                                ${problem.options.map((option, optIndex) => `
-                                    <li onclick="checkAnswer(${index}, ${optIndex}, ${problem.correct})">${String.fromCharCode(65 + optIndex)}. ${option}</li>
+                        <div class="problem-card">
+                            <div class="problem-question">Q${index + 1}. ${problem.question}</div>
+                            <div style="margin-top: 0.5rem;">
+                                ${problem.options.map((opt, i) => `
+                                    <div style="padding: 0.3rem 0; color: ${i === problem.correct ? '#00ff88' : '#e0e0e0'};">
+                                        ${String.fromCharCode(65 + i)}. ${opt} ${i === problem.correct ? '✓' : ''}
+                                    </div>
                                 `).join('')}
-                            </ul>
-                            <div class="explanation" id="explanation-${index}">
-                                <strong>Explanation:</strong> ${problem.explanation}
                             </div>
                         </div>
                     `;
                 });
-                
-                html += `</div></div>`;
+                html += '</div>';
             }
-            
-            // Render key points
+
+            // Key Points
             if (chapter.keyPoints && chapter.keyPoints.length > 0) {
                 html += `
-                    <div class="key-points">
-                        <h2 class="section-title">💡 Key Points to Remember</h2>
-                        <ul>
-                            ${chapter.keyPoints.map(point => `<li>${point}</li>`).join('')}
-                        </ul>
-                    </div>
+                    <div class="chapter-content">
+                        <h2 class="section-title">🔑 Key Points</h2>
+                        <div class="key-points">
                 `;
+                chapter.keyPoints.forEach(point => {
+                    html += `<div class="key-point">✓ ${point}</div>`;
+                });
+                html += '</div></div>';
             }
-            
-            // Render formulae
+
+            // Formulae
             if (chapter.formulae && chapter.formulae.length > 0) {
                 html += `
-                    <div class="formulae-section">
+                    <div class="chapter-content">
                         <h2 class="section-title">📐 Important Formulae</h2>
-                        ${chapter.formulae.map(formula => `
-                            <div class="formula-item">
-                                <div class="formula-name">${formula.name}</div>
-                                <div class="formula">${formula.formula}</div>
-                                <div style="color: #aaa; margin-top: 0.5rem;">${formula.description}</div>
-                            </div>
-                        `).join('')}
-                    </div>
+                        <div class="formulae-grid">
                 `;
+                chapter.formulae.forEach(formula => {
+                    html += `
+                        <div class="formula-card">
+                            <div class="formula-name">${formula.name}</div>
+                            <div class="formula-expression">${formula.formula}</div>
+                        </div>
+                    `;
+                });
+                html += '</div></div>';
             }
-            
-            contentDiv.innerHTML = html;
+
+            viewer.innerHTML = html;
         }
-        
-        function checkAnswer(problemIndex, selectedOption, correctOption) {
-            const problemCard = document.getElementById(`problem-${problemIndex}`);
-            const options = problemCard.querySelectorAll('.options li');
-            const explanation = document.getElementById(`explanation-${problemIndex}`);
-            
-            // Remove previous selections
-            options.forEach(opt => {
-                opt.classList.remove('correct', 'wrong');
-            });
-            
-            // Mark selected option
-            if (selectedOption === correctOption) {
-                options[selectedOption].classList.add('correct');
-            } else {
-                options[selectedOption].classList.add('wrong');
-                options[correctOption].classList.add('correct');
-            }
-            
-            // Show explanation
-            explanation.classList.add('show');
-        }
-        
-        console.log('📚 Chapter Viewer loaded with real content!');
+
+        // Load chapter when page loads
+        window.addEventListener('DOMContentLoaded', loadAndDisplayChapter);
     </script>
 </body>
 </html>
