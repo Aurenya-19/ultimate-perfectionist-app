@@ -226,150 +226,165 @@
         </div>
     </div>
 
-    <!-- CRITICAL: Load content-loader.js FIRST -->
+    <!-- Load content-loader.js synchronously FIRST -->
     <script src="content-loader.js"></script>
     
+    <!-- Main script - runs AFTER content-loader.js is loaded -->
     <script>
-        // Get chapter ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const chapterId = urlParams.get('id');
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get chapter ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const chapterId = urlParams.get('id');
 
-        async function loadAndDisplayChapter() {
-            const viewer = document.getElementById('chapter-viewer');
-            
-            if (!chapterId) {
-                viewer.innerHTML = '<div class="error">No chapter ID provided!</div>';
-                return;
-            }
-
-            try {
-                // Check if CONTENT_LOADER is available
-                if (typeof CONTENT_LOADER === 'undefined') {
-                    throw new Error('CONTENT_LOADER is not defined. Make sure content-loader.js is loaded.');
-                }
-
-                // Load chapter data
-                const chapterData = await CONTENT_LOADER.loadChapter(chapterId);
+            async function loadAndDisplayChapter() {
+                const viewer = document.getElementById('chapter-viewer');
                 
-                if (!chapterData) {
-                    viewer.innerHTML = '<div class="error">Chapter not found!</div>';
+                if (!chapterId) {
+                    viewer.innerHTML = '<div class="error">❌ No chapter ID provided in URL!</div>';
                     return;
                 }
 
-                // Display chapter
-                displayChapter(chapterData);
-            } catch (error) {
-                console.error('Error loading chapter:', error);
-                viewer.innerHTML = `<div class="error">Error loading chapter: ${error.message}</div>`;
-            }
-        }
+                try {
+                    // Check if CONTENT_LOADER exists
+                    if (typeof window.CONTENT_LOADER === 'undefined') {
+                        throw new Error('CONTENT_LOADER is not defined. Make sure content-loader.js is loaded.');
+                    }
 
-        function displayChapter(chapter) {
-            const viewer = document.getElementById('chapter-viewer');
-            
-            let html = `
-                <div class="chapter-header">
-                    <h1 class="chapter-title">${chapter.title}</h1>
-                    <div class="chapter-meta">
-                        <span class="meta-badge">📚 ${chapter.subject}</span>
-                        <span class="meta-badge">📂 ${chapter.category}</span>
-                        <span class="meta-badge">⭐ ${chapter.difficulty}</span>
+                    console.log('Loading chapter:', chapterId);
+                    
+                    // Load chapter data
+                    const chapterData = await window.CONTENT_LOADER.loadChapter(chapterId);
+                    
+                    if (!chapterData) {
+                        viewer.innerHTML = '<div class="error">❌ Chapter not found!</div>';
+                        return;
+                    }
+
+                    console.log('Chapter loaded successfully:', chapterData.title);
+                    
+                    // Display chapter
+                    displayChapter(chapterData);
+                } catch (error) {
+                    console.error('Error loading chapter:', error);
+                    viewer.innerHTML = `
+                        <div class="error">
+                            <h2>❌ Error Loading Chapter</h2>
+                            <p>${error.message}</p>
+                            <p style="margin-top: 2rem;">
+                                <a href="app.html" class="back-button">← Back to All Chapters</a>
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+
+            function displayChapter(chapter) {
+                const viewer = document.getElementById('chapter-viewer');
+                
+                let html = `
+                    <div class="chapter-header">
+                        <h1 class="chapter-title">${chapter.title}</h1>
+                        <div class="chapter-meta">
+                            <span class="meta-badge">📚 ${chapter.subject}</span>
+                            <span class="meta-badge">📂 ${chapter.category}</span>
+                            <span class="meta-badge">⭐ ${chapter.difficulty}</span>
+                        </div>
                     </div>
-                </div>
-            `;
-
-            // Sections
-            if (chapter.sections && chapter.sections.length > 0) {
-                html += '<div class="chapter-content">';
-                chapter.sections.forEach(section => {
-                    html += `
-                        <div class="section">
-                            <h2 class="section-title">${section.title}</h2>
-                            <div class="section-content">${section.content}</div>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-            }
-
-            // Examples
-            if (chapter.examples && chapter.examples.length > 0) {
-                html += `
-                    <div class="examples-section">
-                        <h2 class="section-title">📝 Worked Examples</h2>
                 `;
-                chapter.examples.forEach((example, index) => {
-                    html += `
-                        <div class="example-card">
-                            <div class="example-title">Example ${index + 1}: ${example.title}</div>
-                            <div><strong>Problem:</strong> ${example.problem}</div>
-                            <div style="margin-top: 0.5rem;"><strong>Solution:</strong> ${example.solution}</div>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-            }
 
-            // Problems
-            if (chapter.problems && chapter.problems.length > 0) {
-                html += `
-                    <div class="problems-section">
-                        <h2 class="section-title">🎯 Practice Problems</h2>
-                `;
-                chapter.problems.forEach((problem, index) => {
-                    const correctAnswer = problem.options[problem.correct];
-                    html += `
-                        <div class="problem-card">
-                            <div class="problem-question">Q${index + 1}. ${problem.question}</div>
-                            <div style="margin-top: 0.5rem;">
-                                ${problem.options.map((opt, i) => `
-                                    <div style="padding: 0.3rem 0; color: ${i === problem.correct ? '#00ff88' : '#e0e0e0'};">
-                                        ${String.fromCharCode(65 + i)}. ${opt} ${i === problem.correct ? '✓' : ''}
-                                    </div>
-                                `).join('')}
+                // Sections
+                if (chapter.sections && chapter.sections.length > 0) {
+                    html += '<div class="chapter-content">';
+                    chapter.sections.forEach(section => {
+                        html += `
+                            <div class="section">
+                                <h2 class="section-title">${section.title}</h2>
+                                <div class="section-content">${section.content}</div>
                             </div>
-                        </div>
-                    `;
-                });
-                html += '</div>';
-            }
+                        `;
+                    });
+                    html += '</div>';
+                }
 
-            // Key Points
-            if (chapter.keyPoints && chapter.keyPoints.length > 0) {
-                html += `
-                    <div class="chapter-content">
-                        <h2 class="section-title">🔑 Key Points</h2>
-                        <div class="key-points">
-                `;
-                chapter.keyPoints.forEach(point => {
-                    html += `<div class="key-point">✓ ${point}</div>`;
-                });
-                html += '</div></div>';
-            }
-
-            // Formulae
-            if (chapter.formulae && chapter.formulae.length > 0) {
-                html += `
-                    <div class="chapter-content">
-                        <h2 class="section-title">📐 Important Formulae</h2>
-                        <div class="formulae-grid">
-                `;
-                chapter.formulae.forEach(formula => {
+                // Examples
+                if (chapter.examples && chapter.examples.length > 0) {
                     html += `
-                        <div class="formula-card">
-                            <div class="formula-name">${formula.name}</div>
-                            <div class="formula-expression">${formula.formula}</div>
-                        </div>
+                        <div class="examples-section">
+                            <h2 class="section-title">📝 Worked Examples</h2>
                     `;
-                });
-                html += '</div></div>';
+                    chapter.examples.forEach((example, index) => {
+                        html += `
+                            <div class="example-card">
+                                <div class="example-title">Example ${index + 1}: ${example.title}</div>
+                                <div><strong>Problem:</strong> ${example.problem}</div>
+                                <div style="margin-top: 0.5rem;"><strong>Solution:</strong> ${example.solution}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+
+                // Problems
+                if (chapter.problems && chapter.problems.length > 0) {
+                    html += `
+                        <div class="problems-section">
+                            <h2 class="section-title">🎯 Practice Problems</h2>
+                    `;
+                    chapter.problems.forEach((problem, index) => {
+                        html += `
+                            <div class="problem-card">
+                                <div class="problem-question">Q${index + 1}. ${problem.question}</div>
+                                <div style="margin-top: 0.5rem;">
+                                    ${problem.options.map((opt, i) => `
+                                        <div style="padding: 0.3rem 0; color: ${i === problem.correct ? '#00ff88' : '#e0e0e0'};">
+                                            ${String.fromCharCode(65 + i)}. ${opt} ${i === problem.correct ? '✓' : ''}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+
+                // Key Points
+                if (chapter.keyPoints && chapter.keyPoints.length > 0) {
+                    html += `
+                        <div class="chapter-content">
+                            <h2 class="section-title">🔑 Key Points</h2>
+                            <div class="key-points">
+                    `;
+                    chapter.keyPoints.forEach(point => {
+                        html += `<div class="key-point">✓ ${point}</div>`;
+                    });
+                    html += '</div></div>';
+                }
+
+                // Formulae
+                if (chapter.formulae && chapter.formulae.length > 0) {
+                    html += `
+                        <div class="chapter-content">
+                            <h2 class="section-title">📐 Important Formulae</h2>
+                            <div class="formulae-grid">
+                    `;
+                    chapter.formulae.forEach(formula => {
+                        html += `
+                            <div class="formula-card">
+                                <div class="formula-name">${formula.name}</div>
+                                <div class="formula-expression">${formula.formula}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div></div>';
+                }
+
+                viewer.innerHTML = html;
             }
 
-            viewer.innerHTML = html;
-        }
-
-        // Load chapter when page loads
-        window.addEventListener('DOMContentLoaded', loadAndDisplayChapter);
+            // Start loading
+            loadAndDisplayChapter();
+        });
     </script>
 </body>
 </html>
