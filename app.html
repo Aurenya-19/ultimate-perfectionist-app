@@ -3,276 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapters - NEXUS REALITY</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>All Chapters - NEXUS REALITY</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { 
-            --bg: #000; 
-            --card: rgba(10,10,26,0.9);
-            --cyan: #00ffff; 
-            --pink: #ff00ff; 
-            --green: #00ff88; 
-            --orange: #ffaa00; 
-            --text: #fff;
-            --border: rgba(0,255,255,0.3);
+        .chapters-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
         }
-        body { font-family: 'Rajdhani', sans-serif; background: var(--bg); color: var(--text); }
-        .quantum-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgba(0,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255,0,255,0.1) 0%, transparent 50%); }
-        
-        .navbar { background: rgba(0,0,0,0.9); padding: 1rem 2rem; border-bottom: 2px solid var(--cyan); position: sticky; top: 0; z-index: 100; }
-        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: var(--cyan); font-weight: 900; }
-        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .nav-link { color: var(--text); text-decoration: none; transition: all 0.2s; padding: 0.5rem 1rem; border-radius: 5px; }
-        .nav-link:hover { color: var(--cyan); background: rgba(0,255,255,0.1); }
-        
-        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
-        .header { text-align: center; margin-bottom: 3rem; }
-        .title { font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--pink), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-        
-        .filters { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
-        .filter-btn { padding: 0.8rem 1.5rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 8px; cursor: pointer; transition: all 0.3s; font-weight: 700; color: var(--text); font-family: 'Rajdhani', sans-serif; font-size: 1rem; }
-        .filter-btn:hover { background: rgba(0,255,255,0.2); transform: translateY(-2px); }
-        .filter-btn.active { background: linear-gradient(135deg, var(--cyan), #0099cc); }
-        
-        .search-box { max-width: 600px; margin: 0 auto 2rem; position: relative; }
-        .search-input { width: 100%; padding: 1rem 1rem 1rem 3rem; background: rgba(0,255,255,0.1); border: 2px solid var(--cyan); border-radius: 10px; color: var(--text); font-size: 1rem; font-family: 'Rajdhani', sans-serif; }
-        .search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--cyan); }
-        
-        .chapters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
-        .chapter-card { background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(255,0,255,0.1)); border: 2px solid var(--cyan); border-radius: 12px; padding: 1.5rem; transition: all 0.3s; cursor: pointer; position: relative; }
-        .chapter-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,255,255,0.4); }
-        .chapter-number { position: absolute; top: 1rem; right: 1rem; background: var(--cyan); color: #000; padding: 0.3rem 0.8rem; border-radius: 5px; font-weight: 900; font-size: 0.9rem; }
-        .chapter-title { color: var(--pink); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
-        .chapter-stats { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
-        .stat { display: flex; align-items: center; gap: 0.3rem; font-size: 0.9rem; opacity: 0.9; }
-        .status-badge { display: inline-block; padding: 0.3rem 0.8rem; border-radius: 5px; font-size: 0.8rem; font-weight: 700; margin-top: 0.5rem; }
-        .status-complete { background: rgba(0,255,136,0.2); color: var(--green); border: 1px solid var(--green); }
-        .status-partial { background: rgba(255,170,0,0.2); color: var(--orange); border: 1px solid var(--orange); }
-        
-        .no-results { text-align: center; padding: 3rem; opacity: 0.7; font-size: 1.2rem; }
-        
-        @media (max-width: 768px) { 
-            .title { font-size: 2rem; }
-            .chapters-grid { grid-template-columns: 1fr; }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.5rem;
+        }
+
+        .filter-section {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #00d4ff;
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chapter-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+        }
+
+        .chapter-card:hover {
+            border-color: #00d4ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,212,255,0.3);
+        }
+
+        .chapter-card.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #00ff88;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .chapter-number {
+            font-size: 0.9rem;
+            color: #00d4ff;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .chapter-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-badge {
+            background: rgba(0,212,255,0.2);
+            color: #00d4ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .chapter-status {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .status-complete {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+        }
+
+        .status-coming {
+            background: rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #00a8cc);
+            color: #000;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,212,255,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .chapters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chapters-container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-bg"></div>
-    
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="logo">🎯 NEXUS REALITY</div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">🏠 Home</a>
-                <a href="app.html" class="nav-link">📚 Chapters</a>
-                <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
-                <a href="test.html" class="nav-link">📝 Tests</a>
-                <a href="olympiad-papers.html" class="nav-link">🏆 Olympiad</a>
-                <a href="quick-revision.html" class="nav-link">⚡ Revision</a>
+    <div class="chapters-container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+        
+        <div class="page-header">
+            <h1 class="page-title">📚 All Chapters</h1>
+            <p style="color: #aaa; font-size: 1.2rem;">51 Complete Chapters for JEE Main + Advanced</p>
+        </div>
+
+        <div class="stats-bar" id="stats-bar">
+            <!-- Stats will be loaded dynamically -->
+        </div>
+
+        <div class="filter-section">
+            <input type="text" class="search-box" id="search-box" placeholder="🔍 Search chapters...">
+            <div class="filter-buttons" id="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Chapters</button>
+                <button class="filter-btn" data-filter="Physics">Physics</button>
+                <button class="filter-btn" data-filter="Chemistry">Chemistry</button>
+                <button class="filter-btn" data-filter="Mathematics">Mathematics</button>
+                <button class="filter-btn" data-filter="completed">Completed Only</button>
             </div>
         </div>
-    </nav>
-    
-    <div class="container">
-        <div class="header">
-            <h1 class="title">📚 Browse Chapters</h1>
-            <p style="color: var(--cyan); font-size: 1.2rem;">50 Complete Chapters • 1350+ Problems • All Difficulty Levels</p>
-        </div>
-        
-        <!-- Search -->
-        <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search chapters...">
-        </div>
-        
-        <!-- Filters -->
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterSubject('all')">All Subjects</button>
-            <button class="filter-btn" onclick="filterSubject('physics')">⚛️ Physics</button>
-            <button class="filter-btn" onclick="filterSubject('chemistry')">🧪 Chemistry</button>
-            <button class="filter-btn" onclick="filterSubject('maths')">📐 Mathematics</button>
-        </div>
-        
-        <!-- Chapters Grid -->
-        <div class="chapters-grid" id="chaptersGrid"></div>
-        
-        <div class="no-results" id="noResults" style="display: none;">
-            No chapters found. Try a different search or filter.
+
+        <div class="chapters-grid" id="chapters-grid">
+            <!-- Chapters will be loaded dynamically -->
         </div>
     </div>
+
+    <!-- CRITICAL: Load content-loader.js -->
+    <script src="content-loader.js"></script>
     
-    <script src="master-integration.js"></script>
     <script>
         let currentFilter = 'all';
         let allChapters = [];
-        
-        // Initialize
-        function init() {
-            if (!window.NEXUS) {
-                console.error('NEXUS not loaded! Loading fallback data...');
-                loadFallbackData();
-            } else {
-                loadChapters();
-            }
-            
-            // Setup search
-            document.getElementById('searchInput').addEventListener('input', handleSearch);
-        }
-        
-        // Load fallback data if master-integration.js fails
-        function loadFallbackData() {
-            allChapters = [
-                // Physics
-                { id: 'p1', subject: 'physics', title: 'Units and Measurements', problems: 50, status: 'complete' },
-                { id: 'p2', subject: 'physics', title: 'Motion in a Straight Line', problems: 45, status: 'complete' },
-                { id: 'p3', subject: 'physics', title: 'Laws of Motion', problems: 60, status: 'complete' },
-                { id: 'p4', subject: 'physics', title: 'Work, Energy and Power', problems: 55, status: 'complete' },
-                { id: 'p5', subject: 'physics', title: 'Rotational Motion', problems: 50, status: 'complete' },
-                { id: 'p6', subject: 'physics', title: 'Gravitation', problems: 45, status: 'complete' },
-                { id: 'p8', subject: 'physics', title: 'Thermodynamics', problems: 50, status: 'complete' },
-                { id: 'p9', subject: 'physics', title: 'Kinetic Theory of Gases', problems: 40, status: 'complete' },
-                { id: 'p10', subject: 'physics', title: 'Oscillations and Waves', problems: 55, status: 'complete' },
-                { id: 'p11', subject: 'physics', title: 'Electrostatics', problems: 60, status: 'complete' },
-                { id: 'p12', subject: 'physics', title: 'Current Electricity', problems: 50, status: 'complete' },
-                { id: 'p15', subject: 'physics', title: 'Electromagnetic Induction', problems: 45, status: 'complete' },
-                { id: 'p18', subject: 'physics', title: 'Ray Optics', problems: 50, status: 'complete' },
-                
-                // Chemistry
-                { id: 'c1', subject: 'chemistry', title: 'Atomic Structure', problems: 45, status: 'complete' },
-                { id: 'c3', subject: 'chemistry', title: 'Chemical Bonding', problems: 50, status: 'complete' },
-                { id: 'c5', subject: 'chemistry', title: 'Thermodynamics', problems: 40, status: 'complete' },
-                { id: 'c8', subject: 'chemistry', title: 'Equilibrium', problems: 45, status: 'complete' },
-                { id: 'c10', subject: 'chemistry', title: 'Hydrocarbons', problems: 40, status: 'complete' },
-                { id: 'c12', subject: 'chemistry', title: 'Aldehydes, Ketones and Carboxylic Acids', problems: 45, status: 'complete' },
-                { id: 'c16', subject: 'chemistry', title: 'Electrochemistry', problems: 40, status: 'complete' },
-                
-                // Mathematics
-                { id: 'm1', subject: 'maths', title: 'Sets, Relations and Functions', problems: 50, status: 'complete' },
-                { id: 'm2', subject: 'maths', title: 'Complex Numbers', problems: 45, status: 'complete' },
-                { id: 'm6', subject: 'maths', title: 'Matrices and Determinants', problems: 50, status: 'complete' },
-                { id: 'm12', subject: 'maths', title: 'Limits and Derivatives', problems: 50, status: 'complete' },
-                { id: 'm13', subject: 'maths', title: 'Probability', problems: 45, status: 'complete' }
-            ];
-            displayChapters(allChapters);
-        }
-        
-        // Load chapters from NEXUS
+
+        // Load and display chapters
         function loadChapters() {
-            allChapters = [
-                ...window.NEXUS.chapters.physics.map(ch => ({...ch, subject: 'physics'})),
-                ...window.NEXUS.chapters.chemistry.map(ch => ({...ch, subject: 'chemistry'})),
-                ...window.NEXUS.chapters.maths.map(ch => ({...ch, subject: 'maths'}))
-            ];
-            displayChapters(allChapters);
-        }
-        
-        // Display chapters
-        function displayChapters(chapters) {
-            const grid = document.getElementById('chaptersGrid');
-            const noResults = document.getElementById('noResults');
-            
-            if (chapters.length === 0) {
-                grid.style.display = 'none';
-                noResults.style.display = 'block';
+            if (typeof CONTENT_LOADER === 'undefined') {
+                console.error('CONTENT_LOADER not loaded!');
+                document.getElementById('chapters-grid').innerHTML = 
+                    '<div style="text-align:center;color:#ff4444;padding:3rem;">Error: Content loader not available</div>';
                 return;
             }
+
+            // Get all chapters
+            allChapters = Object.entries(CONTENT_LOADER.chapters).map(([id, chapter]) => ({
+                id,
+                ...chapter
+            }));
+
+            // Display stats
+            displayStats();
+
+            // Display chapters
+            displayChapters(allChapters);
+
+            // Setup filters
+            setupFilters();
+
+            // Setup search
+            setupSearch();
+        }
+
+        function displayStats() {
+            const stats = CONTENT_LOADER.getStatistics();
+            const statsBar = document.getElementById('stats-bar');
             
-            grid.style.display = 'grid';
-            noResults.style.display = 'none';
+            statsBar.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.completed}</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.total}</div>
+                    <div class="stat-label">Total Chapters</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.percentage}%</div>
+                    <div class="stat-label">Coverage</div>
+                </div>
+            `;
+        }
+
+        function displayChapters(chapters) {
+            const grid = document.getElementById('chapters-grid');
             
-            grid.innerHTML = chapters.map(chapter => {
-                const subjectIcon = {
-                    physics: '⚛️',
-                    chemistry: '🧪',
-                    maths: '📐'
-                }[chapter.subject];
-                
-                const subjectName = {
-                    physics: 'Physics',
-                    chemistry: 'Chemistry',
-                    maths: 'Mathematics'
-                }[chapter.subject];
-                
-                return `
-                    <div class="chapter-card" onclick="openChapter('${chapter.id}')">
-                        <div class="chapter-number">${chapter.id.toUpperCase()}</div>
-                        <div class="chapter-title">${subjectIcon} ${chapter.title}</div>
-                        <div style="opacity: 0.8; margin-bottom: 0.5rem;">${subjectName}</div>
-                        <div class="chapter-stats">
-                            <div class="stat">
-                                <i class="fas fa-book"></i>
-                                <span>${chapter.problems} Problems</span>
-                            </div>
-                        </div>
-                        <span class="status-badge ${chapter.status === 'complete' ? 'status-complete' : 'status-partial'}">
-                            ${chapter.status === 'complete' ? '✓ Complete' : '⚠ Partial'}
+            if (chapters.length === 0) {
+                grid.innerHTML = '<div style="text-align:center;color:#aaa;padding:3rem;">No chapters found</div>';
+                return;
+            }
+
+            grid.innerHTML = chapters.map((chapter, index) => `
+                <div class="chapter-card ${chapter.hasContent ? 'completed' : ''}" 
+                     onclick="${chapter.hasContent ? `window.location.href='chapter-viewer.html?id=${chapter.id}'` : ''}">
+                    <div class="chapter-number">Chapter ${index + 1}</div>
+                    <div class="chapter-title">${chapter.title}</div>
+                    <div class="chapter-meta">
+                        <span class="meta-badge">📚 ${chapter.subject}</span>
+                        <span class="meta-badge">📂 ${chapter.category}</span>
+                    </div>
+                    <div class="chapter-status">
+                        <span class="status-badge ${chapter.hasContent ? 'status-complete' : 'status-coming'}">
+                            ${chapter.hasContent ? '✓ Available' : '⏳ Coming Soon'}
                         </span>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         }
-        
-        // Filter by subject
-        function filterSubject(subject) {
-            currentFilter = subject;
+
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
             
-            // Update active button
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active state
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Apply filter
+                    const filter = btn.dataset.filter;
+                    currentFilter = filter;
+                    applyFilter();
+                });
             });
-            event.target.classList.add('active');
-            
-            // Filter chapters
-            let filtered = allChapters;
-            if (subject !== 'all') {
-                filtered = allChapters.filter(ch => ch.subject === subject);
-            }
-            
-            displayChapters(filtered);
         }
-        
-        // Handle search
-        function handleSearch(e) {
-            const query = e.target.value.toLowerCase();
+
+        function setupSearch() {
+            const searchBox = document.getElementById('search-box');
             
+            searchBox.addEventListener('input', (e) => {
+                applyFilter(e.target.value);
+            });
+        }
+
+        function applyFilter(searchQuery = '') {
             let filtered = allChapters;
-            
-            // Apply subject filter
+
+            // Apply subject/status filter
             if (currentFilter !== 'all') {
-                filtered = filtered.filter(ch => ch.subject === currentFilter);
+                if (currentFilter === 'completed') {
+                    filtered = filtered.filter(c => c.hasContent);
+                } else {
+                    filtered = filtered.filter(c => c.subject === currentFilter);
+                }
             }
-            
-            // Apply search
-            if (query) {
-                filtered = filtered.filter(ch => 
-                    ch.title.toLowerCase().includes(query) ||
-                    ch.id.toLowerCase().includes(query)
+
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(c => 
+                    c.title.toLowerCase().includes(query) ||
+                    c.subject.toLowerCase().includes(query) ||
+                    c.category.toLowerCase().includes(query)
                 );
             }
-            
+
             displayChapters(filtered);
         }
-        
-        // Open chapter
-        function openChapter(chapterId) {
-            // Save to progress
-            if (window.NEXUS && window.NEXUS.progress) {
-                window.NEXUS.progress.addStudyTime(5); // Add 5 minutes
-            }
-            
-            // Navigate to chapter viewer
-            window.location.href = `chapter-viewer.html?id=${chapterId}`;
-        }
-        
-        // Initialize on load
-        window.addEventListener('load', init);
-        
-        console.log('📚 Chapter Browser - Ready!');
+
+        // Load chapters when page loads
+        window.addEventListener('DOMContentLoaded', loadChapters);
     </script>
 </body>
 </html>
