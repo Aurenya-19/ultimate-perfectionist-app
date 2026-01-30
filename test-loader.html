@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Content Loader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #1a1a2e;
+            color: white;
+        }
+        .test-result {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        .success {
+            background: #00ff88;
+            color: #000;
+        }
+        .error {
+            background: #ff4444;
+            color: white;
+        }
+        .info {
+            background: #00d4ff;
+            color: #000;
+        }
+        pre {
+            background: #000;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Content Loader Test Page</h1>
+    <p>This page tests if content-loader.js is loading correctly.</p>
+    
+    <div id="test-results"></div>
+
+    <!-- Load content-loader.js -->
+    <script src="content-loader.js"></script>
+    
+    <script>
+        const resultsDiv = document.getElementById('test-results');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = message;
+            resultsDiv.appendChild(div);
+        }
+
+        // Test 1: Check if CONTENT_LOADER exists
+        addResult('Test 1: Checking if CONTENT_LOADER exists...', 'info');
+        if (typeof window.CONTENT_LOADER !== 'undefined') {
+            addResult('✅ SUCCESS: CONTENT_LOADER is defined!', 'success');
+        } else {
+            addResult('❌ FAILED: CONTENT_LOADER is not defined!', 'error');
+        }
+
+        // Test 2: Check chapters object
+        addResult('Test 2: Checking chapters object...', 'info');
+        if (window.CONTENT_LOADER && window.CONTENT_LOADER.chapters) {
+            const chapterCount = Object.keys(window.CONTENT_LOADER.chapters).length;
+            addResult(`✅ SUCCESS: Found ${chapterCount} chapters!`, 'success');
+        } else {
+            addResult('❌ FAILED: Chapters object not found!', 'error');
+        }
+
+        // Test 3: Get statistics
+        addResult('Test 3: Getting statistics...', 'info');
+        if (window.CONTENT_LOADER && window.CONTENT_LOADER.getStatistics) {
+            const stats = window.CONTENT_LOADER.getStatistics();
+            addResult(`✅ SUCCESS: Stats loaded!<br>
+                Total: ${stats.total}<br>
+                Completed: ${stats.completed}<br>
+                Coverage: ${stats.percentage}%`, 'success');
+        } else {
+            addResult('❌ FAILED: getStatistics function not found!', 'error');
+        }
+
+        // Test 4: List completed chapters
+        addResult('Test 4: Listing completed chapters...', 'info');
+        if (window.CONTENT_LOADER && window.CONTENT_LOADER.getCompletedChapters) {
+            const completed = window.CONTENT_LOADER.getCompletedChapters();
+            let list = '<ul>';
+            completed.slice(0, 10).forEach(ch => {
+                list += `<li>${ch.title} (${ch.subject})</li>`;
+            });
+            list += '</ul>';
+            addResult(`✅ SUCCESS: Found ${completed.length} completed chapters!<br>First 10:${list}`, 'success');
+        } else {
+            addResult('❌ FAILED: getCompletedChapters function not found!', 'error');
+        }
+
+        // Test 5: Try loading a chapter
+        addResult('Test 5: Attempting to load a chapter...', 'info');
+        if (window.CONTENT_LOADER && window.CONTENT_LOADER.loadChapter) {
+            window.CONTENT_LOADER.loadChapter('physics-mechanics-1')
+                .then(chapter => {
+                    if (chapter) {
+                        addResult(`✅ SUCCESS: Loaded chapter "${chapter.title}"!<br>
+                            Sections: ${chapter.sections ? chapter.sections.length : 0}<br>
+                            Examples: ${chapter.examples ? chapter.examples.length : 0}<br>
+                            Problems: ${chapter.problems ? chapter.problems.length : 0}`, 'success');
+                    } else {
+                        addResult('❌ FAILED: Chapter loaded but returned null!', 'error');
+                    }
+                })
+                .catch(error => {
+                    addResult(`❌ FAILED: Error loading chapter: ${error.message}`, 'error');
+                });
+        } else {
+            addResult('❌ FAILED: loadChapter function not found!', 'error');
+        }
+
+        // Test 6: Check all chapter files
+        addResult('Test 6: Checking chapter file paths...', 'info');
+        if (window.CONTENT_LOADER && window.CONTENT_LOADER.chapters) {
+            const chapters = window.CONTENT_LOADER.chapters;
+            let withFiles = 0;
+            let withoutFiles = 0;
+            
+            Object.values(chapters).forEach(ch => {
+                if (ch.file) withFiles++;
+                else withoutFiles++;
+            });
+            
+            addResult(`✅ Chapters with files: ${withFiles}<br>
+                Chapters without files: ${withoutFiles}`, 'success');
+        }
+
+        // Summary
+        setTimeout(() => {
+            addResult('<h2>🎯 Test Summary</h2><p>If all tests passed, content-loader.js is working correctly!</p>', 'info');
+        }, 1000);
+    </script>
+</body>
+</html>
