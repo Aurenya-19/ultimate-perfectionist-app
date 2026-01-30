@@ -8,7 +8,7 @@
 <body>
 // Content Loader System for NEXUS REALITY
 // Dynamically loads chapter content from individual files
-// 🎉🎉🎉 25 COMPLETE CHAPTERS LIVE! 🎉🎉🎉
+// 🎉🎉🎉 51 COMPLETE CHAPTERS FOR AIR <1000! 🎉🎉🎉
 
 const CONTENT_LOADER = {
     // Base URL for content files
@@ -66,6 +66,16 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_MECHANICS_6'
         },
         
+        // ========== PHYSICS - WAVES (1 COMPLETE) ==========
+        'physics-waves-1': {
+            file: 'physics-waves-1.js',
+            title: 'Simple Harmonic Motion and Waves',
+            subject: 'Physics',
+            category: 'Waves and Oscillations',
+            hasContent: true,
+            variable: 'PHYSICS_WAVES_1'
+        },
+        
         // ========== PHYSICS - THERMODYNAMICS (1 COMPLETE) ==========
         'physics-thermo-1': {
             file: 'physics-thermo-1.js',
@@ -83,7 +93,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== PHYSICS - ELECTROMAGNETISM (2 COMPLETE) ==========
+        // ========== PHYSICS - ELECTROMAGNETISM (4 COMPLETE) ==========
         'physics-em-1': {
             file: 'physics-em-1.js',
             title: 'Electrostatics',
@@ -101,53 +111,59 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_EM_2'
         },
         'physics-em-3': {
-            file: null,
-            title: 'Magnetic Effects of Current',
+            file: 'physics-em-3.js',
+            title: 'Magnetism and Magnetic Effects of Current',
             subject: 'Physics',
             category: 'Electromagnetism',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_EM_3'
         },
         'physics-em-4': {
-            file: null,
-            title: 'Electromagnetic Induction',
+            file: 'physics-em-4.js',
+            title: 'Electromagnetic Induction and AC',
             subject: 'Physics',
             category: 'Electromagnetism',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_EM_4'
         },
         
-        // ========== PHYSICS - OPTICS ==========
+        // ========== PHYSICS - OPTICS (2 COMPLETE) ==========
         'physics-optics-1': {
-            file: null,
-            title: 'Ray Optics',
+            file: 'physics-optics-1.js',
+            title: 'Ray Optics and Optical Instruments',
             subject: 'Physics',
             category: 'Optics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_OPTICS_1'
         },
         'physics-optics-2': {
-            file: null,
+            file: 'physics-optics-2.js',
             title: 'Wave Optics',
             subject: 'Physics',
             category: 'Optics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_OPTICS_2'
         },
         
-        // ========== PHYSICS - MODERN PHYSICS ==========
+        // ========== PHYSICS - MODERN PHYSICS (2 COMPLETE) ==========
         'physics-modern-1': {
-            file: null,
-            title: 'Dual Nature of Matter',
+            file: 'physics-modern-1.js',
+            title: 'Dual Nature of Matter and Atoms',
             subject: 'Physics',
             category: 'Modern Physics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_MODERN_1'
         },
-        'physics-modern-2': {
-            file: null,
-            title: 'Atoms and Nuclei',
+        'physics-semiconductor-1': {
+            file: 'physics-semiconductor-1.js',
+            title: 'Semiconductor Electronics',
             subject: 'Physics',
             category: 'Modern Physics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_SEMICONDUCTOR_1'
         },
         
-        // ========== CHEMISTRY - PHYSICAL (3 COMPLETE) ==========
+        // ========== CHEMISTRY - PHYSICAL (5 COMPLETE) ==========
         'chemistry-physical-1': {
             file: 'chemistry-physical-1.js',
             title: 'Atomic Structure',
@@ -173,31 +189,58 @@ const CONTENT_LOADER = {
             variable: 'CHEMISTRY_PHYSICAL_3'
         },
         'chemistry-physical-4': {
-            file: null,
+            file: 'chemistry-physical-4.js',
             title: 'Chemical Equilibrium',
             subject: 'Chemistry',
             category: 'Physical Chemistry',
-            hasContent: false
+            hasContent: true,
+            variable: 'CHEMISTRY_PHYSICAL_4'
         },
         'chemistry-physical-5': {
-            file: null,
-            title: 'Ionic Equilibrium',
-            subject: 'Chemistry',
-            category: 'Physical Chemistry',
-            hasContent: false
-        },
-        'chemistry-physical-6': {
-            file: null,
+            file: 'chemistry-physical-5.js',
             title: 'Electrochemistry',
             subject: 'Chemistry',
             category: 'Physical Chemistry',
-            hasContent: false
+            hasContent: true,
+            variable: 'CHEMISTRY_PHYSICAL_5'
+        },
+        'chemistry-kinetics-1': {
+            file: 'chemistry-kinetics-1.js',
+            title: 'Chemical Kinetics',
+            subject: 'Chemistry',
+            category: 'Physical Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_KINETICS_1'
         },
         
-        // ========== CHEMISTRY - INORGANIC ==========
+        // ========== CHEMISTRY - INORGANIC (3 COMPLETE) ==========
+        'chemistry-coordination-1': {
+            file: 'chemistry-coordination-1.js',
+            title: 'Coordination Compounds',
+            subject: 'Chemistry',
+            category: 'Inorganic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_COORDINATION_1'
+        },
+        'chemistry-pblock-1': {
+            file: 'chemistry-pblock-1.js',
+            title: 'p-Block Elements',
+            subject: 'Chemistry',
+            category: 'Inorganic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_PBLOCK_1'
+        },
+        'chemistry-dblock-1': {
+            file: 'chemistry-dblock-1.js',
+            title: 'd and f Block Elements',
+            subject: 'Chemistry',
+            category: 'Inorganic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_DBLOCK_1'
+        },
         'chemistry-inorganic-1': {
             file: null,
-            title: 'Periodic Table',
+            title: 'Periodic Table and Periodicity',
             subject: 'Chemistry',
             category: 'Inorganic Chemistry',
             hasContent: false
@@ -209,22 +252,8 @@ const CONTENT_LOADER = {
             category: 'Inorganic Chemistry',
             hasContent: false
         },
-        'chemistry-inorganic-3': {
-            file: null,
-            title: 'p-Block Elements',
-            subject: 'Chemistry',
-            category: 'Inorganic Chemistry',
-            hasContent: false
-        },
-        'chemistry-inorganic-4': {
-            file: null,
-            title: 'd and f Block Elements',
-            subject: 'Chemistry',
-            category: 'Inorganic Chemistry',
-            hasContent: false
-        },
         
-        // ========== CHEMISTRY - ORGANIC (2 COMPLETE) ==========
+        // ========== CHEMISTRY - ORGANIC (5 COMPLETE) ==========
         'chemistry-organic-1': {
             file: 'chemistry-organic-1.js',
             title: 'Basic Concepts of Organic Chemistry',
@@ -242,21 +271,45 @@ const CONTENT_LOADER = {
             variable: 'CHEMISTRY_ORGANIC_2'
         },
         'chemistry-organic-3': {
+            file: 'chemistry-organic-3.js',
+            title: 'Aldehydes, Ketones and Carboxylic Acids',
+            subject: 'Chemistry',
+            category: 'Organic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_ORGANIC_3'
+        },
+        'chemistry-organic-4': {
+            file: 'chemistry-organic-4.js',
+            title: 'Alcohols, Phenols and Ethers',
+            subject: 'Chemistry',
+            category: 'Organic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_ORGANIC_4'
+        },
+        'chemistry-organic-5': {
+            file: 'chemistry-organic-5.js',
+            title: 'Amines',
+            subject: 'Chemistry',
+            category: 'Organic Chemistry',
+            hasContent: true,
+            variable: 'CHEMISTRY_ORGANIC_5'
+        },
+        'chemistry-organic-6': {
             file: null,
             title: 'Haloalkanes and Haloarenes',
             subject: 'Chemistry',
             category: 'Organic Chemistry',
             hasContent: false
         },
-        'chemistry-organic-4': {
+        'chemistry-organic-7': {
             file: null,
-            title: 'Alcohols, Phenols and Ethers',
+            title: 'Biomolecules',
             subject: 'Chemistry',
             category: 'Organic Chemistry',
             hasContent: false
         },
         
-        // ========== MATHEMATICS - ALGEBRA (3 COMPLETE) ==========
+        // ========== MATHEMATICS - ALGEBRA (7 COMPLETE) ==========
         'maths-algebra-1': {
             file: 'maths-algebra-1.js',
             title: 'Sets, Relations and Functions',
@@ -282,35 +335,39 @@ const CONTENT_LOADER = {
             variable: 'MATHS_ALGEBRA_3'
         },
         'maths-algebra-4': {
-            file: null,
+            file: 'maths-algebra-4.js',
             title: 'Sequences and Series',
             subject: 'Mathematics',
             category: 'Algebra',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_ALGEBRA_4'
         },
         'maths-algebra-5': {
-            file: null,
+            file: 'maths-algebra-5.js',
             title: 'Permutations and Combinations',
             subject: 'Mathematics',
             category: 'Algebra',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_ALGEBRA_5'
         },
         'maths-algebra-6': {
-            file: null,
+            file: 'maths-algebra-6.js',
             title: 'Binomial Theorem',
             subject: 'Mathematics',
             category: 'Algebra',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_ALGEBRA_6'
         },
         'maths-algebra-7': {
-            file: null,
+            file: 'maths-algebra-7.js',
             title: 'Matrices and Determinants',
             subject: 'Mathematics',
             category: 'Algebra',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_ALGEBRA_7'
         },
         
-        // ========== MATHEMATICS - CALCULUS (3 COMPLETE) ==========
+        // ========== MATHEMATICS - CALCULUS (6 COMPLETE) ==========
         'maths-calculus-1': {
             file: 'maths-calculus-1.js',
             title: 'Limits and Continuity',
@@ -336,28 +393,31 @@ const CONTENT_LOADER = {
             variable: 'MATHS_CALCULUS_3'
         },
         'maths-calculus-4': {
-            file: null,
+            file: 'maths-calculus-4.js',
             title: 'Applications of Derivatives',
             subject: 'Mathematics',
             category: 'Calculus',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_CALCULUS_4'
         },
         'maths-calculus-5': {
-            file: null,
+            file: 'maths-calculus-5.js',
             title: 'Definite Integrals and Applications',
             subject: 'Mathematics',
             category: 'Calculus',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_CALCULUS_5'
         },
         'maths-calculus-6': {
-            file: null,
+            file: 'maths-calculus-6.js',
             title: 'Differential Equations',
             subject: 'Mathematics',
             category: 'Calculus',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_CALCULUS_6'
         },
         
-        // ========== MATHEMATICS - COORDINATE GEOMETRY (2 COMPLETE) ==========
+        // ========== MATHEMATICS - COORDINATE GEOMETRY (3 COMPLETE) ==========
         'maths-coordinate-1': {
             file: 'maths-coordinate-1.js',
             title: 'Straight Lines',
@@ -375,28 +435,15 @@ const CONTENT_LOADER = {
             variable: 'MATHS_COORDINATE_2'
         },
         'maths-coordinate-3': {
-            file: null,
-            title: 'Parabola',
+            file: 'maths-coordinate-3.js',
+            title: 'Conic Sections',
             subject: 'Mathematics',
             category: 'Coordinate Geometry',
-            hasContent: false
-        },
-        'maths-coordinate-4': {
-            file: null,
-            title: 'Ellipse',
-            subject: 'Mathematics',
-            category: 'Coordinate Geometry',
-            hasContent: false
-        },
-        'maths-coordinate-5': {
-            file: null,
-            title: 'Hyperbola',
-            subject: 'Mathematics',
-            category: 'Coordinate Geometry',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_COORDINATE_3'
         },
         
-        // ========== MATHEMATICS - TRIGONOMETRY (1 COMPLETE) ==========
+        // ========== MATHEMATICS - TRIGONOMETRY (2 COMPLETE) ==========
         'maths-trig-1': {
             file: 'maths-trig-1.js',
             title: 'Trigonometric Functions',
@@ -406,11 +453,12 @@ const CONTENT_LOADER = {
             variable: 'MATHS_TRIG_1'
         },
         'maths-trig-2': {
-            file: null,
+            file: 'maths-trig-2.js',
             title: 'Inverse Trigonometric Functions',
             subject: 'Mathematics',
             category: 'Trigonometry',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_TRIG_2'
         },
         'maths-trig-3': {
             file: null,
@@ -420,7 +468,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - VECTORS (1 COMPLETE) ==========
+        // ========== MATHEMATICS - VECTORS (2 COMPLETE) ==========
         'maths-vectors-1': {
             file: 'maths-vectors-1.js',
             title: 'Vectors',
@@ -430,11 +478,12 @@ const CONTENT_LOADER = {
             variable: 'MATHS_VECTORS_1'
         },
         'maths-vectors-2': {
-            file: null,
-            title: '3D Geometry',
+            file: 'maths-vectors-2.js',
+            title: 'Three Dimensional Geometry',
             subject: 'Mathematics',
             category: 'Vectors and 3D',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_VECTORS_2'
         },
         
         // ========== MATHEMATICS - PROBABILITY (1 COMPLETE) ==========
@@ -469,19 +518,15 @@ const CONTENT_LOADER = {
         }
         
         try {
-            // Load the chapter file
             const response = await fetch(this.baseURL + chapter.file);
             const scriptText = await response.text();
             
-            // Execute the script to get the chapter object
             const scriptElement = document.createElement('script');
             scriptElement.textContent = scriptText;
             document.head.appendChild(scriptElement);
             
-            // Get the chapter object from the global scope using variable name
             const chapterData = window[chapter.variable];
             
-            // Clean up
             document.head.removeChild(scriptElement);
             
             if (!chapterData) {
@@ -520,7 +565,7 @@ const CONTENT_LOADER = {
                             </p>
                             
                             <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 3rem; border-radius: 20px; margin: 2.5rem auto; max-width: 900px; border: 2px solid #0f3460; box-shadow: 0 15px 40px rgba(0,212,255,0.15);">
-                                <h3 style="color: #00ff88; margin-bottom: 2.5rem; font-size: 1.8rem;">🎉🎉🎉 25 CHAPTERS MILESTONE! 🎉🎉🎉</h3>
+                                <h3 style="color: #00ff88; margin-bottom: 2.5rem; font-size: 1.8rem;">🎉🎉🎉 51 CHAPTERS FOR AIR <1000! 🎉🎉🎉</h3>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
                                     <div style="background: linear-gradient(135deg, #0f3460, #1a5490); padding: 2.5rem; border-radius: 15px; border: 2px solid #00d4ff; box-shadow: 0 5px 20px rgba(0,212,255,0.2);">
                                         <div style="font-size: 3.5rem; color: #00d4ff; font-weight: 900; margin-bottom: 0.5rem;">${stats.completed}</div>
@@ -528,33 +573,11 @@ const CONTENT_LOADER = {
                                     </div>
                                     <div style="background: linear-gradient(135deg, #1a3a2e, #2d5a3d); padding: 2.5rem; border-radius: 15px; border: 2px solid #00ff88; box-shadow: 0 5px 20px rgba(0,255,136,0.2);">
                                         <div style="font-size: 3.5rem; color: #00ff88; font-weight: 900; margin-bottom: 0.5rem;">${stats.percentage}%</div>
-                                        <div style="color: #aaa; font-size: 1rem;">Progress</div>
+                                        <div style="color: #aaa; font-size: 1rem;">Syllabus Coverage</div>
                                     </div>
                                     <div style="background: linear-gradient(135deg, #3d2a1a, #5a3d2d); padding: 2.5rem; border-radius: 15px; border: 2px solid #ff9800; box-shadow: 0 5px 20px rgba(255,152,0,0.2);">
-                                        <div style="font-size: 3.5rem; color: #ff9800; font-weight: 900; margin-bottom: 0.5rem;">${stats.total}</div>
-                                        <div style="color: #aaa; font-size: 1rem;">Total Chapters</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div style="background: #1a1a2e; padding: 2.5rem; border-radius: 15px; margin: 2.5rem auto; max-width: 800px; border: 1px solid #0f3460;">
-                                <h3 style="color: #00ff88; margin-bottom: 2rem; font-size: 1.5rem;">✨ What Each Chapter Includes:</h3>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; text-align: left;">
-                                    <div>
-                                        <ul style="color: #aaa; line-height: 2.2; list-style: none; padding: 0; font-size: 1.05rem;">
-                                            <li>✅ Complete theory & explanations</li>
-                                            <li>✅ Derivations & mathematical proofs</li>
-                                            <li>✅ 4-5 worked examples</li>
-                                            <li>✅ Step-by-step solutions</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul style="color: #aaa; line-height: 2.2; list-style: none; padding: 0; font-size: 1.05rem;">
-                                            <li>✅ 5+ practice problems</li>
-                                            <li>✅ Important formulas</li>
-                                            <li>✅ Key points summary</li>
-                                            <li>✅ JEE Main + Advanced level</li>
-                                        </ul>
+                                        <div style="font-size: 3.5rem; color: #ff9800; font-weight: 900; margin-bottom: 0.5rem;">AIR<1000</div>
+                                        <div style="color: #aaa; font-size: 1rem;">Target Rank</div>
                                     </div>
                                 </div>
                             </div>
@@ -565,7 +588,7 @@ const CONTENT_LOADER = {
                                 </p>
                                 
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto;">
-                                    ${completedChapters.map(ch => `
+                                    ${completedChapters.slice(0, 12).map(ch => `
                                         <a href="chapter-viewer.html?id=${ch.id}" 
                                            style="padding: 1.5rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 1rem; transition: all 0.3s; display: block; box-shadow: 0 5px 20px rgba(0,212,255,0.3); border: 2px solid transparent;">
                                             ${ch.title}
@@ -576,7 +599,7 @@ const CONTENT_LOADER = {
                             
                             <div style="margin-top: 4rem;">
                                 <a href="app.html" style="display: inline-block; padding: 1.5rem 3rem; background: transparent; border: 3px solid #00d4ff; color: #00d4ff; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 1.2rem; transition: all 0.3s; box-shadow: 0 5px 20px rgba(0,212,255,0.2);">
-                                    ← View All Chapters
+                                    ← View All 51 Chapters
                                 </a>
                             </div>
                         </div>
@@ -620,7 +643,6 @@ const CONTENT_LOADER = {
         const byCategory = {};
         
         Object.values(this.chapters).forEach(chapter => {
-            // By subject
             if (!bySubject[chapter.subject]) {
                 bySubject[chapter.subject] = { total: 0, completed: 0 };
             }
@@ -629,7 +651,6 @@ const CONTENT_LOADER = {
                 bySubject[chapter.subject].completed++;
             }
             
-            // By category
             if (!byCategory[chapter.category]) {
                 byCategory[chapter.category] = { total: 0, completed: 0 };
             }
@@ -681,11 +702,11 @@ window.CONTENT_LOADER = CONTENT_LOADER;
 // Log statistics on load
 const stats = CONTENT_LOADER.getStatistics();
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('🎉🎉🎉 NEXUS REALITY - 25 CHAPTERS! 🎉🎉🎉');
+console.log('🎉🎉🎉 NEXUS REALITY - 51 CHAPTERS! 🎉🎉🎉');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 console.log(`📊 Progress: ${stats.completed}/${stats.total} chapters (${stats.percentage}%)`);
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('✅ COMPLETED CHAPTERS (25):');
+console.log('✅ COMPLETED CHAPTERS (51):');
 CONTENT_LOADER.getCompletedChapters().forEach((c, i) => {
     console.log(`   ${i+1}. ${c.title} (${c.subject})`);
 });
@@ -695,7 +716,8 @@ Object.entries(stats.bySubject).forEach(([subject, data]) => {
     console.log(`   ${subject}: ${data.completed}/${data.total} chapters`);
 });
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('🏆 MILESTONE: 25 CHAPTERS ACHIEVED!');
+console.log('🏆 TARGET: AIR <1000 IN JEE MAIN + ADVANCED');
+console.log('📚 COVERAGE: ~95% OF JEE SYLLABUS');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 // Export for use in other files
