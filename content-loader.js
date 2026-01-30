@@ -8,7 +8,7 @@
 <body>
 // Content Loader System for NEXUS REALITY
 // Dynamically loads chapter content from individual files
-// 🎉 16 COMPLETE CHAPTERS LIVE! 🎉
+// 🎉🎉🎉 25 COMPLETE CHAPTERS LIVE! 🎉🎉🎉
 
 const CONTENT_LOADER = {
     // Base URL for content files
@@ -66,13 +66,14 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_MECHANICS_6'
         },
         
-        // ========== PHYSICS - THERMODYNAMICS ==========
+        // ========== PHYSICS - THERMODYNAMICS (1 COMPLETE) ==========
         'physics-thermo-1': {
-            file: null,
+            file: 'physics-thermo-1.js',
             title: 'Thermodynamics',
             subject: 'Physics',
             category: 'Thermodynamics',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_THERMO_1'
         },
         'physics-thermo-2': {
             file: null,
@@ -82,7 +83,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== PHYSICS - ELECTROMAGNETISM (1 COMPLETE) ==========
+        // ========== PHYSICS - ELECTROMAGNETISM (2 COMPLETE) ==========
         'physics-em-1': {
             file: 'physics-em-1.js',
             title: 'Electrostatics',
@@ -92,11 +93,12 @@ const CONTENT_LOADER = {
             variable: 'PHYSICS_EM_1'
         },
         'physics-em-2': {
-            file: null,
+            file: 'physics-em-2.js',
             title: 'Current Electricity',
             subject: 'Physics',
             category: 'Electromagnetism',
-            hasContent: false
+            hasContent: true,
+            variable: 'PHYSICS_EM_2'
         },
         'physics-em-3': {
             file: null,
@@ -163,11 +165,12 @@ const CONTENT_LOADER = {
             variable: 'CHEMISTRY_PHYSICAL_2'
         },
         'chemistry-physical-3': {
-            file: null,
+            file: 'chemistry-physical-3.js',
             title: 'Thermodynamics',
             subject: 'Chemistry',
             category: 'Physical Chemistry',
-            hasContent: false
+            hasContent: true,
+            variable: 'CHEMISTRY_PHYSICAL_3'
         },
         'chemistry-physical-4': {
             file: null,
@@ -221,7 +224,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== CHEMISTRY - ORGANIC (1 COMPLETE) ==========
+        // ========== CHEMISTRY - ORGANIC (2 COMPLETE) ==========
         'chemistry-organic-1': {
             file: 'chemistry-organic-1.js',
             title: 'Basic Concepts of Organic Chemistry',
@@ -231,11 +234,12 @@ const CONTENT_LOADER = {
             variable: 'CHEMISTRY_ORGANIC_1'
         },
         'chemistry-organic-2': {
-            file: null,
+            file: 'chemistry-organic-2.js',
             title: 'Hydrocarbons',
             subject: 'Chemistry',
             category: 'Organic Chemistry',
-            hasContent: false
+            hasContent: true,
+            variable: 'CHEMISTRY_ORGANIC_2'
         },
         'chemistry-organic-3': {
             file: null,
@@ -306,7 +310,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - CALCULUS (2 COMPLETE) ==========
+        // ========== MATHEMATICS - CALCULUS (3 COMPLETE) ==========
         'maths-calculus-1': {
             file: 'maths-calculus-1.js',
             title: 'Limits and Continuity',
@@ -324,15 +328,16 @@ const CONTENT_LOADER = {
             variable: 'MATHS_CALCULUS_2'
         },
         'maths-calculus-3': {
-            file: null,
-            title: 'Applications of Derivatives',
+            file: 'maths-calculus-3.js',
+            title: 'Integration',
             subject: 'Mathematics',
             category: 'Calculus',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_CALCULUS_3'
         },
         'maths-calculus-4': {
             file: null,
-            title: 'Integration',
+            title: 'Applications of Derivatives',
             subject: 'Mathematics',
             category: 'Calculus',
             hasContent: false
@@ -352,7 +357,7 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - COORDINATE GEOMETRY (1 COMPLETE) ==========
+        // ========== MATHEMATICS - COORDINATE GEOMETRY (2 COMPLETE) ==========
         'maths-coordinate-1': {
             file: 'maths-coordinate-1.js',
             title: 'Straight Lines',
@@ -362,11 +367,12 @@ const CONTENT_LOADER = {
             variable: 'MATHS_COORDINATE_1'
         },
         'maths-coordinate-2': {
-            file: null,
+            file: 'maths-coordinate-2.js',
             title: 'Circles',
             subject: 'Mathematics',
             category: 'Coordinate Geometry',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_COORDINATE_2'
         },
         'maths-coordinate-3': {
             file: null,
@@ -390,13 +396,14 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - TRIGONOMETRY ==========
+        // ========== MATHEMATICS - TRIGONOMETRY (1 COMPLETE) ==========
         'maths-trig-1': {
-            file: null,
+            file: 'maths-trig-1.js',
             title: 'Trigonometric Functions',
             subject: 'Mathematics',
             category: 'Trigonometry',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_TRIG_1'
         },
         'maths-trig-2': {
             file: null,
@@ -413,13 +420,14 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - VECTORS ==========
+        // ========== MATHEMATICS - VECTORS (1 COMPLETE) ==========
         'maths-vectors-1': {
-            file: null,
+            file: 'maths-vectors-1.js',
             title: 'Vectors',
             subject: 'Mathematics',
             category: 'Vectors and 3D',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_VECTORS_1'
         },
         'maths-vectors-2': {
             file: null,
@@ -429,13 +437,14 @@ const CONTENT_LOADER = {
             hasContent: false
         },
         
-        // ========== MATHEMATICS - PROBABILITY ==========
+        // ========== MATHEMATICS - PROBABILITY (1 COMPLETE) ==========
         'maths-probability-1': {
-            file: null,
+            file: 'maths-probability-1.js',
             title: 'Probability',
             subject: 'Mathematics',
             category: 'Probability and Statistics',
-            hasContent: false
+            hasContent: true,
+            variable: 'MATHS_PROBABILITY_1'
         },
         'maths-probability-2': {
             file: null,
@@ -511,7 +520,7 @@ const CONTENT_LOADER = {
                             </p>
                             
                             <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 3rem; border-radius: 20px; margin: 2.5rem auto; max-width: 900px; border: 2px solid #0f3460; box-shadow: 0 15px 40px rgba(0,212,255,0.15);">
-                                <h3 style="color: #00ff88; margin-bottom: 2.5rem; font-size: 1.8rem;">🎉 16 Chapters Milestone Achieved!</h3>
+                                <h3 style="color: #00ff88; margin-bottom: 2.5rem; font-size: 1.8rem;">🎉🎉🎉 25 CHAPTERS MILESTONE! 🎉🎉🎉</h3>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
                                     <div style="background: linear-gradient(135deg, #0f3460, #1a5490); padding: 2.5rem; border-radius: 15px; border: 2px solid #00d4ff; box-shadow: 0 5px 20px rgba(0,212,255,0.2);">
                                         <div style="font-size: 3.5rem; color: #00d4ff; font-weight: 900; margin-bottom: 0.5rem;">${stats.completed}</div>
@@ -555,7 +564,7 @@ const CONTENT_LOADER = {
                                     <strong>🎯 Explore our ${stats.completed} completed chapters:</strong>
                                 </p>
                                 
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; max-width: 1100px; margin: 0 auto;">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto;">
                                     ${completedChapters.map(ch => `
                                         <a href="chapter-viewer.html?id=${ch.id}" 
                                            style="padding: 1.5rem; background: linear-gradient(135deg, #00d4ff, #00a8cc); color: #000; text-decoration: none; border-radius: 12px; font-weight: 700; font-size: 1rem; transition: all 0.3s; display: block; box-shadow: 0 5px 20px rgba(0,212,255,0.3); border: 2px solid transparent;">
@@ -672,13 +681,13 @@ window.CONTENT_LOADER = CONTENT_LOADER;
 // Log statistics on load
 const stats = CONTENT_LOADER.getStatistics();
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('🎉 NEXUS REALITY - CONTENT LOADER v2.0');
+console.log('🎉🎉🎉 NEXUS REALITY - 25 CHAPTERS! 🎉🎉🎉');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 console.log(`📊 Progress: ${stats.completed}/${stats.total} chapters (${stats.percentage}%)`);
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('✅ COMPLETED CHAPTERS (16):');
+console.log('✅ COMPLETED CHAPTERS (25):');
 CONTENT_LOADER.getCompletedChapters().forEach((c, i) => {
-    console.log(`   ${i+1}. ${c.title} (${c.subject} - ${c.category})`);
+    console.log(`   ${i+1}. ${c.title} (${c.subject})`);
 });
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 console.log('📈 BY SUBJECT:');
@@ -686,7 +695,7 @@ Object.entries(stats.bySubject).forEach(([subject, data]) => {
     console.log(`   ${subject}: ${data.completed}/${data.total} chapters`);
 });
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log('🎯 MILESTONE: 16 CHAPTERS ACHIEVED!');
+console.log('🏆 MILESTONE: 25 CHAPTERS ACHIEVED!');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
 // Export for use in other files
